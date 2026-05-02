@@ -137,11 +137,13 @@ export default function MainLayout() {
             >
               <Menu className="h-6 w-6" />
             </button>
-            <img 
-              src="/Images/Logo.png" 
-              alt={libraryName} 
-              className="h-10 w-auto object-contain"
-            />
+            <Link to="/landing" className="flex items-center">
+              <img 
+                src="/Images/Logo.png" 
+                alt={libraryName} 
+                className="h-10 w-auto object-contain"
+              />
+            </Link>
           </div>
           
           {/* Title */}

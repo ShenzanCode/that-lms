@@ -31,6 +31,7 @@ import AdminNotifications from './pages/admin/AdminNotifications'
 import TestNotifications from './pages/admin/TestNotifications'
 import LiveChatSupport from './pages/admin/LiveChatSupport'
 import NotFound from './pages/NotFound'
+import Landing from './pages/Landing'
 
 // Student Pages
 import StudentLogin from './pages/student/StudentLogin'
@@ -236,6 +237,7 @@ function App() {
     >
       <Routes>
         {/* Public Routes */}
+        <Route path="/landing" element={<Landing />} />
         <Route element={<AuthLayout />}>
           <Route
             path="/login"

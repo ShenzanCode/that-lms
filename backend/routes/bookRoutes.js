@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {
   getBooks,
+  getPublicBooks,
   getBook,
   createBook,
   updateBook,
@@ -13,6 +14,9 @@ const {
 } = require('../controllers/bookController');
 const { protect, protectAny } = require('../middleware/authMiddleware');
 const { upload, handleMulterError } = require('../middleware/uploadMiddleware');
+
+// Public landing page catalog (limited fields)
+router.get('/public', getPublicBooks);
 
 // Read routes - accessible to both librarians and students
 router.get('/', protectAny, getBooks);

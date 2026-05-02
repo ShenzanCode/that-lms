@@ -25,7 +25,7 @@ export default function Login() {
       const { token, ...userData } = data.data
       login(userData, token)
       toast.success('Login successful!')
-      navigate('/dashboard')
+      navigate('/')
     },
     onError: (error) => {
       toast.error(error.response?.data?.message || 'Login failed')

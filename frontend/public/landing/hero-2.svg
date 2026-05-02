@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="900" viewBox="0 0 1920 900" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1920" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#011039"/>
+      <stop offset="0.45" stop-color="#0B1A53"/>
+      <stop offset="1" stop-color="#011039"/>
+    </linearGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
+    <linearGradient id="stripe" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#E76800" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.10"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1920" height="900" fill="url(#bg)"/>
+
+  <circle cx="520" cy="260" r="240" fill="#E76800" fill-opacity="0.22" filter="url(#soft)"/>
+  <circle cx="1420" cy="590" r="300" fill="#FFFFFF" fill-opacity="0.08" filter="url(#soft)"/>
+
+  <g opacity="0.55">
+    <rect x="0" y="130" width="1920" height="18" fill="url(#stripe)"/>
+    <rect x="0" y="185" width="1920" height="12" fill="url(#stripe)"/>
+    <rect x="0" y="238" width="1920" height="8" fill="url(#stripe)"/>
+  </g>
+
+  <path d="M0 690C260 650 500 670 740 720C980 770 1140 770 1410 710C1680 650 1800 640 1920 650V900H0V690Z" fill="#FFFFFF" fill-opacity="0.08"/>
+  <path d="M0 740C280 700 540 720 780 770C1020 820 1200 820 1460 760C1720 700 1820 690 1920 700V900H0V740Z" fill="#E76800" fill-opacity="0.10"/>
+</svg>

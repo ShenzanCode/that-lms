@@ -77,6 +77,64 @@ const getBooks = async (req, res, next) => {
   }
 };
 
+// @desc    Get public books for landing page (limited fields)
+// @route   GET /api/books/public
+// @access  Public
+const getPublicBooks = async (req, res, next) => {
+  try {
+    const {
+      page = 1,
+      limit = 12,
+      search,
+      category,
+      sortBy = 'title'
+    } = req.query;
+
+    const parsedPage = Math.max(parseInt(page) || 1, 1);
+    const parsedLimit = Math.min(Math.max(parseInt(limit) || 12, 1), 50);
+
+    // Build query (public: only title/author/category)
+    const query = {};
+
+    if (search) {
+      const escapedSearch = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      query.$or = [
+        { title: { $regex: escapedSearch, $options: 'i' } },
+        { author: { $regex: escapedSearch, $options: 'i' } },
+        { category: { $regex: escapedSearch, $options: 'i' } }
+      ];
+    }
+
+    if (category && category.trim() !== '') {
+      const escapedCategory = category.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      query.category = { $regex: new RegExp(`^${escapedCategory}$`, 'i') };
+    }
+
+    const skip = (parsedPage - 1) * parsedLimit;
+
+    const books = await Book.find(query)
+      .select('title author category coverImage')
+      .sort(sortBy)
+      .limit(parsedLimit)
+      .skip(skip);
+
+    const total = await Book.countDocuments(query);
+
+    res.json({
+      success: true,
+      data: books,
+      pagination: {
+        page: parsedPage,
+        limit: parsedLimit,
+        total,
+        pages: Math.ceil(total / parsedLimit)
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // @desc    Get single book
 // @route   GET /api/books/:id
 // @access  Private
@@ -492,6 +550,7 @@ const getBookCategories = async (req, res, next) => {
 
 module.exports = {
   getBooks,
+  getPublicBooks,
   getBook,
   createBook,
   updateBook,

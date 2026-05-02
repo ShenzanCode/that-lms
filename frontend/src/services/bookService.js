@@ -6,6 +6,11 @@ export const bookService = {
     return response.data
   },
 
+  getPublicBooks: async (params) => {
+    const response = await api.get('/books/public', { params })
+    return response.data
+  },
+
   getBook: async (id) => {
     const response = await api.get(`/books/${id}`)
     return response.data

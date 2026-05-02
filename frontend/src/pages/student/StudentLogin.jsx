@@ -80,7 +80,7 @@ export default function StudentLogin() {
             <div className="flex justify-center mb-4">
               <img src={Logo} alt="Library Logo" className="h-20 w-auto" />
             </div>
-            <h1 className="text-3xl font-bold" style={{color: '#011039'}}>Student Login</h1>
+            <h1 className="text-3xl font-bold" style={{color: '#011039'}}>User Login</h1>
             <p className="text-gray-600 mt-2">Welcome back! Please login to your account</p>
           </div>
 
