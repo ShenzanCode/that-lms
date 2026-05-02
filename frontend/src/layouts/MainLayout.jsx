@@ -220,16 +220,6 @@ export default function MainLayout() {
             {/* Admin Dropdown Menu */}
             {showAdminMenu && (
               <div className="absolute bottom-full left-4 right-4 mb-2 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
-                <a
-                  href="/landing.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setShowAdminMenu(false)}
-                  className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                >
-                  <BookOpen className="h-4 w-4" />
-                  <span>View Landing Page</span>
-                </a>
                 <button
                   onClick={() => {
                     setShowAdminMenu(false)
