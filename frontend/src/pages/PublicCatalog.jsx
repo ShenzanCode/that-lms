@@ -1,0 +1,343 @@
+import { useState, useEffect } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { Link } from 'react-router-dom'
+import { BookOpen, Search, Filter, X, Calendar, Hash, User, BookmarkIcon, ChevronRight, Mail, Phone, MapPin } from 'lucide-react'
+import { bookService } from '@/services/bookService'
+import { settingsService } from '@/services/settingsService'
+import { Card, CardContent } from '@/components/ui/Card'
+import { Button } from '@/components/ui/Button'
+import { Badge } from '@/components/ui/Badge'
+import { Modal } from '@/components/ui/Modal'
+import { Pagination } from '@/components/ui/Pagination'
+
+const PAGE_SIZE = 18
+
+const getCoverUrl = (coverImage) => {
+  if (!coverImage) return null
+  if (coverImage.startsWith('http://') || coverImage.startsWith('https://') || coverImage.startsWith('blob:')) {
+    return coverImage
+  }
+  return `http://localhost:5000${coverImage}`
+}
+
+export default function PublicCatalog() {
+  const [page, setPage] = useState(1)
+  const [search, setSearch] = useState('')
+  const [debouncedSearch, setDebouncedSearch] = useState('')
+  const [selectedBook, setSelectedBook] = useState(null)
+  const [showBookModal, setShowBookModal] = useState(false)
+  const [filters, setFilters] = useState({
+    category: '',
+  })
+
+  // Debounce search
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search)
+      setPage(1)
+    }, 400)
+    return () => clearTimeout(timer)
+  }, [search])
+
+  const { data: settingsData } = useQuery({
+    queryKey: ['public-settings'],
+    queryFn: () => settingsService.getSettings(),
+  })
+
+  const libraryName = 'Wisdom Hall Thal University Bhakkar'
+
+  const { data: booksData, isLoading: booksLoading } = useQuery({
+    queryKey: ['public-books-catalog', page, debouncedSearch, filters.category],
+    queryFn: () => bookService.getPublicBooks({ 
+      page, 
+      limit: PAGE_SIZE, 
+      search: debouncedSearch, 
+      category: filters.category,
+      sortBy: 'title' 
+    }),
+  })
+
+  const books = booksData?.data || []
+  const pagination = booksData?.pagination || { page: 1, pages: 1, total: 0 }
+
+  const handleFilterChange = (category) => {
+    setFilters({ category })
+    setPage(1)
+  }
+
+  const handleBookClick = (book) => {
+    setSelectedBook(book)
+    setShowBookModal(true)
+  }
+
+  return (
+    <div className="min-h-screen bg-[#F8F9FA]">
+      {/* Navbar */}
+      <header className="bg-white shadow-sm fixed top-0 left-0 right-0 z-50 transition-all border-b-2" style={{ borderColor: '#E76800' }}>
+        <div className="flex items-center justify-between h-16 px-4 sm:px-8 max-w-7xl mx-auto">
+          <div className="flex items-center gap-3">
+            <Link to="/landing" className="flex items-center">
+              <img src="/Images/Logo.png" alt={libraryName} className="h-10 w-auto object-contain" />
+            </Link>
+          </div>
+
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
+            <Link to="/landing" className="text-slate-600 hover:text-[#E76800] transition-colors">Home</Link>
+            <Link to="/landing#books" className="text-[#E76800] font-bold">Catalog</Link>
+            <Link to="/student/login" className="text-slate-600 hover:text-[#E76800] transition-colors">Portal Login</Link>
+          </nav>
+
+          <div className="flex items-center gap-4">
+            <Link to="/student/login">
+              <Button variant="primary" className="px-6 rounded-lg shadow-md">Login</Button>
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      <main className="pt-24 pb-20 px-4 sm:px-8">
+        <div className="max-w-7xl mx-auto">
+          {/* Header */}
+          <div className="mb-10">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-[#011039]">Complete Library Catalog</h1>
+            <p className="text-slate-500 mt-2 text-lg">Explore our full collection of books and academic resources.</p>
+            <div className="h-1.5 w-20 bg-[#E76800] mt-4 rounded-full"></div>
+          </div>
+
+          {/* Search and Filters */}
+          <Card className="mb-10 bg-white shadow-sm border-slate-100 rounded-2xl overflow-hidden">
+            <div className="p-6 flex flex-col md:flex-row gap-6">
+              <div className="flex-1 relative group">
+                <Search className="h-5 w-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#E76800] transition-colors" />
+                <input
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search by title, author, or ISBN..."
+                  className="w-full pl-12 pr-4 py-3.5 border-2 border-slate-100 rounded-xl focus:outline-none focus:border-[#E76800] transition-all bg-slate-50 focus:bg-white placeholder:text-slate-400"
+                />
+              </div>
+              
+              <div className="w-full md:w-64">
+                <select
+                  className="w-full px-4 py-3.5 border-2 border-slate-100 rounded-xl focus:outline-none focus:border-[#E76800] transition-all bg-slate-50 focus:bg-white text-slate-600 font-medium"
+                  value={filters.category}
+                  onChange={(e) => handleFilterChange(e.target.value)}
+                >
+                  <option value="">All Categories</option>
+                  {[
+                    "Biology", "Business", "Chemistry", "Communication and Media", 
+                    "Computer / Computer Science", "Education", "English", "History", 
+                    "Information Technology", "International Relations", "Islamic Studies", 
+                    "Mathematics", "Miscellaneous", "Physics", "Psychology", 
+                    "Social Work", "Sociology", "Sports Sciences", "Urdu", "Zoology"
+                  ].map(cat => (
+                    <option key={cat} value={cat}>{cat}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </Card>
+
+          {/* Books Grid */}
+          {booksLoading ? (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+              {Array.from({ length: 12 }).map((_, idx) => (
+                <div key={idx} className="bg-white rounded-2xl border border-slate-100 p-3 animate-pulse">
+                  <div className="aspect-[3/4] bg-slate-100 rounded-xl mb-4" />
+                  <div className="space-y-3 px-1">
+                    <div className="h-4 bg-slate-100 rounded w-3/4" />
+                    <div className="h-3 bg-slate-100 rounded w-1/2" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <>
+              {books.length === 0 ? (
+                <div className="text-center py-24 bg-white rounded-3xl border-2 border-dashed border-slate-200">
+                  <BookOpen className="h-20 w-20 text-slate-200 mx-auto mb-4" />
+                  <h3 className="text-xl font-bold text-[#011039]">No books found</h3>
+                  <p className="text-slate-500 mt-2">Try adjusting your search or category filters.</p>
+                  <Button variant="outline" onClick={() => { setSearch(''); setFilters({category: ''}) }} className="mt-6 rounded-xl">Clear All Filters</Button>
+                </div>
+              ) : (
+                <>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+                    {books.map((book) => {
+                      const coverUrl = getCoverUrl(book.coverImage)
+                      return (
+                        <Card 
+                          key={book._id} 
+                          className="group p-3 border-slate-100 hover:border-[#E76800]/20 hover:shadow-xl transition-all duration-300 rounded-2xl flex flex-col h-full bg-white cursor-pointer"
+                          onClick={() => handleBookClick(book)}
+                        >
+                          <div className="aspect-[3/4] bg-slate-50 rounded-xl overflow-hidden mb-4 relative shadow-sm">
+                            {coverUrl ? (
+                              <img src={coverUrl} alt={book.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center">
+                                <BookOpen className="h-10 w-10 text-slate-200" />
+                              </div>
+                            )}
+                          </div>
+                          <div className="flex flex-col flex-1 px-1 text-center">
+                            <h3 className="text-xs font-bold text-[#011039] line-clamp-2 leading-snug group-hover:text-[#E76800] transition-colors">{book.title}</h3>
+                            <p className="text-[10px] text-slate-500 mt-2 truncate italic">{book.author}</p>
+                            <div className="mt-auto pt-4">
+                              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-100 text-[#011039] block truncate">
+                                {book.category}
+                              </span>
+                            </div>
+                          </div>
+                        </Card>
+                      )
+                    })}
+                  </div>
+
+                  <div className="mt-16 flex justify-center">
+                    <Pagination
+                      currentPage={pagination.page}
+                      totalPages={pagination.pages}
+                      onPageChange={setPage}
+                    />
+                  </div>
+                </>
+              )}
+            </>
+          )}
+        </div>
+      </main>
+
+      {/* Book Details Modal */}
+      {showBookModal && selectedBook && (
+        <Modal isOpen={showBookModal} onClose={() => setShowBookModal(false)}>
+          <div className="p-0 overflow-hidden rounded-3xl">
+            <div className="grid grid-cols-1 md:grid-cols-5">
+              {/* Left Side: Cover Image */}
+              <div className="md:col-span-2 bg-slate-50 flex items-center justify-center p-8">
+                <div className="w-full aspect-[3/4] rounded-2xl shadow-2xl overflow-hidden border-4 border-white">
+                  {selectedBook.coverImage ? (
+                    <img
+                      src={getCoverUrl(selectedBook.coverImage)}
+                      alt={selectedBook.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <BookOpen className="h-20 w-20 text-slate-300" />
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Right Side: Details */}
+              <div className="md:col-span-3 p-8">
+                <div className="flex justify-between items-start mb-6">
+                  <div>
+                    <Badge variant={selectedBook.status === 'Available' ? 'success' : 'warning'} className="mb-3 px-3 py-1 rounded-lg">
+                      {selectedBook.status}
+                    </Badge>
+                    <h2 className="text-2xl font-extrabold text-[#011039] leading-tight">
+                      {selectedBook.title}
+                    </h2>
+                    <p className="text-[#E76800] font-bold mt-1">{selectedBook.author}</p>
+                  </div>
+                  <button 
+                    onClick={() => setShowBookModal(false)}
+                    className="p-2 hover:bg-slate-100 rounded-full transition-colors"
+                  >
+                    <X className="h-6 w-6 text-slate-400" />
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-2 gap-6 mb-8">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <div className="h-9 w-9 rounded-lg bg-slate-50 flex items-center justify-center">
+                        <BookmarkIcon className="h-5 w-5 text-[#E76800]" />
+                      </div>
+                      <div>
+                        <p className="text-[10px] uppercase font-bold text-slate-400">Category</p>
+                        <p className="text-sm font-bold text-[#011039]">{selectedBook.category || '-'}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="h-9 w-9 rounded-lg bg-slate-50 flex items-center justify-center">
+                        <Hash className="h-5 w-5 text-[#E76800]" />
+                      </div>
+                      <div>
+                        <p className="text-[10px] uppercase font-bold text-slate-400">Sr.No</p>
+                        <p className="text-sm font-bold text-[#011039]">{selectedBook.accessionNumber || '-'}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <div className="h-9 w-9 rounded-lg bg-slate-50 flex items-center justify-center">
+                        <Calendar className="h-5 w-5 text-[#E76800]" />
+                      </div>
+                      <div>
+                        <p className="text-[10px] uppercase font-bold text-slate-400">Edition</p>
+                        <p className="text-sm font-bold text-[#011039]">{selectedBook.edition || '-'}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="h-9 w-9 rounded-lg bg-slate-50 flex items-center justify-center">
+                        <Hash className="h-5 w-5 text-[#E76800]" />
+                      </div>
+                      <div>
+                        <p className="text-[10px] uppercase font-bold text-slate-400">ISBN</p>
+                        <p className="text-sm font-bold text-[#011039] truncate max-w-[120px]">{selectedBook.isbn || '-'}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {selectedBook.description && (
+                  <div className="mb-8">
+                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-2">About this book</p>
+                    <p className="text-slate-600 text-sm leading-relaxed">{selectedBook.description}</p>
+                  </div>
+                )}
+
+                <div className="pt-6 border-t border-slate-100">
+                  <p className="text-slate-500 text-xs text-center mb-6">To borrow or reserve this book, please log in to your student portal.</p>
+                  <div className="flex gap-4">
+                    <Button 
+                      variant="outline" 
+                      className="flex-1 h-12 rounded-xl"
+                      onClick={() => setShowBookModal(false)}
+                    >
+                      Close
+                    </Button>
+                    <Link to="/student/login" className="flex-1">
+                      <Button variant="primary" className="w-full h-12 rounded-xl shadow-lg shadow-orange-600/20">
+                        Login for Portal
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      )}
+
+      {/* Footer (Simplified) */}
+      <footer className="bg-[#011039] py-10 px-4 sm:px-8 text-white">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex items-center gap-3">
+            <img src="/Images/Logo.png" alt="Logo" className="h-10 w-auto brightness-0 invert" />
+            <h3 className="font-bold">{libraryName}</h3>
+          </div>
+          <div className="flex gap-6 text-sm text-slate-300">
+            <Link to="/landing" className="hover:text-white transition-colors">Home</Link>
+            <a href="/landing#books" className="hover:text-white transition-colors">Books</a>
+            <Link to="/student/login" className="hover:text-white transition-colors">Portal</Link>
+          </div>
+          <p className="text-xs text-slate-400 font-medium">© {new Date().getFullYear()} {libraryName}</p>
+        </div>
+      </footer>
+    </div>
+  )
+}

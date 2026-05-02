@@ -9,46 +9,26 @@ export const Button = ({
   loading,
   ...props 
 }) => {
-  const baseStyles = 'btn inline-flex items-center justify-center gap-2 font-medium transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed'
+  const baseStyles = 'btn inline-flex items-center justify-center gap-2 font-medium transition-all rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95'
   
   const variants = {
-    primary: 'text-white hover:opacity-90 focus:ring-2 focus:ring-offset-2',
-    secondary: 'text-white hover:opacity-90 focus:ring-2 focus:ring-offset-2',
-    outline: 'border border-gray-300 bg-white hover:bg-gray-50 focus:ring-2 focus:ring-offset-2',
-    ghost: 'hover:bg-gray-100 focus:ring-gray-300',
+    primary: 'bg-primary text-white hover:bg-primary/90 shadow-sm focus:ring-primary',
+    secondary: 'bg-secondary text-white hover:bg-secondary/90 shadow-sm focus:ring-secondary',
+    outline: 'border-2 border-secondary bg-transparent text-secondary hover:bg-secondary hover:text-white focus:ring-secondary',
+    ghost: 'bg-transparent text-secondary hover:bg-secondary/10 focus:ring-secondary',
     danger: 'bg-danger-500 text-white hover:bg-danger-600 focus:ring-danger-500',
     success: 'bg-success-500 text-white hover:bg-success-600 focus:ring-success-500',
   }
   
   const sizes = {
     sm: 'px-3 py-1.5 text-sm',
-    md: 'px-4 py-2 text-sm',
-    lg: 'px-6 py-3 text-base',
+    md: 'px-4 py-2.5 text-sm',
+    lg: 'px-8 py-3.5 text-base',
   }
   
-  const getButtonStyle = () => {
-    if (variant === 'primary') {
-      return { backgroundColor: '#E76800' }
-    }
-    if (variant === 'secondary') {
-      return { backgroundColor: '#011039' }
-    }
-    if (variant === 'outline') {
-      return { color: '#011039', borderColor: '#011039' }
-    }
-    if (variant === 'ghost') {
-      return { color: '#011039' }
-    }
-    if (variant === 'danger') {
-      return { backgroundColor: '#dc2626', color: '#ffffff' }
-    }
-    return {}
-  }
-
   return (
     <button
       className={cn(baseStyles, variants[variant], sizes[size], className)}
-      style={getButtonStyle()}
       disabled={disabled || loading}
       {...props}
     >
