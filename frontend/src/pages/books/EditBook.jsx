@@ -46,7 +46,7 @@ export default function EditBook() {
     queryFn: () => bookService.getBook(id),
     onError: (error) => {
       toast.error('Failed to load book data')
-      navigate('/books')
+      navigate('/admin/books')
     },
   })
 
@@ -94,7 +94,7 @@ export default function EditBook() {
       toast.success('Book updated successfully!')
       queryClient.invalidateQueries({ queryKey: ['books'] })
       queryClient.invalidateQueries({ queryKey: ['book', id] })
-      navigate('/books')
+      navigate('/admin/books')
     },
     onError: (error) => {
       toast.error(error.response?.data?.message || 'Failed to update book')
@@ -194,7 +194,7 @@ export default function EditBook() {
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => navigate('/books')}
+          onClick={() => navigate('/admin/books')}
         >
           <ArrowLeft className="h-4 w-4" />
         </Button>
@@ -459,7 +459,7 @@ export default function EditBook() {
             <Button
               type="button"
               variant="outline"
-              onClick={() => navigate('/books')}
+              onClick={() => navigate('/admin/books')}
               disabled={updateBookMutation.isPending}
             >
               Cancel

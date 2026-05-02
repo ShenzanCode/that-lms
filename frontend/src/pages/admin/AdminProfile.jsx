@@ -142,7 +142,7 @@ export default function AdminProfile() {
           <p className="mt-1 text-gray-600">Update your profile information</p>
         </div>
         <Button
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/admin')}
           variant="outline"
           size="sm"
         >
@@ -413,7 +413,7 @@ export default function AdminProfile() {
               <Button
                 type="button"
                 variant="outline"
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/admin')}
                 disabled={updateProfileMutation.isPending}
                 className="px-8 py-3"
               >

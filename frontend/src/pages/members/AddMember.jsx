@@ -32,7 +32,7 @@ export default function AddMember() {
     mutationFn: memberService.createMember,
     onSuccess: () => {
       toast.success('Member added successfully!')
-      navigate('/members')
+      navigate('/admin/members')
     },
     onError: (error) => {
       toast.error(error.response?.data?.message || 'Failed to add member')
@@ -111,7 +111,7 @@ export default function AddMember() {
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => navigate('/members')}
+          onClick={() => navigate('/admin/members')}
         >
           <ArrowLeft className="h-4 w-4" />
         </Button>
@@ -321,7 +321,7 @@ export default function AddMember() {
             <Button
               type="button"
               variant="outline"
-              onClick={() => navigate('/members')}
+              onClick={() => navigate('/admin/members')}
               disabled={createMemberMutation.isPending}
             >
               Cancel

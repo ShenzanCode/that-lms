@@ -143,7 +143,7 @@ export default function IssuedBooks() {
             <RefreshCw className="h-4 w-4" />
             Refresh
           </Button>
-          <Link to="/transactions/issue">
+          <Link to="/admin/transactions/issue">
             <Button variant="primary">
               <Plus className="h-4 w-4" />
               Issue Book
@@ -255,7 +255,7 @@ export default function IssuedBooks() {
                         <td className="px-6 py-4">
                           <div>
                             <Link
-                              to={`/books/${transaction.bookId?._id || '#'}`}
+                              to={`/admin/books/${transaction.bookId?._id || '#'}`}
                               className="text-sm font-medium text-primary-600 hover:text-primary-700"
                             >
                               {transaction.bookId?.title || 'Unknown Book'}
@@ -267,7 +267,7 @@ export default function IssuedBooks() {
                         <td className="px-6 py-4">
                           <div>
                             <Link
-                              to={`/members/${transaction.memberId?._id || '#'}`}
+                              to={`/admin/members/${transaction.memberId?._id || '#'}`}
                               className="text-sm font-medium text-primary-600 hover:text-primary-700"
                             >
                               {transaction.memberId?.name || 'Unknown Member'}
@@ -345,7 +345,7 @@ export default function IssuedBooks() {
             title="No issued books"
             description="No books are currently issued"
             action={
-              <Link to="/transactions/issue">
+              <Link to="/admin/transactions/issue">
                 <Button variant="primary">
                   <Plus className="h-4 w-4" />
                   Issue Book
@@ -436,7 +436,7 @@ export default function IssuedBooks() {
                 <p className="text-xs text-orange-600 mt-1">
                   You can return the book, but fines will remain unpaid. Clear fines to borrow new books.
                 </p>
-                <Link to="/fines" className="text-xs text-primary-600 hover:text-primary-700 underline mt-2 inline-block">
+                <Link to="/admin/fines" className="text-xs text-primary-600 hover:text-primary-700 underline mt-2 inline-block">
                   Go to Fines Management
                 </Link>
               </div>

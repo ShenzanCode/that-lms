@@ -23,12 +23,12 @@ export default function PendingApprovalPage() {
 
   const handleLogout = () => {
     logout()
-    navigate('/student/login')
+    navigate('/landing?auth=login&type=student')
   }
 
   const handleLogin = () => {
     logout()
-    navigate('/student/login')
+    navigate('/landing?auth=login&type=student')
   }
 
   if (isLoading && !updatedStudent) {

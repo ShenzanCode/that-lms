@@ -78,7 +78,7 @@ export default function Books() {
             <Database className="h-4 w-4" />
             Bulk Management
           </Button>
-          <Link to="/books/add">
+          <Link to="/admin/books/add">
             <Button variant="primary">
               <Plus className="h-4 w-4" />
               Add Book
@@ -174,7 +174,7 @@ export default function Books() {
                       </td>
                       <td className="px-6 py-4 text-sm font-medium" style={{color: '#011039'}}>{book.accessionNumber}</td>
                       <td className="px-6 py-4">
-                        <Link to={`/books/${book._id}`} className="text-sm font-medium hover:underline" style={{color: '#E76800'}}>
+                        <Link to={`/admin/books/${book._id}`} className="text-sm font-medium hover:underline" style={{color: '#E76800'}}>
                           {book.title}
                         </Link>
                       </td>
@@ -198,7 +198,7 @@ export default function Books() {
                         <StatusBadge status={book.status} />
                       </td>
                       <td className="px-6 py-4 text-right">
-                        <Link to={`/books/${book._id}/edit`}>
+                        <Link to={`/admin/books/${book._id}/edit`}>
                           <Button variant="ghost" size="sm">Edit</Button>
                         </Link>
                       </td>
@@ -223,7 +223,7 @@ export default function Books() {
             title="No books found"
             description="Try adjusting your search or filters"
             action={
-              <Link to="/books/add">
+              <Link to="/admin/books/add">
                 <Button variant="primary">
                   <Plus className="h-4 w-4" />
                   Add Your First Book

@@ -4,11 +4,9 @@ import { useMemberAuthStore } from './store/memberAuthStore'
 
 // Layouts
 import MainLayout from './layouts/MainLayout'
-import AuthLayout from './layouts/AuthLayout'
 import StudentLayout from './layouts/StudentLayout'
 
 // Librarian Pages
-import Login from './pages/auth/Login'
 import Dashboard from './pages/Dashboard'
 import Books from './pages/books/Books'
 import BookDetails from './pages/books/BookDetails'
@@ -35,8 +33,6 @@ import Landing from './pages/Landing'
 import PublicCatalog from './pages/PublicCatalog'
 
 // Student Pages
-import StudentLogin from './pages/student/StudentLogin'
-import StudentRegister from './pages/student/StudentRegister'
 import ProfileSetup from './pages/student/ProfileSetup'
 import PendingApprovalPage from './pages/student/PendingApprovalPage'
 import RejectedStatusPage from './pages/student/RejectedStatusPage'
@@ -56,17 +52,11 @@ const ProtectedRoute = ({ children }) => {
   
   // Check all authentication conditions for librarian
   if (!isAuthenticated || !user || !token) {
-    return <Navigate to="/login" replace />
+    return <Navigate to="/landing?auth=login&type=librarian" replace />
   }
   
   return children
 }
-
-// Protected Route Component for Member/Student
-// const StudentProtectedRoute = ({ children }) => {
-//   const { isAuthenticated } = useMemberStore()
-//   return isAuthenticated ? children : <Navigate to="/student/login" replace />
-// }
 
 // Public Route Component (redirect if already logged in)
 const PublicRoute = ({ children }) => {
@@ -79,7 +69,7 @@ const StudentProtectedRoute = ({ children }) => {
   const { isAuthenticated, student } = useMemberAuthStore()
   
   if (!isAuthenticated || !student) {
-    return <Navigate to="/student/login" replace />
+    return <Navigate to="/landing?auth=login&type=student" replace />
   }
 
   // Check if account is blocked - redirect to blocked page
@@ -107,7 +97,7 @@ const StudentProtectedRoute = ({ children }) => {
     return <Navigate to="/student/rejected" replace />
   }
 
-  return <Navigate to="/student/login" replace />
+  return <Navigate to="/landing" replace />
 }
 
 // Student Public Route Component
@@ -148,7 +138,7 @@ const ProfileSetupRoute = ({ children }) => {
   const { isAuthenticated, student } = useMemberAuthStore()
   
   if (!isAuthenticated || !student) {
-    return <Navigate to="/student/login" replace />
+    return <Navigate to="/landing" replace />
   }
 
   // Allow rejected users to resubmit (regardless of profileCompleted status)
@@ -171,7 +161,7 @@ const ProfileSetupRoute = ({ children }) => {
     return <Navigate to="/student/pending" replace />
   }
 
-  return <Navigate to="/student/login" replace />
+  return <Navigate to="/landing" replace />
 }
 
 // Status Page Route Component (for pending/rejected pages)
@@ -179,7 +169,7 @@ const StudentStatusRoute = ({ children, allowedStatus }) => {
   const { isAuthenticated, student } = useMemberAuthStore()
   
   if (!isAuthenticated || !student) {
-    return <Navigate to="/student/login" replace />
+    return <Navigate to="/landing" replace />
   }
   
   // If student status changed, redirect appropriately
@@ -217,7 +207,7 @@ const BlockedPageRoute = ({ children }) => {
   const { isAuthenticated, student } = useMemberAuthStore()
   
   if (!isAuthenticated || !student) {
-    return <Navigate to="/student/login" replace />
+    return <Navigate to="/landing" replace />
   }
   
   // Only allow access if student is actually blocked
@@ -237,90 +227,64 @@ function App() {
       }}
     >
       <Routes>
-        {/* Public Routes */}
+        {/* Public Website (Integrated Landing & Dashboard) */}
+        <Route path="/" element={<Landing />} />
         <Route path="/landing" element={<Landing />} />
         <Route path="/catalog" element={<PublicCatalog />} />
-        <Route element={<AuthLayout />}>
-          <Route
-            path="/login"
-            element={
-              <PublicRoute>
-                <Login />
-              </PublicRoute>
-            }
-          />
-        </Route>
-
+        
         {/* Protected Routes */}
         <Route
+          path="/admin"
           element={
             <ProtectedRoute>
               <MainLayout />
             </ProtectedRoute>
           }
         >
-          <Route path="/" element={<Dashboard />} />
+          <Route index element={<Dashboard />} />
+          <Route path="dashboard" element={<Dashboard />} />
           
           {/* Books */}
-          <Route path="/books" element={<Books />} />
-          <Route path="/books/add" element={<AddBook />} />
-          <Route path="/books/:id" element={<BookDetails />} />
-          <Route path="/books/:id/edit" element={<EditBook />} />
+          <Route path="books" element={<Books />} />
+          <Route path="books/add" element={<AddBook />} />
+          <Route path="books/:id" element={<BookDetails />} />
+          <Route path="books/:id/edit" element={<EditBook />} />
           
           {/* Members */}
-          <Route path="/members" element={<Members />} />
-          <Route path="/members/add" element={<AddMember />} />
-          <Route path="/members/pending" element={<PendingApprovals />} />
-          <Route path="/members/:id" element={<MemberDetails />} />
-          <Route path="/members/:id/edit" element={<EditMember />} />
+          <Route path="members" element={<Members />} />
+          <Route path="members/add" element={<AddMember />} />
+          <Route path="members/pending" element={<PendingApprovals />} />
+          <Route path="members/:id" element={<MemberDetails />} />
+          <Route path="members/:id/edit" element={<EditMember />} />
           
           {/* Transactions */}
-          <Route path="/transactions/issue" element={<IssueBook />} />
-          <Route path="/transactions/return" element={<ReturnBook />} />
-          <Route path="/transactions/issued" element={<IssuedBooks />} />
+          <Route path="transactions/issue" element={<IssueBook />} />
+          <Route path="transactions/return" element={<ReturnBook />} />
+          <Route path="transactions/issued" element={<IssuedBooks />} />
           
           {/* Reservations */}
-          <Route path="/reservations" element={<Reservations />} />
+          <Route path="reservations" element={<Reservations />} />
           
           {/* Fines */}
-          <Route path="/fines" element={<Fines />} />
+          <Route path="fines" element={<Fines />} />
           
           {/* Reports */}
-          <Route path="/reports" element={<Reports />} />
+          <Route path="reports" element={<Reports />} />
           
           {/* Live Chat Support */}
-          <Route path="/live-chat" element={<LiveChatSupport />} />
+          <Route path="live-chat" element={<LiveChatSupport />} />
           
           {/* Notifications */}
-          <Route path="/notifications" element={<AdminNotifications />} />
-          <Route path="/test-notifications" element={<TestNotifications />} />
+          <Route path="notifications" element={<AdminNotifications />} />
+          <Route path="test-notifications" element={<TestNotifications />} />
           
           {/* Settings */}
-          <Route path="/settings" element={<Settings />} />
+          <Route path="settings" element={<Settings />} />
           
           {/* Admin Profile */}
-          <Route path="/admin/profile" element={<AdminProfile />} />
+          <Route path="profile" element={<AdminProfile />} />
         </Route>
 
-        {/* Student Public Routes */}
-        <Route
-          path="/student/login"
-          element={
-            <StudentPublicRoute>
-              <StudentLogin />
-            </StudentPublicRoute>
-          }
-        />
-        
-        <Route
-          path="/student/register"
-          element={
-            <StudentPublicRoute>
-              <StudentRegister />
-            </StudentPublicRoute>
-          }
-        />
-        
         {/* Student Protected Routes - Status Pages */}
         <Route
           path="/student/profile-setup"

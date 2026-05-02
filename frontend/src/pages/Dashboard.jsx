@@ -72,7 +72,7 @@ function DashboardContent() {
       subtitle: `${stats?.books?.available || 0} available`,
       icon: BookOpen,
       color: 'primary',
-      link: '/books',
+      link: '/admin/books',
     },
     {
       title: 'Total Members',
@@ -80,7 +80,7 @@ function DashboardContent() {
       subtitle: `${stats?.members?.active || 0} active`,
       icon: Users,
       color: 'secondary',
-      link: '/members',
+      link: '/admin/members',
     },
     {
       title: 'Books Issued',
@@ -88,7 +88,7 @@ function DashboardContent() {
       subtitle: 'Currently borrowed',
       icon: BookCheck,
       color: 'warning',
-      link: '/transactions/issued',
+      link: '/admin/transactions/issued',
     },
     {
       title: 'Overdue Books',
@@ -96,7 +96,7 @@ function DashboardContent() {
       subtitle: 'Require attention',
       icon: AlertCircle,
       color: 'danger',
-      link: '/reports?tab=overdue',
+      link: '/admin/reports?tab=overdue',
     },
   ]
 
@@ -143,7 +143,7 @@ function DashboardContent() {
           <CardContent>
             <div className="grid grid-cols-2 gap-4">
               <Link
-                to="/transactions/issue"
+                to="/admin/transactions/issue"
                 className="p-4 border-2 border-dashed rounded-lg transition-all group hover:bg-orange-50"
                 style={{borderColor: '#E76800'}}
               >
@@ -152,7 +152,7 @@ function DashboardContent() {
                 <p className="text-sm" style={{color: '#011039'}}>Lend a book</p>
               </Link>
               <Link
-                to="/transactions/return"
+                to="/admin/transactions/return"
                 className="p-4 border-2 border-dashed rounded-lg transition-all group hover:bg-orange-50"
                 style={{borderColor: '#E76800'}}
               >
@@ -161,7 +161,7 @@ function DashboardContent() {
                 <p className="text-sm" style={{color: '#011039'}}>Process return</p>
               </Link>
               <Link
-                to="/books/add"
+                to="/admin/books/add"
                 className="p-4 border-2 border-dashed rounded-lg transition-all group hover:bg-orange-50"
                 style={{borderColor: '#E76800'}}
               >
@@ -170,7 +170,7 @@ function DashboardContent() {
                 <p className="text-sm" style={{color: '#011039'}}>New book entry</p>
               </Link>
               <Link
-                to="/members/add"
+                to="/admin/members/add"
                 className="p-4 border-2 border-dashed rounded-lg transition-all group hover:bg-orange-50"
                 style={{borderColor: '#E76800'}}
               >
@@ -253,7 +253,7 @@ function DashboardContent() {
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle>Recent Transactions</CardTitle>
-              <Link to="/transactions/issued" className="text-sm text-primary-600 hover:text-primary-700 font-medium flex items-center gap-1">
+              <Link to="/admin/transactions/issued" className="text-sm text-primary-600 hover:text-primary-700 font-medium flex items-center gap-1">
                 View All
                 <ArrowRight className="h-4 w-4" />
               </Link>

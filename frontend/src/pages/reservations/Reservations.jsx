@@ -369,7 +369,7 @@ export default function Reservations() {
                     <td className="px-6 py-4">
                       <div className="text-sm">
                         <Link
-                          to={`/books/${reservation.bookId?._id}`}
+                          to={`/admin/books/${reservation.bookId?._id}`}
                           className="font-medium text-primary-600 hover:text-primary-700"
                         >
                           {reservation.bookId?.title}

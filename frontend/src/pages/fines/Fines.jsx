@@ -343,7 +343,7 @@ export default function Fines() {
                           />
                           <div className="text-sm">
                             <Link
-                              to={`/members/${fine.memberId?._id}`}
+                              to={`/admin/members/${fine.memberId?._id}`}
                               className="font-medium text-primary-600 hover:text-primary-700"
                             >
                               {fine.memberId?.name}
@@ -358,7 +358,7 @@ export default function Fines() {
                       <td className="px-6 py-4">
                         <div className="text-sm">
                           <Link
-                            to={`/books/${fine.bookId?._id}`}
+                            to={`/admin/books/${fine.bookId?._id}`}
                             className="font-medium text-primary-600 hover:text-primary-700"
                           >
                             {fine.bookId?.title}

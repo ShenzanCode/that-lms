@@ -46,7 +46,7 @@ export default function RejectedStatusPage() {
 
   const handleLogout = () => {
     logout()
-    navigate('/student/login')
+    navigate('/landing?auth=login&type=student')
   }
 
   return (

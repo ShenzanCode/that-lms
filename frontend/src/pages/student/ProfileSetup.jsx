@@ -431,7 +431,7 @@ export default function ProfileSetup() {
                 type="button"
                 onClick={() => {
                   logout()
-                  navigate('/student/login')
+                  navigate('/landing?auth=login&type=student')
                 }}
                 className="flex-1 py-2 px-4 rounded-md font-medium border border-gray-300 hover:bg-gray-50"
                 style={{color: '#011039'}}

@@ -37,7 +37,7 @@ export default function AddBook() {
     mutationFn: bookService.createBook,
     onSuccess: () => {
       toast.success('Book added successfully!')
-      navigate('/books')
+      navigate('/admin/books')
     },
     onError: (error) => {
       toast.error(error.response?.data?.message || 'Failed to add book')
@@ -102,7 +102,7 @@ export default function AddBook() {
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => navigate('/books')}
+          onClick={() => navigate('/admin/books')}
         >
           <ArrowLeft className="h-4 w-4" />
         </Button>
@@ -342,7 +342,7 @@ export default function AddBook() {
             <Button
               type="button"
               variant="outline"
-              onClick={() => navigate('/books')}
+              onClick={() => navigate('/admin/books')}
               disabled={createBookMutation.isPending}
             >
               Cancel

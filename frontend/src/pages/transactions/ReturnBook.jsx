@@ -165,7 +165,7 @@ export default function ReturnBook() {
           <h1 className="text-3xl font-bold" style={{color: '#011039'}}>Return Book</h1>
           <p className="text-gray-600 mt-1">Process book returns and calculate fines</p>
         </div>
-        <Button variant="outline" onClick={() => navigate('/transactions/issued')}>
+        <Button variant="outline" onClick={() => navigate('/admin/transactions/issued')}>
           <Clock className="h-4 w-4 mr-2" />
           View All Issued Books
         </Button>
@@ -431,7 +431,7 @@ export default function ReturnBook() {
                     <div className="mt-3 flex gap-2">
                       <Button
                         type="button"
-                        onClick={() => navigate(`/fines?member=${selectedTransaction.memberId._id}`)}
+                        onClick={() => navigate(`/admin/fines?member=${selectedTransaction.memberId._id}`)}
                         variant="outline"
                         className="text-red-700 border-red-300 hover:bg-red-50"
                       >

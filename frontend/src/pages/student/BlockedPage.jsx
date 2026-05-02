@@ -31,7 +31,7 @@ export default function BlockedPage() {
 
   const handleLogout = () => {
     logout()
-    navigate('/student/login')
+    navigate('/landing?auth=login&type=student')
   }
 
   const handleContactAdmin = () => {

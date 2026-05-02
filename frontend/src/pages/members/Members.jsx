@@ -228,7 +228,7 @@ export default function Members() {
             <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
             Refresh
           </Button>
-          <Link to="/members/add">
+          <Link to="/admin/members/add">
             <Button variant="primary">
               <Plus className="h-4 w-4" />
               Add Member
@@ -313,7 +313,7 @@ export default function Members() {
                       <td className="px-6 py-4 text-sm font-medium" style={{color: '#011039'}}>{member.memberId}</td>
                       <td className="px-6 py-4">
                         <Link
-                          to={`/members/${member._id}`}
+                          to={`/admin/members/${member._id}`}
                           className="text-sm font-medium hover:underline"
                           style={{color: '#E76800'}}
                         >
@@ -372,10 +372,10 @@ export default function Members() {
                       </td>
                       <td className="px-6 py-4 text-right">
                         <div className="flex justify-end gap-2">
-                          <Link to={`/members/${member._id}`}>
+                          <Link to={`/admin/members/${member._id}`}>
                             <Button variant="ghost" size="sm">View</Button>
                           </Link>
-                          <Link to={`/members/${member._id}/edit`}>
+                          <Link to={`/admin/members/${member._id}/edit`}>
                             <Button variant="ghost" size="sm">Edit</Button>
                           </Link>
                           {member.isBlocked ? (
@@ -418,7 +418,7 @@ export default function Members() {
             title="No members found"
             description="Try adjusting your search or filters"
             action={
-              <Link to="/members/add">
+              <Link to="/admin/members/add">
                 <Button variant="primary">
                   <Plus className="h-4 w-4" />
                   Add Your First Member

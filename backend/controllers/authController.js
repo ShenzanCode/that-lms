@@ -61,9 +61,9 @@ const login = async (req, res, next) => {
         email: librarian.email,
         name: librarian.name,
         role: librarian.role,
-        photo: librarian.photo,
-        token
-      }
+        photo: librarian.photo
+      },
+      token
     });
   } catch (error) {
     next(error);

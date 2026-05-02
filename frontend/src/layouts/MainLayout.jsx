@@ -83,17 +83,17 @@ export default function MainLayout() {
   }, [showAdminMenu])
 
   const navigation = [
-    { name: 'Dashboard', path: '/', icon: Home },
-    { name: 'Books', path: '/books', icon: BookOpen },
-    { name: 'Members', path: '/members', icon: Users },
-    { name: 'Pending Approvals', path: '/members/pending', icon: User },
-    { name: 'Issue Book', path: '/transactions/issue', icon: BookCheck },
-    { name: 'Return Book', path: '/transactions/return', icon: BookX },
-    { name: 'Issued Books', path: '/transactions/issued', icon: BookMarked },
-    { name: 'Reservations', path: '/reservations', icon: Clock },
-    { name: 'Fines', path: '/fines', icon: DollarSign },
-    { name: 'Live Chat Support', path: '/live-chat', icon: MessageCircle },
-    { name: 'Reports', path: '/reports', icon: BarChart3 },
+    { name: 'Dashboard', path: '/admin', icon: Home },
+    { name: 'Books', path: '/admin/books', icon: BookOpen },
+    { name: 'Members', path: '/admin/members', icon: Users },
+    { name: 'Pending Approvals', path: '/admin/members/pending', icon: User },
+    { name: 'Issue Book', path: '/admin/transactions/issue', icon: BookCheck },
+    { name: 'Return Book', path: '/admin/transactions/return', icon: BookX },
+    { name: 'Issued Books', path: '/admin/transactions/issued', icon: BookMarked },
+    { name: 'Reservations', path: '/admin/reservations', icon: Clock },
+    { name: 'Fines', path: '/admin/fines', icon: DollarSign },
+    { name: 'Live Chat Support', path: '/admin/live-chat', icon: MessageCircle },
+    { name: 'Reports', path: '/admin/reports', icon: BarChart3 },
   ]
 
   const handleLogout = () => {
@@ -102,25 +102,8 @@ export default function MainLayout() {
   }
 
   const isActive = (path) => {
-    // Handle dashboard route
-    if (path === '/') return location.pathname === '/'
-    
-    // Exact match always wins
-    if (location.pathname === path) return true
-    
-    // Prevent false positives for similar paths
-    const currentPath = location.pathname
-    
-    // Don't highlight "/members" when on "/members/pending"  
-    if (path === '/members' && currentPath.startsWith('/members/')) return false
-    
-    // Don't highlight "/transactions/issue" when on "/transactions/issued"
-    if (path === '/transactions/issue' && currentPath === '/transactions/issued') return false
-    
-    // For other nested routes, allow parent highlighting
-    if (currentPath.startsWith(path + '/')) return true
-    
-    return false
+    if (path === '/admin') return location.pathname === '/admin' || location.pathname === '/admin/dashboard'
+    return location.pathname.startsWith(path)
   }
 
   return (
@@ -235,7 +218,7 @@ export default function MainLayout() {
                 <button
                   onClick={() => {
                     setShowAdminMenu(false)
-                    navigate('/settings')
+                    navigate('/admin/settings')
                   }}
                   className="flex items-center gap-3 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                 >

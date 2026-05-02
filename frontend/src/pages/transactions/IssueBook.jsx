@@ -41,7 +41,7 @@ export default function IssueBook() {
     mutationFn: transactionService.issueBook,
     onSuccess: (data) => {
       toast.success('Book issued successfully!')
-      navigate('/transactions/issued')
+      navigate('/admin/transactions/issued')
     },
     onError: (error) => {
       toast.error(error.response?.data?.message || 'Failed to issue book')
@@ -81,7 +81,7 @@ export default function IssueBook() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center gap-4">
-        <Button variant="ghost" size="sm" onClick={() => navigate('/transactions/issued')}>
+        <Button variant="ghost" size="sm" onClick={() => navigate('/admin/transactions/issued')}>
           <ArrowLeft className="h-4 w-4" />
         </Button>
         <div>

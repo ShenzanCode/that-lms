@@ -16,20 +16,23 @@ api.interceptors.request.use(
     const token = localStorage.getItem('token')
     const studentToken = localStorage.getItem('studentToken')
     
-    // Check if we're in student area based on current URL
+    // Check if the request is for student-specific API
+    // We check if the URL starts with /student-auth or if it's a student-facing request
+    const isStudentAPI = config.url.startsWith('/student-auth') || 
+                         config.url.startsWith('/notifications') || 
+                         config.url.startsWith('/reservations') ||
+                         config.url.startsWith('/fines')
+    
+    // Check if we're in student area based on current URL (fallback)
     const isStudentArea = window.location.pathname.startsWith('/student')
     
     // Determine which token to use
-    if (isStudentArea) {
-      // Use student token for student area
-      if (studentToken) {
-        config.headers.Authorization = `Bearer ${studentToken}`
-      }
-    } else {
-      // Use librarian token for admin area
-      if (token) {
-        config.headers.Authorization = `Bearer ${token}`
-      }
+    // If it's a student API OR we are in a student area, prioritize studentToken
+    if ((isStudentAPI || isStudentArea) && studentToken) {
+      config.headers.Authorization = `Bearer ${studentToken}`
+    } else if (token) {
+      // Otherwise use librarian token if it exists
+      config.headers.Authorization = `Bearer ${token}`
     }
     
     // Don't set Content-Type for FormData (let browser set it with boundary)
@@ -56,15 +59,15 @@ api.interceptors.response.use(
         // Handle student token expiration
         localStorage.removeItem('studentToken')
         localStorage.removeItem('student-auth-storage')
-        if (window.location.pathname !== '/student/login') {
-          window.location.href = '/student/login'
+        if (window.location.pathname !== '/landing' && window.location.pathname !== '/') {
+          window.location.href = '/landing?auth=login&type=student'
         }
       } else {
         // Handle librarian token expiration
         localStorage.removeItem('token')
         localStorage.removeItem('auth-storage')
-        if (window.location.pathname !== '/login') {
-          window.location.href = '/login'
+        if (window.location.pathname !== '/landing' && window.location.pathname !== '/') {
+          window.location.href = '/landing?auth=login&type=librarian'
         }
       }
     }

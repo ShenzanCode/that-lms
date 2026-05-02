@@ -51,7 +51,7 @@ export default function MemberDetails() {
     queryFn: () => memberService.getMember(id),
     onError: () => {
       toast.error('Failed to load member details')
-      navigate('/members')
+      navigate('/admin/members')
     },
   })
 
@@ -88,7 +88,7 @@ export default function MemberDetails() {
     mutationFn: ({ id, force }) => memberService.deleteMember(id, force),
     onSuccess: () => {
       toast.success('Member deleted successfully')
-      navigate('/members')
+      navigate('/admin/members')
     },
     onError: (error) => {
       toast.error(error.response?.data?.message || 'Failed to delete member')
@@ -204,7 +204,7 @@ export default function MemberDetails() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="sm" onClick={() => navigate('/members')}>
+          <Button variant="ghost" size="sm" onClick={() => navigate('/admin/members')}>
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <div>
@@ -230,7 +230,7 @@ export default function MemberDetails() {
               Block
             </Button>
           )}
-          <Link to={`/members/${id}/edit`}>
+          <Link to={`/admin/members/${id}/edit`}>
             <Button 
               className="text-white border-0"
               style={{
@@ -424,7 +424,7 @@ export default function MemberDetails() {
                     <div key={transaction._id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                       <div>
                         <Link
-                          to={`/books/${transaction.bookId._id}`}
+                          to={`/admin/books/${transaction.bookId._id}`}
                           className="font-medium text-primary-600 hover:text-primary-700"
                         >
                           {transaction.bookId.title}

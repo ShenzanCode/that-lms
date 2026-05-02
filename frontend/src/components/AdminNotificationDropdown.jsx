@@ -130,7 +130,7 @@ export default function AdminNotificationDropdown() {
     }
 
     // Always navigate to notifications page with the notification ID
-    navigate(`/notifications?notificationId=${notification.id}`)
+    navigate(`/admin/notifications?notificationId=${notification.id}`)
 
     // Close the dropdown
     setIsOpen(false)
@@ -254,7 +254,7 @@ export default function AdminNotificationDropdown() {
           {notifications.length > 0 && (
             <div className="p-3 border-t border-gray-200 text-center">
               <Link
-                to="/notifications"
+                to="/admin/notifications"
                 className="text-sm font-medium hover:underline"
                 style={{color: '#E76800'}}
                 onClick={() => setIsOpen(false)}

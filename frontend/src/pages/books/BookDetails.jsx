@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { 
@@ -34,7 +35,7 @@ export default function BookDetails() {
     queryFn: () => bookService.getBook(id),
     onError: () => {
       toast.error('Failed to load book details')
-      navigate('/books')
+      navigate('/admin/books')
     },
   })
 
@@ -42,7 +43,7 @@ export default function BookDetails() {
     mutationFn: bookService.deleteBook,
     onSuccess: () => {
       toast.success('Book deleted successfully')
-      navigate('/books')
+      navigate('/admin/books')
     },
     onError: (error) => {
       toast.error(error.response?.data?.message || 'Failed to delete book')
@@ -80,7 +81,7 @@ export default function BookDetails() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="sm" onClick={() => navigate('/books')}>
+          <Button variant="ghost" size="sm" onClick={() => navigate('/admin/books')}>
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <div>
@@ -89,7 +90,7 @@ export default function BookDetails() {
           </div>
         </div>
         <div className="flex gap-2">
-          <Link to={`/books/${id}/edit`}>
+          <Link to={`/admin/books/${id}/edit`}>
             <Button variant="outline">
               <Edit className="h-4 w-4" />
               Edit
@@ -270,7 +271,7 @@ export default function BookDetails() {
                     <div key={transaction._id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                       <div>
                         <Link
-                          to={`/members/${transaction.memberId._id}`}
+                          to={`/admin/members/${transaction.memberId._id}`}
                           className="font-medium text-primary-600 hover:text-primary-700"
                         >
                           {transaction.memberId.name}
@@ -326,5 +327,3 @@ export default function BookDetails() {
     </div>
   )
 }
-
-import { useState } from 'react'

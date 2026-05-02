@@ -10,6 +10,9 @@ import { Badge } from '@/components/ui/Badge'
 import { Modal } from '@/components/ui/Modal'
 import { Pagination } from '@/components/ui/Pagination'
 
+import PublicNavbar from '@/components/PublicNavbar'
+import AuthModal from '@/components/AuthModal'
+
 const PAGE_SIZE = 18
 
 const getCoverUrl = (coverImage) => {
@@ -26,9 +29,16 @@ export default function PublicCatalog() {
   const [debouncedSearch, setDebouncedSearch] = useState('')
   const [selectedBook, setSelectedBook] = useState(null)
   const [showBookModal, setShowBookModal] = useState(false)
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
+  const [authMode, setAuthMode] = useState('login')
   const [filters, setFilters] = useState({
     category: '',
   })
+
+  const openAuth = (mode) => {
+    setAuthMode(mode)
+    setIsAuthModalOpen(true)
+  }
 
   // Debounce search
   useEffect(() => {
@@ -72,28 +82,7 @@ export default function PublicCatalog() {
 
   return (
     <div className="min-h-screen bg-[#F8F9FA]">
-      {/* Navbar */}
-      <header className="bg-white shadow-sm fixed top-0 left-0 right-0 z-50 transition-all border-b-2" style={{ borderColor: '#E76800' }}>
-        <div className="flex items-center justify-between h-16 px-4 sm:px-8 max-w-7xl mx-auto">
-          <div className="flex items-center gap-3">
-            <Link to="/landing" className="flex items-center">
-              <img src="/Images/Logo.png" alt={libraryName} className="h-10 w-auto object-contain" />
-            </Link>
-          </div>
-
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-            <Link to="/landing" className="text-slate-600 hover:text-[#E76800] transition-colors">Home</Link>
-            <Link to="/landing#books" className="text-[#E76800] font-bold">Catalog</Link>
-            <Link to="/student/login" className="text-slate-600 hover:text-[#E76800] transition-colors">Portal Login</Link>
-          </nav>
-
-          <div className="flex items-center gap-4">
-            <Link to="/student/login">
-              <Button variant="primary" className="px-6 rounded-lg shadow-md">Login</Button>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <PublicNavbar onOpenAuth={openAuth} />
 
       <main className="pt-24 pb-20 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto">
@@ -310,7 +299,7 @@ export default function PublicCatalog() {
                     >
                       Close
                     </Button>
-                    <Link to="/student/login" className="flex-1">
+                    <Link to="/landing?auth=login&type=student" className="flex-1">
                       <Button variant="primary" className="w-full h-12 rounded-xl shadow-lg shadow-orange-600/20">
                         Login for Portal
                       </Button>
@@ -333,11 +322,16 @@ export default function PublicCatalog() {
           <div className="flex gap-6 text-sm text-slate-300">
             <Link to="/landing" className="hover:text-white transition-colors">Home</Link>
             <a href="/landing#books" className="hover:text-white transition-colors">Books</a>
-            <Link to="/student/login" className="hover:text-white transition-colors">Portal</Link>
+            <Link to="/landing?auth=login&type=student" className="hover:text-white transition-colors">Portal</Link>
           </div>
           <p className="text-xs text-slate-400 font-medium">© {new Date().getFullYear()} {libraryName}</p>
         </div>
       </footer>
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
+        initialMode={authMode} 
+      />
     </div>
   )
 }

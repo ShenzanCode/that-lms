@@ -40,7 +40,7 @@ export default function EditMember() {
     queryFn: () => memberService.getMember(id),
     onError: (error) => {
       toast.error('Failed to load member data')
-      navigate('/members')
+      navigate('/admin/members')
     },
   })
 
@@ -75,7 +75,7 @@ export default function EditMember() {
     mutationFn: (data) => memberService.updateMember(id, data),
     onSuccess: () => {
       toast.success('Member updated successfully!')
-      navigate(`/members/${id}`)
+      navigate(`/admin/members/${id}`)
     },
     onError: (error) => {
       toast.error(error.response?.data?.message || 'Failed to update member')
@@ -175,7 +175,7 @@ export default function EditMember() {
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => navigate(`/members/${id}`)}
+          onClick={() => navigate(`/admin/members/${id}`)}
         >
           <ArrowLeft className="h-4 w-4" />
         </Button>
@@ -405,7 +405,7 @@ export default function EditMember() {
             <Button
               type="button"
               variant="outline"
-              onClick={() => navigate(`/members/${id}`)}
+              onClick={() => navigate(`/admin/members/${id}`)}
               disabled={updateMemberMutation.isPending}
             >
               Cancel
