@@ -1,9 +1,17 @@
 import { useEffect, useMemo, useState, useRef } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
-import { BookOpen, ShieldCheck, Search, Phone, Mail, MapPin, Clock, ChevronRight, User, LogOut, LayoutDashboard, Settings as SettingsIcon, Menu, X as CloseIcon } from 'lucide-react'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { 
+  BookOpen, ShieldCheck, Search, Phone, Mail, MapPin, 
+  Clock, ChevronRight, User, LogOut, LayoutDashboard, 
+  Settings as SettingsIcon, Menu, X as CloseIcon,
+  CheckCircle, AlertTriangle, Hash, Calendar, BookmarkIcon,
+  X, LogIn
+} from 'lucide-react'
 import { settingsService } from '@/services/settingsService'
 import { bookService } from '@/services/bookService'
+import { reservationService } from '@/services/reservationService'
+import { transactionService } from '@/services/transactionService'
 import { Button } from '@/components/ui/Button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 import { useAuthStore } from '@/store/authStore'
@@ -11,6 +19,9 @@ import { useMemberAuthStore } from '@/store/memberAuthStore'
 import Avatar from '@/components/ui/Avatar'
 import AuthModal from '@/components/AuthModal'
 import StudentDashboard from './student/StudentDashboard'
+import { Modal } from '@/components/ui/Modal'
+import { Badge } from '@/components/ui/Badge'
+import toast from 'react-hot-toast'
 
 import PublicNavbar from '@/components/PublicNavbar'
 
@@ -29,12 +40,15 @@ export default function Landing() {
   const [bookItems, setBookItems] = useState([])
   const [activeSlide, setActiveSlide] = useState(0)
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false)
+  const [selectedBook, setSelectedBook] = useState(null)
+  const [showBookModal, setShowBookModal] = useState(false)
   const [authMode, setAuthMode] = useState('login')
   const [authType, setAuthType] = useState('student')
   const [view, setView] = useState('landing') // 'landing' or 'dashboard'
-  
+
   const navigate = useNavigate()
   const location = useLocation()
+  const queryClient = useQueryClient()
 
   const { user: librarian, logout: logoutLibrarian, isAuthenticated: isLibAuth } = useAuthStore()
   const { student, logout: logoutStudent, isAuthenticated: isStudentAuth } = useMemberAuthStore()
@@ -42,6 +56,52 @@ export default function Landing() {
   const isAuthenticated = isLibAuth || isStudentAuth
   const user = librarian || student
   const userType = isLibAuth ? 'librarian' : 'student'
+
+  // Fetch student's current books and reservations if logged in
+  const { data: myBooksData } = useQuery({
+    queryKey: ['my-issued-books'],
+    queryFn: () => transactionService.getIssuedBooks(),
+    enabled: !!isStudentAuth
+  })
+
+  const { data: myReservationsData } = useQuery({
+    queryKey: ['my-reservations'],
+    queryFn: () => reservationService.getReservations(),
+    enabled: !!isStudentAuth
+  })
+
+  const myIssuedBooks = myBooksData?.data || []
+  const myReservations = myReservationsData?.data || []
+
+  // Check if current student has this book
+  const hasBook = (bookId) => myIssuedBooks.some(tx => tx.bookId?._id === bookId)
+  const hasReservation = (bookId) => myReservations.find(res => res.bookId?._id === bookId)
+
+  // Reservation Mutation
+  const reserveMutation = useMutation({
+    mutationFn: (bookId) => reservationService.createReservation({ bookId }),
+    onSuccess: () => {
+      toast.success('Reservation request submitted successfully!')
+      queryClient.invalidateQueries(['my-reservations'])
+    },
+    onError: (error) => {
+      toast.error(error.response?.data?.message || 'Failed to request reservation')
+    }
+  })
+
+  const handleReserve = async (e, bookId) => {
+    if (e) e.stopPropagation()
+    if (!isStudentAuth) {
+      openAuth('login')
+      return
+    }
+    reserveMutation.mutate(bookId)
+  }
+
+  const handleBookClick = (book) => {
+    setSelectedBook(book)
+    setShowBookModal(true)
+  }
 
   // Auto-slide hero section
   useEffect(() => {
@@ -94,7 +154,12 @@ export default function Landing() {
     () => [
       'https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&q=80&w=2000',
       'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=2000',
-      'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&q=80&w=2000'
+      'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&q=80&w=2000',
+      'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&q=80&w=2000',
+      'https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&q=80&w=2000',
+      'https://images.unsplash.com/photo-1529148482759-b35b25c5f217?auto=format&fit=crop&q=80&w=2000',
+      'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=2000',
+      'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=2000'
     ],
     []
   )
@@ -194,11 +259,14 @@ export default function Landing() {
                   </p>
 
                   <div className="flex flex-wrap items-center gap-4 animate-slide-up" style={{ animationDelay: '300ms' }}>
-                    <Link to="/catalog">
-                      <Button variant="primary" size="lg" className="rounded-lg shadow-xl shadow-orange-500/20">
-                        Explore Catalog
-                      </Button>
-                    </Link>
+                    <Button 
+                      variant="primary" 
+                      size="lg" 
+                      className="rounded-lg shadow-xl shadow-orange-500/20"
+                      onClick={() => navigate('/catalog')}
+                    >
+                      Explore Catalog
+                    </Button>
                     {!isAuthenticated && (
                       <Button 
                         variant="outline" 
@@ -312,7 +380,11 @@ export default function Landing() {
                         {bookItems.map((book) => {
                           const coverUrl = getCoverUrl(book.coverImage)
                           return (
-                            <Card key={book._id} className="group p-3 border-slate-100 hover:border-[#E76800]/20 hover:shadow-xl transition-all duration-300 rounded-2xl flex flex-col h-full bg-white">
+                            <Card 
+                              key={book._id} 
+                              className="group p-3 border-slate-100 hover:border-[#E76800]/20 hover:shadow-xl transition-all duration-300 rounded-2xl flex flex-col h-full bg-white cursor-pointer"
+                              onClick={() => handleBookClick(book)}
+                            >
                               <div className="aspect-[3/4] bg-slate-50 rounded-xl overflow-hidden mb-4 relative shadow-sm">
                                 {coverUrl ? (
                                   <img src={coverUrl} alt={book.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
@@ -331,11 +403,13 @@ export default function Landing() {
                         })}
                       </div>
                       <div className="mt-16 flex justify-center">
-                        <Link to="/catalog">
-                          <Button variant="primary" className="px-12 h-14 rounded-2xl shadow-xl shadow-orange-600/20 text-lg font-bold">
-                            Explore Full Catalog
-                          </Button>
-                        </Link>
+                        <Button 
+                          variant="primary" 
+                          className="px-12 h-14 rounded-2xl shadow-xl shadow-orange-600/20 text-lg font-bold"
+                          onClick={() => navigate('/catalog')}
+                        >
+                          Explore Full Catalog
+                        </Button>
                       </div>
                     </>
                   )}
@@ -475,6 +549,161 @@ export default function Landing() {
         initialMode={authMode}
         initialType={authType}
       />
+
+      {/* Book Details Modal */}
+      {showBookModal && selectedBook && (
+        <Modal isOpen={showBookModal} onClose={() => setShowBookModal(false)}>
+          <div className="p-0 overflow-hidden rounded-3xl">
+            <div className="grid grid-cols-1 md:grid-cols-5">
+              {/* Left Side: Cover Image */}
+              <div className="md:col-span-2 bg-slate-50 flex items-center justify-center p-8">
+                <div className="w-full aspect-[3/4] rounded-2xl shadow-2xl overflow-hidden border-4 border-white">
+                  {selectedBook.coverImage ? (
+                    <img
+                      src={getCoverUrl(selectedBook.coverImage)}
+                      alt={selectedBook.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <BookOpen className="h-20 w-20 text-slate-300" />
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Right Side: Details */}
+              <div className="md:col-span-3 p-8 text-left">
+                <div className="flex justify-between items-start mb-6">
+                  <div>
+                    <Badge variant={selectedBook.status === 'Available' ? 'success' : 'warning'} className="mb-3 px-3 py-1 rounded-lg">
+                      {selectedBook.status}
+                    </Badge>
+                    <h2 className="text-2xl font-extrabold text-[#011039] leading-tight">
+                      {selectedBook.title}
+                    </h2>
+                    <p className="text-[#E76800] font-bold mt-1">{selectedBook.author}</p>
+                  </div>
+                  <button 
+                    onClick={() => setShowBookModal(false)}
+                    className="p-2 hover:bg-slate-100 rounded-full transition-colors"
+                  >
+                    <X className="h-6 w-6 text-slate-400" />
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-2 gap-y-4 gap-x-6 mb-8 bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                  <div>
+                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Sr.No</p>
+                    <p className="text-sm font-bold text-[#011039]">{selectedBook.accessionNumber || '-'}</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Author</p>
+                    <p className="text-sm font-bold text-[#011039]">{selectedBook.author || '-'}</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Category</p>
+                    <p className="text-sm font-bold text-[#011039]">{selectedBook.category || '-'}</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Edition</p>
+                    <p className="text-sm font-bold text-[#011039]">{selectedBook.edition || '-'}</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">By Purchase</p>
+                    <p className="text-sm font-bold text-[#011039]">{selectedBook.price ? `Rs. ${selectedBook.price}` : '-'}</p>
+                  </div>
+                </div>
+
+                {selectedBook.description && (
+                  <div className="mb-8">
+                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-2">About this book</p>
+                    <p className="text-slate-600 text-sm leading-relaxed line-clamp-3">{selectedBook.description}</p>
+                  </div>
+                )}
+
+                <div className="pt-6 border-t border-slate-100">
+                  {isStudentAuth ? (
+                    <div className="space-y-4">
+                      {hasBook(selectedBook._id) ? (
+                        <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 flex items-center gap-3">
+                          <CheckCircle className="h-5 w-5 text-blue-600 shrink-0" />
+                          <p className="text-sm font-bold text-blue-800">You currently have this book issued.</p>
+                        </div>
+                      ) : hasReservation(selectedBook._id) ? (
+                        <div className={`border rounded-xl p-4 flex items-center gap-3 ${
+                          hasReservation(selectedBook._id).status === 'pending' 
+                          ? 'bg-orange-50 border-orange-100' 
+                          : 'bg-green-50 border-green-100'
+                        }`}>
+                          <Clock className={`h-5 w-5 shrink-0 ${
+                            hasReservation(selectedBook._id).status === 'pending' 
+                            ? 'text-orange-600' 
+                            : 'text-green-600'
+                          }`} />
+                          <div>
+                            <p className={`text-sm font-bold ${
+                              hasReservation(selectedBook._id).status === 'pending' 
+                              ? 'text-orange-800' 
+                              : 'text-green-800'
+                            }`}>
+                              {hasReservation(selectedBook._id).status === 'pending' 
+                                ? 'Reservation Pending' 
+                                : 'Reservation Approved'}
+                            </p>
+                            <p className="text-xs mt-0.5 opacity-70">
+                              {hasReservation(selectedBook._id).status === 'pending' 
+                                ? 'Waiting for librarian approval.' 
+                                : 'Please visit the library to collect your book.'}
+                            </p>
+                          </div>
+                        </div>
+                      ) : selectedBook.status === 'Available' ? (
+                        <Button 
+                          variant="primary" 
+                          className="w-full h-14 rounded-2xl shadow-xl shadow-orange-600/20 text-lg font-bold"
+                          onClick={(e) => handleReserve(e, selectedBook._id)}
+                          loading={reserveMutation.isPending}
+                        >
+                          Request Reservation
+                        </Button>
+                      ) : (
+                        <div className="bg-slate-100 border border-slate-200 rounded-xl p-4 flex items-center gap-3">
+                          <AlertTriangle className="h-5 w-5 text-slate-500 shrink-0" />
+                          <p className="text-sm font-bold text-slate-700">This book is currently unavailable.</p>
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="space-y-6 text-center">
+                      <div className="bg-slate-50 border border-slate-100 rounded-xl p-4">
+                        <p className="text-slate-600 text-sm font-medium">To borrow or reserve this book, please log in to your student portal.</p>
+                      </div>
+                      <div className="flex gap-4">
+                        <Button 
+                          variant="outline" 
+                          className="flex-1 h-12 rounded-xl"
+                          onClick={() => setShowBookModal(false)}
+                        >
+                          Close
+                        </Button>
+                        <Button 
+                          variant="primary" 
+                          className="flex-1 h-12 rounded-xl shadow-lg shadow-orange-500/20 flex items-center justify-center gap-2"
+                          onClick={() => openAuth('login')}
+                        >
+                          <LogIn className="h-4 w-4" />
+                          Login to Portal
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </Modal>
+      )}
     </div>
   )
 }

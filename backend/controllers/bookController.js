@@ -113,7 +113,7 @@ const getPublicBooks = async (req, res, next) => {
     const skip = (parsedPage - 1) * parsedLimit;
 
     const books = await Book.find(query)
-      .select('title author category coverImage')
+      .select('title author category coverImage accessionNumber edition price status availableCopies totalCopies description isbn ddcNumber department language pages shelfLocation condition')
       .sort(sortBy)
       .limit(parsedLimit)
       .skip(skip);

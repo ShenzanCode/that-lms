@@ -1,14 +1,22 @@
 import { useState, useEffect } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
-import { BookOpen, Search, Filter, X, Calendar, Hash, User, BookmarkIcon, ChevronRight, Mail, Phone, MapPin } from 'lucide-react'
+import { 
+  BookOpen, Search, Filter, X, Calendar, Hash, User, 
+  BookmarkIcon, ChevronRight, Mail, Phone, MapPin, 
+  Clock, CheckCircle, AlertTriangle, LogIn
+} from 'lucide-react'
 import { bookService } from '@/services/bookService'
 import { settingsService } from '@/services/settingsService'
+import { reservationService } from '@/services/reservationService'
+import { transactionService } from '@/services/transactionService'
+import { useMemberAuthStore } from '@/store/memberAuthStore'
 import { Card, CardContent } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { Modal } from '@/components/ui/Modal'
 import { Pagination } from '@/components/ui/Pagination'
+import toast from 'react-hot-toast'
 
 import PublicNavbar from '@/components/PublicNavbar'
 import AuthModal from '@/components/AuthModal'
@@ -34,6 +42,51 @@ export default function PublicCatalog() {
   const [filters, setFilters] = useState({
     category: '',
   })
+
+  const { student, isAuthenticated } = useMemberAuthStore()
+  const queryClient = useQueryClient()
+
+  // Fetch student's current books and reservations if logged in
+  const { data: myBooksData } = useQuery({
+    queryKey: ['my-issued-books'],
+    queryFn: () => transactionService.getIssuedBooks(),
+    enabled: !!isAuthenticated
+  })
+
+  const { data: myReservationsData } = useQuery({
+    queryKey: ['my-reservations'],
+    queryFn: () => reservationService.getReservations(),
+    enabled: !!isAuthenticated
+  })
+
+  const myIssuedBooks = myBooksData?.data || []
+  const myReservations = myReservationsData?.data || []
+
+  // Check if current student has this book
+  const hasBook = (bookId) => myIssuedBooks.some(tx => tx.bookId?._id === bookId)
+  const hasReservation = (bookId) => myReservations.find(res => res.bookId?._id === bookId)
+
+  // Reservation Mutation
+  const reserveMutation = useMutation({
+    mutationFn: (bookId) => reservationService.createReservation({ bookId }),
+    onSuccess: () => {
+      toast.success('Reservation request submitted successfully!')
+      queryClient.invalidateQueries(['my-reservations'])
+      queryClient.invalidateQueries(['public-books-catalog'])
+    },
+    onError: (error) => {
+      toast.error(error.response?.data?.message || 'Failed to request reservation')
+    }
+  })
+
+  const handleReserve = async (e, bookId) => {
+    if (e) e.stopPropagation()
+    if (!isAuthenticated) {
+      openAuth('login')
+      return
+    }
+    reserveMutation.mutate(bookId)
+  }
 
   const openAuth = (mode) => {
     setAuthMode(mode)
@@ -154,12 +207,20 @@ export default function PublicCatalog() {
                   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
                     {books.map((book) => {
                       const coverUrl = getCoverUrl(book.coverImage)
+                      const isIssuedToMe = hasBook(book._id)
+                      const myRes = hasReservation(book._id)
+
                       return (
                         <Card 
                           key={book._id} 
-                          className="group p-3 border-slate-100 hover:border-[#E76800]/20 hover:shadow-xl transition-all duration-300 rounded-2xl flex flex-col h-full bg-white cursor-pointer"
+                          className={`group p-3 border-slate-100 hover:border-[#E76800]/20 hover:shadow-xl transition-all duration-300 rounded-2xl flex flex-col h-full bg-white cursor-pointer relative ${isIssuedToMe ? 'ring-2 ring-blue-500/20' : ''}`}
                           onClick={() => handleBookClick(book)}
                         >
+                          {isIssuedToMe && (
+                            <div className="absolute top-2 right-2 z-10 bg-blue-500 text-white p-1 rounded-full shadow-lg" title="You currently have this book">
+                              <CheckCircle className="h-4 w-4" />
+                            </div>
+                          )}
                           <div className="aspect-[3/4] bg-slate-50 rounded-xl overflow-hidden mb-4 relative shadow-sm">
                             {coverUrl ? (
                               <img src={coverUrl} alt={book.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
@@ -239,46 +300,26 @@ export default function PublicCatalog() {
                   </button>
                 </div>
 
-                <div className="grid grid-cols-2 gap-6 mb-8">
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <div className="h-9 w-9 rounded-lg bg-slate-50 flex items-center justify-center">
-                        <BookmarkIcon className="h-5 w-5 text-[#E76800]" />
-                      </div>
-                      <div>
-                        <p className="text-[10px] uppercase font-bold text-slate-400">Category</p>
-                        <p className="text-sm font-bold text-[#011039]">{selectedBook.category || '-'}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="h-9 w-9 rounded-lg bg-slate-50 flex items-center justify-center">
-                        <Hash className="h-5 w-5 text-[#E76800]" />
-                      </div>
-                      <div>
-                        <p className="text-[10px] uppercase font-bold text-slate-400">Sr.No</p>
-                        <p className="text-sm font-bold text-[#011039]">{selectedBook.accessionNumber || '-'}</p>
-                      </div>
-                    </div>
+                <div className="grid grid-cols-2 gap-y-4 gap-x-6 mb-8 bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                  <div>
+                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Sr.No</p>
+                    <p className="text-sm font-bold text-[#011039]">{selectedBook.accessionNumber || '-'}</p>
                   </div>
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <div className="h-9 w-9 rounded-lg bg-slate-50 flex items-center justify-center">
-                        <Calendar className="h-5 w-5 text-[#E76800]" />
-                      </div>
-                      <div>
-                        <p className="text-[10px] uppercase font-bold text-slate-400">Edition</p>
-                        <p className="text-sm font-bold text-[#011039]">{selectedBook.edition || '-'}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="h-9 w-9 rounded-lg bg-slate-50 flex items-center justify-center">
-                        <Hash className="h-5 w-5 text-[#E76800]" />
-                      </div>
-                      <div>
-                        <p className="text-[10px] uppercase font-bold text-slate-400">ISBN</p>
-                        <p className="text-sm font-bold text-[#011039] truncate max-w-[120px]">{selectedBook.isbn || '-'}</p>
-                      </div>
-                    </div>
+                  <div>
+                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Author</p>
+                    <p className="text-sm font-bold text-[#011039]">{selectedBook.author || '-'}</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Category</p>
+                    <p className="text-sm font-bold text-[#011039]">{selectedBook.category || '-'}</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Edition</p>
+                    <p className="text-sm font-bold text-[#011039]">{selectedBook.edition || '-'}</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">By Purchase</p>
+                    <p className="text-sm font-bold text-[#011039]">{selectedBook.price ? `Rs. ${selectedBook.price}` : '-'}</p>
                   </div>
                 </div>
 
@@ -290,21 +331,89 @@ export default function PublicCatalog() {
                 )}
 
                 <div className="pt-6 border-t border-slate-100">
-                  <p className="text-slate-500 text-xs text-center mb-6">To borrow or reserve this book, please log in to your student portal.</p>
-                  <div className="flex gap-4">
-                    <Button 
-                      variant="outline" 
-                      className="flex-1 h-12 rounded-xl"
-                      onClick={() => setShowBookModal(false)}
-                    >
-                      Close
-                    </Button>
-                    <Link to="/landing?auth=login&type=student" className="flex-1">
-                      <Button variant="primary" className="w-full h-12 rounded-xl shadow-lg shadow-orange-600/20">
-                        Login for Portal
+                  {isAuthenticated ? (
+                    <div className="space-y-4">
+                      {hasBook(selectedBook._id) ? (
+                        <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 flex items-center gap-3">
+                          <CheckCircle className="h-5 w-5 text-blue-600 shrink-0" />
+                          <p className="text-sm font-bold text-blue-800">You currently have this book issued.</p>
+                        </div>
+                      ) : hasReservation(selectedBook._id) ? (
+                        <div className={`border rounded-xl p-4 flex items-center gap-3 ${
+                          hasReservation(selectedBook._id).status === 'pending' 
+                          ? 'bg-orange-50 border-orange-100' 
+                          : 'bg-green-50 border-green-100'
+                        }`}>
+                          <Clock className={`h-5 w-5 shrink-0 ${
+                            hasReservation(selectedBook._id).status === 'pending' 
+                            ? 'text-orange-600' 
+                            : 'text-green-600'
+                          }`} />
+                          <div>
+                            <p className={`text-sm font-bold ${
+                              hasReservation(selectedBook._id).status === 'pending' 
+                              ? 'text-orange-800' 
+                              : 'text-green-800'
+                            }`}>
+                              {hasReservation(selectedBook._id).status === 'pending' 
+                                ? 'Reservation Pending' 
+                                : 'Reservation Approved'}
+                            </p>
+                            <p className="text-xs mt-0.5 opacity-70">
+                              {hasReservation(selectedBook._id).status === 'pending' 
+                                ? 'Waiting for librarian approval.' 
+                                : 'Please visit the library to collect your book.'}
+                            </p>
+                          </div>
+                        </div>
+                      ) : selectedBook.status === 'Available' ? (
+                        <Button 
+                          variant="primary" 
+                          className="w-full h-14 rounded-2xl shadow-xl shadow-orange-600/20 text-lg font-bold"
+                          onClick={(e) => handleReserve(e, selectedBook._id)}
+                          loading={reserveMutation.isPending}
+                        >
+                          Request Reservation
+                        </Button>
+                      ) : (
+                        <div className="bg-slate-100 border border-slate-200 rounded-xl p-4 flex items-center gap-3">
+                          <AlertTriangle className="h-5 w-5 text-slate-500 shrink-0" />
+                          <p className="text-sm font-bold text-slate-700">This book is currently unavailable.</p>
+                        </div>
+                      )}
+                      
+                      <Button 
+                        variant="outline" 
+                        className="w-full h-12 rounded-xl"
+                        onClick={() => setShowBookModal(false)}
+                      >
+                        Close
                       </Button>
-                    </Link>
-                  </div>
+                    </div>
+                  ) : (
+                    <div className="space-y-6">
+                      <div className="bg-slate-50 border border-slate-100 rounded-xl p-4 text-center">
+                        <p className="text-slate-600 text-sm font-medium">To borrow or reserve this book, please log in to your student portal.</p>
+                      </div>
+                      <div className="flex gap-4">
+                        <Button 
+                          variant="outline" 
+                          className="flex-1 h-12 rounded-xl"
+                          onClick={() => setShowBookModal(false)}
+                        >
+                          Close
+                        </Button>
+                        <Button 
+                          variant="primary" 
+                          className="flex-1 h-12 rounded-xl shadow-lg shadow-orange-500/20 flex items-center justify-center gap-2"
+                          onClick={() => openAuth('login')}
+                        >
+                          <LogIn className="h-4 w-4" />
+                          Login to Portal
+                        </Button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
