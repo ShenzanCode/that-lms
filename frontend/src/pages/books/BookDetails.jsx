@@ -69,7 +69,7 @@ export default function BookDetails() {
   const getStatusColor = (status) => {
     const colors = {
       Available: 'success',
-      'Not Available': 'warning',
+      Issued: 'warning',
       Damaged: 'danger',
       Lost: 'danger',
     }

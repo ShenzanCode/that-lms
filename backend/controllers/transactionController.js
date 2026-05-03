@@ -100,10 +100,10 @@ const issueBook = async (req, res, next) => {
       maxRenewals: maxRenewals
     });
 
-    // Update book available copies
+    // Update book status and availability
     book.availableCopies -= 1;
     if (book.availableCopies === 0) {
-      book.status = 'Not Available';
+      book.status = 'Issued';
     }
     await book.save();
 
@@ -227,7 +227,7 @@ const returnBook = async (req, res, next) => {
     // Update book
     const book = transaction.bookId;
     book.availableCopies += 1;
-    if (book.availableCopies > 0 && book.status === 'Not Available') {
+    if (book.availableCopies > 0 && book.status === 'Issued') {
       book.status = 'Available';
     }
     if (condition) {

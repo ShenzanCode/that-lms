@@ -87,8 +87,16 @@ const createReservation = async (req, res, next) => {
       });
     }
 
-    // Check if book is available - allow reservation with 'Pending' status if not available
+    // Check if book is available
     const isBookAvailable = book.availableCopies > 0;
+
+    // If student is requesting and book is available, they should visit library instead
+    if (req.student && isBookAvailable) {
+      return res.status(400).json({
+        success: false,
+        message: 'This book is currently available in the library. Please visit the library to issue it directly.'
+      });
+    }
 
     // Check for existing active reservation
     const existingReservation = await Reservation.findOne({
@@ -100,7 +108,7 @@ const createReservation = async (req, res, next) => {
     if (existingReservation) {
       return res.status(400).json({
         success: false,
-        message: 'You already have a reservation for this book'
+        message: 'You already have an active reservation for this book'
       });
     }
 
@@ -112,8 +120,9 @@ const createReservation = async (req, res, next) => {
     
     const priority = lastReservation ? lastReservation.priority + 1 : 1;
 
-    // Determine initial status based on availability
-    const initialStatus = isBookAvailable ? 'Active' : 'Pending';
+    // Determine initial status: Always 'Pending' for student requests as per user requirement
+    // Librarians can create 'Active' reservations directly
+    const initialStatus = req.student ? 'Pending' : (isBookAvailable ? 'Active' : 'Pending');
 
     const reservation = await Reservation.create({
       bookId,

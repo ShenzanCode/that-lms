@@ -87,10 +87,11 @@ const getPublicBooks = async (req, res, next) => {
       limit = 12,
       search,
       category,
+      status,
       sortBy = 'title'
     } = req.query;
 
-    const parsedPage = Math.max(parseInt(page) || 1, 1);
+    const parsedPage = parseInt(page) || 1;
     const parsedLimit = Math.min(Math.max(parseInt(limit) || 12, 1), 50);
 
     // Build query (public: only title/author/category)
@@ -108,6 +109,10 @@ const getPublicBooks = async (req, res, next) => {
     if (category && category.trim() !== '') {
       const escapedCategory = category.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       query.category = { $regex: new RegExp(`^${escapedCategory}$`, 'i') };
+    }
+
+    if (status && status.trim() !== '') {
+      query.status = status;
     }
 
     const skip = (parsedPage - 1) * parsedLimit;
@@ -252,11 +257,11 @@ const updateBook = async (req, res, next) => {
         updateData.availableCopies = newTotalCopies;
       }
       
-      // Update status based on availableCopies (only for Available/Not Available status)
-      if (book.status === 'Available' || book.status === 'Not Available') {
+      // Update status based on availableCopies (only for Available/Issued status)
+      if (book.status === 'Available' || book.status === 'Issued') {
         const finalAvailableCopies = updateData.availableCopies !== undefined ? updateData.availableCopies : newAvailableCopies;
         if (finalAvailableCopies <= 0) {
-          updateData.status = 'Not Available';
+          updateData.status = 'Issued';
         } else {
           updateData.status = 'Available';
         }

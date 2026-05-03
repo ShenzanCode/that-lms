@@ -340,11 +340,8 @@ export default function EditBook() {
                     <option value="Business">Business</option>
                     <option value="Chemistry">Chemistry</option>
                     <option value="Communication and Media">Communication and Media</option>
-                    <option value="Computer / Computer Science">Computer / Computer Science</option>
+                    <option value="CS & IT">CS & IT</option>
                     <option value="Education">Education</option>
-                    <option value="English">English</option>
-                    <option value="History">History</option>
-                    <option value="Information Technology">Information Technology</option>
                     <option value="International Relations">International Relations</option>
                     <option value="Islamic Studies">Islamic Studies</option>
                     <option value="Mathematics">Mathematics</option>

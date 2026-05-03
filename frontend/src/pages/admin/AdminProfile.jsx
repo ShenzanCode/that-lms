@@ -205,7 +205,7 @@ export default function AdminProfile() {
                 )}
                 <label
                   htmlFor="adminPhoto"
-                  className="absolute bottom-0 right-0 w-12 h-12 rounded-full flex items-center justify-center cursor-pointer shadow-lg hover:scale-110 transition-transform"
+                  className="absolute bottom-0 right-0 w-12 h-12 rounded-full flex items-center justify-center cursor-pointer shadow-lg transition-transform"
                   style={{backgroundColor: '#011039'}}
                   title="Upload Photo"
                 >

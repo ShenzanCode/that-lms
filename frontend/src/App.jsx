@@ -38,7 +38,6 @@ import PendingApprovalPage from './pages/student/PendingApprovalPage'
 import RejectedStatusPage from './pages/student/RejectedStatusPage'
 import BlockedPage from './pages/student/BlockedPage'
 import StudentDashboard from './pages/student/StudentDashboard'
-import StudentCatalog from './pages/student/StudentCatalog'
 import StudentMyBooks from './pages/student/StudentMyBooks'
 import StudentReservations from './pages/student/StudentReservations'
 import StudentFines from './pages/student/StudentFines'
@@ -333,7 +332,6 @@ function App() {
           }
         >
           <Route path="dashboard" element={<StudentDashboard />} />
-          <Route path="catalog" element={<StudentCatalog />} />
           <Route path="my-books" element={<StudentMyBooks />} />
           <Route path="reservations" element={<StudentReservations />} />
           <Route path="fines" element={<StudentFines />} />

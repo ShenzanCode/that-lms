@@ -41,7 +41,7 @@ export const isOverdue = (dueDate) => {
 export const getStatusColor = (status) => {
   const colors = {
     Available: 'success',
-    'Not Available': 'warning',
+    Issued: 'warning',
     Overdue: 'danger',
     Returned: 'primary',
     Damaged: 'warning',

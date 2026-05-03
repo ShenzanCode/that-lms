@@ -19,9 +19,9 @@ const fixBookStatus = async () => {
       const originalStatus = book.status;
 
       // Fix status based on availableCopies
-      if (book.status === 'Available' || book.status === 'Not Available') {
-        if (book.availableCopies <= 0 && book.status !== 'Not Available') {
-          book.status = 'Not Available';
+      if (book.status === 'Available' || book.status === 'Issued') {
+        if (book.availableCopies <= 0 && book.status !== 'Issued') {
+          book.status = 'Issued';
           needsUpdate = true;
         } else if (book.availableCopies > 0 && book.status !== 'Available') {
           book.status = 'Available';

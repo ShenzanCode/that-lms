@@ -20,8 +20,10 @@ api.interceptors.request.use(
     // We check if the URL starts with /student-auth or if it's a student-facing request
     const isStudentAPI = config.url.startsWith('/student-auth') || 
                          config.url.startsWith('/notifications') || 
-                         config.url.startsWith('/reservations') ||
-                         config.url.startsWith('/fines')
+                         config.url.startsWith('/reservations') || 
+                         config.url.startsWith('/fines') ||
+                         config.url.startsWith('/transactions') ||
+                         config.url.startsWith('/chat')
     
     // Check if we're in student area based on current URL (fallback)
     const isStudentArea = window.location.pathname.startsWith('/student')

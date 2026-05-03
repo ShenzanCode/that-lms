@@ -180,186 +180,145 @@ export default function StudentNotifications() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Page Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold" style={{color: '#011039'}}>
-            Notifications
-          </h1>
-          <p className="text-gray-600 mt-1">
-            {unreadCount > 0 ? `You have ${unreadCount} unread notification${unreadCount > 1 ? 's' : ''}` : 'All caught up!'}
-          </p>
+      <div className="relative overflow-hidden bg-gradient-to-r from-[#011039] to-[#011039]/90 rounded-xl p-8 sm:p-10 text-white shadow-xl">
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div>
+            <h1 className="text-3xl font-extrabold tracking-tight">Notification Center</h1>
+            <p className="text-slate-300 mt-2 text-lg">
+              {unreadCount > 0 ? `You have ${unreadCount} unread message${unreadCount > 1 ? 's' : ''}` : 'Your inbox is all caught up'}
+            </p>
+          </div>
+          {unreadCount > 0 && (
+            <Button
+              onClick={handleMarkAllAsRead}
+              className="bg-[#E76800] hover:bg-[#E76800]/90 text-white font-bold px-6 py-3 rounded-xl shadow-lg shadow-orange-600/20 flex items-center gap-2 border-none"
+            >
+              <CheckCheck className="h-5 w-5" />
+              Mark All as Read
+            </Button>
+          )}
         </div>
-        {unreadCount > 0 && (
-          <Button
-            onClick={handleMarkAllAsRead}
-            variant="outline"
-          >
-            <CheckCheck className="h-4 w-4 mr-2" />
-            Mark All as Read
-          </Button>
-        )}
+        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-[#E76800]/10 rounded-full blur-3xl"></div>
       </div>
 
-      {/* Filter Tabs */}
-      <Card>
-        <CardHeader>
-          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-            <CardTitle style={{color: '#011039'}}>All Notifications</CardTitle>
+      {/* Main Content */}
+      <Card className="border-none shadow-sm rounded-xl overflow-hidden bg-white">
+        <div className="p-6 sm:p-10">
+          <div className="flex flex-col xl:flex-row gap-6 items-start xl:items-center justify-between mb-10 pb-8 border-b border-slate-50">
+            <div className="flex flex-wrap gap-2">
+              {[
+                { id: 'all', label: 'All Messages' },
+                { id: 'unread', label: `Unread ${unreadCount > 0 ? `(${unreadCount})` : ''}` },
+                { id: 'read', label: 'History' }
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setFilter(tab.id)}
+                  className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${
+                    filter === tab.id
+                      ? 'bg-[#011039] text-white shadow-md'
+                      : 'bg-slate-50 text-slate-400 hover:bg-slate-100 hover:text-slate-600'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
             
-            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-              {/* Search */}
-              <div className="relative flex-1 sm:flex-initial">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search notifications..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 w-full sm:w-64"
-                />
-              </div>
-
-              {/* Filter */}
-              <div className="flex gap-2">
-                <button
-                  onClick={() => {
-                    setFilter('all')
-                    setPage(1)
-                  }}
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                    filter === 'all'
-                      ? 'text-white'
-                      : 'text-gray-600 bg-gray-100 hover:bg-gray-200'
-                  }`}
-                  style={filter === 'all' ? {backgroundColor: '#E76800'} : {}}
-                >
-                  All
-                </button>
-                <button
-                  onClick={() => {
-                    setFilter('unread')
-                    setPage(1)
-                  }}
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                    filter === 'unread'
-                      ? 'text-white'
-                      : 'text-gray-600 bg-gray-100 hover:bg-gray-200'
-                  }`}
-                  style={filter === 'unread' ? {backgroundColor: '#E76800'} : {}}
-                >
-                  Unread {unreadCount > 0 && `(${unreadCount})`}
-                </button>
-                <button
-                  onClick={() => {
-                    setFilter('read')
-                    setPage(1)
-                  }}
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                    filter === 'read'
-                      ? 'text-white'
-                      : 'text-gray-600 bg-gray-100 hover:bg-gray-200'
-                  }`}
-                  style={filter === 'read' ? {backgroundColor: '#E76800'} : {}}
-                >
-                  Read
-                </button>
-              </div>
+            <div className="relative w-full xl:w-96 group">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-300 group-focus-within:text-[#E76800] transition-colors" />
+              <input
+                type="text"
+                placeholder="Search messages..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-12 pr-4 py-3 bg-slate-50 border-2 border-slate-50 rounded-xl focus:outline-none focus:border-[#E76800] focus:bg-white transition-all text-slate-600 font-medium placeholder:text-slate-300"
+              />
             </div>
           </div>
-        </CardHeader>
 
-        <CardContent>
           {filteredNotifications.length === 0 ? (
-            <div className="text-center py-12">
-              <Bell className="h-16 w-16 mx-auto mb-4 text-gray-400" />
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">No notifications</h3>
-              <p className="text-gray-600">
-                {searchTerm
-                  ? 'No notifications match your search.'
-                  : filter === 'unread'
-                  ? 'You have no unread notifications.'
-                  : filter === 'read'
-                  ? 'You have no read notifications.'
-                  : 'You have no notifications.'}
+            <div className="text-center py-20">
+              <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                <BellOff className="h-10 w-10 text-slate-200" />
+              </div>
+              <h3 className="text-xl font-bold text-[#011039]">No notifications found</h3>
+              <p className="text-slate-500 mt-2 max-w-sm mx-auto">
+                {searchTerm ? "We couldn't find any messages matching your search." : "You're all caught up with your library updates."}
               </p>
             </div>
           ) : (
-            <>
-              <div className="space-y-3">
-                {paginatedNotifications.map((notification) => (
-                  <div
-                    key={notification._id}
-                    id={`notification-${notification._id}`}
-                    className={`p-4 rounded-lg border transition-all duration-300 ${
-                      highlightedId === notification._id
-                        ? 'ring-2 ring-orange-500 shadow-lg'
-                        : ''
-                    } ${
-                      !notification.isRead
-                        ? 'bg-blue-50 border-blue-200'
-                        : 'bg-white border-gray-200 hover:bg-gray-50'
-                    }`}
-                  >
-                    <div className="flex gap-4">
-                      <div className="flex-shrink-0 mt-1">
-                        {getNotificationIcon(notification.type)}
+            <div className="space-y-4">
+              {paginatedNotifications.map((notification) => (
+                <div
+                  key={notification._id}
+                  id={`notification-${notification._id}`}
+                  className={`group p-6 rounded-xl border-2 transition-all duration-300 relative ${
+                    highlightedId === notification._id
+                      ? 'border-[#E76800] bg-orange-50/30 shadow-md'
+                      : !notification.isRead
+                        ? 'bg-slate-50/50 border-slate-50 hover:border-blue-100'
+                        : 'bg-white border-transparent hover:border-slate-50'
+                  }`}
+                >
+                  <div className="flex gap-6">
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${!notification.isRead ? 'bg-blue-500/10' : 'bg-slate-50'}`}>
+                      {getNotificationIcon(notification.type)}
+                    </div>
+                    
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-start justify-between gap-4 mb-2">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-1">
+                            <h3 className={`text-lg font-extrabold truncate ${!notification.isRead ? 'text-[#011039]' : 'text-slate-500'}`}>
+                              {notification.title}
+                            </h3>
+                            {!notification.isRead && (
+                              <span className="flex-shrink-0 h-2.5 w-2.5 rounded-full bg-[#E76800] shadow-sm shadow-orange-600/50" />
+                            )}
+                          </div>
+                          <Badge variant={notification.type === 'fine' || notification.type === 'overdue' ? 'danger' : notification.type === 'reservation' ? 'warning' : 'default'} className="px-2 py-0.5 rounded-lg text-[9px] uppercase font-black tracking-[0.1em]">
+                            {notification.type}
+                          </Badge>
+                        </div>
+                        
+                        <div className="flex-shrink-0 text-[11px] font-bold text-slate-400 uppercase tracking-tight bg-slate-50 px-3 py-1 rounded-full">
+                          {format(new Date(notification.createdAt), 'MMM dd, HH:mm')}
+                        </div>
                       </div>
                       
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-start justify-between gap-3 mb-2">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-1">
-                              <h3 className="text-sm font-semibold text-gray-900">
-                                {notification.title}
-                              </h3>
-                              {!notification.isRead && (
-                                <span className="flex-shrink-0 h-2 w-2 rounded-full"
-                                  style={{backgroundColor: '#E76800'}}
-                                />
-                              )}
-                            </div>
-                            <Badge variant={notification.type === 'fine' || notification.type === 'overdue' ? 'danger' : notification.type === 'reservation' ? 'info' : 'default'}>
-                              {notification.type}
-                            </Badge>
-                          </div>
-                          
-                          <div className="flex-shrink-0 text-xs text-gray-500">
-                            {format(new Date(notification.createdAt), 'MMM dd, yyyy HH:mm')}
-                          </div>
-                        </div>
-                        
-                        <p className="text-sm text-gray-700 mb-3">
-                          {notification.message}
-                        </p>
-                        
-                        <div className="flex gap-3">
-                          {!notification.isRead && (
-                            <button
-                              onClick={() => handleMarkAsRead(notification._id)}
-                              className="text-sm font-medium hover:underline"
-                              style={{color: '#007BFF'}}
-                            >
-                              Mark as read
-                            </button>
-                          )}
+                      <p className={`text-sm leading-relaxed mb-4 ${!notification.isRead ? 'text-slate-600 font-medium' : 'text-slate-400'}`}>
+                        {notification.message}
+                      </p>
+                      
+                      <div className="flex items-center gap-4">
+                        {!notification.isRead && (
                           <button
-                            onClick={() => handleDelete(notification._id)}
-                            className="text-sm font-medium text-gray-500 hover:text-red-600 hover:underline"
+                            onClick={() => handleMarkAsRead(notification._id)}
+                            className="text-xs font-black uppercase tracking-wider text-blue-600 hover:text-blue-700 transition-colors flex items-center gap-1.5"
                           >
-                            Delete
+                            <Check className="h-4 w-4" />
+                            Mark as read
                           </button>
-                        </div>
+                        )}
+                        <button
+                          onClick={() => handleDelete(notification._id)}
+                          className="text-xs font-black uppercase tracking-wider text-slate-400 hover:text-red-500 transition-colors flex items-center gap-1.5"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                          Delete message
+                        </button>
                       </div>
                     </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
 
               {/* Pagination */}
               {totalPages > 1 && (
-                <div className="mt-6">
+                <div className="mt-12 flex justify-center border-t border-slate-50 pt-8">
                   <Pagination
                     currentPage={currentPage}
                     totalPages={totalPages}
@@ -367,9 +326,9 @@ export default function StudentNotifications() {
                   />
                 </div>
               )}
-            </>
+            </div>
           )}
-        </CardContent>
+        </div>
       </Card>
 
       {/* Delete Notification Confirmation Dialog */}

@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate, Link } from 'react-router-dom'
 import { useMemberAuthStore } from '@/store/memberAuthStore'
 import { studentAuthService } from '@/services/studentAuthService'
 import { settingsService } from '@/services/settingsService'
@@ -76,18 +76,25 @@ export default function StudentLayout() {
     <div className="min-h-screen bg-[#F8F9FA]">
       <PublicNavbar onOpenAuth={() => {}} />
 
-      <main className="pt-20 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+      <main className="pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-[calc(100vh-400px)]">
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
           <Outlet />
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="mt-auto py-12 bg-white border-t border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 text-center">
-            <p className="text-slate-400 text-sm font-bold italic">
-                © {new Date().getFullYear()} Wisdom Hall Thal University Bhakkar
-            </p>
+      <footer className="bg-[#011039] py-12 px-4 sm:px-8 text-white mt-12">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex items-center gap-3">
+            <img src="/Images/Logo.png" alt="Logo" className="h-10 w-auto brightness-0 invert" />
+            <h3 className="font-bold">Wisdom Hall Thal University Bhakkar</h3>
+          </div>
+          <div className="flex gap-6 text-sm text-slate-300">
+            <Link to="/landing" className="hover:text-white transition-colors">Home</Link>
+            <Link to="/catalog" className="hover:text-white transition-colors">Catalog</Link>
+            <Link to="/student/dashboard" className="hover:text-white transition-colors">Dashboard</Link>
+          </div>
+          <p className="text-xs text-slate-400 font-medium">© {new Date().getFullYear()} Wisdom Hall Thal University Bhakkar</p>
         </div>
       </footer>
 

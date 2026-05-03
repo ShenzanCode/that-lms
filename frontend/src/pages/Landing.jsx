@@ -98,6 +98,10 @@ export default function Landing() {
     reserveMutation.mutate(bookId)
   }
 
+  const handleExploreCatalog = () => {
+    navigate('/catalog')
+  }
+
   const handleBookClick = (book) => {
     setSelectedBook(book)
     setShowBookModal(true)
@@ -218,7 +222,7 @@ export default function Landing() {
               <Button 
                 variant="outline" 
                 onClick={() => setView('landing')}
-                className="rounded-xl font-bold flex items-center gap-2 border-slate-200 text-slate-600"
+                className="rounded-lg font-bold flex items-center gap-2 border-slate-200 text-slate-600"
               >
                 <ChevronRight className="h-4 w-4 rotate-180" />
                 Back to Website
@@ -263,7 +267,7 @@ export default function Landing() {
                       variant="primary" 
                       size="lg" 
                       className="rounded-lg shadow-xl shadow-orange-500/20"
-                      onClick={() => navigate('/catalog')}
+                      onClick={handleExploreCatalog}
                     >
                       Explore Catalog
                     </Button>
@@ -281,7 +285,7 @@ export default function Landing() {
 
                   <div className="mt-16 flex flex-wrap items-center gap-10 text-white/80 animate-slide-up" style={{ animationDelay: '400ms' }}>
                     <div className="flex items-center gap-3">
-                      <div className="h-12 w-12 rounded-xl bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/10">
+                      <div className="h-12 w-12 rounded-lg bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/10">
                         <ShieldCheck className="h-6 w-6 text-[#E76800]" />
                       </div>
                       <div>
@@ -290,7 +294,7 @@ export default function Landing() {
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <div className="h-12 w-12 rounded-xl bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/10">
+                      <div className="h-12 w-12 rounded-lg bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/10">
                         <BookOpen className="h-6 w-6 text-[#E76800]" />
                       </div>
                       <div>
@@ -320,13 +324,13 @@ export default function Landing() {
                   <div className="flex items-center gap-3">
                     <button
                       onClick={handlePrevSlide}
-                      className="h-12 w-12 rounded-xl border border-white/20 text-white flex items-center justify-center hover:bg-[#E76800] hover:border-[#E76800] transition-all backdrop-blur-sm active:scale-90 group"
+                      className="h-12 w-12 rounded-lg border border-white/20 text-white flex items-center justify-center hover:bg-[#E76800] hover:border-[#E76800] transition-all backdrop-blur-sm active:scale-90 group"
                     >
                       <ChevronRight className="h-6 w-6 rotate-180 group-hover:-translate-x-0.5 transition-transform" />
                     </button>
                     <button
                       onClick={handleNextSlide}
-                      className="h-12 w-12 rounded-xl border border-white/20 text-white flex items-center justify-center hover:bg-[#E76800] hover:border-[#E76800] transition-all backdrop-blur-sm active:scale-90 group"
+                      className="h-12 w-12 rounded-lg border border-white/20 text-white flex items-center justify-center hover:bg-[#E76800] hover:border-[#E76800] transition-all backdrop-blur-sm active:scale-90 group"
                     >
                       <ChevronRight className="h-6 w-6 group-hover:translate-x-0.5 transition-transform" />
                     </button>
@@ -353,7 +357,7 @@ export default function Landing() {
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         placeholder="Search titles, authors..."
-                        className="w-full pl-12 pr-4 py-3.5 border-2 border-slate-100 rounded-xl focus:outline-none focus:border-[#E76800] transition-all bg-slate-50 focus:bg-white placeholder:text-slate-400"
+                        className="w-full pl-12 pr-4 py-3.5 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-[#E76800] transition-all bg-slate-50 focus:bg-white placeholder:text-slate-400"
                       />
                     </div>
                   </div>
@@ -361,14 +365,14 @@ export default function Landing() {
 
                 <div className="mt-10">
                   {booksError ? (
-                    <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-xl">
+                    <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
                       <p className="text-red-700 font-medium">Unable to load books right now.</p>
                     </div>
                   ) : booksLoading ? (
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
                       {Array.from({ length: 12 }).map((_, idx) => (
-                        <div key={idx} className="bg-white rounded-2xl border border-slate-100 p-3 animate-pulse">
-                          <div className="aspect-[3/4] bg-slate-100 rounded-xl mb-4" />
+                        <div key={idx} className="bg-white rounded-lg border border-slate-100 p-3 animate-pulse">
+                          <div className="aspect-[3/4] bg-slate-100 rounded-lg mb-4" />
                           <div className="h-4 bg-slate-100 rounded w-3/4 mb-2" />
                           <div className="h-3 bg-slate-100 rounded w-1/2" />
                         </div>
@@ -382,20 +386,32 @@ export default function Landing() {
                           return (
                             <Card 
                               key={book._id} 
-                              className="group p-3 border-slate-100 hover:border-[#E76800]/20 hover:shadow-xl transition-all duration-300 rounded-2xl flex flex-col h-full bg-white cursor-pointer"
+                              className="group p-3 border-slate-100 hover:shadow-md transition-all duration-300 rounded-lg flex flex-col h-full bg-white cursor-pointer relative"
                               onClick={() => handleBookClick(book)}
                             >
-                              <div className="aspect-[3/4] bg-slate-50 rounded-xl overflow-hidden mb-4 relative shadow-sm">
+                              {hasBook(book._id) && (
+                                <div className="absolute top-2 left-2 z-10 bg-blue-500 text-white p-1.5 rounded-full shadow-lg border-2 border-white" title="You currently have this book">
+                                  <CheckCircle className="h-3 w-3" />
+                                </div>
+                              )}
+                              <div className="aspect-[3/4] bg-slate-50 rounded-lg overflow-hidden mb-4 relative shadow-sm">
                                 {coverUrl ? (
-                                  <img src={coverUrl} alt={book.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                  <img src={coverUrl} alt={book.title} className="w-full h-full object-cover transition-transform duration-500" />
                                 ) : (
                                   <div className="w-full h-full flex items-center justify-center">
                                     <BookOpen className="h-12 w-12 text-slate-200" />
                                   </div>
                                 )}
+                                
+                                {/* Category Overlay */}
+                                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#011039]/90 via-[#011039]/50 to-transparent pt-8 pb-2 px-2 flex items-center justify-center">
+                                  <span className="text-white text-[9px] font-extrabold uppercase tracking-[0.1em] drop-shadow-sm truncate">
+                                    {book.category || 'General'}
+                                  </span>
+                                </div>
                               </div>
                               <div className="flex flex-col flex-1 px-1 text-center">
-                                <h3 className="text-xs font-bold text-[#011039] line-clamp-2 leading-snug group-hover:text-[#E76800] transition-colors">{book.title}</h3>
+                                <h3 className="text-xs font-bold text-[#011039] line-clamp-2 leading-snug transition-colors">{book.title}</h3>
                                 <p className="text-[10px] text-slate-500 mt-2 truncate italic">{book.author}</p>
                               </div>
                             </Card>
@@ -405,8 +421,8 @@ export default function Landing() {
                       <div className="mt-16 flex justify-center">
                         <Button 
                           variant="primary" 
-                          className="px-12 h-14 rounded-2xl shadow-xl shadow-orange-600/20 text-lg font-bold"
-                          onClick={() => navigate('/catalog')}
+                          className="px-12 h-14 rounded-lg shadow-xl shadow-orange-600/20 text-lg font-bold"
+                          onClick={handleExploreCatalog}
                         >
                           Explore Full Catalog
                         </Button>
@@ -432,10 +448,10 @@ export default function Landing() {
                     { title: 'Priority Reservations', icon: Clock, desc: 'Reserve popular titles in advance and get instant notifications.' },
                     { title: 'Account Dashboard', icon: User, desc: 'Track borrowing history, fines, and personalized recommendations.' }
                   ].map((service, i) => (
-                    <Card key={i} className="group relative bg-white p-8 rounded-3xl border-slate-100 hover:border-[#E76800]/20 hover:shadow-2xl transition-all duration-500 overflow-hidden">
+                    <Card key={i} className="group relative bg-white p-8 rounded-xl border-slate-100 hover:shadow-md transition-all duration-300 overflow-hidden">
                       <div className="relative z-10">
-                        <div className="h-16 w-16 rounded-2xl bg-[#011039]/5 flex items-center justify-center mb-8 group-hover:bg-[#E76800] group-hover:text-white transition-all duration-500 group-hover:scale-110 shadow-inner">
-                          <service.icon className="h-8 w-8 text-[#011039] group-hover:text-white transition-colors" />
+                        <div className="h-16 w-16 rounded-lg bg-[#011039]/5 flex items-center justify-center mb-8 shadow-inner">
+                          <service.icon className="h-8 w-8 text-[#011039]" />
                         </div>
                         <h3 className="text-xl font-bold text-[#011039] mb-4">{service.title}</h3>
                         <p className="text-slate-500 leading-relaxed mb-8">{service.desc}</p>
@@ -552,153 +568,157 @@ export default function Landing() {
 
       {/* Book Details Modal */}
       {showBookModal && selectedBook && (
-        <Modal isOpen={showBookModal} onClose={() => setShowBookModal(false)}>
-          <div className="p-0 overflow-hidden rounded-3xl">
-            <div className="grid grid-cols-1 md:grid-cols-5">
-              {/* Left Side: Cover Image */}
-              <div className="md:col-span-2 bg-slate-50 flex items-center justify-center p-8">
-                <div className="w-full aspect-[3/4] rounded-2xl shadow-2xl overflow-hidden border-4 border-white">
-                  {selectedBook.coverImage ? (
-                    <img
-                      src={getCoverUrl(selectedBook.coverImage)}
-                      alt={selectedBook.title}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <BookOpen className="h-20 w-20 text-slate-300" />
-                    </div>
-                  )}
+        <Modal 
+          isOpen={showBookModal} 
+          onClose={() => setShowBookModal(false)}
+          showHeader={false}
+          noPadding={true}
+          size="lg"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-5">
+            {/* Left Side: Cover Image */}
+            <div className="md:col-span-2 bg-slate-50 flex items-center justify-center p-8">
+              <div className="w-full aspect-[3/4] rounded-lg shadow-2xl overflow-hidden border-4 border-white">
+                {selectedBook.coverImage ? (
+                  <img
+                    src={getCoverUrl(selectedBook.coverImage)}
+                    alt={selectedBook.title}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <BookOpen className="h-20 w-20 text-slate-300" />
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Right Side: Details */}
+            <div className="md:col-span-3 p-8 text-left">
+              <div className="flex justify-between items-start mb-6">
+                <div>
+                  <Badge variant={selectedBook.status === 'Available' ? 'success' : 'warning'} className="mb-3 px-3 py-1 rounded-lg">
+                    {selectedBook.status}
+                  </Badge>
+                  <h2 className="text-2xl font-extrabold text-[#011039] leading-tight">
+                    {selectedBook.title}
+                  </h2>
+                  <p className="text-[#E76800] font-bold mt-1">{selectedBook.author}</p>
+                </div>
+                <button 
+                  onClick={() => setShowBookModal(false)}
+                  className="p-2 hover:bg-slate-100 rounded-full transition-colors"
+                >
+                  <X className="h-6 w-6 text-slate-400" />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-2 gap-y-4 gap-x-6 mb-8 bg-slate-50 p-6 rounded-lg border border-slate-100">
+                <div>
+                  <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Sr.No</p>
+                  <p className="text-sm font-bold text-[#011039]">{selectedBook.accessionNumber || '-'}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Author</p>
+                  <p className="text-sm font-bold text-[#011039]">{selectedBook.author || '-'}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Category</p>
+                  <p className="text-sm font-bold text-[#011039]">{selectedBook.category || '-'}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Edition</p>
+                  <p className="text-sm font-bold text-[#011039]">{selectedBook.edition || '-'}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">By Purchase</p>
+                  <p className="text-sm font-bold text-[#011039]">{selectedBook.price ? `Rs. ${selectedBook.price}` : '-'}</p>
                 </div>
               </div>
 
-              {/* Right Side: Details */}
-              <div className="md:col-span-3 p-8 text-left">
-                <div className="flex justify-between items-start mb-6">
-                  <div>
-                    <Badge variant={selectedBook.status === 'Available' ? 'success' : 'warning'} className="mb-3 px-3 py-1 rounded-lg">
-                      {selectedBook.status}
-                    </Badge>
-                    <h2 className="text-2xl font-extrabold text-[#011039] leading-tight">
-                      {selectedBook.title}
-                    </h2>
-                    <p className="text-[#E76800] font-bold mt-1">{selectedBook.author}</p>
-                  </div>
-                  <button 
-                    onClick={() => setShowBookModal(false)}
-                    className="p-2 hover:bg-slate-100 rounded-full transition-colors"
-                  >
-                    <X className="h-6 w-6 text-slate-400" />
-                  </button>
+              {selectedBook.description && (
+                <div className="mb-8">
+                  <p className="text-[10px] uppercase font-bold text-slate-400 mb-2">About this book</p>
+                  <p className="text-slate-600 text-sm leading-relaxed line-clamp-3">{selectedBook.description}</p>
                 </div>
+              )}
 
-                <div className="grid grid-cols-2 gap-y-4 gap-x-6 mb-8 bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                  <div>
-                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Sr.No</p>
-                    <p className="text-sm font-bold text-[#011039]">{selectedBook.accessionNumber || '-'}</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Author</p>
-                    <p className="text-sm font-bold text-[#011039]">{selectedBook.author || '-'}</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Category</p>
-                    <p className="text-sm font-bold text-[#011039]">{selectedBook.category || '-'}</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Edition</p>
-                    <p className="text-sm font-bold text-[#011039]">{selectedBook.edition || '-'}</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">By Purchase</p>
-                    <p className="text-sm font-bold text-[#011039]">{selectedBook.price ? `Rs. ${selectedBook.price}` : '-'}</p>
-                  </div>
-                </div>
-
-                {selectedBook.description && (
-                  <div className="mb-8">
-                    <p className="text-[10px] uppercase font-bold text-slate-400 mb-2">About this book</p>
-                    <p className="text-slate-600 text-sm leading-relaxed line-clamp-3">{selectedBook.description}</p>
-                  </div>
-                )}
-
-                <div className="pt-6 border-t border-slate-100">
-                  {isStudentAuth ? (
-                    <div className="space-y-4">
-                      {hasBook(selectedBook._id) ? (
-                        <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 flex items-center gap-3">
-                          <CheckCircle className="h-5 w-5 text-blue-600 shrink-0" />
-                          <p className="text-sm font-bold text-blue-800">You currently have this book issued.</p>
+              <div className="pt-6 border-t border-slate-100">
+                {isStudentAuth ? (
+                  <div className="space-y-4">
+                    {hasBook(selectedBook._id) ? (
+                      <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 flex items-center gap-3">
+                        <CheckCircle className="h-5 w-5 text-blue-600 shrink-0" />
+                        <p className="text-sm font-bold text-blue-800">You currently have this book issued.</p>
+                      </div>
+                    ) : selectedBook.status === 'Available' ? (
+                      <div className="bg-green-50 border border-green-100 rounded-lg p-4 flex items-center gap-3">
+                        <CheckCircle className="h-5 w-5 text-green-600 shrink-0" />
+                        <p className="text-sm font-bold text-green-800">
+                          This book is currently available! Please visit the library to issue it.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="space-y-4">
+                        <div className="bg-orange-50 border border-orange-100 rounded-lg p-4 flex items-center gap-3">
+                          <AlertTriangle className="h-5 w-5 text-orange-600 shrink-0" />
+                          <p className="text-sm font-bold text-orange-800">
+                            This book is currently unavailable please send the reservation
+                          </p>
                         </div>
-                      ) : hasReservation(selectedBook._id) ? (
-                        <div className={`border rounded-xl p-4 flex items-center gap-3 ${
-                          hasReservation(selectedBook._id).status === 'pending' 
-                          ? 'bg-orange-50 border-orange-100' 
-                          : 'bg-green-50 border-green-100'
-                        }`}>
-                          <Clock className={`h-5 w-5 shrink-0 ${
-                            hasReservation(selectedBook._id).status === 'pending' 
-                            ? 'text-orange-600' 
-                            : 'text-green-600'
-                          }`} />
-                          <div>
-                            <p className={`text-sm font-bold ${
-                              hasReservation(selectedBook._id).status === 'pending' 
-                              ? 'text-orange-800' 
-                              : 'text-green-800'
-                            }`}>
-                              {hasReservation(selectedBook._id).status === 'pending' 
-                                ? 'Reservation Pending' 
-                                : 'Reservation Approved'}
-                            </p>
-                            <p className="text-xs mt-0.5 opacity-70">
-                              {hasReservation(selectedBook._id).status === 'pending' 
-                                ? 'Waiting for librarian approval.' 
-                                : 'Please visit the library to collect your book.'}
-                            </p>
-                          </div>
-                        </div>
-                      ) : selectedBook.status === 'Available' ? (
+                        
                         <Button 
                           variant="primary" 
-                          className="w-full h-14 rounded-2xl shadow-xl shadow-orange-600/20 text-lg font-bold"
+                          className="w-full h-14 rounded-lg shadow-xl shadow-orange-600/20 text-lg font-bold"
                           onClick={(e) => handleReserve(e, selectedBook._id)}
                           loading={reserveMutation.isPending}
                         >
                           Request Reservation
                         </Button>
-                      ) : (
-                        <div className="bg-slate-100 border border-slate-200 rounded-xl p-4 flex items-center gap-3">
-                          <AlertTriangle className="h-5 w-5 text-slate-500 shrink-0" />
-                          <p className="text-sm font-bold text-slate-700">This book is currently unavailable.</p>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="space-y-6 text-center">
+                    {selectedBook.status === 'Available' ? (
+                      <div className="bg-green-50 border border-green-100 rounded-lg p-4 flex items-center gap-3 text-left">
+                        <CheckCircle className="h-5 w-5 text-green-600 shrink-0" />
+                        <p className="text-sm font-bold text-green-800">
+                          This book is currently available! Please visit the library to issue it.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="space-y-4">
+                        <div className="bg-orange-50 border border-orange-100 rounded-lg p-4 flex items-center gap-3 text-left">
+                          <AlertTriangle className="h-5 w-5 text-orange-600 shrink-0" />
+                          <p className="text-sm font-bold text-orange-800">
+                            This book is currently unavailable please send the reservation
+                          </p>
                         </div>
-                      )}
-                    </div>
-                  ) : (
-                    <div className="space-y-6 text-center">
-                      <div className="bg-slate-50 border border-slate-100 rounded-xl p-4">
-                        <p className="text-slate-600 text-sm font-medium">To borrow or reserve this book, please log in to your student portal.</p>
+                        <div className="bg-slate-50 border border-slate-100 rounded-lg p-4">
+                          <p className="text-slate-600 text-sm font-medium">To reserve this book, please log in to your student portal.</p>
+                        </div>
                       </div>
-                      <div className="flex gap-4">
-                        <Button 
-                          variant="outline" 
-                          className="flex-1 h-12 rounded-xl"
-                          onClick={() => setShowBookModal(false)}
-                        >
-                          Close
-                        </Button>
-                        <Button 
-                          variant="primary" 
-                          className="flex-1 h-12 rounded-xl shadow-lg shadow-orange-500/20 flex items-center justify-center gap-2"
-                          onClick={() => openAuth('login')}
-                        >
-                          <LogIn className="h-4 w-4" />
-                          Login to Portal
-                        </Button>
-                      </div>
+                    )}
+                    <div className="flex gap-4">
+                      <Button 
+                        variant="outline" 
+                        className="flex-1 h-12 rounded-lg"
+                        onClick={() => setShowBookModal(false)}
+                      >
+                        Close
+                      </Button>
+                      <Button 
+                        variant="primary" 
+                        className="flex-1 h-12 rounded-lg shadow-lg shadow-orange-500/20 flex items-center justify-center gap-2"
+                        onClick={() => openAuth('login')}
+                      >
+                        <LogIn className="h-4 w-4" />
+                        Login to Portal
+                      </Button>
                     </div>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

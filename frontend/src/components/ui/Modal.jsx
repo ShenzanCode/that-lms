@@ -2,7 +2,16 @@ import { X } from 'lucide-react'
 import { useEffect } from 'react'
 import { cn } from '@/lib/utils'
 
-export const Modal = ({ isOpen, onClose, title, children, size = 'md', className }) => {
+export const Modal = ({ 
+  isOpen, 
+  onClose, 
+  title, 
+  children, 
+  size = 'md', 
+  className,
+  showHeader = true,
+  noPadding = false
+}) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
@@ -21,7 +30,7 @@ export const Modal = ({ isOpen, onClose, title, children, size = 'md', className
     sm: 'max-w-md',
     md: 'max-w-2xl',
     lg: 'max-w-4xl',
-    xl: 'max-w-6xl',
+    xl: 'max-w-7xl',
   }
   
   return (
@@ -29,32 +38,35 @@ export const Modal = ({ isOpen, onClose, title, children, size = 'md', className
       <div className="flex min-h-screen items-center justify-center p-4">
         {/* Backdrop */}
         <div 
-          className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
           onClick={onClose}
         ></div>
         
         {/* Modal */}
         <div className={cn(
-          'relative bg-white rounded-lg shadow-xl w-full animate-fade-in',
+          'relative bg-white rounded-lg shadow-2xl w-full animate-in fade-in zoom-in duration-300',
           sizes[size],
           className
         )}>
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b">
-            <h2 className="text-xl font-semibold" style={{color: '#011039'}}>{title}</h2>
-            <button
-              onClick={onClose}
-              className="transition-colors"
-              style={{color: '#E76800'}}
-              onMouseEnter={(e) => e.target.style.opacity = '0.7'}
-              onMouseLeave={(e) => e.target.style.opacity = '1'}
-            >
-              <X className="h-5 w-5" />
-            </button>
-          </div>
+          {showHeader && (
+            <div className="flex items-center justify-between p-6 border-b border-slate-100">
+              <h2 className="text-xl font-bold" style={{color: '#011039'}}>{title}</h2>
+              <button
+                onClick={onClose}
+                className="p-2 hover:bg-slate-100 rounded-full transition-all"
+                style={{color: '#E76800'}}
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+          )}
           
           {/* Content */}
-          <div className="p-6">
+          <div className={cn(
+            noPadding ? 'p-0' : 'p-6',
+            'overflow-hidden rounded-lg'
+          )}>
             {children}
           </div>
         </div>

@@ -74,73 +74,79 @@ export default function StudentMyBooks() {
   }
 
   return (
-    <div>
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold" style={{color: '#011039'}}>My Books</h1>
-        <p className="text-gray-600 mt-1">Books currently issued to you</p>
+    <div className="space-y-8">
+      {/* Page Header */}
+      <div className="relative overflow-hidden bg-gradient-to-r from-[#011039] to-[#011039]/90 rounded-lg p-8 sm:p-10 text-white shadow-xl">
+        <div className="relative z-10">
+          <h1 className="text-3xl font-extrabold tracking-tight">My Issued Books</h1>
+          <p className="text-slate-300 mt-2 text-lg">Manage and track your current borrowings</p>
+        </div>
+        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-[#E76800]/10 rounded-full blur-3xl"></div>
       </div>
 
       {transactions.length === 0 ? (
-        <EmptyState
-          icon={BookOpen}
-          message="No books issued"
-          description="You don't have any books currently issued. Browse the catalog to find books."
-        />
+        <div className="bg-white rounded-lg p-16 text-center border-2 border-dashed border-slate-200">
+           <BookOpen className="h-16 w-16 mx-auto text-slate-200 mb-6" />
+           <h3 className="text-2xl font-bold text-[#011039]">No books issued</h3>
+           <p className="text-slate-500 mt-2 max-w-sm mx-auto">Browse the Library Catalog to discover and borrow your next read.</p>
+           <button 
+             onClick={() => window.location.href = '/catalog'}
+             className="mt-8 px-10 py-3.5 bg-[#011039] text-white rounded-lg font-bold hover:bg-[#E76800] hover:shadow-lg transition-all"
+           >
+             Explore Catalog
+           </button>
+        </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
           {transactions.map((transaction) => {
             const daysRemaining = getDaysRemaining(transaction.dueDate)
             const isOverdue = daysRemaining < 0
             
             return (
-              <Card key={transaction._id}>
-                <CardContent className="p-4">
-                  <div className="flex gap-4">
-                    <BookCover 
-                      src={transaction.bookId?.coverImage} 
-                      alt={transaction.bookId?.title}
-                      className="w-20 h-28 flex-shrink-0"
-                    />
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-sm mb-1 line-clamp-2" style={{color: '#011039'}}>
-                        {transaction.bookId?.title}
-                      </h3>
-                      <p className="text-xs text-gray-600 mb-2 line-clamp-1">
-                        {transaction.bookId?.author}
-                      </p>
-                      
-                      <div className="space-y-2">
-                        <Badge variant={getStatusBadgeVariant(transaction.status)}>
+              <Card key={transaction._id} className="border-none shadow-sm hover:shadow-md transition-all duration-300 rounded-lg overflow-hidden bg-white p-5 group">
+                <div className="flex gap-6">
+                  <div className="w-32 flex-shrink-0">
+                    <div className="aspect-[3/4] rounded-lg overflow-hidden shadow-lg">
+                      <BookCover 
+                        src={transaction.bookId?.coverImage} 
+                        alt={transaction.bookId?.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex-1 flex flex-col justify-between py-2">
+                    <div>
+                      <div className="flex justify-between items-start">
+                        <Badge variant={isOverdue ? 'danger' : 'success'} className="px-3 py-1 rounded-lg text-[10px] uppercase font-bold tracking-wider">
                           {transaction.status}
                         </Badge>
-                        
-                        <div className="text-xs space-y-1">
-                          <div className="flex items-center gap-1 text-gray-600">
-                            <Calendar className="h-3 w-3" />
-                            <span>Issued: {formatDate(transaction.issueDate)}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Calendar className="h-3 w-3" />
-                            <span className={isOverdue ? 'text-red-600 font-medium' : 'text-gray-600'}>
-                              Due: {formatDate(transaction.dueDate)}
-                            </span>
-                          </div>
-                          
-                          {isOverdue ? (
-                            <div className="flex items-center gap-1 text-red-600 font-medium">
-                              <AlertCircle className="h-3 w-3" />
-                              <span>Overdue by {Math.abs(daysRemaining)} days</span>
-                            </div>
-                          ) : (
-                            <div className="text-gray-600">
-                              <span>{daysRemaining} days remaining</span>
-                            </div>
-                          )}
-                        </div>
+                      </div>
+                      <h3 className="font-extrabold text-[#011039] mt-3 line-clamp-2 leading-snug">
+                        {transaction.bookId?.title}
+                      </h3>
+                      <p className="text-sm font-bold text-slate-400 mt-1 line-clamp-1 italic">
+                        {transaction.bookId?.author}
+                      </p>
+                    </div>
+                    
+                    <div className="mt-6 space-y-3 pt-5 border-t border-slate-50">
+                      <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-tight">
+                        <span className="text-slate-400">Issued</span>
+                        <span className="text-slate-600">{formatDate(transaction.issueDate)}</span>
+                      </div>
+                      <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-tight">
+                        <span className="text-slate-400">Due Date</span>
+                        <span className={isOverdue ? 'text-red-500' : 'text-slate-600'}>{formatDate(transaction.dueDate)}</span>
+                      </div>
+                      
+                      <div className={`mt-2 p-2.5 rounded-lg text-center shadow-inner ${isOverdue ? 'bg-red-50 text-red-600' : 'bg-slate-50 text-slate-600'}`}>
+                        <p className="text-[10px] font-black uppercase tracking-widest">
+                          {isOverdue ? `Overdue by ${Math.abs(daysRemaining)} days` : `${daysRemaining} days left`}
+                        </p>
                       </div>
                     </div>
                   </div>
-                </CardContent>
+                </div>
               </Card>
             )
           })}

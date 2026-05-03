@@ -77,7 +77,7 @@ export default function NewChatPopup() {
 
   return (
     <div className="fixed bottom-6 right-6 z-[60] animate-slide-up">
-      <div className="bg-white rounded-xl shadow-2xl border border-gray-200 max-w-sm overflow-hidden backdrop-blur-sm">
+      <div className="bg-white rounded-lg shadow-2xl border border-gray-200 max-w-sm overflow-hidden backdrop-blur-sm">
         {/* Header with gradient */}
         <div 
           className="px-5 py-3.5 text-white flex items-center justify-between relative overflow-hidden"
@@ -133,7 +133,7 @@ export default function NewChatPopup() {
           <div className="flex gap-2">
             <button
               onClick={handleAccept}
-              className="flex-1 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-orange-500 text-white rounded-lg font-medium hover:from-blue-700 hover:to-orange-600 transition-all shadow-md hover:shadow-lg transform hover:scale-[1.02] flex items-center justify-center gap-2"
+              className="flex-1 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-orange-500 text-white rounded-lg font-medium hover:from-blue-700 hover:to-orange-600 transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
             >
               <span>Reply Now</span>
               <ArrowRight className="h-4 w-4" />

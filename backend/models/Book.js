@@ -65,7 +65,7 @@ const bookSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['Available', 'Not Available', 'Damaged', 'Lost'],
+    enum: ['Available', 'Issued', 'Damaged', 'Lost'],
     default: 'Available'
   },
   condition: {
@@ -121,11 +121,11 @@ bookSchema.pre('save', function(next) {
 
 // Update status based on available copies
 bookSchema.pre('save', function(next) {
-  // Only auto-update status if it's currently Available or Not Available
+  // Only auto-update status if it's currently Available or Issued
   // Don't change status if book is marked as Damaged or Lost
-  if (this.status === 'Available' || this.status === 'Not Available') {
+  if (this.status === 'Available' || this.status === 'Issued') {
     if (this.availableCopies <= 0) {
-      this.status = 'Not Available';
+      this.status = 'Issued';
     } else {
       this.status = 'Available';
     }

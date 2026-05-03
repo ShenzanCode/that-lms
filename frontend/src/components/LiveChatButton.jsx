@@ -44,7 +44,7 @@ export default function LiveChatButton({ enabled = true }) {
         {!isOpen && (
           <button
             onClick={() => setIsOpen(true)}
-            className="group relative flex items-center justify-center w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110"
+            className="group relative flex items-center justify-center w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
             style={{
               background: hasActiveSession 
                 ? 'linear-gradient(135deg, #011039 0%, #E76800 100%)' 

@@ -98,14 +98,14 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login', init
       onClose={onClose} 
       title={mode === 'login' ? 'Welcome Back' : 'Join Our Library'}
       size="sm"
-      className="rounded-3xl overflow-hidden"
+      className="rounded-xl overflow-hidden"
     >
       <div className="flex flex-col">
         {/* Toggle Mode */}
-        <div className="flex bg-slate-100 p-1.5 rounded-2xl mb-8">
+        <div className="flex bg-slate-100 p-1.5 rounded-lg mb-8">
           <button
             onClick={() => setMode('login')}
-            className={`flex-1 py-2.5 text-sm font-bold rounded-xl transition-all ${
+            className={`flex-1 py-2.5 text-sm font-bold rounded-md transition-all ${
               mode === 'login' ? 'bg-white text-[#011039] shadow-sm' : 'text-slate-500 hover:text-slate-700'
             }`}
           >
@@ -113,7 +113,7 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login', init
           </button>
           <button
             onClick={() => setMode('signup')}
-            className={`flex-1 py-2.5 text-sm font-bold rounded-xl transition-all ${
+            className={`flex-1 py-2.5 text-sm font-bold rounded-md transition-all ${
               mode === 'signup' ? 'bg-white text-[#011039] shadow-sm' : 'text-slate-500 hover:text-slate-700'
             }`}
           >
@@ -157,7 +157,7 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login', init
                 name="memberType"
                 value={formData.memberType}
                 onChange={handleChange}
-                className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:outline-none focus:border-orange-500 transition-all font-bold text-slate-700"
+                className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-orange-500 transition-all font-bold text-slate-700"
               >
                 <option value="Student">Student</option>
                 <option value="Faculty">Faculty</option>
@@ -177,7 +177,7 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login', init
                 onChange={handleChange}
                 placeholder="Enter username"
                 required
-                className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:outline-none focus:border-orange-500 transition-all placeholder:text-slate-300 font-medium"
+                className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-orange-500 transition-all placeholder:text-slate-300 font-medium"
               />
             </div>
           </div>
@@ -194,7 +194,7 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login', init
                   onChange={handleChange}
                   placeholder="name@university.edu"
                   required
-                  className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:outline-none focus:border-orange-500 transition-all placeholder:text-slate-300 font-medium"
+                  className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-orange-500 transition-all placeholder:text-slate-300 font-medium"
                 />
               </div>
             </div>
@@ -211,7 +211,7 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login', init
                 onChange={handleChange}
                 placeholder="••••••••"
                 required
-                className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:outline-none focus:border-orange-500 transition-all placeholder:text-slate-300 font-medium"
+                className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-orange-500 transition-all placeholder:text-slate-300 font-medium"
               />
             </div>
           </div>
@@ -228,7 +228,7 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login', init
                   onChange={handleChange}
                   placeholder="••••••••"
                   required
-                  className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-2 border-slate-100 rounded-2xl focus:outline-none focus:border-orange-500 transition-all placeholder:text-slate-300 font-medium"
+                  className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-orange-500 transition-all placeholder:text-slate-300 font-medium"
                 />
               </div>
             </div>
@@ -237,7 +237,7 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login', init
           <Button 
             type="submit" 
             variant="primary" 
-            className="w-full h-14 rounded-2xl shadow-xl shadow-orange-600/20 text-lg font-bold mt-4"
+            className="w-full h-14 rounded-lg shadow-xl shadow-orange-600/20 text-lg font-bold mt-4"
             loading={loading}
           >
             {mode === 'login' ? 'Sign In' : 'Create Account'}

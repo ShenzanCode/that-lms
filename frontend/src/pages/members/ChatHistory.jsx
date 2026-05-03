@@ -304,241 +304,242 @@ export default function ChatHistory() {
   const totalUnread = sessions.reduce((sum, session) => sum + session.unreadCountMember, 0);
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold" style={{ color: '#011039' }}>
-            My Support Chats
-          </h1>
-          <p className="text-gray-600 mt-1">
-            View and manage your support conversations
-            {totalUnread > 0 && (
-              <span className="ml-2 px-2 py-0.5 bg-red-500 text-white text-xs rounded-full">
-                {totalUnread} unread
-              </span>
-            )}
-          </p>
+    <div className="space-y-8">
+      {/* Page Header */}
+      <div className="relative overflow-hidden bg-gradient-to-r from-[#011039] to-[#011039]/90 rounded-xl p-8 sm:p-10 text-white shadow-xl">
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div>
+            <h1 className="text-3xl font-extrabold tracking-tight">Support History</h1>
+            <p className="text-slate-300 mt-2 text-lg">
+              View and manage your conversations with library support
+              {totalUnread > 0 && (
+                <span className="ml-3 px-3 py-1 bg-[#E76800] text-white text-xs font-black uppercase rounded-full shadow-lg shadow-orange-600/30 inline-block">
+                  {totalUnread} new message{totalUnread > 1 ? 's' : ''}
+                </span>
+              )}
+            </p>
+          </div>
         </div>
+        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-[#E76800]/10 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="grid grid-cols-12 gap-6">
+      <div className="grid grid-cols-12 gap-8">
         {/* Sessions List */}
         <div className="col-span-12 lg:col-span-4">
-          <Card>
-            <CardHeader>
-              <div className="space-y-4">
-                <CardTitle className="flex items-center gap-2">
-                  <MessageCircle className="h-5 w-5" style={{ color: '#E76800' }} />
-                  Conversations
-                </CardTitle>
+          <Card className="border-none shadow-sm rounded-xl overflow-hidden bg-white h-[750px] flex flex-col">
+            <div className="p-8 border-b border-slate-50">
+                <div className="flex items-center gap-3 mb-8">
+                  <div className="w-10 h-10 rounded-lg bg-orange-50 flex items-center justify-center">
+                    <MessageCircle className="h-5 w-5 text-[#E76800]" />
+                  </div>
+                  <h2 className="text-xl font-extrabold text-[#011039]">Conversations</h2>
+                </div>
 
                 {/* Tabs */}
-                <div className="flex gap-2 border-b border-gray-200">
-                  <button
-                    onClick={() => setActiveTab('active')}
-                    className={`flex-1 px-4 py-2 text-sm font-medium transition-colors relative ${
-                      activeTab === 'active'
-                        ? 'border-b-2'
-                        : 'text-gray-600 hover:text-gray-900'
-                    }`}
-                    style={activeTab === 'active' ? { color: '#E76800', borderColor: '#E76800' } : {}}
-                  >
-                    Active Chats
-                    {activeChatCount > 0 && (
-                      <span className="ml-2 px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded-full">
-                        {activeChatCount}
-                      </span>
-                    )}
-                  </button>
-                  <button
-                    onClick={() => setActiveTab('closed')}
-                    className={`flex-1 px-4 py-2 text-sm font-medium transition-colors relative ${
-                      activeTab === 'closed'
-                        ? 'border-b-2'
-                        : 'text-gray-600 hover:text-gray-900'
-                    }`}
-                    style={activeTab === 'closed' ? { color: '#E76800', borderColor: '#E76800' } : {}}
-                  >
-                    Closed
-                    {closedChatCount > 0 && (
-                      <span className="ml-2 px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded-full">
-                        {closedChatCount}
-                      </span>
-                    )}
-                  </button>
+                <div className="flex p-1.5 bg-slate-50 rounded-xl mb-6">
+                  {[
+                    { id: 'active', label: 'Active', count: activeChatCount },
+                    { id: 'closed', label: 'History', count: closedChatCount }
+                  ].map((tab) => (
+                    <button
+                      key={tab.id}
+                      onClick={() => setActiveTab(tab.id)}
+                      className={`flex-1 py-2.5 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${
+                        activeTab === tab.id
+                          ? 'bg-white text-[#011039] shadow-sm'
+                          : 'text-slate-400 hover:text-slate-600'
+                      }`}
+                    >
+                      {tab.label}
+                      {tab.count > 0 && (
+                        <span className={`ml-2 px-1.5 py-0.5 rounded-md text-[10px] ${activeTab === tab.id ? 'bg-[#011039] text-white' : 'bg-slate-200 text-slate-500'}`}>
+                          {tab.count}
+                        </span>
+                      )}
+                    </button>
+                  ))}
                 </div>
 
                 {/* Search */}
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                <div className="relative group">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-300 group-focus-within:text-[#E76800] transition-colors" />
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search conversations..."
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-                    style={{ '--tw-ring-color': '#E76800' }}
+                    placeholder="Search messages..."
+                    className="w-full pl-11 pr-4 py-3 bg-slate-50 border-2 border-transparent rounded-lg focus:outline-none focus:border-orange-100 focus:bg-white transition-all text-sm font-bold text-slate-600 placeholder:text-slate-300"
                   />
                 </div>
-              </div>
-            </CardHeader>
-            <CardContent className="p-0">
+            </div>
+            
+            <div className="flex-1 overflow-y-auto custom-scrollbar">
               {loading ? (
-                <div className="flex items-center justify-center p-8">
-                  <LoadingSpinner />
+                <div className="flex flex-col items-center justify-center h-full gap-4">
+                  <LoadingSpinner size="md" />
+                  <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Synchronizing...</p>
                 </div>
               ) : filteredSessions.length === 0 ? (
-                <div className="text-center p-8 text-gray-500">
-                  <MessageCircle className="h-12 w-12 mx-auto mb-3 text-gray-300" />
-                  <p className="font-medium">
-                    {activeTab === 'active' ? 'No active chats' : 'No closed chats'}
-                  </p>
-                  <p className="text-sm text-gray-400 mt-1">
+                <div className="text-center p-12 h-full flex flex-col items-center justify-center">
+                  <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4">
+                    <MessageCircle className="h-8 w-8 text-slate-200" />
+                  </div>
+                  <p className="text-sm font-bold text-[#011039]">No conversations</p>
+                  <p className="text-xs text-slate-400 mt-2 leading-relaxed">
                     {activeTab === 'active'
-                      ? 'Start a new conversation using the chat button'
-                      : 'No closed conversations yet'}
+                      ? 'Click the chat icon in the bottom right to start a new support request.'
+                      : 'You have no archived conversations.'}
                   </p>
                 </div>
               ) : (
-                <div className="divide-y max-h-[600px] overflow-y-auto">
+                <div className="divide-y divide-slate-50">
                   {filteredSessions.map((session) => (
                     <div
                       key={session._id}
-                      className={`p-4 transition hover:bg-gray-50 ${
-                        selectedSession?._id === session._id ? 'bg-orange-50 border-l-4' : ''
+                      className={`p-6 transition-all cursor-pointer hover:bg-slate-50 relative group ${
+                        selectedSession?._id === session._id ? 'bg-orange-50/50' : ''
                       }`}
-                      style={selectedSession?._id === session._id ? { borderColor: '#E76800' } : {}}
+                      onClick={() => handleSelectSession(session)}
                     >
-                      <div className="flex items-start justify-between gap-3">
-                        <div 
-                          className="flex-1 min-w-0 cursor-pointer"
-                          onClick={() => handleSelectSession(session)}
-                        >
-                          <div className="flex items-center gap-2">
-                            <p className="font-medium text-gray-900 truncate">
-                              Support Chat
+                      {selectedSession?._id === session._id && (
+                        <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#E76800] rounded-r-full"></div>
+                      )}
+                      
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1">
+                            <p className="font-extrabold text-[#011039] text-sm truncate">
+                              Support Representative
                             </p>
                             {session.unreadCountMember > 0 && (
-                              <span className="flex items-center justify-center px-2 py-0.5 bg-red-500 text-white text-xs rounded-full">
+                              <span className="flex items-center justify-center w-5 h-5 bg-[#E76800] text-white text-[10px] font-black rounded-full shadow-sm shadow-orange-600/30">
                                 {session.unreadCountMember}
                               </span>
                             )}
                           </div>
-                          <p className="text-sm text-gray-500 truncate mt-1">{session.lastMessage || 'No messages yet'}</p>
-                          <p className="text-xs text-gray-400 mt-1">
-                            {new Date(session.lastMessageTime).toLocaleString()}
+                          <p className={`text-xs truncate ${selectedSession?._id === session._id ? 'text-slate-600 font-bold' : 'text-slate-400 font-medium'}`}>
+                            {session.lastMessage || 'Starting conversation...'}
+                          </p>
+                          <p className="text-[10px] text-slate-300 font-bold mt-2 uppercase tracking-tight">
+                            {new Date(session.lastMessageTime).toLocaleDateString()} at {new Date(session.lastMessageTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                           </p>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <div 
-                            className={`w-2 h-2 rounded-full ${session.adminLeft ? 'bg-gray-400' : 'bg-green-500'}`}
-                            title={session.adminLeft ? 'Closed' : 'Active'}
-                          ></div>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDeleteSession(session._id);
-                            }}
-                            className="p-1 hover:bg-red-100 rounded transition text-gray-400 hover:text-red-600"
-                            title="Delete chat"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </button>
+                        <div className="flex flex-col items-end gap-2">
+                           <div className={`w-2 h-2 rounded-full ${session.adminLeft ? 'bg-slate-200' : 'bg-[#E76800] shadow-[0_0_8px_rgba(231,104,0,0.5)]'}`}></div>
+                           <button
+                             onClick={(e) => {
+                               e.stopPropagation();
+                               handleDeleteSession(session._id);
+                             }}
+                             className="p-2 hover:bg-red-50 rounded-lg transition-all text-slate-300 hover:text-red-500 opacity-0 group-hover:opacity-100"
+                           >
+                             <Trash2 className="h-3.5 w-3.5" />
+                           </button>
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
               )}
-            </CardContent>
+            </div>
           </Card>
         </div>
 
         {/* Chat Window */}
         <div className="col-span-12 lg:col-span-8">
           {selectedSession ? (
-            <Card className="h-[700px] flex flex-col">
-              <CardHeader className="border-b">
+            <Card className="border-none shadow-sm rounded-xl overflow-hidden bg-white h-[750px] flex flex-col">
+              <div className="p-6 sm:px-10 sm:py-8 border-b border-slate-50 bg-slate-50/30 backdrop-blur-sm">
                 <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle>Support Chat</CardTitle>
-                    <p className="text-sm text-gray-500 mt-1">
-                      {selectedSession.adminLeft ? 'Closed by support' : 'Active conversation'}
-                    </p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-[#011039] flex items-center justify-center text-white font-black shadow-lg shadow-blue-900/20">
+                      SR
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-extrabold text-[#011039]">Support Chat</h3>
+                      <div className="flex items-center gap-2">
+                        <div className={`w-1.5 h-1.5 rounded-full ${selectedSession.adminLeft ? 'bg-slate-300' : 'bg-green-500'}`}></div>
+                        <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">
+                          {selectedSession.adminLeft ? 'Session Archived' : 'Live support active'}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                   {!adminLeft && !memberLeft && (
                     <Button
-                      variant="outline"
-                      size="sm"
                       onClick={() => handleCloseSession(selectedSession._id)}
-                      className="text-red-600 border-red-600 hover:bg-red-50"
+                      className="bg-red-50 hover:bg-red-100 text-red-500 border-none px-6 py-2.5 rounded-lg text-xs font-black uppercase tracking-widest transition-all"
                     >
                       <XCircle className="h-4 w-4 mr-2" />
-                      End Chat
+                      Leave chat
                     </Button>
                   )}
                 </div>
-              </CardHeader>
+              </div>
 
-              {/* Messages */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50">
+              {/* Messages Area */}
+              <div className="flex-1 overflow-y-auto p-6 sm:p-10 space-y-6 bg-[#F8F9FA]/50 custom-scrollbar">
                 {messages.length === 0 ? (
-                  <div className="flex items-center justify-center h-full text-gray-500">
-                    No messages yet
+                  <div className="flex flex-col items-center justify-center h-full text-center">
+                    <div className="w-16 h-16 bg-white rounded-full shadow-sm flex items-center justify-center mb-4">
+                        <MessageCircle className="h-8 w-8 text-slate-100" />
+                    </div>
+                    <p className="text-sm font-bold text-slate-300 uppercase tracking-widest">Initializing sequence...</p>
                   </div>
                 ) : (
                   <>
                     {messages.map((msg) => {
-                      // System message - centered
                       if (msg.isSystemMessage || msg.senderType === 'system') {
                         return (
-                          <div key={msg._id} className="flex justify-center my-4">
-                            <div className="px-4 py-2 bg-gray-200 text-gray-600 rounded-full text-sm">
+                          <div key={msg._id} className="flex justify-center my-8">
+                            <div className="px-5 py-2 bg-slate-100/50 backdrop-blur-sm border border-slate-100 text-slate-400 font-bold rounded-xl text-[10px] uppercase tracking-widest shadow-sm">
                               {msg.message}
                             </div>
                           </div>
                         );
                       }
 
-                      // Regular message
                       const isOwn = msg.senderType === 'student';
                       return (
-                        <div key={msg._id} className={`flex ${isOwn ? 'justify-end' : 'justify-start'}`}>
+                        <div key={msg._id} className={`flex ${isOwn ? 'justify-end' : 'justify-start'} animate-in fade-in zoom-in-95 duration-300`}>
                           <div
-                            className={`max-w-[75%] rounded-lg px-4 py-2 ${
+                            className={`max-w-[80%] sm:max-w-[70%] group relative ${
                               isOwn
-                                ? 'text-white'
-                                : 'bg-white text-gray-800 border border-gray-200'
-                            }`}
-                            style={isOwn ? { background: 'linear-gradient(135deg, #011039 0%, #E76800 100%)' } : {}}
+                                ? 'bg-white text-slate-600 rounded-xl rounded-tr-none border-2 border-slate-50'
+                                : 'bg-[#011039] text-white rounded-xl rounded-tl-none shadow-xl shadow-blue-900/10'
+                            } p-4 sm:p-5 transition-transform`}
                           >
                             {!isOwn && (
-                              <p className="text-xs font-semibold mb-1" style={{ color: '#E76800' }}>
+                              <p className="text-[10px] font-black uppercase tracking-widest mb-2 text-orange-400">
                                 {msg.senderName}
                               </p>
                             )}
-                            <p className="text-sm whitespace-pre-wrap break-words">{msg.message}</p>
-                            <div className="flex items-center gap-2 mt-1">
-                              <p className={`text-xs ${isOwn ? 'text-orange-100' : 'text-gray-400'}`}>
-                                {new Date(msg.createdAt).toLocaleTimeString('en-US', {
-                                  hour: '2-digit',
-                                  minute: '2-digit',
-                                })}
+                            <p className="text-sm leading-relaxed font-medium whitespace-pre-wrap break-words">{msg.message}</p>
+                            <div className={`flex items-center gap-2 mt-4 pt-3 border-t ${isOwn ? 'border-slate-50' : 'border-white/10'}`}>
+                              <p className={`text-[10px] font-black uppercase tracking-tighter ${isOwn ? 'text-slate-300' : 'text-white/40'}`}>
+                                {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                               </p>
-                              {isOwn && msg.isRead && <CheckCheck className="h-3 w-3 text-orange-200" />}
+                              {isOwn && (
+                                <div className="ml-auto">
+                                    {msg.isRead ? (
+                                        <CheckCheck className="h-3 w-3 text-blue-500" />
+                                    ) : (
+                                        <div className="w-2.5 h-2.5 rounded-full border-2 border-slate-200"></div>
+                                    )}
+                                </div>
+                              )}
                             </div>
                           </div>
                         </div>
                       );
                     })}
                     {isTyping && (
-                      <div className="flex justify-start">
-                        <div className="bg-white border border-gray-200 rounded-lg px-4 py-2">
-                          <div className="flex gap-1">
-                            <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></span>
-                            <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100"></span>
-                            <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200"></span>
+                      <div className="flex justify-start animate-in fade-in slide-in-from-left-2">
+                        <div className="bg-[#011039] rounded-xl rounded-tl-none px-5 py-4 shadow-lg shadow-blue-900/10">
+                          <div className="flex gap-1.5">
+                            <span className="w-2 h-2 bg-orange-400 rounded-full animate-bounce"></span>
+                            <span className="w-2 h-2 bg-orange-400 rounded-full animate-bounce [animation-delay:0.2s]"></span>
+                            <span className="w-2 h-2 bg-orange-400 rounded-full animate-bounce [animation-delay:0.4s]"></span>
                           </div>
                         </div>
                       </div>
@@ -548,19 +549,33 @@ export default function ChatHistory() {
                 )}
               </div>
 
-              {/* Input - Read-only message */}
-              <div className="border-t p-4 bg-white">
-                <div className="text-center py-3 text-sm text-gray-500 bg-gray-50 rounded-lg">
-                  <p className="font-medium">View-only mode</p>
-                  <p className="text-xs mt-1">Use the chat button to send messages</p>
+              {/* Input Message Overlay */}
+              <div className="p-8 sm:px-10 border-t border-slate-50 bg-white">
+                <div className="bg-slate-50 rounded-xl p-6 text-center border-2 border-dashed border-slate-100">
+                  <div className="flex items-center justify-center gap-4 mb-2">
+                    <div className="w-2 h-2 rounded-full bg-slate-300"></div>
+                    <p className="text-xs font-black uppercase tracking-[0.2em] text-[#011039]">Historical Record</p>
+                    <div className="w-2 h-2 rounded-full bg-slate-300"></div>
+                  </div>
+                  <p className="text-xs font-bold text-slate-400 leading-relaxed">
+                    This window is for reviewing your history. To send a new message, please use the <span className="text-[#E76800]">live chat widget</span> located in the bottom right of your screen.
+                  </p>
                 </div>
               </div>
             </Card>
           ) : (
-            <Card className="h-[700px] flex items-center justify-center">
-              <div className="text-center text-gray-500">
-                <MessageCircle className="h-16 w-16 mx-auto mb-4 text-gray-300" />
-                <p className="text-lg">Select a conversation to view chat</p>
+            <Card className="border-none shadow-sm rounded-xl overflow-hidden bg-white h-[750px] flex items-center justify-center p-12 text-center group">
+              <div className="max-w-xs">
+                <div className="relative mb-8 inline-block">
+                    <div className="absolute inset-0 bg-orange-50 rounded-full blur-2xl transition-transform duration-700"></div>
+                    <div className="relative w-24 h-24 bg-white rounded-full shadow-sm flex items-center justify-center border border-slate-50">
+                        <MessageCircle className="h-10 w-10 text-slate-100 transition-colors duration-500" />
+                    </div>
+                </div>
+                <h3 className="text-xl font-extrabold text-[#011039]">Select a conversation</h3>
+                <p className="text-sm font-medium text-slate-400 mt-3 leading-relaxed">
+                    Pick a discussion from the list to view the full message history and resolution status.
+                </p>
               </div>
             </Card>
           )}

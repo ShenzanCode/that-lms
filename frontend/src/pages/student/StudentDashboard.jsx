@@ -105,7 +105,7 @@ export default function StudentDashboard() {
     
     const statusConfig = {
       'Available': { variant: 'success', text: 'Available' },
-      'Not Available': { variant: 'warning', text: 'Not Available' },
+      'Issued': { variant: 'warning', text: 'Issued' },
       'Damaged': { variant: 'error', text: 'Damaged' },
       'Lost': { variant: 'default', text: 'Lost' }
     }
@@ -121,175 +121,200 @@ export default function StudentDashboard() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-10">
       {/* Page Header */}
-      <div>
-        <h1 className="text-3xl font-bold" style={{color: '#011039'}}>
-          Welcome, {student?.name}!
-        </h1>
-        <p className="text-gray-600 mt-1">Here's your library overview</p>
+      <div className="relative overflow-hidden bg-[#011039] rounded-lg p-8 sm:p-12 text-white shadow-xl">
+        <div className="relative z-10">
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+            Welcome, {student?.name}!
+          </h1>
+          <p className="text-slate-300 mt-3 text-lg max-w-2xl leading-relaxed">
+            Your personal library gateway. Keep track of your borrowed materials, manage reservations, and explore new academic horizons.
+          </p>
+          <div className="flex gap-4 mt-8">
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10">
+              <BookCheck className="h-4 w-4 text-[#E76800]" />
+              <span className="text-sm font-bold">{stats.borrowed} Books Issued</span>
+            </div>
+            {stats.totalFines > 0 && (
+              <div className="flex items-center gap-2 bg-red-500/20 backdrop-blur-md px-4 py-2 rounded-lg border border-red-500/20">
+                <AlertCircle className="h-4 w-4 text-red-400" />
+                <span className="text-sm font-bold text-red-200">Action Required: Fines</span>
+              </div>
+            )}
+          </div>
+        </div>
+        
+        {/* Abstract Background Shapes */}
+        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-[#E76800]/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-64 h-64 bg-blue-500/10 rounded-full blur-2xl"></div>
       </div>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Books Borrowed</p>
-                <p className="text-2xl font-bold mt-1" style={{color: '#E76800'}}>
-                  {stats.borrowed}<span className="text-sm text-gray-500">/{student?.borrowingLimit || 3}</span>
-                </p>
+        {[
+          { label: 'Books Borrowed', value: `${stats.borrowed}`, sub: `Limit: ${student?.borrowingLimit || 3}`, icon: BookCheck, color: '#E76800', bg: 'bg-orange-50' },
+          { label: 'Available Slots', value: stats.available, sub: 'For new issues', icon: BookOpen, color: '#28A745', bg: 'bg-green-50' },
+          { label: 'Reservations', value: stats.reservations, sub: 'Active requests', icon: Clock, color: '#011039', bg: 'bg-slate-50' },
+          { label: 'Total Fines', value: `Rs. ${stats.totalFines.toFixed(0)}`, sub: stats.totalFines > 0 ? 'Pending payment' : 'No dues', icon: DollarSign, color: stats.totalFines > 0 ? '#DC3545' : '#28A745', bg: stats.totalFines > 0 ? 'bg-red-50' : 'bg-green-50' }
+        ].map((stat, idx) => (
+          <Card key={idx} className="border-none shadow-sm hover:shadow-md transition-all duration-300 rounded-lg overflow-hidden group">
+            <CardContent className="p-8">
+              <div className="flex justify-between items-start">
+                <div>
+                  <p className="text-sm font-bold text-slate-400 uppercase tracking-wider">{stat.label}</p>
+                  <p className="text-3xl font-extrabold mt-2 transition-transform origin-left duration-500" style={{ color: stat.color }}>
+                    {stat.value}
+                  </p>
+                  <p className="text-xs font-bold text-slate-500 mt-2 flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: stat.color }}></span>
+                    {stat.sub}
+                  </p>
+                </div>
+                <div className={`w-14 h-14 rounded-lg flex items-center justify-center ${stat.bg} transition-transform duration-500 shadow-inner`}>
+                  <stat.icon className="h-7 w-7" style={{ color: stat.color }} />
+                </div>
               </div>
-              <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{backgroundColor: '#E7680020'}}>
-                <BookCheck className="h-6 w-6" style={{color: '#E76800'}} />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Available Slots</p>
-                <p className="text-2xl font-bold mt-1" style={{color: '#28A745'}}>
-                  {stats.available}
-                </p>
-              </div>
-              <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{backgroundColor: '#28A74520'}}>
-                <BookOpen className="h-6 w-6" style={{color: '#28A745'}} />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Active Reservations</p>
-                <p className="text-2xl font-bold mt-1" style={{color: '#FFC107'}}>
-                  {stats.reservations}
-                </p>
-              </div>
-              <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{backgroundColor: '#FFC10720'}}>
-                <Clock className="h-6 w-6" style={{color: '#FFC107'}} />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm text-gray-600">Unpaid Fines</p>
-                <p className="text-2xl font-bold mt-1" style={{color: stats.totalFines > 0 ? '#DC3545' : '#28A745'}}>
-                  Rs. {stats.totalFines.toFixed(2)}
-                </p>
-              </div>
-              <div className="w-12 h-12 rounded-lg flex items-center justify-center" style={{backgroundColor: stats.totalFines > 0 ? '#DC354520' : '#28A74520'}}>
-                <DollarSign className="h-6 w-6" style={{color: stats.totalFines > 0 ? '#DC3545' : '#28A745'}} />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        ))}
       </div>
 
-      {/* Currently Borrowed Books */}
-      <Card>
-        <CardHeader>
-          <CardTitle style={{color: '#011039'}}>Currently Borrowed Books</CardTitle>
-        </CardHeader>
-        <CardContent>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Currently Borrowed Books */}
+        <div className="lg:col-span-2 space-y-6">
+          <div className="flex items-center justify-between px-2">
+            <h2 className="text-2xl font-extrabold text-[#011039]">Current Issues</h2>
+            <span className="px-4 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-bold uppercase tracking-wider">
+              Recent 4 Books
+            </span>
+          </div>
+
           {issuedBooks.length === 0 ? (
-            <div className="text-center py-8">
-              <BookCheck className="h-12 w-12 mx-auto text-gray-400 mb-3" />
-              <p className="text-gray-600">No books currently borrowed</p>
-              <p className="text-sm text-gray-500 mt-1">Visit the Book Catalog to find books</p>
+            <div className="bg-white rounded-lg p-12 text-center border-2 border-dashed border-slate-200">
+              <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                <BookCheck className="h-10 w-10 text-slate-200" />
+              </div>
+              <h3 className="text-xl font-bold text-[#011039]">No active issues found</h3>
+              <p className="text-slate-500 mt-2 max-w-sm mx-auto">Browse our library catalog to discover and borrow your next read.</p>
+              <button 
+                onClick={() => window.location.href = '/catalog'}
+                className="mt-8 px-8 py-3 bg-[#E76800] text-white rounded-lg font-bold hover:shadow-lg hover:shadow-orange-600/20 transition-all"
+              >
+                Discover Books
+              </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {issuedBooks.slice(0, 4).map((transaction) => {
                 const daysRemaining = getDaysRemaining(transaction.dueDate)
                 const isOverdue = daysRemaining < 0
                 const bookStatusBadge = getBookStatusBadge(transaction.bookId)
 
                 return (
-                  <div key={transaction._id} className="flex gap-3 p-3 border rounded-lg">
-                    <BookCover 
-                      src={transaction.bookId?.coverImage} 
-                      alt={transaction.bookId?.title}
-                      className="w-16 h-24 flex-shrink-0"
-                    />
-                    <div className="flex-1 min-w-0">
-                      <h4 className="font-semibold text-sm line-clamp-1" style={{color: '#011039'}}>
-                        {transaction.bookId?.title}
-                      </h4>
-                      <p className="text-xs text-gray-600 line-clamp-1">
-                        {transaction.bookId?.author}
-                      </p>
-                      <div className="mt-2 space-y-1">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <Badge variant={isOverdue ? 'danger' : 'success'} className="text-xs">
-                            {transaction.status}
-                          </Badge>
-                          <Badge variant={bookStatusBadge.variant} className="text-xs">
-                            {bookStatusBadge.text}
-                          </Badge>
+                  <Card key={transaction._id} className="border-none shadow-sm hover:shadow-md transition-all duration-300 rounded-lg overflow-hidden bg-white p-4">
+                    <div className="flex gap-5 h-full">
+                      <div className="w-28 flex-shrink-0">
+                        <div className="aspect-[3/4] rounded-lg overflow-hidden shadow-md">
+                          <BookCover 
+                            src={transaction.bookId?.coverImage} 
+                            alt={transaction.bookId?.title}
+                            className="w-full h-full object-cover"
+                          />
                         </div>
-                        <div className="text-xs">
-                          <div className="flex items-center gap-1 text-gray-600">
-                            <Calendar className="h-3 w-3" />
-                            <span>Due: {formatDate(transaction.dueDate)}</span>
+                      </div>
+                      <div className="flex-1 flex flex-col justify-between py-1">
+                        <div>
+                          <div className="flex justify-between items-start gap-2">
+                             <Badge variant={isOverdue ? 'danger' : 'success'} className="px-2 py-0.5 rounded-lg text-[9px] uppercase font-bold tracking-wider">
+                              {transaction.status}
+                            </Badge>
                           </div>
-                          {isOverdue ? (
-                            <p className="text-red-600 font-medium mt-1">
-                              Overdue by {Math.abs(daysRemaining)} days
-                            </p>
-                          ) : (
-                            <p className="text-gray-600 mt-1">
-                              {daysRemaining} days remaining
-                            </p>
-                          )}
+                          <h4 className="font-extrabold text-[#011039] mt-2 line-clamp-2 leading-tight">
+                            {transaction.bookId?.title}
+                          </h4>
+                          <p className="text-xs font-bold text-[#E76800] mt-1 line-clamp-1 italic">
+                            {transaction.bookId?.author}
+                          </p>
                         </div>
-                        {transaction.bookId && (
-                          <div className="text-xs text-gray-600 mt-1">
-                            Copies: {transaction.bookId.availableCopies || 0}/{transaction.bookId.totalCopies || 0}
+
+                        <div className="mt-4 pt-4 border-t border-slate-100">
+                          <div className="flex items-center gap-2 text-slate-500">
+                            <Calendar className="h-3.5 w-3.5 text-slate-400" />
+                            <span className="text-[10px] font-bold uppercase tracking-tight">Due: {formatDate(transaction.dueDate)}</span>
                           </div>
-                        )}
+                          <div className={`mt-2 px-3 py-1.5 rounded-lg text-center ${isOverdue ? 'bg-red-50 text-red-600' : 'bg-slate-50 text-slate-600'}`}>
+                            <p className="text-[10px] font-extrabold uppercase tracking-wide">
+                              {isOverdue ? `Overdue by ${Math.abs(daysRemaining)} days` : `${daysRemaining} days left`}
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Card>
                 )
               })}
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
 
-      {/* Outstanding Fines */}
-      {stats.totalFines > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2" style={{color: '#DC3545'}}>
-              <AlertCircle className="h-5 w-5" />
-              Outstanding Fines
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-              <p className="text-red-800 font-medium">
-                You have unpaid fines totaling Rs. {stats.totalFines.toFixed(2)}
-              </p>
-              <p className="text-sm text-red-600 mt-1">
-                Please clear your fines to continue borrowing books.
-              </p>
+        {/* Sidebar Sections */}
+        <div className="space-y-8">
+          {/* Fines Card */}
+          <div className="px-2">
+             <h2 className="text-2xl font-extrabold text-[#011039]">Account Status</h2>
+          </div>
+          
+          <Card className={`border-none rounded-lg shadow-xl overflow-hidden ${stats.totalFines > 0 ? 'bg-red-600' : 'bg-[#011039]'}`}>
+            <CardContent className="p-8 text-white">
+              <div className="flex items-center justify-between mb-8">
+                <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center backdrop-blur-md">
+                  <DollarSign className="h-6 w-6" />
+                </div>
+                <span className="text-[10px] font-extrabold uppercase tracking-[0.2em] opacity-60">Dues Overview</span>
+              </div>
+              
+              <div>
+                <p className="text-white/60 text-sm font-bold uppercase tracking-wider">Total Outstanding</p>
+                <p className="text-5xl font-black mt-2">
+                  <span className="text-2xl font-bold opacity-60 mr-1">Rs.</span>
+                  {stats.totalFines.toFixed(0)}
+                </p>
+              </div>
+
+              {stats.totalFines > 0 ? (
+                <div className="mt-8 p-4 bg-white/10 rounded-lg backdrop-blur-md border border-white/10">
+                  <p className="text-sm font-bold leading-relaxed">
+                    Please visit the library to clear your dues and restore full borrowing privileges.
+                  </p>
+                </div>
+              ) : (
+                <div className="mt-8 p-4 bg-green-500/20 rounded-lg backdrop-blur-md border border-green-500/20 flex items-center gap-3">
+                  <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+                  <p className="text-sm font-bold">Your account is in good standing.</p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Quick Help */}
+          <Card className="border-none rounded-lg shadow-sm bg-white p-8">
+            <h3 className="text-lg font-extrabold text-[#011039] mb-4">Need Assistance?</h3>
+            <p className="text-slate-500 text-sm font-medium leading-relaxed mb-6">
+              Our library staff is here to help you. Reach out via live chat for instant support regarding your account or book issues.
+            </p>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg border border-slate-100">
+                <Clock className="h-5 w-5 text-[#E76800]" />
+                <div>
+                  <p className="text-[10px] font-black uppercase text-slate-400">Library Hours</p>
+                  <p className="text-xs font-bold text-[#011039]">Mon-Fri: 9AM - 5PM</p>
+                </div>
+              </div>
             </div>
-          </CardContent>
-        </Card>
-      )}
+          </Card>
+        </div>
+      </div>
     </div>
   )
 }

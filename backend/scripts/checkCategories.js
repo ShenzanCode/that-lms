@@ -66,7 +66,7 @@ const checkCategories = async () => {
     // Show correct categories
     const correctCategories = [
       'Biology', 'Business', 'Chemistry', 'Communication and Media', 
-      'Computer / Computer Science', 'Education', 'English', 'History',
+      'CS & IT', 'Education', 'English', 'History',
       'Information Technology', 'International Relations', 'Islamic Studies',
       'Mathematics', 'Miscellaneous', 'Physics', 'Psychology', 
       'Social Work', 'Sociology', 'Sports Sciences', 'Urdu', 'Zoology'
