@@ -1,29 +1,23 @@
 import { cn, getStatusColor } from '@/lib/utils'
 
-export const Badge = ({ children, variant = 'primary', className, style, ...props }) => {
-  const getVariantStyle = () => {
-    switch(variant) {
-      case 'primary':
-        return { backgroundColor: '#FFF4E6', color: '#E76800' }
-      case 'success':
-        return { backgroundColor: '#E6F4EA', color: '#137333' }
-      case 'warning':
-        return { backgroundColor: '#FFF4E6', color: '#E76800' }
-      case 'danger':
-        return { backgroundColor: '#FFEAEA', color: '#D93025' }
-      case 'secondary':
-        return { backgroundColor: '#E6F2FF', color: '#011039' }
-      case 'info':
-        return { backgroundColor: '#E6F2FF', color: '#011039' }
-      default:
-        return { backgroundColor: '#F5F5F5', color: '#011039' }
-    }
+export const Badge = ({ children, variant = 'primary', className, ...props }) => {
+  const variants = {
+    primary: 'bg-primary/10 text-primary',
+    success: 'bg-success/10 text-success-600',
+    warning: 'bg-warning/10 text-warning-600',
+    danger: 'bg-danger/10 text-danger-600',
+    secondary: 'bg-secondary/10 text-secondary',
+    info: 'bg-blue-100 text-blue-700',
+    default: 'bg-gray-100 text-gray-700',
   }
   
   return (
     <span 
-      className={cn('badge inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold whitespace-nowrap', className)} 
-      style={{...getVariantStyle(), ...style}}
+      className={cn(
+        'badge inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold whitespace-nowrap', 
+        variants[variant] || variants.default,
+        className
+      )} 
       {...props}
     >
       {children}

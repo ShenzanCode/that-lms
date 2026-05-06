@@ -614,7 +614,7 @@ const BulkBookManager = ({ isOpen, onClose }) => {
           <div className="space-y-6">
             <div className="text-center">
               <BookOpen className="mx-auto h-16 w-16 mb-4" style={{color: '#E76800'}} />
-              <h3 className="text-lg font-medium mb-2" style={{color: '#011039'}}>
+              <h3 className="text-lg font-bold mb-2" style={{color: '#011039'}}>
                 Manage Your Book Collection
               </h3>
               <p className="text-gray-600 mb-6">
@@ -625,7 +625,7 @@ const BulkBookManager = ({ isOpen, onClose }) => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Card className="p-6 text-center hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-[#E76800]">
                 <Upload className="mx-auto h-12 w-12 text-[#E76800] mb-3" />
-                <h4 className="font-medium mb-2" style={{color: '#011039'}}>Download Template</h4>
+                <h4 className="font-bold mb-2" style={{color: '#011039'}}>Download Template</h4>
                 <p className="text-sm text-gray-600 mb-4">
                   Get the Excel template with required columns
                 </p>
@@ -639,7 +639,7 @@ const BulkBookManager = ({ isOpen, onClose }) => {
 
               <Card className="p-6 text-center hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-red-500">
                 <Trash2 className="mx-auto h-12 w-12 text-red-500 mb-3" />
-                <h4 className="font-medium mb-2" style={{color: '#011039'}}>Delete All Books</h4>
+                <h4 className="font-bold mb-2" style={{color: '#011039'}}>Delete All Books</h4>
                 <p className="text-sm text-gray-600 mb-4">
                   Remove all existing books from the system
                 </p>
@@ -654,7 +654,7 @@ const BulkBookManager = ({ isOpen, onClose }) => {
 
               <Card className="p-6 text-center hover:shadow-lg transition-shadow cursor-pointer border-2 border-transparent hover:border-[#E76800]">
                 <Upload className="mx-auto h-12 w-12 mb-3" style={{color: '#E76800'}} />
-                <h4 className="font-medium mb-2" style={{color: '#011039'}}>Import Books</h4>
+                <h4 className="font-bold mb-2" style={{color: '#011039'}}>Import Books</h4>
                 <p className="text-sm text-gray-600 mb-4">
                   Upload Excel file with your book collection
                 </p>
@@ -672,7 +672,7 @@ const BulkBookManager = ({ isOpen, onClose }) => {
         {step === 'upload' && (
           <div className="text-center">
             <Upload className="mx-auto h-16 w-16 mb-4" style={{color: '#E76800'}} />
-            <h3 className="text-lg font-medium mb-2" style={{color: '#011039'}}>
+            <h3 className="text-lg font-bold mb-2" style={{color: '#011039'}}>
               Upload Excel File
             </h3>
             <p className="text-gray-600 mb-6">
@@ -717,13 +717,13 @@ const BulkBookManager = ({ isOpen, onClose }) => {
 
         {step === 'preview' && (
           <div>
-            <h3 className="text-lg font-medium mb-4" style={{color: '#011039'}}>
+            <h3 className="text-lg font-bold mb-4" style={{color: '#011039'}}>
               Preview Import Data
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               <Card className="p-4 bg-green-50 border-green-200">
-                <h4 className="font-medium text-green-800 mb-2">
+                <h4 className="font-bold text-green-800 mb-2">
                   ✓ Valid Books: {validBooks.length}
                 </h4>
                 <p className="text-sm text-green-600">
@@ -735,7 +735,7 @@ const BulkBookManager = ({ isOpen, onClose }) => {
               </Card>
 
               <Card className="p-4 bg-red-50 border-red-200">
-                <h4 className="font-medium text-red-800 mb-2">
+                <h4 className="font-bold text-red-800 mb-2">
                   ✗ Invalid Books: {invalidBooks.length}
                 </h4>
                 <p className="text-sm text-red-600">
@@ -746,7 +746,7 @@ const BulkBookManager = ({ isOpen, onClose }) => {
 
             {validBooks.filter(book => book.totalCopies > 1).length > 0 && (
               <Card className="p-4 mb-6 bg-orange-50 border-[#E76800]">
-                <h4 className="font-medium mb-3" style={{color: '#011039'}}>
+                <h4 className="font-bold mb-3" style={{color: '#011039'}}>
                   📚 Books with Multiple Copies ({validBooks.filter(book => book.totalCopies > 1).length} books)
                 </h4>
                 <div className="max-h-40 overflow-y-auto space-y-2">
@@ -756,12 +756,12 @@ const BulkBookManager = ({ isOpen, onClose }) => {
                     .map((book, index) => (
                       <div key={index} className="p-2 bg-white rounded border flex justify-between items-center">
                         <div>
-                          <p className="text-sm font-medium">{book.title}</p>
+                          <p className="text-sm font-bold">{book.title}</p>
                           <p className="text-xs text-gray-600">
                             by {book.author} - {book.edition && book.edition !== '-' ? book.edition : 'N/A'}
                           </p>
                         </div>
-                        <span className="px-3 py-1 rounded-full text-sm font-medium" style={{backgroundColor: '#E76800', color: 'white'}}>
+                        <span className="px-3 py-1 rounded-full text-sm font-bold" style={{backgroundColor: '#E76800', color: 'white'}}>
                           {book.totalCopies} copies
                         </span>
                       </div>
@@ -777,14 +777,14 @@ const BulkBookManager = ({ isOpen, onClose }) => {
 
             {invalidBooks.length > 0 && (
               <Card className="p-4 mb-6 bg-yellow-50 border-yellow-200">
-                <h4 className="font-medium text-yellow-800 mb-3 flex items-center">
+                <h4 className="font-bold text-yellow-800 mb-3 flex items-center">
                   <AlertTriangle className="w-5 h-5 mr-2" />
                   Errors Found
                 </h4>
                 <div className="max-h-40 overflow-y-auto">
                   {invalidBooks.slice(0, 5).map((item, index) => (
                     <div key={index} className="mb-2 p-2 bg-white rounded border">
-                      <p className="text-sm font-medium">Row {item.row}: {item.book.title || 'Untitled'}</p>
+                      <p className="text-sm font-bold">Row {item.row}: {item.book.title || 'Untitled'}</p>
                       <p className="text-xs text-red-600">{item.errors.join(', ')}</p>
                     </div>
                   ))}

@@ -234,7 +234,7 @@ export default function StudentNotifications() {
                 placeholder="Search messages..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-slate-50 border-2 border-slate-50 rounded-xl focus:outline-none focus:border-[#E76800] focus:bg-white transition-all text-slate-600 font-medium placeholder:text-slate-300"
+                className="w-full pl-12 pr-4 py-3 bg-slate-50 border-2 border-slate-50 rounded-xl focus:outline-none focus:border-[#E76800] focus:bg-white transition-all text-slate-600 font-bold placeholder:text-slate-300"
               />
             </div>
           </div>
@@ -289,7 +289,7 @@ export default function StudentNotifications() {
                         </div>
                       </div>
                       
-                      <p className={`text-sm leading-relaxed mb-4 ${!notification.isRead ? 'text-slate-600 font-medium' : 'text-slate-400'}`}>
+                      <p className={`text-sm leading-relaxed mb-4 ${!notification.isRead ? 'text-slate-600 font-bold' : 'text-slate-400'}`}>
                         {notification.message}
                       </p>
                       

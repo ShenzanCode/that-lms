@@ -107,20 +107,19 @@ export default function MainLayout() {
   }
 
   return (
-    <div className="min-h-screen" style={{backgroundColor: '#F8F9FA'}}>
+    <div className="min-h-screen bg-[#F8F9FA]">
       {/* Top Navbar */}
-      <header className="bg-white shadow-sm fixed top-0 left-0 right-0 z-50" style={{borderBottom: '2px solid #E76800'}}>
+      <header className="bg-white/95 backdrop-blur-md shadow-sm fixed top-0 left-0 right-0 z-50 border-b-2 border-primary">
         <div className="flex items-center justify-between h-16 px-4 sm:px-6">
           {/* Logo Section */}
           <div className="flex items-center gap-4">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="lg:hidden hover:text-primary-500"
-              style={{color: '#011039'}}
+              className="lg:hidden text-secondary hover:text-primary transition-colors"
             >
               <Menu className="h-6 w-6" />
             </button>
-            <Link to="/landing" className="flex items-center">
+            <Link to="/admin" className="flex items-center">
               <img 
                 src="/Images/Logo.png" 
                 alt={libraryName} 
@@ -137,8 +136,7 @@ export default function MainLayout() {
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              letterSpacing: '1px',
-              fontFamily: 'system-ui, -apple-system, sans-serif'
+              letterSpacing: '1px'
             }}
           >
             {libraryName}
@@ -152,10 +150,10 @@ export default function MainLayout() {
       </header>
 
       {/* Sidebar */}
-      <div className={`fixed left-0 z-40 w-64 shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`} style={{backgroundColor: '#011039', top: '64px', bottom: 0}}>
+      <div className={`fixed left-0 z-40 w-64 shadow-xl transform transition-transform duration-300 ease-in-out lg:translate-x-0 bg-secondary ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`} style={{ top: '64px', bottom: 0 }}>
         <div className="flex flex-col h-full">
           {/* Navigation */}
-          <nav className="flex-1 overflow-y-auto py-4 px-3">
+          <nav className="flex-1 overflow-y-auto py-6 px-3">
             {navigation.map((item) => {
               const Icon = item.icon
               const active = isActive(item.path)
@@ -164,41 +162,34 @@ export default function MainLayout() {
                   key={item.path}
                   to={item.path}
                   onClick={() => setSidebarOpen(false)}
-                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 transition-colors hover:bg-opacity-80 ${active ? 'text-white font-medium' : 'text-gray-300 hover:text-white'}`}
-                  style={active ? {backgroundColor: '#E76800'} : {}}
-                  onMouseEnter={(e) => {
-                    if (!active) e.target.closest('a').style.backgroundColor = 'rgba(231, 104, 0, 0.1)'
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!active) e.target.closest('a').style.backgroundColor = 'transparent'
-                  }}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-xl mb-2 transition-all group ${active ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
                 >
-                  <Icon className="h-5 w-5" />
-                  <span>{item.name}</span>
+                  <Icon className={`h-5 w-5 ${active ? 'text-white' : 'text-slate-400 group-hover:text-primary transition-colors'}`} />
+                  <span className="font-bold">{item.name}</span>
                 </Link>
               )
             })}
           </nav>
 
           {/* Admin Profile Header */}
-          <div className="p-4 relative" ref={adminMenuRef} style={{borderTop: '1px solid rgba(255,255,255,0.1)'}}>
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center overflow-hidden" style={{backgroundColor: '#E76800'}}>
+          <div className="p-4 relative" ref={adminMenuRef} style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+            <div className="flex items-center gap-3 p-2 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 transition-colors">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden bg-primary shadow-inner">
                 {user?.photo ? (
                   <img src={`http://localhost:5000${user.photo}`} alt={user.name} className="w-full h-full object-cover" />
                 ) : (
-                  <User className="h-6 w-6 text-white" />
+                  <User className="h-5 w-5 text-white" />
                 )}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-xs text-gray-400 uppercase tracking-wide">System Administrator</p>
-                <p className="text-sm font-semibold text-white truncate mt-0.5">{user?.name || 'Admin'}</p>
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Administrator</p>
+                <p className="text-sm font-bold text-white truncate">{user?.name || 'Admin'}</p>
               </div>
               <button
                 onClick={() => setShowAdminMenu(!showAdminMenu)}
-                className="p-1 rounded-lg hover:bg-white/10 transition-colors"
+                className="p-1.5 rounded-lg hover:bg-white/10 text-slate-400 hover:text-white transition-all"
               >
-                <MoreVertical className="h-5 w-5 text-gray-300" />
+                <MoreVertical className="h-4 w-4" />
               </button>
             </div>
 

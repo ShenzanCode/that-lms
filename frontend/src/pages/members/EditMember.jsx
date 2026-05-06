@@ -191,7 +191,7 @@ export default function EditMember() {
           <div className="p-6 space-y-6">
             {/* Photo Upload */}
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700">
+              <label className="block mb-2 text-sm font-bold text-gray-700">
                 Member Photo
               </label>
               {!photoPreview ? (
@@ -200,7 +200,7 @@ export default function EditMember() {
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
                       <Upload className="w-10 h-10 mb-3 text-gray-400" />
                       <p className="mb-2 text-sm text-gray-500">
-                        <span className="font-semibold">Click to upload</span>
+                        <span className="font-bold">Click to upload</span>
                       </p>
                       <p className="text-xs text-gray-500">PNG, JPG (MAX. 5MB)</p>
                     </div>
@@ -244,7 +244,7 @@ export default function EditMember() {
                       accept="image/*"
                       onChange={handleFileChange}
                     />
-                    <span className="px-4 py-2 text-sm font-medium text-primary-600 bg-primary-50 rounded-md hover:bg-primary-100 transition-colors">
+                    <span className="px-4 py-2 text-sm font-bold text-primary-600 bg-primary-50 rounded-md hover:bg-primary-100 transition-colors">
                       Change Photo
                     </span>
                   </label>
@@ -254,7 +254,7 @@ export default function EditMember() {
 
             {/* Basic Information */}
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Basic Information</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Basic Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Input
                   label="Member ID"
@@ -295,10 +295,10 @@ export default function EditMember() {
 
             {/* Academic Information */}
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Academic Information</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Academic Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block mb-1.5 text-sm font-medium text-gray-700">
+                  <label className="block mb-1.5 text-sm font-bold text-gray-700">
                     Member Type <span className="text-danger-500 ml-1">*</span>
                   </label>
                   <select
@@ -344,10 +344,10 @@ export default function EditMember() {
 
             {/* Membership Details */}
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Membership Details</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Membership Details</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block mb-1.5 text-sm font-medium text-gray-700">
+                  <label className="block mb-1.5 text-sm font-bold text-gray-700">
                     Valid Until <span className="text-danger-500 ml-1">*</span>
                   </label>
                   <div className="relative">
@@ -368,10 +368,10 @@ export default function EditMember() {
 
             {/* Additional Information */}
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Additional Information</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Additional Information</h3>
               <div className="space-y-4">
                 <div>
-                  <label className="block mb-1.5 text-sm font-medium text-gray-700">
+                  <label className="block mb-1.5 text-sm font-bold text-gray-700">
                     Address
                   </label>
                   <textarea
@@ -384,7 +384,7 @@ export default function EditMember() {
                   />
                 </div>
                 <div>
-                  <label className="block mb-1.5 text-sm font-medium text-gray-700">
+                  <label className="block mb-1.5 text-sm font-bold text-gray-700">
                     Notes
                   </label>
                   <textarea

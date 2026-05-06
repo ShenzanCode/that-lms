@@ -96,7 +96,7 @@ export default function IssueBook() {
           <div className="p-6 space-y-4">
             <div className="flex items-center gap-2 mb-4">
               <BookOpen className="h-5 w-5" style={{color: '#E76800'}} />
-              <h3 className="text-lg font-semibold" style={{color: '#011039'}}>Select Book</h3>
+              <h3 className="text-lg font-bold" style={{color: '#011039'}}>Select Book</h3>
             </div>
 
             {!selectedBook ? (
@@ -129,7 +129,7 @@ export default function IssueBook() {
                           >
                             <div className="flex justify-between items-start">
                               <div>
-                                <p className="font-medium" style={{color: '#011039'}}>{book.title}</p>
+                                <p className="font-bold" style={{color: '#011039'}}>{book.title}</p>
                                 <p className="text-sm" style={{color: '#011039'}}>{book.author}</p>
                                 <p className="text-xs mt-1" style={{color: '#6B7280'}}>
                                   Acc: {book.accessionNumber} | Available: {book.availableCopies}/{book.totalCopies}
@@ -155,7 +155,7 @@ export default function IssueBook() {
                 <div className="p-4 rounded-lg" style={{backgroundColor: '#FFF3E0'}}>
                   <div className="flex justify-between items-start">
                     <div>
-                      <p className="font-semibold" style={{color: '#011039'}}>{selectedBook.title}</p>
+                      <p className="font-bold" style={{color: '#011039'}}>{selectedBook.title}</p>
                       <p className="text-sm mt-1" style={{color: '#011039'}}>{selectedBook.author}</p>
                       <p className="text-sm mt-2" style={{color: '#6B7280'}}>
                         Publisher: {selectedBook.publisher || 'N/A'}
@@ -190,7 +190,7 @@ export default function IssueBook() {
           <div className="p-6 space-y-4">
             <div className="flex items-center gap-2 mb-4">
               <User className="h-5 w-5" style={{color: '#E76800'}} />
-              <h3 className="text-lg font-semibold" style={{color: '#011039'}}>Select Member</h3>
+              <h3 className="text-lg font-bold" style={{color: '#011039'}}>Select Member</h3>
             </div>
 
             {!selectedMember ? (
@@ -236,7 +236,7 @@ export default function IssueBook() {
                                   size="sm"
                                 />
                                 <div className="flex-1">
-                                  <p className="font-medium" style={{color: '#011039'}}>{member.name}</p>
+                                  <p className="font-bold" style={{color: '#011039'}}>{member.name}</p>
                                   <p className="text-sm" style={{color: '#011039'}}>{member.memberId} • {member.memberType}</p>
                                   <p className="text-xs mt-1" style={{color: '#6B7280'}}>
                                     Borrowed: {member.currentBorrowedBooks}/{member.borrowingLimit}
@@ -272,7 +272,7 @@ export default function IssueBook() {
                       size="lg"
                     />
                     <div className="flex-1">
-                      <p className="font-semibold" style={{color: '#011039'}}>{selectedMember.name}</p>
+                      <p className="font-bold" style={{color: '#011039'}}>{selectedMember.name}</p>
                       <p className="text-sm mt-1" style={{color: '#011039'}}>
                         {selectedMember.memberId} • {selectedMember.memberType}
                       </p>
@@ -331,25 +331,25 @@ export default function IssueBook() {
       {selectedBook && selectedMember && (
         <Card>
           <div className="p-6">
-            <h3 className="text-lg font-semibold mb-4" style={{color: '#011039'}}>Issue Summary</h3>
+            <h3 className="text-lg font-bold mb-4" style={{color: '#011039'}}>Issue Summary</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
                 <p className="text-sm mb-1" style={{color: '#6B7280'}}>Book</p>
-                <p className="font-medium" style={{color: '#011039'}}>{selectedBook.title}</p>
+                <p className="font-bold" style={{color: '#011039'}}>{selectedBook.title}</p>
                 <p className="text-sm" style={{color: '#6B7280'}}>Acc: {selectedBook.accessionNumber}</p>
               </div>
               <div>
                 <p className="text-sm mb-1" style={{color: '#6B7280'}}>Member</p>
-                <p className="font-medium" style={{color: '#011039'}}>{selectedMember.name}</p>
+                <p className="font-bold" style={{color: '#011039'}}>{selectedMember.name}</p>
                 <p className="text-sm" style={{color: '#6B7280'}}>{selectedMember.memberId}</p>
               </div>
               <div>
                 <p className="text-sm mb-1" style={{color: '#6B7280'}}>Issue Date</p>
-                <p className="font-medium" style={{color: '#011039'}}>{format(new Date(), 'PPP')}</p>
+                <p className="font-bold" style={{color: '#011039'}}>{format(new Date(), 'PPP')}</p>
               </div>
               <div>
                 <p className="text-sm mb-1" style={{color: '#6B7280'}}>Due Date</p>
-                <p className="font-medium" style={{color: '#011039'}}>
+                <p className="font-bold" style={{color: '#011039'}}>
                   {format(
                     new Date(Date.now() + (selectedMember.memberType === 'Faculty' ? 30 : selectedMember.memberType === 'Staff' ? 21 : 14) * 24 * 60 * 60 * 1000),
                     'PPP'

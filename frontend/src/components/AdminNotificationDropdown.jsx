@@ -157,7 +157,7 @@ export default function AdminNotificationDropdown() {
         <div className="absolute right-0 mt-2 w-96 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-gray-200">
-            <h3 className="text-lg font-semibold" style={{color: '#011039'}}>
+            <h3 className="text-lg font-bold" style={{color: '#011039'}}>
               Notifications
             </h3>
             <div className="flex items-center gap-2">
@@ -201,7 +201,7 @@ export default function AdminNotificationDropdown() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-start justify-between gap-2">
-                        <h4 className="text-sm font-semibold text-gray-900 truncate">
+                        <h4 className="text-sm font-bold text-gray-900 truncate">
                           {notification.title}
                         </h4>
                         {!notification.isRead && (
@@ -255,7 +255,7 @@ export default function AdminNotificationDropdown() {
             <div className="p-3 border-t border-gray-200 text-center">
               <Link
                 to="/admin/notifications"
-                className="text-sm font-medium hover:underline"
+                className="text-sm font-bold hover:underline"
                 style={{color: '#E76800'}}
                 onClick={() => setIsOpen(false)}
               >

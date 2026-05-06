@@ -118,7 +118,7 @@ export default function AddBook() {
           <div className="p-6 space-y-6">
             {/* Cover Image Upload */}
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700">
+              <label className="block mb-2 text-sm font-bold text-gray-700">
                 Book Cover Image
               </label>
               {!coverPreview ? (
@@ -127,7 +127,7 @@ export default function AddBook() {
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
                       <Upload className="w-10 h-10 mb-3 text-gray-400" />
                       <p className="mb-2 text-sm text-gray-500">
-                        <span className="font-semibold">Click to upload</span> or drag and drop
+                        <span className="font-bold">Click to upload</span> or drag and drop
                       </p>
                       <p className="text-xs text-gray-500">PNG, JPG or JPEG (MAX. 5MB)</p>
                     </div>
@@ -159,7 +159,7 @@ export default function AddBook() {
 
             {/* Basic Information */}
             <div>
-              <h3 className="text-lg font-semibold mb-4" style={{color: '#011039'}}>Basic Information</h3>
+              <h3 className="text-lg font-bold mb-4" style={{color: '#011039'}}>Basic Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Input
                   label="Sr.No (Accession Number)"
@@ -205,10 +205,10 @@ export default function AddBook() {
 
             {/* Classification */}
             <div>
-              <h3 className="text-lg font-semibold mb-4" style={{color: '#011039'}}>Classification</h3>
+              <h3 className="text-lg font-bold mb-4" style={{color: '#011039'}}>Classification</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block mb-1.5 text-sm font-medium text-gray-700">
+                  <label className="block mb-1.5 text-sm font-bold text-gray-700">
                     Category <span className="text-danger-500 ml-1">*</span>
                   </label>
                   <select
@@ -257,7 +257,7 @@ export default function AddBook() {
 
             {/* Copies and Condition */}
             <div>
-              <h3 className="text-lg font-semibold mb-4" style={{color: '#011039'}}>Copies & Condition</h3>
+              <h3 className="text-lg font-bold mb-4" style={{color: '#011039'}}>Copies & Condition</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <Input
                   label="Total Copies"
@@ -279,7 +279,7 @@ export default function AddBook() {
                   required
                 />
                 <div>
-                  <label className="block mb-1.5 text-sm font-medium text-gray-700">
+                  <label className="block mb-1.5 text-sm font-bold text-gray-700">
                     Condition
                   </label>
                   <select
@@ -299,10 +299,10 @@ export default function AddBook() {
 
             {/* Additional Details */}
             <div>
-              <h3 className="text-lg font-semibold mb-4" style={{color: '#011039'}}>Additional Details</h3>
+              <h3 className="text-lg font-bold mb-4" style={{color: '#011039'}}>Additional Details</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block mb-1.5 text-sm font-medium text-gray-700">
+                  <label className="block mb-1.5 text-sm font-bold text-gray-700">
                     Price
                   </label>
                   <input
@@ -318,7 +318,7 @@ export default function AddBook() {
                   </p>
                 </div>
                 <div className="md:col-span-2">
-                  <label className="block mb-1.5 text-sm font-medium text-gray-700">
+                  <label className="block mb-1.5 text-sm font-bold text-gray-700">
                     Description
                   </label>
                   <textarea

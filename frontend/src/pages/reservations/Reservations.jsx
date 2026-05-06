@@ -336,22 +336,22 @@ export default function Reservations() {
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
                     Priority
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
                     Book
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
                     Member
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
                     Reservation Date
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
@@ -361,7 +361,7 @@ export default function Reservations() {
                   <tr key={reservation._id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
-                        <span className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-primary-100 text-primary-700 font-semibold text-sm">
+                        <span className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-primary-100 text-primary-700 font-bold text-sm">
                           #{reservation.priority}
                         </span>
                       </div>
@@ -370,7 +370,7 @@ export default function Reservations() {
                       <div className="text-sm">
                         <Link
                           to={`/admin/books/${reservation.bookId?._id}`}
-                          className="font-medium text-primary-600 hover:text-primary-700"
+                          className="font-bold text-primary-600 hover:text-primary-700"
                         >
                           {reservation.bookId?.title}
                         </Link>
@@ -384,7 +384,7 @@ export default function Reservations() {
                       <div className="text-sm">
                         <Link
                           to={`/members/${reservation.memberId?._id}`}
-                          className="font-medium text-primary-600 hover:text-primary-700"
+                          className="font-bold text-primary-600 hover:text-primary-700"
                         >
                           {reservation.memberId?.name}
                         </Link>
@@ -509,13 +509,13 @@ export default function Reservations() {
         <div className="space-y-6">
           {/* Book Selection */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-bold text-gray-700 mb-2">
               Select Book *
             </label>
             {selectedBook ? (
               <div className="flex items-center justify-between p-3 bg-primary-50 border border-primary-200 rounded-lg">
                 <div>
-                  <p className="font-medium text-gray-900">{selectedBook.title}</p>
+                  <p className="font-bold text-gray-900">{selectedBook.title}</p>
                   <p className="text-sm text-gray-600">{selectedBook.author}</p>
                   <p className="text-xs text-gray-500">{selectedBook.accessionNumber}</p>
                 </div>
@@ -545,7 +545,7 @@ export default function Reservations() {
                         }}
                         className="w-full p-3 text-left hover:bg-gray-50 transition-colors"
                       >
-                        <p className="font-medium text-gray-900">{book.title}</p>
+                        <p className="font-bold text-gray-900">{book.title}</p>
                         <p className="text-sm text-gray-600">{book.author}</p>
                         <div className="flex items-center gap-2 mt-1">
                           <span className="text-xs text-gray-500">
@@ -580,13 +580,13 @@ export default function Reservations() {
 
           {/* Member Selection */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-bold text-gray-700 mb-2">
               Select Member *
             </label>
             {selectedMember ? (
               <div className="flex items-center justify-between p-3 bg-primary-50 border border-primary-200 rounded-lg">
                 <div>
-                  <p className="font-medium text-gray-900">{selectedMember.name}</p>
+                  <p className="font-bold text-gray-900">{selectedMember.name}</p>
                   <p className="text-sm text-gray-600">{selectedMember.memberId}</p>
                   {selectedMember.phone && (
                     <p className="text-xs text-gray-500">{selectedMember.phone}</p>
@@ -620,7 +620,7 @@ export default function Reservations() {
                       >
                         <div className="flex items-center justify-between">
                           <div>
-                            <p className="font-medium text-gray-900">{member.name}</p>
+                            <p className="font-bold text-gray-900">{member.name}</p>
                             <p className="text-sm text-gray-600">{member.memberId}</p>
                             {member.phone && (
                               <p className="text-xs text-gray-500">{member.phone}</p>
@@ -640,7 +640,7 @@ export default function Reservations() {
 
           {/* Notes */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-bold text-gray-700 mb-2">
               Notes (Optional)
             </label>
             <textarea
@@ -861,7 +861,7 @@ export default function Reservations() {
             by <strong>{selectedReservation?.memberId?.name}</strong>?
           </p>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-bold text-gray-700 mb-2">
               Reason for Rejection (Optional)
             </label>
             <textarea

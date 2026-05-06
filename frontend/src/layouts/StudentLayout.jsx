@@ -94,7 +94,7 @@ export default function StudentLayout() {
             <Link to="/catalog" className="hover:text-white transition-colors">Catalog</Link>
             <Link to="/student/dashboard" className="hover:text-white transition-colors">Dashboard</Link>
           </div>
-          <p className="text-xs text-slate-400 font-medium">© {new Date().getFullYear()} Wisdom Hall Thal University Bhakkar</p>
+          <p className="text-xs text-slate-400 font-bold">© {new Date().getFullYear()} Wisdom Hall Thal University Bhakkar</p>
         </div>
       </footer>
 

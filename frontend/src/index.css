@@ -27,7 +27,7 @@ html {
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 23 100% 45%;
-    --radius: 0.5rem;
+    --radius: 0.75rem;
   }
 }
 
@@ -37,6 +37,7 @@ html {
   }
   body {
     @apply bg-background text-foreground;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-feature-settings: 'rlig' 1, 'calt' 1;
   }
 }
@@ -47,105 +48,59 @@ html {
   }
 
   .card {
-    @apply rounded-lg border bg-card text-card-foreground shadow-sm;
+    @apply rounded-xl border bg-card text-card-foreground shadow-sm;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50;
+    @apply inline-flex items-center justify-center rounded-lg text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50;
   }
 
   .btn-primary {
-    background-color: #E76800;
-    color: white;
-    padding: 0.5rem 1rem;
+    @apply bg-primary text-white px-4 py-2 hover:opacity-90;
   }
   
-  .btn-primary:hover {
-    background-color: #E76800;
-    opacity: 0.9;
-  }
-
   .btn-secondary {
-    background-color: #011039;
-    color: white;
-    padding: 0.5rem 1rem;
-  }
-  
-  .btn-secondary:hover {
-    background-color: #011039;
-    opacity: 0.9;
+    @apply bg-secondary text-white px-4 py-2 hover:opacity-90;
   }
 
   .btn-outline {
-    border: 1px solid #011039;
-    background-color: transparent;
-    color: #011039;
-    padding: 0.5rem 1rem;
+    @apply border-2 border-secondary bg-transparent text-secondary px-4 py-2 hover:bg-secondary hover:text-white;
   }
   
-  .btn-outline:hover {
-    background-color: #011039;
-    color: white;
-  }
-
   .btn-ghost {
-    background-color: transparent;
-    color: #011039;
-    padding: 0.5rem 1rem;
-  }
-  
-  .btn-ghost:hover {
-    background-color: rgba(1, 16, 57, 0.1);
+    @apply bg-transparent text-secondary px-4 py-2 hover:bg-secondary/10;
   }
 
   .btn-danger {
-    @apply bg-danger-500 text-white hover:bg-danger-600 px-4 py-2;
+    @apply bg-danger text-white hover:bg-danger/90 px-4 py-2;
   }
 
   .input {
-    display: flex;
-    height: 2.5rem;
-    width: 100%;
-    border-radius: 0.375rem;
-    border: 1px solid #D1D5DB;
-    background-color: white;
-    padding: 0.5rem 0.75rem;
-    font-size: 0.875rem;
-    transition: border-color 0.2s ease;
-  }
-  
-  .input:focus {
-    outline: none;
-    border-color: #E76800;
-    box-shadow: 0 0 0 3px rgba(231, 104, 0, 0.1);
+    @apply flex h-10 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm transition-all focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10;
   }
 
   .label {
-    @apply text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
+    @apply text-sm font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
   }
 
   .badge {
-    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors;
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold transition-colors;
   }
 
   .badge-success {
-    background-color: #E6F4EA;
-    color: #137333;
+    @apply bg-success/10 text-success-600;
   }
 
   .badge-warning {
-    background-color: #FFF4E6;
-    color: #E76800;
+    @apply bg-warning/10 text-warning-600;
   }
 
   .badge-danger {
-    background-color: #FFEAEA;
-    color: #D93025;
+    @apply bg-danger/10 text-danger-600;
   }
 
   .badge-primary {
-    background-color: #FFF4E6;
-    color: #E76800;
+    @apply bg-primary/10 text-primary;
   }
 
   /* Brand specific utilities */

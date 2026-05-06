@@ -223,7 +223,7 @@ export default function ProfileSetup() {
           )}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium mb-2" style={{color: '#011039'}}>
+              <label className="block text-sm font-bold mb-2" style={{color: '#011039'}}>
                 Full Name *
               </label>
               <input
@@ -238,7 +238,7 @@ export default function ProfileSetup() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2" style={{color: '#011039'}}>
+              <label className="block text-sm font-bold mb-2" style={{color: '#011039'}}>
                 {memberType === 'Student' ? 'Roll Number' : 'Employee ID'} *
               </label>
               <input
@@ -253,7 +253,7 @@ export default function ProfileSetup() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2" style={{color: '#011039'}}>
+              <label className="block text-sm font-bold mb-2" style={{color: '#011039'}}>
                 Department *
               </label>
               <input
@@ -268,7 +268,7 @@ export default function ProfileSetup() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-2" style={{color: '#011039'}}>
+              <label className="block text-sm font-bold mb-2" style={{color: '#011039'}}>
                 Phone Number
               </label>
               <input
@@ -285,7 +285,7 @@ export default function ProfileSetup() {
               {memberType === 'Student' ? (
                 <>
                   <div>
-                    <label className="block text-sm font-medium mb-2" style={{color: '#011039'}}>
+                    <label className="block text-sm font-bold mb-2" style={{color: '#011039'}}>
                       Subject *
                     </label>
                     <input
@@ -300,7 +300,7 @@ export default function ProfileSetup() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2" style={{color: '#011039'}}>
+                    <label className="block text-sm font-bold mb-2" style={{color: '#011039'}}>
                       Semester *
                     </label>
                     <input
@@ -316,7 +316,7 @@ export default function ProfileSetup() {
                 </>
               ) : (
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium mb-2" style={{color: '#011039'}}>
+                  <label className="block text-sm font-bold mb-2" style={{color: '#011039'}}>
                     Designation/Subject *
                   </label>
                   <input
@@ -334,7 +334,7 @@ export default function ProfileSetup() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-2" style={{color: '#011039'}}>
+                <label className="block text-sm font-bold mb-2" style={{color: '#011039'}}>
                   Profile Photo
                 </label>
                 <div className="relative">
@@ -353,7 +353,7 @@ export default function ProfileSetup() {
                       {photo ? (
                         <div className="flex flex-col items-center">
                           <ImageIcon className="h-8 w-8 text-green-500 mb-2" />
-                          <p className="text-sm font-medium text-gray-700">{photo.name}</p>
+                          <p className="text-sm font-bold text-gray-700">{photo.name}</p>
                           <p className="text-xs text-gray-500 mt-1">{(photo.size / 1024).toFixed(2)} KB</p>
                           <button
                             type="button"
@@ -369,7 +369,7 @@ export default function ProfileSetup() {
                       ) : (
                         <div className="flex flex-col items-center">
                           <Upload className="h-8 w-8 text-gray-400 mb-2" />
-                          <p className="text-sm font-medium text-gray-700">Upload Photo</p>
+                          <p className="text-sm font-bold text-gray-700">Upload Photo</p>
                           <p className="text-xs text-gray-500 mt-1">Click to browse</p>
                         </div>
                       )}
@@ -380,7 +380,7 @@ export default function ProfileSetup() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2" style={{color: '#011039'}}>
+                <label className="block text-sm font-bold mb-2" style={{color: '#011039'}}>
                   Fee Challan or University Card *
                 </label>
                 <div className="relative">
@@ -399,7 +399,7 @@ export default function ProfileSetup() {
                       {document ? (
                         <div className="flex flex-col items-center">
                           <ImageIcon className="h-8 w-8 text-green-500 mb-2" />
-                          <p className="text-sm font-medium text-gray-700">{document.name}</p>
+                          <p className="text-sm font-bold text-gray-700">{document.name}</p>
                           <p className="text-xs text-gray-500 mt-1">{(document.size / 1024).toFixed(2)} KB</p>
                           <button
                             type="button"
@@ -415,7 +415,7 @@ export default function ProfileSetup() {
                       ) : (
                         <div className="flex flex-col items-center">
                           <Upload className="h-8 w-8 text-gray-400 mb-2" />
-                          <p className="text-sm font-medium text-gray-700">Upload Document</p>
+                          <p className="text-sm font-bold text-gray-700">Upload Document</p>
                           <p className="text-xs text-gray-500 mt-1">Click to browse</p>
                         </div>
                       )}
@@ -433,14 +433,14 @@ export default function ProfileSetup() {
                   logout()
                   navigate('/landing?auth=login&type=student')
                 }}
-                className="flex-1 py-2 px-4 rounded-md font-medium border border-gray-300 hover:bg-gray-50"
+                className="flex-1 py-2 px-4 rounded-md font-bold border border-gray-300 hover:bg-gray-50"
                 style={{color: '#011039'}}
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="flex-1 py-2 px-4 rounded-md text-white font-medium"
+                className="flex-1 py-2 px-4 rounded-md text-white font-bold"
                 disabled={loading}
                 style={{backgroundColor: '#E76800'}}
               >
@@ -478,14 +478,14 @@ export default function ProfileSetup() {
             <div className="flex gap-3">
               <button
                 onClick={handleCancelPreview}
-                className="flex-1 py-2 px-4 rounded-md font-medium border border-gray-300 hover:bg-gray-50"
+                className="flex-1 py-2 px-4 rounded-md font-bold border border-gray-300 hover:bg-gray-50"
                 style={{color: '#011039'}}
               >
                 Cancel
               </button>
               <button
                 onClick={handleUseImage}
-                className="flex-1 py-2 px-4 rounded-md text-white font-medium"
+                className="flex-1 py-2 px-4 rounded-md text-white font-bold"
                 style={{backgroundColor: '#E76800'}}
               >
                 Use This Image

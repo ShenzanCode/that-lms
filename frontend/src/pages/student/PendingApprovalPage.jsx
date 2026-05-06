@@ -104,7 +104,7 @@ export default function PendingApprovalPage() {
                 <div className="flex items-start gap-3 text-left">
                   <AlertTriangle className="h-5 w-5 mt-0.5 text-red-500" />
                   <div>
-                    <p className="font-medium text-red-900">Rejection Reason:</p>
+                    <p className="font-bold text-red-900">Rejection Reason:</p>
                     <p className="text-sm text-red-700 mt-1">
                       {rejectionReason}
                     </p>
@@ -156,7 +156,7 @@ export default function PendingApprovalPage() {
             <div className="flex items-start gap-3 text-left">
               <CheckCircle className="h-5 w-5 mt-0.5" style={{color: '#E76800'}} />
               <div>
-                <p className="font-medium" style={{color: '#011039'}}>What happens next?</p>
+                <p className="font-bold" style={{color: '#011039'}}>What happens next?</p>
                 <p className="text-sm text-gray-600 mt-1">
                   The librarian will review your information and either approve or reject your registration.
                 </p>

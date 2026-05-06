@@ -221,7 +221,7 @@ export default function AdminNotifications() {
               <div className="flex gap-2">
                 <button
                   onClick={() => setFilter('all')}
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                  className={`px-4 py-2 rounded-md text-sm font-bold transition-colors ${
                     filter === 'all'
                       ? 'text-white'
                       : 'text-gray-600 bg-gray-100 hover:bg-gray-200'
@@ -232,7 +232,7 @@ export default function AdminNotifications() {
                 </button>
                 <button
                   onClick={() => setFilter('unread')}
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                  className={`px-4 py-2 rounded-md text-sm font-bold transition-colors ${
                     filter === 'unread'
                       ? 'text-white'
                       : 'text-gray-600 bg-gray-100 hover:bg-gray-200'
@@ -243,7 +243,7 @@ export default function AdminNotifications() {
                 </button>
                 <button
                   onClick={() => setFilter('read')}
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                  className={`px-4 py-2 rounded-md text-sm font-bold transition-colors ${
                     filter === 'read'
                       ? 'text-white'
                       : 'text-gray-600 bg-gray-100 hover:bg-gray-200'
@@ -261,7 +261,7 @@ export default function AdminNotifications() {
           {filteredNotifications.length === 0 ? (
             <div className="text-center py-12">
               <Bell className="h-16 w-16 mx-auto mb-4 text-gray-400" />
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">No notifications</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-2">No notifications</h3>
               <p className="text-gray-600">
                 {searchTerm
                   ? 'No notifications match your search.'
@@ -296,7 +296,7 @@ export default function AdminNotifications() {
                         <div className="flex items-start justify-between gap-3 mb-2">
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
-                              <h3 className="text-sm font-semibold text-gray-900">
+                              <h3 className="text-sm font-bold text-gray-900">
                                 {notification.title}
                               </h3>
                               {!notification.isRead && (
@@ -323,7 +323,7 @@ export default function AdminNotifications() {
                           {!notification.isRead && (
                             <button
                               onClick={() => markAsRead(notification.id)}
-                              className="text-sm font-medium hover:underline"
+                              className="text-sm font-bold hover:underline"
                               style={{color: '#007BFF'}}
                             >
                               Mark as read
@@ -331,7 +331,7 @@ export default function AdminNotifications() {
                           )}
                           <button
                             onClick={() => deleteNotification(notification.id)}
-                            className="text-sm font-medium text-gray-500 hover:text-red-600 hover:underline"
+                            className="text-sm font-bold text-gray-500 hover:text-red-600 hover:underline"
                           >
                             Delete
                           </button>

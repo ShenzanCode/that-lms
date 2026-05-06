@@ -127,7 +127,7 @@ export default function AddMember() {
           <div className="p-6 space-y-6">
             {/* Photo Upload */}
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700">
+              <label className="block mb-2 text-sm font-bold text-gray-700">
                 Member Photo
               </label>
               {!photoPreview ? (
@@ -136,7 +136,7 @@ export default function AddMember() {
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
                       <Upload className="w-10 h-10 mb-3 text-gray-400" />
                       <p className="mb-2 text-sm text-gray-500">
-                        <span className="font-semibold">Click to upload</span>
+                        <span className="font-bold">Click to upload</span>
                       </p>
                       <p className="text-xs text-gray-500">PNG, JPG (MAX. 5MB)</p>
                     </div>
@@ -170,7 +170,7 @@ export default function AddMember() {
 
             {/* Basic Information */}
             <div>
-              <h3 className="text-lg font-semibold mb-4" style={{color: '#011039'}}>Basic Information</h3>
+              <h3 className="text-lg font-bold mb-4" style={{color: '#011039'}}>Basic Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Input
                   label="Member ID"
@@ -211,10 +211,10 @@ export default function AddMember() {
 
             {/* Academic Information */}
             <div>
-              <h3 className="text-lg font-semibold mb-4" style={{color: '#011039'}}>Academic Information</h3>
+              <h3 className="text-lg font-bold mb-4" style={{color: '#011039'}}>Academic Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block mb-1.5 text-sm font-medium text-gray-700">
+                  <label className="block mb-1.5 text-sm font-bold text-gray-700">
                     Member Type <span className="text-danger-500 ml-1">*</span>
                   </label>
                   <select
@@ -260,10 +260,10 @@ export default function AddMember() {
 
             {/* Membership Details */}
             <div>
-              <h3 className="text-lg font-semibold mb-4" style={{color: '#011039'}}>Membership Details</h3>
+              <h3 className="text-lg font-bold mb-4" style={{color: '#011039'}}>Membership Details</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block mb-1.5 text-sm font-medium text-gray-700">
+                  <label className="block mb-1.5 text-sm font-bold text-gray-700">
                     Valid Until <span className="text-danger-500 ml-1">*</span>
                   </label>
                   <div className="relative">
@@ -284,10 +284,10 @@ export default function AddMember() {
 
             {/* Additional Information */}
             <div>
-              <h3 className="text-lg font-semibold mb-4" style={{color: '#011039'}}>Additional Information</h3>
+              <h3 className="text-lg font-bold mb-4" style={{color: '#011039'}}>Additional Information</h3>
               <div className="space-y-4">
                 <div>
-                  <label className="block mb-1.5 text-sm font-medium text-gray-700">
+                  <label className="block mb-1.5 text-sm font-bold text-gray-700">
                     Address
                   </label>
                   <textarea
@@ -300,7 +300,7 @@ export default function AddMember() {
                   />
                 </div>
                 <div>
-                  <label className="block mb-1.5 text-sm font-medium text-gray-700">
+                  <label className="block mb-1.5 text-sm font-bold text-gray-700">
                     Notes
                   </label>
                   <textarea

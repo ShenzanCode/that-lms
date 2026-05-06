@@ -172,7 +172,7 @@ export default function AdminProfile() {
                 ) : (
                   <AlertCircle className="h-5 w-5" />
                 )}
-                <p className="text-sm font-medium">{message.text}</p>
+                <p className="text-sm font-bold">{message.text}</p>
               </div>
             )}
 
@@ -220,7 +220,7 @@ export default function AdminProfile() {
                 </label>
               </div>
               <div className="text-center">
-                <p className="text-sm font-semibold mb-1" style={{color: '#011039'}}>Profile Photo</p>
+                <p className="text-sm font-bold mb-1" style={{color: '#011039'}}>Profile Photo</p>
                 <p className="text-xs" style={{color: '#6B7280'}}>Click the camera icon to upload</p>
                 <p className="text-xs" style={{color: '#E76800'}}>Max size: 5MB • JPG, PNG, GIF</p>
               </div>
@@ -228,14 +228,14 @@ export default function AdminProfile() {
 
             <div className="space-y-6">
               <div className="bg-gray-50 p-4 rounded-lg">
-                <h3 className="text-sm font-semibold mb-4 flex items-center" style={{color: '#011039'}}>
+                <h3 className="text-sm font-bold mb-4 flex items-center" style={{color: '#011039'}}>
                   <User className="h-4 w-4 mr-2" style={{color: '#E76800'}} />
                   Account Information
                 </h3>
                 <div className="space-y-4">
                   {/* Username */}
                   <div>
-                    <label className="block text-sm font-medium mb-2" style={{ color: '#011039' }}>
+                    <label className="block text-sm font-bold mb-2" style={{ color: '#011039' }}>
                       Username <span className="text-red-500">*</span>
                     </label>
                     <div className="relative">
@@ -253,7 +253,7 @@ export default function AdminProfile() {
 
                   {/* Role (Read-only) */}
                   <div>
-                    <label className="block text-sm font-medium mb-2" style={{ color: '#011039' }}>
+                    <label className="block text-sm font-bold mb-2" style={{ color: '#011039' }}>
                       Role
                     </label>
                     <div className="relative">
@@ -270,14 +270,14 @@ export default function AdminProfile() {
               </div>
 
               <div className="bg-gray-50 p-4 rounded-lg">
-                <h3 className="text-sm font-semibold mb-4 flex items-center" style={{color: '#011039'}}>
+                <h3 className="text-sm font-bold mb-4 flex items-center" style={{color: '#011039'}}>
                   <Mail className="h-4 w-4 mr-2" style={{color: '#E76800'}} />
                   Personal Information
                 </h3>
                 <div className="space-y-4">
                   {/* Name */}
                   <div>
-                    <label className="block text-sm font-medium mb-2" style={{ color: '#011039' }}>
+                    <label className="block text-sm font-bold mb-2" style={{ color: '#011039' }}>
                       Full Name <span className="text-red-500">*</span>
                     </label>
                     <div className="relative">
@@ -295,7 +295,7 @@ export default function AdminProfile() {
 
                   {/* Email */}
                   <div>
-                    <label className="block text-sm font-medium mb-2" style={{ color: '#011039' }}>
+                    <label className="block text-sm font-bold mb-2" style={{ color: '#011039' }}>
                       Email Address <span className="text-red-500">*</span>
                     </label>
                     <div className="relative">
@@ -319,7 +319,7 @@ export default function AdminProfile() {
               <button
                 type="button"
                 onClick={() => setShowPasswordFields(!showPasswordFields)}
-                className="text-sm font-medium hover:underline flex items-center gap-2"
+                className="text-sm font-bold hover:underline flex items-center gap-2"
                 style={{ color: '#E76800' }}
               >
                 <Lock className="h-4 w-4" />
@@ -330,13 +330,13 @@ export default function AdminProfile() {
             {/* Password Fields */}
             {showPasswordFields && (
               <div className="bg-gray-50 p-4 rounded-lg">
-                <h3 className="text-sm font-semibold mb-4 flex items-center" style={{color: '#011039'}}>
+                <h3 className="text-sm font-bold mb-4 flex items-center" style={{color: '#011039'}}>
                   <Lock className="h-4 w-4 mr-2" style={{color: '#E76800'}} />
                   Change Password
                 </h3>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium mb-2" style={{ color: '#011039' }}>
+                    <label className="block text-sm font-bold mb-2" style={{ color: '#011039' }}>
                       Current Password <span className="text-red-500">*</span>
                     </label>
                     <div className="relative">
@@ -353,7 +353,7 @@ export default function AdminProfile() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2" style={{ color: '#011039' }}>
+                    <label className="block text-sm font-bold mb-2" style={{ color: '#011039' }}>
                       New Password <span className="text-red-500">*</span>
                     </label>
                     <div className="relative">
@@ -371,7 +371,7 @@ export default function AdminProfile() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2" style={{ color: '#011039' }}>
+                    <label className="block text-sm font-bold mb-2" style={{ color: '#011039' }}>
                       Confirm New Password <span className="text-red-500">*</span>
                     </label>
                     <div className="relative">
@@ -394,7 +394,7 @@ export default function AdminProfile() {
             <div className="flex gap-3 pt-6 border-t">
               <Button
                 type="submit"
-                className="flex-1 py-3 text-base font-semibold"
+                className="flex-1 py-3 text-base font-bold"
                 style={{backgroundColor: '#E76800', color: 'white'}}
                 disabled={updateProfileMutation.isPending}
               >

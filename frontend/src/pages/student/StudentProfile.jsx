@@ -214,7 +214,7 @@ export default function StudentProfile() {
                 </label>
               </div>
               <div className="text-center">
-                <p className="text-sm font-semibold mb-1" style={{color: '#011039'}}>Profile Photo</p>
+                <p className="text-sm font-bold mb-1" style={{color: '#011039'}}>Profile Photo</p>
                 <p className="text-xs" style={{color: '#6B7280'}}>Click the camera icon to upload</p>
                 <p className="text-xs" style={{color: '#E76800'}}>Max size: 5MB • JPG, PNG</p>
               </div>
@@ -222,13 +222,13 @@ export default function StudentProfile() {
 
             <div className="space-y-6">
               <div className="bg-gray-50 p-4 rounded-lg">
-                <h3 className="text-sm font-semibold mb-4 flex items-center" style={{color: '#011039'}}>
+                <h3 className="text-sm font-bold mb-4 flex items-center" style={{color: '#011039'}}>
                   <User className="h-4 w-4 mr-2" style={{color: '#E76800'}} />
                   Personal Information
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium mb-2" style={{color: '#011039'}}>
+                    <label className="block text-sm font-bold mb-2" style={{color: '#011039'}}>
                       Full Name <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -243,7 +243,7 @@ export default function StudentProfile() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2" style={{color: '#011039'}}>
+                    <label className="block text-sm font-bold mb-2" style={{color: '#011039'}}>
                       Phone Number <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -261,13 +261,13 @@ export default function StudentProfile() {
               </div>
 
               <div className="bg-gray-50 p-4 rounded-lg">
-                <h3 className="text-sm font-semibold mb-4 flex items-center" style={{color: '#011039'}}>
+                <h3 className="text-sm font-bold mb-4 flex items-center" style={{color: '#011039'}}>
                   <BookOpen className="h-4 w-4 mr-2" style={{color: '#E76800'}} />
                   Academic Information
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium mb-2" style={{color: '#011039'}}>
+                    <label className="block text-sm font-bold mb-2" style={{color: '#011039'}}>
                       Department <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -282,7 +282,7 @@ export default function StudentProfile() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium mb-2" style={{color: '#011039'}}>
+                    <label className="block text-sm font-bold mb-2" style={{color: '#011039'}}>
                       Year/Semester
                     </label>
                     <input
@@ -296,7 +296,7 @@ export default function StudentProfile() {
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium mb-2" style={{color: '#011039'}}>
+                    <label className="block text-sm font-bold mb-2" style={{color: '#011039'}}>
                       Course/Program
                     </label>
                     <input
@@ -312,7 +312,7 @@ export default function StudentProfile() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2" style={{color: '#011039'}}>
+                <label className="block text-sm font-bold mb-2" style={{color: '#011039'}}>
                   Address
                 </label>
                 <textarea
@@ -330,7 +330,7 @@ export default function StudentProfile() {
               <Button
                 type="submit"
                 disabled={loading}
-                className="flex-1 py-3 text-base font-semibold"
+                className="flex-1 py-3 text-base font-bold"
                 style={{backgroundColor: '#E76800', color: 'white'}}
               >
                 {loading ? (

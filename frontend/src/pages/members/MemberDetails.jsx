@@ -260,7 +260,7 @@ export default function MemberDetails() {
         <div className="bg-danger-50 border border-danger-200 rounded-lg p-4 flex items-start gap-3">
           <AlertCircle className="h-5 w-5 text-danger-600 mt-0.5" />
           <div>
-            <h3 className="text-sm font-semibold text-danger-900">Member Blocked</h3>
+            <h3 className="text-sm font-bold text-danger-900">Member Blocked</h3>
             <p className="text-sm text-danger-700 mt-1">{member.blockReason}</p>
           </div>
         </div>
@@ -269,7 +269,7 @@ export default function MemberDetails() {
         <div className="bg-warning-50 border border-warning-200 rounded-lg p-4 flex items-start gap-3">
           <AlertCircle className="h-5 w-5 text-warning-600 mt-0.5" />
           <div>
-            <h3 className="text-sm font-semibold text-warning-900">Membership Expired</h3>
+            <h3 className="text-sm font-bold text-warning-900">Membership Expired</h3>
             <p className="text-sm text-warning-700 mt-1">
               This membership expired on {format(new Date(member.validUntil), 'PPP')}
             </p>
@@ -333,37 +333,37 @@ export default function MemberDetails() {
           {/* Membership Details */}
           <Card>
             <div className="p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Membership Details</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Membership Details</h3>
               <div className="space-y-3">
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Member Type:</span>
-                  <span className="font-medium text-gray-900">{member.memberType}</span>
+                  <span className="font-bold text-gray-900">{member.memberType}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Department:</span>
-                  <span className="font-medium text-gray-900">{member.department}</span>
+                  <span className="font-bold text-gray-900">{member.department}</span>
                 </div>
                 {member.course && (
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600">Course:</span>
-                    <span className="font-medium text-gray-900">{member.course}</span>
+                    <span className="font-bold text-gray-900">{member.course}</span>
                   </div>
                 )}
                 {member.year && (
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600">Year:</span>
-                    <span className="font-medium text-gray-900">{member.year}</span>
+                    <span className="font-bold text-gray-900">{member.year}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Join Date:</span>
-                  <span className="font-medium text-gray-900">
+                  <span className="font-bold text-gray-900">
                     {format(new Date(member.joinDate), 'PP')}
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Valid Until:</span>
-                  <span className={`font-medium ${isExpired ? 'text-danger-600' : 'text-gray-900'}`}>
+                  <span className={`font-bold ${isExpired ? 'text-danger-600' : 'text-gray-900'}`}>
                     {format(new Date(member.validUntil), 'PP')}
                   </span>
                 </div>
@@ -415,7 +415,7 @@ export default function MemberDetails() {
           <Card>
             <div className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900">Currently Borrowed Books</h3>
+                <h3 className="text-lg font-bold text-gray-900">Currently Borrowed Books</h3>
                 <Badge>{member.currentBooks?.length || 0}</Badge>
               </div>
               {member.currentBooks && member.currentBooks.length > 0 ? (
@@ -425,7 +425,7 @@ export default function MemberDetails() {
                       <div>
                         <Link
                           to={`/admin/books/${transaction.bookId._id}`}
-                          className="font-medium text-primary-600 hover:text-primary-700"
+                          className="font-bold text-primary-600 hover:text-primary-700"
                         >
                           {transaction.bookId.title}
                         </Link>
@@ -456,7 +456,7 @@ export default function MemberDetails() {
             <Card>
               <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-gray-900">Outstanding Fines</h3>
+                  <h3 className="text-lg font-bold text-gray-900">Outstanding Fines</h3>
                   <div className="flex items-center gap-2">
                     <DollarSign className="h-5 w-5 text-danger-600" />
                     <span className="text-lg font-bold text-danger-600">
@@ -468,7 +468,7 @@ export default function MemberDetails() {
                   {member.outstandingFines.map((fine) => (
                     <div key={fine._id} className="flex items-center justify-between p-3 bg-danger-50 rounded-lg">
                       <div>
-                        <p className="font-medium text-gray-900">{fine.bookId?.title}</p>
+                        <p className="font-bold text-gray-900">{fine.bookId?.title}</p>
                         <p className="text-sm text-gray-600">{fine.reason}</p>
                       </div>
                       <div className="text-right">
@@ -487,7 +487,7 @@ export default function MemberDetails() {
           {member.notes && (
             <Card>
               <div className="p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Notes</h3>
+                <h3 className="text-lg font-bold text-gray-900 mb-4">Notes</h3>
                 <p className="text-sm text-gray-700 whitespace-pre-wrap">{member.notes}</p>
               </div>
             </Card>
@@ -566,7 +566,7 @@ export default function MemberDetails() {
           <div className="flex items-start gap-3 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
             <AlertCircle className="h-6 w-6 text-yellow-600 flex-shrink-0 mt-0.5" />
             <div className="flex-1">
-              <h4 className="font-semibold text-yellow-900 mb-2">
+              <h4 className="font-bold text-yellow-900 mb-2">
                 {activeBooksWarning.type === 'delete' ? 'Cannot Delete Member' : 'Member Has Borrowed Books'}
               </h4>
               <p className="text-sm text-yellow-800">
@@ -583,13 +583,13 @@ export default function MemberDetails() {
           {/* List of borrowed books */}
           {activeBooksWarning.bookDetails && activeBooksWarning.bookDetails.length > 0 && (
             <div className="space-y-2">
-              <h5 className="font-medium text-sm" style={{color: '#011039'}}>Active Borrowed Books:</h5>
+              <h5 className="font-bold text-sm" style={{color: '#011039'}}>Active Borrowed Books:</h5>
               <div className="max-h-48 overflow-y-auto space-y-2">
                 {activeBooksWarning.bookDetails.map((book, index) => (
                   <div key={index} className="p-3 bg-gray-50 border rounded-lg text-sm">
-                    <div className="font-medium" style={{color: '#011039'}}>{book.title}</div>
+                    <div className="font-bold" style={{color: '#011039'}}>{book.title}</div>
                     <div className="text-xs text-gray-600 mt-1">
-                      ISBN: {book.isbn} | Status: <span className={book.status === 'Overdue' ? 'text-red-600 font-semibold' : 'text-gray-700'}>{book.status}</span>
+                      ISBN: {book.isbn} | Status: <span className={book.status === 'Overdue' ? 'text-red-600 font-bold' : 'text-gray-700'}>{book.status}</span>
                     </div>
                     <div className="text-xs text-gray-500 mt-1">
                       Due: {new Date(book.dueDate).toLocaleDateString()}
@@ -628,7 +628,7 @@ export default function MemberDetails() {
               </p>
               {!blockModal.open && activeBooksWarning.open && (
                 <div className="mt-4">
-                  <label className="block text-sm font-medium mb-2" style={{color: '#011039'}}>
+                  <label className="block text-sm font-bold mb-2" style={{color: '#011039'}}>
                     Reason for blocking:
                   </label>
                   <textarea

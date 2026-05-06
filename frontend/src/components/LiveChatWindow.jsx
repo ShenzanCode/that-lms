@@ -334,7 +334,7 @@ export default function LiveChatWindow({ onClose, onUnreadCountChange }) {
       <div className="fixed bottom-6 right-24 z-50">
         <button
           onClick={() => setIsMinimized(false)}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg shadow-lg text-white font-medium"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg shadow-lg text-white font-bold"
           style={{ background: 'linear-gradient(135deg, #011039 0%, #E76800 100%)' }}
         >
           <MessageCircle className="h-4 w-4" />
@@ -358,7 +358,7 @@ export default function LiveChatWindow({ onClose, onUnreadCountChange }) {
       >
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-          <h3 className="font-semibold">Live Support</h3>
+          <h3 className="font-bold">Live Support</h3>
         </div>
         <div className="flex items-center gap-2">
           {!chatStarted ? (
@@ -381,7 +381,7 @@ export default function LiveChatWindow({ onClose, onUnreadCountChange }) {
               {session && (
                 <button
                   onClick={handleEndChat}
-                  className="flex items-center gap-1.5 px-3 py-1.5 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-md text-xs font-semibold transition-all duration-200 border border-white border-opacity-30"
+                  className="flex items-center gap-1.5 px-3 py-1.5 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-md text-xs font-bold transition-all duration-200 border border-white border-opacity-30"
                   title="End and delete this conversation"
                 >
                   <XCircle className="h-3.5 w-3.5" />
@@ -398,7 +398,7 @@ export default function LiveChatWindow({ onClose, onUnreadCountChange }) {
         {!chatStarted ? (
           <div className="flex flex-col items-center justify-center h-full text-center px-4">
             <MessageCircle className="h-16 w-16 text-gray-300 mb-4" />
-            <p className="text-gray-600 text-lg font-medium mb-2">
+            <p className="text-gray-600 text-lg font-bold mb-2">
               {hasExistingSession ? 'Welcome back!' : 'Welcome! How can we help you today?'}
             </p>
             <p className="text-gray-400 text-sm mb-6">
@@ -409,7 +409,7 @@ export default function LiveChatWindow({ onClose, onUnreadCountChange }) {
             <button
               onClick={handleStartChat}
               disabled={loading}
-              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-orange-500 text-white rounded-lg font-medium hover:from-blue-700 hover:to-orange-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-orange-500 text-white rounded-lg font-bold hover:from-blue-700 hover:to-orange-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 'Loading...'
@@ -466,7 +466,7 @@ export default function LiveChatWindow({ onClose, onUnreadCountChange }) {
                     }`}
                   >
                     {!isOwn && (
-                      <p className="text-xs font-semibold mb-1" style={{ color: '#011039' }}>
+                      <p className="text-xs font-bold mb-1" style={{ color: '#011039' }}>
                         {msg.senderName}
                       </p>
                     )}
@@ -502,7 +502,7 @@ export default function LiveChatWindow({ onClose, onUnreadCountChange }) {
         <div className="border-t border-gray-200 p-3 bg-white">
           {otherPartyLeft || memberLeft ? (
             <div className="text-center py-3 text-sm text-gray-500 bg-gray-50 rounded-lg">
-              <p className="font-medium">This conversation has ended</p>
+              <p className="font-bold">This conversation has ended</p>
               <p className="text-xs mt-1">No new messages can be sent</p>
             </div>
           ) : (
@@ -519,7 +519,7 @@ export default function LiveChatWindow({ onClose, onUnreadCountChange }) {
               <button
                 onClick={handleSendMessage}
                 disabled={!newMessage.trim() || sending || !session}
-                className="px-4 py-2 rounded-lg text-white font-medium transition disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 rounded-lg text-white font-bold transition disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{ background: newMessage.trim() ? '#E76800' : '#9CA3AF' }}
               >
                 <Send className="h-5 w-5" />

@@ -5,7 +5,7 @@ export const Input = forwardRef(({ className, type = 'text', error, label, ...pr
   return (
     <div className="w-full">
       {label && (
-        <label className="label block mb-1.5 text-sm font-medium" style={{color: '#011039'}}>
+        <label className="label block mb-1.5 text-sm font-bold" style={{color: '#011039'}}>
           {label}
           {props.required && <span className="text-danger-500 ml-1">*</span>}
         </label>

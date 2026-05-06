@@ -60,7 +60,7 @@ export default function BlockedPage() {
 
             {/* Message */}
             <div className="text-center mb-6 sm:mb-8">
-              <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4" style={{color: '#011039'}}>
+              <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4" style={{color: '#011039'}}>
                 Hi {student?.name},
               </h2>
               <p className="text-gray-700 mb-2 text-sm sm:text-base">
@@ -144,8 +144,8 @@ export default function BlockedPage() {
                           <Building2 className="h-5 w-5 sm:h-5.5 sm:w-5.5 md:h-6 md:w-6" style={{color: '#011039'}} />
                         </div>
                         <div className="flex-1 pt-0.5 sm:pt-1">
-                          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1.5 sm:mb-2">Library Name</p>
-                          <p className="text-base sm:text-lg font-semibold text-gray-900 break-words">
+                          <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5 sm:mb-2">Library Name</p>
+                          <p className="text-base sm:text-lg font-bold text-gray-900 break-words">
                             {librarySettings.libraryInfo.name}
                           </p>
                         </div>
@@ -162,10 +162,10 @@ export default function BlockedPage() {
                           <Phone className="h-5 w-5 sm:h-5.5 sm:w-5.5 md:h-6 md:w-6" style={{color: '#011039'}} />
                         </div>
                         <div className="flex-1 pt-0.5 sm:pt-1">
-                          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1.5 sm:mb-2">Phone Number</p>
+                          <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5 sm:mb-2">Phone Number</p>
                           <a 
                             href={`tel:${librarySettings.libraryInfo.phone}`}
-                            className="text-base sm:text-lg font-semibold hover:underline transition-colors inline-flex items-center gap-2 break-all"
+                            className="text-base sm:text-lg font-bold hover:underline transition-colors inline-flex items-center gap-2 break-all"
                             style={{color: '#E76800'}}
                           >
                             {librarySettings.libraryInfo.phone}
@@ -184,10 +184,10 @@ export default function BlockedPage() {
                           <Mail className="h-5 w-5 sm:h-5.5 sm:w-5.5 md:h-6 md:w-6" style={{color: '#011039'}} />
                         </div>
                         <div className="flex-1 pt-0.5 sm:pt-1">
-                          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1.5 sm:mb-2">Email Address</p>
+                          <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5 sm:mb-2">Email Address</p>
                           <a 
                             href={`mailto:${librarySettings.libraryInfo.email}`}
-                            className="text-base sm:text-lg font-semibold hover:underline transition-colors inline-flex items-center gap-2 break-all"
+                            className="text-base sm:text-lg font-bold hover:underline transition-colors inline-flex items-center gap-2 break-all"
                             style={{color: '#E76800'}}
                           >
                             {librarySettings.libraryInfo.email}
@@ -206,8 +206,8 @@ export default function BlockedPage() {
                           <Clock className="h-5 w-5 sm:h-5.5 sm:w-5.5 md:h-6 md:w-6" style={{color: '#011039'}} />
                         </div>
                         <div className="flex-1 pt-0.5 sm:pt-1">
-                          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1.5 sm:mb-2">Working Hours</p>
-                          <p className="text-base sm:text-lg font-semibold text-gray-900 break-words">
+                          <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5 sm:mb-2">Working Hours</p>
+                          <p className="text-base sm:text-lg font-bold text-gray-900 break-words">
                             {librarySettings.libraryInfo.workingHours}
                           </p>
                         </div>
@@ -224,8 +224,8 @@ export default function BlockedPage() {
                           <MapPin className="h-5 w-5 sm:h-5.5 sm:w-5.5 md:h-6 md:w-6" style={{color: '#011039'}} />
                         </div>
                         <div className="flex-1 pt-0.5 sm:pt-1">
-                          <p className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1.5 sm:mb-2">Address</p>
-                          <p className="text-base sm:text-lg font-semibold text-gray-900 break-words">
+                          <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5 sm:mb-2">Address</p>
+                          <p className="text-base sm:text-lg font-bold text-gray-900 break-words">
                             {librarySettings.libraryInfo.address}
                           </p>
                         </div>

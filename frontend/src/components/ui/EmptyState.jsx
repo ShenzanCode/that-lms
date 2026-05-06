@@ -15,7 +15,7 @@ export const EmptyState = ({
           <Icon className="w-full h-full" />
         </div>
       )}
-      <h3 className="text-lg font-semibold text-gray-900 mb-2">{title}</h3>
+      <h3 className="text-lg font-bold text-gray-900 mb-2">{title}</h3>
       {description && (
         <p className="text-center max-w-md mb-4" style={{color: '#011039'}}>{description}</p>
       )}
@@ -63,7 +63,7 @@ export const Alert = ({ variant = 'info', title, children, className }) => {
       <div className="flex gap-3">
         <Icon className={cn('h-5 w-5 flex-shrink-0', icon)} />
         <div className="flex-1">
-          {title && <h4 className={cn('font-medium mb-1', titleClass)}>{title}</h4>}
+          {title && <h4 className={cn('font-bold mb-1', titleClass)}>{title}</h4>}
           <div className={cn('text-sm', content)}>{children}</div>
         </div>
       </div>

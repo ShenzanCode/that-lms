@@ -129,7 +129,7 @@ export default function BookDetails() {
           {/* Availability Status */}
           <Card>
             <div className="p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Availability</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Availability</h3>
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600">Status:</span>
@@ -137,15 +137,15 @@ export default function BookDetails() {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600">Total Copies:</span>
-                  <span className="font-medium text-gray-900">{book.totalCopies}</span>
+                  <span className="font-bold text-gray-900">{book.totalCopies}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600">Available:</span>
-                  <span className="font-medium text-success-600">{book.availableCopies}</span>
+                  <span className="font-bold text-success-600">{book.availableCopies}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600">Issued:</span>
-                  <span className="font-medium text-warning-600">
+                  <span className="font-bold text-warning-600">
                     {book.totalCopies - book.availableCopies}
                   </span>
                 </div>
@@ -165,48 +165,48 @@ export default function BookDetails() {
           {/* Basic Information */}
           <Card>
             <div className="p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Book Information</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Book Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex items-start gap-3">
                   <Hash className="h-5 w-5 text-gray-400 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-600">Sr.No</p>
-                    <p className="font-medium text-gray-900">{book.accessionNumber || '-'}</p>
+                    <p className="font-bold text-gray-900">{book.accessionNumber || '-'}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <User className="h-5 w-5 text-gray-400 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-600">Author</p>
-                    <p className="font-medium text-gray-900">{book.author || '-'}</p>
+                    <p className="font-bold text-gray-900">{book.author || '-'}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <FileText className="h-5 w-5 text-gray-400 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-600">Edition</p>
-                    <p className="font-medium text-gray-900">{book.edition || '-'}</p>
+                    <p className="font-bold text-gray-900">{book.edition || '-'}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <Package className="h-5 w-5 text-gray-400 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-600">By Purchase</p>
-                    <p className="font-medium text-gray-900">{book.publisher || '-'}</p>
+                    <p className="font-bold text-gray-900">{book.publisher || '-'}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <Hash className="h-5 w-5 text-gray-400 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-600">DDC No</p>
-                    <p className="font-medium text-gray-900">{book.ddcNumber || '-'}</p>
+                    <p className="font-bold text-gray-900">{book.ddcNumber || '-'}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <DollarSign className="h-5 w-5 text-gray-400 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-600">Price</p>
-                    <p className="font-medium text-gray-900">
+                    <p className="font-bold text-gray-900">
                       {(() => {
                         if (book.price) {
                           return typeof book.price === 'number' ? `Rs. ${book.price.toFixed(2)}` : book.price;
@@ -225,28 +225,28 @@ export default function BookDetails() {
                   <BookOpen className="h-5 w-5 text-gray-400 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-600">Category</p>
-                    <p className="font-medium text-gray-900">{book.category || '-'}</p>
+                    <p className="font-bold text-gray-900">{book.category || '-'}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <MapPin className="h-5 w-5 text-gray-400 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-600">Shelf Location</p>
-                    <p className="font-medium text-gray-900">{book.shelfLocation || '-'}</p>
+                    <p className="font-bold text-gray-900">{book.shelfLocation || '-'}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <Calendar className="h-5 w-5 text-gray-400 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-600">Added Date</p>
-                    <p className="font-medium text-gray-900">{format(new Date(book.addedDate), 'PPP')}</p>
+                    <p className="font-bold text-gray-900">{format(new Date(book.addedDate), 'PPP')}</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <User className="h-5 w-5 text-gray-400 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-600">Added By</p>
-                    <p className="font-medium text-gray-900">{book.addedBy?.name || '-'}</p>
+                    <p className="font-bold text-gray-900">{book.addedBy?.name || '-'}</p>
                   </div>
                 </div>
               </div>
@@ -256,7 +256,7 @@ export default function BookDetails() {
           {/* Description */}
           <Card>
             <div className="p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Description</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Description</h3>
               <p className="text-gray-700 whitespace-pre-wrap">{book.description || '-'}</p>
             </div>
           </Card>
@@ -265,14 +265,14 @@ export default function BookDetails() {
           {book.issueHistory && book.issueHistory.length > 0 && (
             <Card>
               <div className="p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Issue History</h3>
+                <h3 className="text-lg font-bold text-gray-900 mb-4">Issue History</h3>
                 <div className="space-y-3">
                   {book.issueHistory.map((transaction) => (
                     <div key={transaction._id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                       <div>
                         <Link
                           to={`/admin/members/${transaction.memberId._id}`}
-                          className="font-medium text-primary-600 hover:text-primary-700"
+                          className="font-bold text-primary-600 hover:text-primary-700"
                         >
                           {transaction.memberId.name}
                         </Link>

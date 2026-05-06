@@ -9,15 +9,15 @@ export const Button = ({
   loading,
   ...props 
 }) => {
-  const baseStyles = 'btn inline-flex items-center justify-center gap-2 font-medium transition-all rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95'
+  const baseStyles = 'btn inline-flex items-center justify-center gap-2 font-bold transition-all rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95'
   
   const variants = {
     primary: 'bg-primary text-white hover:bg-primary/90 shadow-sm focus:ring-primary',
     secondary: 'bg-secondary text-white hover:bg-secondary/90 shadow-sm focus:ring-secondary',
     outline: 'border-2 border-secondary bg-transparent text-secondary hover:bg-secondary hover:text-white focus:ring-secondary',
     ghost: 'bg-transparent text-secondary hover:bg-secondary/10 focus:ring-secondary',
-    danger: 'bg-danger-500 text-white hover:bg-danger-600 focus:ring-danger-500',
-    success: 'bg-success-500 text-white hover:bg-success-600 focus:ring-success-500',
+    danger: 'bg-danger text-white hover:bg-danger/90 focus:ring-danger',
+    success: 'bg-success text-white hover:bg-success/90 focus:ring-success',
   }
   
   const sizes = {

@@ -174,7 +174,7 @@ export default function PublicCatalog() {
               <div className="flex flex-wrap gap-4">
                 <div className="w-full md:w-64">
                   <select
-                    className="w-full px-4 py-3.5 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-[#E76800] transition-all bg-slate-50 focus:bg-white text-slate-600 font-medium"
+                    className="w-full px-4 py-3.5 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-[#E76800] transition-all bg-slate-50 focus:bg-white text-slate-600 font-bold"
                     value={filters.category}
                     onChange={(e) => handleFilterChange('category', e.target.value)}
                   >
@@ -193,7 +193,7 @@ export default function PublicCatalog() {
 
                 <div className="w-full md:w-48">
                   <select
-                    className="w-full px-4 py-3.5 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-[#E76800] transition-all bg-slate-50 focus:bg-white text-slate-600 font-medium"
+                    className="w-full px-4 py-3.5 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-[#E76800] transition-all bg-slate-50 focus:bg-white text-slate-600 font-bold"
                     value={filters.status}
                     onChange={(e) => handleFilterChange('status', e.target.value)}
                   >
@@ -415,7 +415,7 @@ export default function PublicCatalog() {
                           </p>
                         </div>
                         <div className="bg-slate-50 border border-slate-100 rounded-lg p-4">
-                          <p className="text-slate-600 text-sm font-medium">To reserve this book, please log in to your student portal.</p>
+                          <p className="text-slate-600 text-sm font-bold">To reserve this book, please log in to your student portal.</p>
                         </div>
                       </div>
                     )}
@@ -456,7 +456,7 @@ export default function PublicCatalog() {
             <a href="/landing#books" className="hover:text-white transition-colors">Books</a>
             <Link to="/landing?auth=login&type=student" className="hover:text-white transition-colors">Portal</Link>
           </div>
-          <p className="text-xs text-slate-400 font-medium">© {new Date().getFullYear()} {libraryName}</p>
+          <p className="text-xs text-slate-400 font-bold">© {new Date().getFullYear()} {libraryName}</p>
         </div>
       </footer>
       <AuthModal 

@@ -309,22 +309,22 @@ export default function Fines() {
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
                     Member
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
                     Book
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
                     Reason
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
                     Amount
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
@@ -344,7 +344,7 @@ export default function Fines() {
                           <div className="text-sm">
                             <Link
                               to={`/admin/members/${fine.memberId?._id}`}
-                              className="font-medium text-primary-600 hover:text-primary-700"
+                              className="font-bold text-primary-600 hover:text-primary-700"
                             >
                               {fine.memberId?.name}
                             </Link>
@@ -359,7 +359,7 @@ export default function Fines() {
                         <div className="text-sm">
                           <Link
                             to={`/admin/books/${fine.bookId?._id}`}
-                            className="font-medium text-primary-600 hover:text-primary-700"
+                            className="font-bold text-primary-600 hover:text-primary-700"
                           >
                             {fine.bookId?.title}
                           </Link>
@@ -378,7 +378,7 @@ export default function Fines() {
                       </td>
                       <td className="px-6 py-4">
                         <div className="text-sm">
-                          <p className="font-medium" style={{color: '#011039'}}>Rs {fine.amount}</p>
+                          <p className="font-bold" style={{color: '#011039'}}>Rs {fine.amount}</p>
                           {fine.paidAmount > 0 && (
                             <p className="text-xs text-success-600">Paid: Rs {fine.paidAmount}</p>
                           )}
@@ -388,7 +388,7 @@ export default function Fines() {
                             </p>
                           )}
                           {outstanding > 0 && (
-                            <p className="text-xs text-danger-600 font-medium">
+                            <p className="text-xs text-danger-600 font-bold">
                               Due: Rs {outstanding}
                             </p>
                           )}
@@ -474,15 +474,15 @@ export default function Fines() {
             <div className="bg-gray-50 rounded-lg p-4 space-y-2">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Member:</span>
-                <span className="font-medium">{selectedFine.memberId?.name}</span>
+                <span className="font-bold">{selectedFine.memberId?.name}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Book:</span>
-                <span className="font-medium">{selectedFine.bookId?.title}</span>
+                <span className="font-bold">{selectedFine.bookId?.title}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Total Fine:</span>
-                <span className="font-medium">Rs {selectedFine.amount}</span>
+                <span className="font-bold">Rs {selectedFine.amount}</span>
               </div>
               {selectedFine.paidAmount > 0 && (
                 <div className="flex justify-between text-sm">
@@ -497,7 +497,7 @@ export default function Fines() {
                 </div>
               )}
               <div className="flex justify-between text-sm pt-2 border-t">
-                <span className="text-gray-600 font-medium">Outstanding:</span>
+                <span className="text-gray-600 font-bold">Outstanding:</span>
                 <span className="font-bold text-danger-600">
                   Rs {selectedFine.amount - selectedFine.paidAmount - selectedFine.waivedAmount}
                 </span>
@@ -506,7 +506,7 @@ export default function Fines() {
 
             {/* Payment Amount */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-bold text-gray-700 mb-2">
                 Payment Amount (Rs) *
               </label>
               <Input
@@ -525,7 +525,7 @@ export default function Fines() {
 
             {/* Payment Method */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-bold text-gray-700 mb-2">
                 Payment Method *
               </label>
               <select
@@ -578,11 +578,11 @@ export default function Fines() {
             <div className="bg-gray-50 rounded-lg p-4 space-y-2">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Member:</span>
-                <span className="font-medium">{selectedFine.memberId?.name}</span>
+                <span className="font-bold">{selectedFine.memberId?.name}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Book:</span>
-                <span className="font-medium">{selectedFine.bookId?.title}</span>
+                <span className="font-bold">{selectedFine.bookId?.title}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">Outstanding:</span>
@@ -601,7 +601,7 @@ export default function Fines() {
 
             {/* Waiver Amount */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-bold text-gray-700 mb-2">
                 Waiver Amount (Rs) *
               </label>
               <Input
@@ -617,7 +617,7 @@ export default function Fines() {
 
             {/* Waiver Reason */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-bold text-gray-700 mb-2">
                 Reason for Waiver *
               </label>
               <textarea

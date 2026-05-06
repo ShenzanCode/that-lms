@@ -199,7 +199,7 @@ export default function ReturnBook() {
         <Card>
           <CardContent className="py-12 text-center">
             <BookX className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No issued books found</h3>
+            <h3 className="text-lg font-bold text-gray-900 mb-2">No issued books found</h3>
             <p className="text-gray-500">
               {searchQuery
                 ? 'Try adjusting your search query'
@@ -225,7 +225,7 @@ export default function ReturnBook() {
                           <BookOpen className="h-6 w-6 text-primary-600" />
                         </div>
                         <div className="flex-1">
-                          <h3 className="text-lg font-semibold text-gray-900">
+                          <h3 className="text-lg font-bold text-gray-900">
                             {transaction.bookId?.title}
                           </h3>
                           <p className="text-sm text-gray-600 mt-1">
@@ -245,7 +245,7 @@ export default function ReturnBook() {
                       {/* Member Info */}
                       <div className="flex items-center gap-2 text-sm bg-gray-50 rounded-lg p-3">
                         <User className="h-4 w-4 text-gray-400" />
-                        <span className="font-medium text-gray-900">
+                        <span className="font-bold text-gray-900">
                           {transaction.memberId?.name}
                         </span>
                         <span className="text-gray-500">
@@ -260,13 +260,13 @@ export default function ReturnBook() {
                       <div className="grid grid-cols-3 gap-4 pt-3 border-t">
                         <div>
                           <p className="text-xs text-gray-500 mb-1">Issue Date</p>
-                          <p className="text-sm font-medium text-gray-900">
+                          <p className="text-sm font-bold text-gray-900">
                             {formatDate(transaction.issueDate)}
                           </p>
                         </div>
                         <div>
                           <p className="text-xs text-gray-500 mb-1">Due Date</p>
-                          <p className="text-sm font-medium text-gray-900">
+                          <p className="text-sm font-bold text-gray-900">
                             {formatDate(transaction.dueDate)}
                           </p>
                         </div>
@@ -283,7 +283,7 @@ export default function ReturnBook() {
                         <div className="flex items-start gap-3 bg-red-50 border border-red-200 rounded-lg p-3">
                           <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
                           <div className="flex-1">
-                            <p className="text-sm font-medium text-red-900">
+                            <p className="text-sm font-bold text-red-900">
                               Book is overdue
                             </p>
                             <p className="text-sm text-red-700 mt-1">
@@ -342,25 +342,25 @@ export default function ReturnBook() {
             <div className="bg-gray-50 rounded-lg p-4 space-y-2">
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600">Book:</span>
-                <span className="text-sm font-medium text-gray-900">
+                <span className="text-sm font-bold text-gray-900">
                   {selectedTransaction.bookId?.title}
                 </span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600">Member:</span>
-                <span className="text-sm font-medium text-gray-900">
+                <span className="text-sm font-bold text-gray-900">
                   {selectedTransaction.memberId?.name}
                 </span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600">Issue Date:</span>
-                <span className="text-sm font-medium text-gray-900">
+                <span className="text-sm font-bold text-gray-900">
                   {formatDate(selectedTransaction.issueDate)}
                 </span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-gray-600">Due Date:</span>
-                <span className="text-sm font-medium text-gray-900">
+                <span className="text-sm font-bold text-gray-900">
                   {formatDate(selectedTransaction.dueDate)}
                 </span>
               </div>
@@ -372,7 +372,7 @@ export default function ReturnBook() {
                 <div className="flex items-start gap-3">
                   <DollarSign className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
                   <div className="flex-1">
-                    <h4 className="text-sm font-semibold text-red-900 mb-1">
+                    <h4 className="text-sm font-bold text-red-900 mb-1">
                       Overdue Fine
                     </h4>
                     <p className="text-sm text-red-700">
@@ -400,7 +400,7 @@ export default function ReturnBook() {
                 <div className="flex items-start gap-3">
                   <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
                   <div className="flex-1">
-                    <h4 className="text-sm font-semibold text-red-900 mb-2">
+                    <h4 className="text-sm font-bold text-red-900 mb-2">
                       Outstanding Fines Must Be Paid
                     </h4>
                     <p className="text-sm text-red-700 mb-3">
@@ -410,7 +410,7 @@ export default function ReturnBook() {
                       {selectedTransaction.unpaidFines.map((fine, index) => (
                         <div key={index} className="bg-white rounded p-3 border border-red-200">
                           <div className="flex justify-between items-center">
-                            <span className="text-sm font-medium">
+                            <span className="text-sm font-bold">
                               {fine.reason} - {fine.description}
                             </span>
                             <span className="text-sm font-bold text-red-900">
@@ -422,7 +422,7 @@ export default function ReturnBook() {
                     </div>
                     <div className="mt-3 pt-3 border-t border-red-200">
                       <div className="flex justify-between items-center">
-                        <span className="text-sm font-semibold text-red-900">Total Outstanding:</span>
+                        <span className="text-sm font-bold text-red-900">Total Outstanding:</span>
                         <span className="text-lg font-bold text-red-900">
                           Rs {selectedTransaction.totalUnpaidFine}
                         </span>
@@ -445,7 +445,7 @@ export default function ReturnBook() {
 
             {/* Book Condition */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-bold text-gray-700 mb-2">
                 Book Condition
               </label>
               <div className="grid grid-cols-4 gap-2">
@@ -454,7 +454,7 @@ export default function ReturnBook() {
                     key={cond}
                     type="button"
                     onClick={() => setCondition(cond)}
-                    className={`px-4 py-2 text-sm font-medium rounded-lg border-2 transition-all ${
+                    className={`px-4 py-2 text-sm font-bold rounded-lg border-2 transition-all ${
                       condition === cond
                         ? 'border-primary-600 bg-primary-50 text-primary-700'
                         : 'border-gray-300 bg-white text-gray-700 hover:border-gray-400'
@@ -468,7 +468,7 @@ export default function ReturnBook() {
 
             {/* Notes */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-bold text-gray-700 mb-2">
                 Notes (Optional)
               </label>
               <textarea

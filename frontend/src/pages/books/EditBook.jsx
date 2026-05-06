@@ -210,7 +210,7 @@ export default function EditBook() {
           <div className="p-6 space-y-6">
             {/* Cover Image Upload */}
             <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700">
+              <label className="block mb-2 text-sm font-bold text-gray-700">
                 Book Cover Image
               </label>
               {!coverPreview ? (
@@ -219,7 +219,7 @@ export default function EditBook() {
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
                       <Upload className="w-10 h-10 mb-3 text-gray-400" />
                       <p className="mb-2 text-sm text-gray-500">
-                        <span className="font-semibold">Click to upload</span> or drag and drop
+                        <span className="font-bold">Click to upload</span> or drag and drop
                       </p>
                       <p className="text-xs text-gray-500">PNG, JPG or JPEG (MAX. 5MB)</p>
                     </div>
@@ -266,7 +266,7 @@ export default function EditBook() {
                       accept="image/*"
                       onChange={handleFileChange}
                     />
-                    <span className="px-4 py-2 text-sm font-medium text-primary-600 bg-primary-50 rounded-md hover:bg-primary-100 transition-colors">
+                    <span className="px-4 py-2 text-sm font-bold text-primary-600 bg-primary-50 rounded-md hover:bg-primary-100 transition-colors">
                       Change Image
                     </span>
                   </label>
@@ -276,7 +276,7 @@ export default function EditBook() {
 
             {/* Basic Information */}
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Basic Information</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Basic Information</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Input
                   label="Sr.No (Accession Number)"
@@ -322,10 +322,10 @@ export default function EditBook() {
 
             {/* Classification */}
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Classification</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Classification</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block mb-1.5 text-sm font-medium text-gray-700">
+                  <label className="block mb-1.5 text-sm font-bold text-gray-700">
                     Category <span className="text-danger-500 ml-1">*</span>
                   </label>
                   <select
@@ -374,7 +374,7 @@ export default function EditBook() {
 
             {/* Copies and Condition */}
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Copies & Condition</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Copies & Condition</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <Input
                   label="Total Copies"
@@ -396,7 +396,7 @@ export default function EditBook() {
                   required
                 />
                 <div>
-                  <label className="block mb-1.5 text-sm font-medium text-gray-700">
+                  <label className="block mb-1.5 text-sm font-bold text-gray-700">
                     Condition
                   </label>
                   <select
@@ -416,10 +416,10 @@ export default function EditBook() {
 
             {/* Additional Details */}
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Additional Details</h3>
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Additional Details</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block mb-1.5 text-sm font-medium text-gray-700">
+                  <label className="block mb-1.5 text-sm font-bold text-gray-700">
                     Price
                   </label>
                   <input
@@ -435,7 +435,7 @@ export default function EditBook() {
                   </p>
                 </div>
                 <div className="md:col-span-2">
-                  <label className="block mb-1.5 text-sm font-medium text-gray-700">
+                  <label className="block mb-1.5 text-sm font-bold text-gray-700">
                     Description
                   </label>
                   <textarea

@@ -160,28 +160,28 @@ export default function PendingApprovals() {
                         <Building2 className="h-4 w-4 text-gray-400" />
                         <div>
                           <p className="text-xs text-gray-500">{member.memberType === 'Student' ? 'Roll Number' : 'Employee ID'}</p>
-                          <p className="text-sm font-medium" style={{color: '#011039'}}>{member.memberId}</p>
+                          <p className="text-sm font-bold" style={{color: '#011039'}}>{member.memberId}</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
                         <Mail className="h-4 w-4 text-gray-400" />
                         <div>
                           <p className="text-xs text-gray-500">Email</p>
-                          <p className="text-sm font-medium" style={{color: '#011039'}}>{member.email}</p>
+                          <p className="text-sm font-bold" style={{color: '#011039'}}>{member.email}</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
                         <Phone className="h-4 w-4 text-gray-400" />
                         <div>
                           <p className="text-xs text-gray-500">Phone</p>
-                          <p className="text-sm font-medium" style={{color: '#011039'}}>{member.phone || 'N/A'}</p>
+                          <p className="text-sm font-bold" style={{color: '#011039'}}>{member.phone || 'N/A'}</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
                         <Building2 className="h-4 w-4 text-gray-400" />
                         <div>
                           <p className="text-xs text-gray-500">Department</p>
-                          <p className="text-sm font-medium" style={{color: '#011039'}}>{member.department}</p>
+                          <p className="text-sm font-bold" style={{color: '#011039'}}>{member.department}</p>
                         </div>
                       </div>
                       {member.subject && (
@@ -189,7 +189,7 @@ export default function PendingApprovals() {
                           <FileText className="h-4 w-4 text-gray-400" />
                           <div>
                             <p className="text-xs text-gray-500">Subject</p>
-                            <p className="text-sm font-medium" style={{color: '#011039'}}>{member.subject}</p>
+                            <p className="text-sm font-bold" style={{color: '#011039'}}>{member.subject}</p>
                           </div>
                         </div>
                       )}
@@ -198,7 +198,7 @@ export default function PendingApprovals() {
                           <Clock className="h-4 w-4 text-gray-400" />
                           <div>
                             <p className="text-xs text-gray-500">Semester</p>
-                            <p className="text-sm font-medium" style={{color: '#011039'}}>{member.semester}</p>
+                            <p className="text-sm font-bold" style={{color: '#011039'}}>{member.semester}</p>
                           </div>
                         </div>
                       )}
@@ -300,32 +300,32 @@ export default function PendingApprovals() {
             <div className="grid grid-cols-2 gap-3 text-sm mb-4">
               <div>
                 <p className="text-gray-500">Name:</p>
-                <p className="font-semibold" style={{color: '#011039'}}>{selectedMember?.name}</p>
+                <p className="font-bold" style={{color: '#011039'}}>{selectedMember?.name}</p>
               </div>
               <div>
                 <p className="text-gray-500">{selectedMember?.memberType === 'Student' ? 'Roll Number' : 'Employee ID'}:</p>
-                <p className="font-semibold" style={{color: '#011039'}}>{selectedMember?.memberId}</p>
+                <p className="font-bold" style={{color: '#011039'}}>{selectedMember?.memberId}</p>
               </div>
               <div>
                 <p className="text-gray-500">Department:</p>
-                <p className="font-semibold" style={{color: '#011039'}}>{selectedMember?.department}</p>
+                <p className="font-bold" style={{color: '#011039'}}>{selectedMember?.department}</p>
               </div>
               {selectedMember?.memberType === 'Student' ? (
                 <div>
                   <p className="text-gray-500">Semester:</p>
-                  <p className="font-semibold" style={{color: '#011039'}}>{selectedMember?.semester || 'N/A'}</p>
+                  <p className="font-bold" style={{color: '#011039'}}>{selectedMember?.semester || 'N/A'}</p>
                 </div>
               ) : (
                 <div>
                   <p className="text-gray-500">Designation:</p>
-                  <p className="font-semibold" style={{color: '#011039'}}>{selectedMember?.subject || 'N/A'}</p>
+                  <p className="font-bold" style={{color: '#011039'}}>{selectedMember?.subject || 'N/A'}</p>
                 </div>
               )}
             </div>
           </div>
 
           <div>
-            <p className="text-sm font-medium mb-2" style={{color: '#011039'}}>
+            <p className="text-sm font-bold mb-2" style={{color: '#011039'}}>
               Fee Challan / University Card:
             </p>
             {selectedMember?.document ? (

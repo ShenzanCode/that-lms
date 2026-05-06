@@ -99,7 +99,7 @@ export default function TestNotifications() {
 
       <Card>
         <div className="p-6">
-          <h2 className="text-lg font-semibold mb-4">
+          <h2 className="text-lg font-bold mb-4">
             Notifications in Service ({notifications.length})
           </h2>
           
@@ -114,7 +114,7 @@ export default function TestNotifications() {
                 >
                   <div className="flex justify-between items-start">
                     <div>
-                      <h3 className="font-semibold text-gray-900">
+                      <h3 className="font-bold text-gray-900">
                         {notification.title}
                       </h3>
                       <p className="text-sm text-gray-600 mt-1">
@@ -136,7 +136,7 @@ export default function TestNotifications() {
 
       <Card>
         <div className="p-6">
-          <h2 className="text-lg font-semibold mb-4">Raw localStorage Data</h2>
+          <h2 className="text-lg font-bold mb-4">Raw localStorage Data</h2>
           <pre className="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-xs">
             {rawStorage === 'null' ? 'null' : JSON.stringify(JSON.parse(rawStorage), null, 2)}
           </pre>

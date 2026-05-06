@@ -177,7 +177,7 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login', init
                 onChange={handleChange}
                 placeholder="Enter username"
                 required
-                className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-orange-500 transition-all placeholder:text-slate-300 font-medium"
+                className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-orange-500 transition-all placeholder:text-slate-300 font-bold"
               />
             </div>
           </div>
@@ -194,7 +194,7 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login', init
                   onChange={handleChange}
                   placeholder="name@university.edu"
                   required
-                  className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-orange-500 transition-all placeholder:text-slate-300 font-medium"
+                  className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-orange-500 transition-all placeholder:text-slate-300 font-bold"
                 />
               </div>
             </div>
@@ -211,7 +211,7 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login', init
                 onChange={handleChange}
                 placeholder="••••••••"
                 required
-                className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-orange-500 transition-all placeholder:text-slate-300 font-medium"
+                className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-orange-500 transition-all placeholder:text-slate-300 font-bold"
               />
             </div>
           </div>
@@ -228,7 +228,7 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login', init
                   onChange={handleChange}
                   placeholder="••••••••"
                   required
-                  className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-orange-500 transition-all placeholder:text-slate-300 font-medium"
+                  className="w-full pl-12 pr-4 py-3.5 bg-slate-50 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-orange-500 transition-all placeholder:text-slate-300 font-bold"
                 />
               </div>
             </div>

@@ -370,7 +370,7 @@ export default function LiveChatSupport() {
                 <div className="flex gap-2 border-b border-gray-200">
                   <button
                     onClick={() => setActiveTab('active')}
-                    className={`flex-1 px-4 py-2 text-sm font-medium transition-colors relative ${
+                    className={`flex-1 px-4 py-2 text-sm font-bold transition-colors relative ${
                       activeTab === 'active'
                         ? 'text-orange-600 border-b-2 border-orange-600'
                         : 'text-gray-600 hover:text-gray-900'
@@ -385,7 +385,7 @@ export default function LiveChatSupport() {
                   </button>
                   <button
                     onClick={() => setActiveTab('closed')}
-                    className={`flex-1 px-4 py-2 text-sm font-medium transition-colors relative ${
+                    className={`flex-1 px-4 py-2 text-sm font-bold transition-colors relative ${
                       activeTab === 'closed'
                         ? 'text-orange-600 border-b-2 border-orange-600'
                         : 'text-gray-600 hover:text-gray-900'
@@ -421,7 +421,7 @@ export default function LiveChatSupport() {
               ) : filteredSessions.length === 0 ? (
                 <div className="text-center p-8 text-gray-500">
                   <MessageCircle className="h-12 w-12 mx-auto mb-3 text-gray-300" />
-                  <p className="font-medium">
+                  <p className="font-bold">
                     {activeTab === 'active' ? 'No active chats' : 'No closed chats'}
                   </p>
                   <p className="text-sm text-gray-400 mt-1">
@@ -445,7 +445,7 @@ export default function LiveChatSupport() {
                           onClick={() => handleSelectSession(session)}
                         >
                           <div className="flex items-center gap-2">
-                            <p className="font-medium text-gray-900 truncate">{session.memberName}</p>
+                            <p className="font-bold text-gray-900 truncate">{session.memberName}</p>
                             {session.unreadCountAdmin > 0 && (
                               <span className="flex items-center justify-center px-2 py-0.5 bg-red-500 text-white text-xs rounded-full">
                                 {session.unreadCountAdmin}
@@ -537,7 +537,7 @@ export default function LiveChatSupport() {
                             }`}
                           >
                             {!isOwn && (
-                              <p className="text-xs font-semibold mb-1" style={{ color: '#011039' }}>
+                              <p className="text-xs font-bold mb-1" style={{ color: '#011039' }}>
                                 {msg.senderName}
                               </p>
                             )}
@@ -575,7 +575,7 @@ export default function LiveChatSupport() {
               <div className="border-t p-4 bg-white">
                 {memberLeft || adminLeft ? (
                   <div className="text-center py-3 text-sm text-gray-500 bg-gray-50 rounded-lg">
-                    <p className="font-medium">This conversation has ended</p>
+                    <p className="font-bold">This conversation has ended</p>
                     <p className="text-xs mt-1">No new messages can be sent</p>
                   </div>
                 ) : (

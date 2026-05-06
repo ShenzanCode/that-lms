@@ -101,29 +101,67 @@ function DashboardContent() {
   ]
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-10">
       {/* Page Header */}
-      <div>
-        <h1 className="text-3xl font-bold" style={{color: '#011039'}}>Dashboard</h1>
-        <p className="mt-1" style={{color: '#011039'}}>Welcome to Library Management System</p>
+      <div className="relative overflow-hidden bg-secondary rounded-2xl p-8 sm:p-12 text-white shadow-2xl">
+        <div className="relative z-10">
+          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+            Admin Dashboard
+          </h1>
+          <p className="text-slate-300 mt-3 text-lg max-w-2xl leading-relaxed font-bold">
+            Welcome back to the Library Management System. Monitor your library's performance and manage your resources efficiently.
+          </p>
+          <div className="flex flex-wrap gap-4 mt-8">
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10">
+              <Calendar className="h-4 w-4 text-primary" />
+              <span className="text-sm font-bold">{formatDate(new Date())}</span>
+            </div>
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10">
+              <TrendingUp className="h-4 w-4 text-primary" />
+              <span className="text-sm font-bold">System Status: Healthy</span>
+            </div>
+          </div>
+        </div>
+        
+        {/* Abstract Background Shapes */}
+        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-64 h-64 bg-blue-500/10 rounded-full blur-2xl"></div>
       </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {statCards.map((stat) => {
+        {statCards.map((stat, idx) => {
           const Icon = stat.icon
+          const bgColors = {
+            primary: 'bg-orange-50',
+            secondary: 'bg-blue-50',
+            warning: 'bg-orange-50',
+            danger: 'bg-red-50'
+          }
+          const iconColors = {
+            primary: '#E76800',
+            secondary: '#011039',
+            warning: '#E76800',
+            danger: '#DC3545'
+          }
+          
           return (
             <Link key={stat.title} to={stat.link}>
-              <Card className="hover:shadow-lg transition-shadow cursor-pointer">
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between">
+              <Card className="border-none shadow-sm hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden group cursor-pointer h-full">
+                <CardContent className="p-8">
+                  <div className="flex justify-between items-start">
                     <div>
-                      <p className="text-sm font-medium" style={{color: '#011039'}}>{stat.title}</p>
-                      <p className="text-3xl font-bold mt-2" style={{color: '#011039'}}>{stat.value}</p>
-                      <p className="text-sm mt-1" style={{color: '#011039'}}>{stat.subtitle}</p>
+                      <p className="text-xs font-black text-slate-400 uppercase tracking-widest">{stat.title}</p>
+                      <p className="text-3xl font-black mt-2 transition-transform origin-left duration-500 group-hover:scale-110" style={{ color: iconColors[stat.color] }}>
+                        {stat.value}
+                      </p>
+                      <p className="text-xs font-bold text-slate-500 mt-2 flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: iconColors[stat.color] }}></span>
+                        {stat.subtitle}
+                      </p>
                     </div>
-                    <div className={`w-12 h-12 rounded-full flex items-center justify-center`} style={{backgroundColor: stat.color === 'primary' ? '#E76800' : stat.color === 'secondary' ? '#011039' : stat.color === 'warning' ? '#E76800' : '#E76800'}}>
-                      <Icon className="h-6 w-6 text-white" />
+                    <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${bgColors[stat.color]} transition-all duration-500 group-hover:rotate-6 shadow-inner`}>
+                      <Icon className="h-7 w-7" style={{ color: iconColors[stat.color] }} />
                     </div>
                   </div>
                 </CardContent>
@@ -134,169 +172,175 @@ function DashboardContent() {
       </div>
 
       {/* Quick Actions & Today's Activity */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Quick Actions */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
+        <Card className="border-none shadow-sm rounded-xl overflow-hidden bg-white">
+          <CardHeader className="border-b border-slate-50 pb-4">
+            <CardTitle className="text-xl font-extrabold text-[#011039]">Quick Actions</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-6">
             <div className="grid grid-cols-2 gap-4">
-              <Link
-                to="/admin/transactions/issue"
-                className="p-4 border-2 border-dashed rounded-lg transition-all group hover:bg-orange-50"
-                style={{borderColor: '#E76800'}}
-              >
-                <BookCheck className="h-8 w-8 mb-2 group-hover:text-white" style={{color: '#E76800'}} />
-                <p className="font-medium" style={{color: '#011039'}}>Issue Book</p>
-                <p className="text-sm" style={{color: '#011039'}}>Lend a book</p>
-              </Link>
-              <Link
-                to="/admin/transactions/return"
-                className="p-4 border-2 border-dashed rounded-lg transition-all group hover:bg-orange-50"
-                style={{borderColor: '#E76800'}}
-              >
-                <BookOpen className="h-8 w-8 mb-2 group-hover:text-white" style={{color: '#E76800'}} />
-                <p className="font-medium" style={{color: '#011039'}}>Return Book</p>
-                <p className="text-sm" style={{color: '#011039'}}>Process return</p>
-              </Link>
-              <Link
-                to="/admin/books/add"
-                className="p-4 border-2 border-dashed rounded-lg transition-all group hover:bg-orange-50"
-                style={{borderColor: '#E76800'}}
-              >
-                <BookOpen className="h-8 w-8 mb-2 group-hover:text-white" style={{color: '#E76800'}} />
-                <p className="font-medium" style={{color: '#011039'}}>Add Book</p>
-                <p className="text-sm" style={{color: '#011039'}}>New book entry</p>
-              </Link>
-              <Link
-                to="/admin/members/add"
-                className="p-4 border-2 border-dashed rounded-lg transition-all group hover:bg-orange-50"
-                style={{borderColor: '#E76800'}}
-              >
-                <Users className="h-8 w-8 mb-2 group-hover:text-white" style={{color: '#E76800'}} />
-                <p className="font-medium" style={{color: '#011039'}}>Add Member</p>
-                <p className="text-sm text-gray-500">Register member</p>
-              </Link>
+              {[
+                { to: "/admin/transactions/issue", icon: BookCheck, label: "Issue Book", sub: "Lend a book", color: "#E76800" },
+                { to: "/admin/transactions/return", icon: BookOpen, label: "Return Book", sub: "Process return", color: "#011039" },
+                { to: "/admin/books/add", icon: BookOpen, label: "Add Book", sub: "New book entry", color: "#E76800" },
+                { to: "/admin/members/add", icon: Users, label: "Add Member", sub: "Register member", color: "#011039" }
+              ].map((action, i) => (
+                <Link
+                  key={i}
+                  to={action.to}
+                  className="p-4 rounded-xl border-2 border-transparent bg-slate-50 hover:bg-white hover:border-slate-100 hover:shadow-lg transition-all group text-center flex flex-col items-center justify-center"
+                >
+                  <div className="w-12 h-12 rounded-lg bg-white shadow-sm flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <action.icon className="h-6 w-6" style={{ color: action.color }} />
+                  </div>
+                  <p className="font-bold text-[#011039]">{action.label}</p>
+                  <p className="text-[10px] font-bold text-slate-400 uppercase mt-1">{action.sub}</p>
+                </Link>
+              ))}
             </div>
           </CardContent>
         </Card>
 
         {/* Today's Activity */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Calendar className="h-5 w-5" style={{color: '#E76800'}} />
+        <Card className="border-none shadow-sm rounded-xl overflow-hidden bg-white">
+          <CardHeader className="border-b border-slate-50 pb-4">
+            <CardTitle className="flex items-center gap-2 text-xl font-extrabold text-[#011039]">
+              <Calendar className="h-5 w-5 text-[#E76800]" />
               Today's Activity
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-6">
             <div className="space-y-4">
-              <div className="flex items-center justify-between p-3 rounded-lg" style={{backgroundColor: '#FFF3E6'}}>
-                <div>
-                  <p className="text-sm font-medium" style={{color: '#011039'}}>Books Issued</p>
-                  <p className="text-2xl font-bold" style={{color: '#E76800'}}>{stats?.today?.issued || 0}</p>
+              <div className="flex items-center justify-between p-4 rounded-xl bg-orange-50/50 border border-orange-100/50">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-white shadow-sm flex items-center justify-center">
+                    <TrendingUp className="h-5 w-5 text-[#E76800]" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Books Issued</p>
+                    <p className="text-2xl font-black text-[#011039]">{stats?.today?.issued || 0}</p>
+                  </div>
                 </div>
-                <TrendingUp className="h-8 w-8" style={{color: '#E76800'}} />
+                <div className="px-3 py-1 bg-[#E76800]/10 rounded-full">
+                   <span className="text-[10px] font-black text-[#E76800] uppercase">Today</span>
+                </div>
               </div>
-              <div className="flex items-center justify-between p-3 rounded-lg" style={{backgroundColor: '#E8EDF5'}}>
-                <div>
-                  <p className="text-sm font-medium" style={{color: '#011039'}}>Books Returned</p>
-                  <p className="text-2xl font-bold" style={{color: '#011039'}}>{stats?.today?.returned || 0}</p>
+              
+              <div className="flex items-center justify-between p-4 rounded-xl bg-blue-50/50 border border-blue-100/50">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-white shadow-sm flex items-center justify-center">
+                    <BookOpen className="h-5 w-5 text-[#011039]" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Books Returned</p>
+                    <p className="text-2xl font-black text-[#011039]">{stats?.today?.returned || 0}</p>
+                  </div>
                 </div>
-                <BookOpen className="h-8 w-8" style={{color: '#011039'}} />
+                <div className="px-3 py-1 bg-[#011039]/10 rounded-full">
+                   <span className="text-[10px] font-black text-[#011039] uppercase">Today</span>
+                </div>
               </div>
-              <div className="flex items-center justify-between p-3 rounded-lg" style={{backgroundColor: '#FFF3E6'}}>
-                <div>
-                  <p className="text-sm font-medium" style={{color: '#011039'}}>Pending Reservations</p>
-                  <p className="text-2xl font-bold" style={{color: '#E76800'}}>{stats?.pendingReservations || 0}</p>
+
+              <div className="flex items-center justify-between p-4 rounded-xl bg-red-50/50 border border-red-100/50">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-white shadow-sm flex items-center justify-center">
+                    <AlertCircle className="h-5 w-5 text-red-500" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Pending Reservations</p>
+                    <p className="text-2xl font-black text-[#011039]">{stats?.pendingReservations || 0}</p>
+                  </div>
                 </div>
-                <AlertCircle className="h-8 w-8" style={{color: '#E76800'}} />
+                <div className="px-3 py-1 bg-red-500/10 rounded-full">
+                   <span className="text-[10px] font-black text-red-500 uppercase">Action</span>
+                </div>
               </div>
             </div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Reset Data Section */}
-      <Card className="border-red-200">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-red-600">
-            <Trash2 className="h-5 w-5" />
-            Data Management
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium text-gray-900">Reset All Data</p>
-              <p className="text-sm text-gray-500 mt-1">
-                Remove all fines, reservations, and issued books data. This action cannot be undone.
-              </p>
-            </div>
-            <Button
-              onClick={() => setShowResetModal(true)}
-              variant="danger"
-              className="whitespace-nowrap"
-            >
-              <Trash2 className="h-4 w-4 mr-2" />
-              Reset Data
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-
       {/* Recent Transactions & Borrowing Trend */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Recent Transactions */}
-        <Card>
-          <CardHeader>
+        <Card className="border-none shadow-sm rounded-xl overflow-hidden bg-white">
+          <CardHeader className="border-b border-slate-50 pb-4">
             <div className="flex items-center justify-between">
-              <CardTitle>Recent Transactions</CardTitle>
-              <Link to="/admin/transactions/issued" className="text-sm text-primary-600 hover:text-primary-700 font-medium flex items-center gap-1">
+              <CardTitle className="text-xl font-extrabold text-[#011039]">Recent Transactions</CardTitle>
+              <Link to="/admin/transactions/issued" className="text-xs font-black uppercase tracking-widest text-[#E76800] hover:translate-x-1 transition-transform flex items-center gap-1">
                 View All
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
+          <CardContent className="p-0">
+            <div className="divide-y divide-slate-50">
               {stats?.recentTransactions?.slice(0, 5).map((transaction) => (
-                <div key={transaction._id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium truncate" style={{color: '#011039'}}>
-                      {transaction.bookId?.title}
-                    </p>
-                    <p className="text-xs text-gray-500">
-                      {transaction.memberId?.name} • {formatDate(transaction.issueDate)}
-                    </p>
+                <div key={transaction._id} className="flex items-center justify-between p-6 hover:bg-slate-50 transition-colors">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-[#011039]">
+                      {transaction.memberId?.name?.charAt(0)}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-extrabold text-[#011039] truncate">
+                        {transaction.bookId?.title}
+                      </p>
+                      <p className="text-xs font-bold text-slate-400">
+                        {transaction.memberId?.name} • {formatDate(transaction.issueDate)}
+                      </p>
+                    </div>
                   </div>
                   <StatusBadge status={transaction.status} />
                 </div>
               )) || (
-                <p className="text-center text-gray-500 py-4">No recent transactions</p>
+                <div className="text-center py-12">
+                  <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <BookCheck className="h-8 w-8 text-slate-200" />
+                  </div>
+                  <p className="text-slate-500 font-bold">No recent transactions</p>
+                </div>
               )}
             </div>
           </CardContent>
         </Card>
 
         {/* Borrowing Trend */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Borrowing Trend (Last 7 Days)</CardTitle>
+        <Card className="border-none shadow-sm rounded-xl overflow-hidden bg-white">
+          <CardHeader className="border-b border-slate-50 pb-4">
+            <CardTitle className="text-xl font-extrabold text-[#011039]">Borrowing Trend</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-8">
             {stats?.borrowingTrend && stats.borrowingTrend.length > 0 ? (
-              <ResponsiveContainer width="100%" height={200}>
+              <ResponsiveContainer width="100%" height={250}>
                 <LineChart data={stats.borrowingTrend}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-                  <XAxis dataKey="_id" tick={{ fontSize: 12 }} stroke="#011039" />
-                  <YAxis stroke="#011039" />
-                  <Tooltip
-                    contentStyle={{ backgroundColor: '#fff', border: '1px solid #E76800' }}
-                    labelStyle={{ color: '#011039' }}
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F1F5F9" />
+                  <XAxis 
+                    dataKey="_id" 
+                    tick={{ fontSize: 10, fontWeight: 700, fill: '#64748B' }} 
+                    axisLine={false}
+                    tickLine={false}
+                    dy={10}
                   />
-                  <Line type="monotone" dataKey="count" stroke="#E76800" strokeWidth={3} dot={{ fill: '#E76800', r: 4 }} />
+                  <YAxis 
+                    tick={{ fontSize: 10, fontWeight: 700, fill: '#64748B' }} 
+                    axisLine={false}
+                    tickLine={false}
+                    dx={-10}
+                  />
+                  <Tooltip
+                    contentStyle={{ backgroundColor: '#fff', border: 'none', borderRadius: '12px', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
+                    itemStyle={{ fontSize: '12px', fontWeight: 800, color: '#011039' }}
+                    labelStyle={{ fontSize: '10px', fontWeight: 800, color: '#64748B', marginBottom: '4px' }}
+                  />
+                  <Line 
+                    type="monotone" 
+                    dataKey="count" 
+                    stroke="#E76800" 
+                    strokeWidth={4} 
+                    dot={{ fill: '#E76800', r: 6, strokeWidth: 2, stroke: '#fff' }} 
+                    activeDot={{ r: 8, strokeWidth: 0 }}
+                  />
                 </LineChart>
               </ResponsiveContainer>
             ) : (
@@ -307,27 +351,71 @@ function DashboardContent() {
       </div>
 
       {/* Popular Categories */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Popular Categories</CardTitle>
+      <Card className="border-none shadow-sm rounded-xl overflow-hidden bg-white">
+        <CardHeader className="border-b border-slate-50 pb-4">
+          <CardTitle className="text-xl font-extrabold text-[#011039]">Popular Categories</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-8">
           {stats?.popularCategories && stats.popularCategories.length > 0 ? (
-            <ResponsiveContainer width="100%" height={250}>
+            <ResponsiveContainer width="100%" height={300}>
               <BarChart data={stats.popularCategories}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-                <XAxis dataKey="_id" stroke="#011039" />
-                <YAxis stroke="#011039" />
-                <Tooltip
-                  contentStyle={{ backgroundColor: '#fff', border: '1px solid #E76800' }}
-                  labelStyle={{ color: '#011039' }}
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F1F5F9" />
+                <XAxis 
+                  dataKey="_id" 
+                  tick={{ fontSize: 10, fontWeight: 700, fill: '#64748B' }} 
+                  axisLine={false}
+                  tickLine={false}
+                  dy={10}
                 />
-                <Bar dataKey="count" fill="#E76800" radius={[8, 8, 0, 0]} />
+                <YAxis 
+                  tick={{ fontSize: 10, fontWeight: 700, fill: '#64748B' }} 
+                  axisLine={false}
+                  tickLine={false}
+                  dx={-10}
+                />
+                <Tooltip
+                  contentStyle={{ backgroundColor: '#fff', border: 'none', borderRadius: '12px', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
+                  itemStyle={{ fontSize: '12px', fontWeight: 800, color: '#011039' }}
+                  labelStyle={{ fontSize: '10px', fontWeight: 800, color: '#64748B', marginBottom: '4px' }}
+                />
+                <Bar 
+                  dataKey="count" 
+                  fill="#E76800" 
+                  radius={[6, 6, 0, 0]} 
+                  barSize={40}
+                />
               </BarChart>
             </ResponsiveContainer>
           ) : (
             <p className="text-center text-gray-500 py-8">No data available</p>
           )}
+        </CardContent>
+      </Card>
+
+      {/* Reset Data Section */}
+      <Card className="border-2 border-dashed border-red-100 bg-red-50/30 rounded-xl overflow-hidden">
+        <CardContent className="p-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-6 text-center md:text-left">
+              <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center shrink-0">
+                <Trash2 className="h-8 w-8 text-red-600" />
+              </div>
+              <div>
+                <h3 className="text-xl font-extrabold text-red-900">System Reset</h3>
+                <p className="text-red-700/70 text-sm font-bold mt-1">
+                  Permanently remove all fines, reservations, and transaction history. Use with extreme caution.
+                </p>
+              </div>
+            </div>
+            <Button
+              onClick={() => setShowResetModal(true)}
+              variant="danger"
+              className="h-14 px-8 rounded-xl shadow-lg shadow-red-500/20 font-extrabold whitespace-nowrap"
+            >
+              <Trash2 className="h-5 w-5 mr-2" />
+              Reset All Data
+            </Button>
+          </div>
         </CardContent>
       </Card>
 
@@ -342,7 +430,7 @@ function DashboardContent() {
             <div className="flex items-start gap-3">
               <AlertCircle className="h-5 w-5 text-red-600 mt-0.5" />
               <div>
-                <p className="font-medium text-red-900">Warning: This action cannot be undone</p>
+                <p className="font-bold text-red-900">Warning: This action cannot be undone</p>
                 <p className="text-sm text-red-700 mt-1">
                   This will permanently delete:
                 </p>

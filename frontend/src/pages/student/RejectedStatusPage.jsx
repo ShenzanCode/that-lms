@@ -70,7 +70,7 @@ export default function RejectedStatusPage() {
               <div className="flex items-start gap-3 text-left">
                 <AlertTriangle className="h-5 w-5 mt-0.5 text-red-500" />
                 <div>
-                  <p className="font-medium text-red-900">Rejection Reason:</p>
+                  <p className="font-bold text-red-900">Rejection Reason:</p>
                   <p className="text-sm text-red-700 mt-1">
                     {student.rejectionReason}
                   </p>

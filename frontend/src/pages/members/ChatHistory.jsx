@@ -417,7 +417,7 @@ export default function ChatHistory() {
                               </span>
                             )}
                           </div>
-                          <p className={`text-xs truncate ${selectedSession?._id === session._id ? 'text-slate-600 font-bold' : 'text-slate-400 font-medium'}`}>
+                          <p className={`text-xs truncate ${selectedSession?._id === session._id ? 'text-slate-600 font-bold' : 'text-slate-400 font-bold'}`}>
                             {session.lastMessage || 'Starting conversation...'}
                           </p>
                           <p className="text-[10px] text-slate-300 font-bold mt-2 uppercase tracking-tight">
@@ -514,7 +514,7 @@ export default function ChatHistory() {
                                 {msg.senderName}
                               </p>
                             )}
-                            <p className="text-sm leading-relaxed font-medium whitespace-pre-wrap break-words">{msg.message}</p>
+                            <p className="text-sm leading-relaxed font-bold whitespace-pre-wrap break-words">{msg.message}</p>
                             <div className={`flex items-center gap-2 mt-4 pt-3 border-t ${isOwn ? 'border-slate-50' : 'border-white/10'}`}>
                               <p className={`text-[10px] font-black uppercase tracking-tighter ${isOwn ? 'text-slate-300' : 'text-white/40'}`}>
                                 {new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -573,7 +573,7 @@ export default function ChatHistory() {
                     </div>
                 </div>
                 <h3 className="text-xl font-extrabold text-[#011039]">Select a conversation</h3>
-                <p className="text-sm font-medium text-slate-400 mt-3 leading-relaxed">
+                <p className="text-sm font-bold text-slate-400 mt-3 leading-relaxed">
                     Pick a discussion from the list to view the full message history and resolution status.
                 </p>
               </div>

@@ -171,7 +171,7 @@ export default function Settings() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-gray-700 mb-2">
                   Library Name
                 </label>
                 <Input
@@ -181,7 +181,7 @@ export default function Settings() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-gray-700 mb-2">
                   Phone Number
                 </label>
                 <Input
@@ -191,7 +191,7 @@ export default function Settings() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-gray-700 mb-2">
                   Email Address
                 </label>
                 <Input
@@ -202,7 +202,7 @@ export default function Settings() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-gray-700 mb-2">
                   Working Hours
                 </label>
                 <Input
@@ -212,7 +212,7 @@ export default function Settings() {
                 />
               </div>
               <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-gray-700 mb-2">
                   Address
                 </label>
                 <Input
@@ -236,7 +236,7 @@ export default function Settings() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-gray-700 mb-2">
                   Student
                 </label>
                 <Input
@@ -248,7 +248,7 @@ export default function Settings() {
                 <p className="text-xs mt-1" style={{color: '#011039'}}>Default loan period for students</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-gray-700 mb-2">
                   Faculty
                 </label>
                 <Input
@@ -260,7 +260,7 @@ export default function Settings() {
                 <p className="text-xs mt-1" style={{color: '#011039'}}>Default loan period for faculty</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-gray-700 mb-2">
                   Staff
                 </label>
                 <Input
@@ -286,7 +286,7 @@ export default function Settings() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-gray-700 mb-2">
                   Student
                 </label>
                 <Input
@@ -298,7 +298,7 @@ export default function Settings() {
                 <p className="text-xs mt-1" style={{color: '#011039'}}>Maximum books a student can borrow</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-gray-700 mb-2">
                   Faculty
                 </label>
                 <Input
@@ -310,7 +310,7 @@ export default function Settings() {
                 <p className="text-xs mt-1" style={{color: '#011039'}}>Maximum books a faculty can borrow</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-gray-700 mb-2">
                   Staff
                 </label>
                 <Input
@@ -336,7 +336,7 @@ export default function Settings() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-gray-700 mb-2">
                   Per Day Fine (Rs)
                 </label>
                 <Input
@@ -349,7 +349,7 @@ export default function Settings() {
                 <p className="text-xs mt-1" style={{color: '#011039'}}>Fine charged per day for overdue books</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-gray-700 mb-2">
                   Maximum Fine (Rs)
                 </label>
                 <Input
@@ -376,7 +376,7 @@ export default function Settings() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-gray-700 mb-2">
                   Maximum Renewals
                 </label>
                 <Input
@@ -388,7 +388,7 @@ export default function Settings() {
                 <p className="text-xs text-gray-500 mt-1">Number of times a book can be renewed</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-gray-700 mb-2">
                   Renewal Period (Days)
                 </label>
                 <Input
@@ -414,7 +414,7 @@ export default function Settings() {
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-gray-700 mb-2">
                   Maximum Reservations
                 </label>
                 <Input
@@ -426,7 +426,7 @@ export default function Settings() {
                 <p className="text-xs text-gray-500 mt-1">Maximum active reservations per member</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-gray-700 mb-2">
                   Reservation Expiry (Days)
                 </label>
                 <Input
@@ -438,7 +438,7 @@ export default function Settings() {
                 <p className="text-xs text-gray-500 mt-1">Days before reservation expires</p>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-gray-700 mb-2">
                   Notification Days
                 </label>
                 <Input
@@ -465,7 +465,7 @@ export default function Settings() {
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-bold text-gray-700 mb-2">
                     Reminder Days
                   </label>
                   <Input
@@ -484,7 +484,7 @@ export default function Settings() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 border rounded-lg" style={{borderColor: formData.notifications.emailEnabled ? '#E76800' : '#E5E7EB'}}>
                   <div>
-                    <p className="font-medium" style={{color: '#011039'}}>Email Notifications</p>
+                    <p className="font-bold" style={{color: '#011039'}}>Email Notifications</p>
                     <p className="text-sm text-gray-500">
                       Enable email notifications for book reminders and overdue alerts (Email service must be configured)
                     </p>
@@ -502,7 +502,7 @@ export default function Settings() {
                 
                 <div className="flex items-center justify-between p-4 border rounded-lg" style={{borderColor: formData.notifications.overdueNotification ? '#E76800' : '#E5E7EB'}}>
                   <div>
-                    <p className="font-medium" style={{color: '#011039'}}>Overdue Notifications</p>
+                    <p className="font-bold" style={{color: '#011039'}}>Overdue Notifications</p>
                     <p className="text-sm text-gray-500">
                       Automatically send notifications for overdue books and generate fines (Disabling this will stop all overdue processing)
                     </p>
@@ -524,7 +524,7 @@ export default function Settings() {
                 <div className="flex gap-2">
                   <CheckCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
                   <div className="text-sm text-blue-800">
-                    <p className="font-medium mb-1">How it works:</p>
+                    <p className="font-bold mb-1">How it works:</p>
                     <ul className="list-disc list-inside space-y-1 text-xs">
                       <li><strong>Reminder Days:</strong> Members receive "Book Due Tomorrow" notification based on this setting</li>
                       <li><strong>Email Notifications:</strong> When enabled, members will also receive email alerts (requires email configuration)</li>
@@ -549,7 +549,7 @@ export default function Settings() {
             <div className="space-y-6">
               <div className="flex items-center justify-between p-4 border-2 rounded-lg" style={{borderColor: formData.liveChat?.enabled ? '#E76800' : '#E5E7EB'}}>
                 <div>
-                  <p className="font-medium" style={{color: '#011039'}}>Enable Live Chat</p>
+                  <p className="font-bold" style={{color: '#011039'}}>Enable Live Chat</p>
                   <p className="text-sm text-gray-500">
                     Allow students to chat with support team in real-time
                   </p>
@@ -566,7 +566,7 @@ export default function Settings() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-gray-700 mb-2">
                   Working Hours
                 </label>
                 <Input
@@ -578,7 +578,7 @@ export default function Settings() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-gray-700 mb-2">
                   Offline Message
                 </label>
                 <textarea
@@ -596,7 +596,7 @@ export default function Settings() {
                 <div className="flex gap-2">
                   <MessageCircle className="h-5 w-5 text-orange-600 flex-shrink-0 mt-0.5" />
                   <div className="text-sm text-orange-800">
-                    <p className="font-medium mb-1">Live Chat Features:</p>
+                    <p className="font-bold mb-1">Live Chat Features:</p>
                     <ul className="list-disc list-inside space-y-1 text-xs">
                       <li>Real-time messaging between students and support team</li>
                       <li>Floating chat button appears on student dashboard when enabled</li>

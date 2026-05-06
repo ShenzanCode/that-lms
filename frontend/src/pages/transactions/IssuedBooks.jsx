@@ -236,13 +236,13 @@ export default function IssuedBooks() {
               <table className="w-full">
                 <thead className="bg-gray-50 border-b">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Book</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Member</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Issue Date</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Due Date</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Renewals</th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Actions</th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Book</th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Member</th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Issue Date</th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Due Date</th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Status</th>
+                    <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase">Renewals</th>
+                    <th className="px-6 py-3 text-right text-xs font-bold text-gray-500 uppercase">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y">
@@ -256,7 +256,7 @@ export default function IssuedBooks() {
                           <div>
                             <Link
                               to={`/admin/books/${transaction.bookId?._id || '#'}`}
-                              className="text-sm font-medium text-primary-600 hover:text-primary-700"
+                              className="text-sm font-bold text-primary-600 hover:text-primary-700"
                             >
                               {transaction.bookId?.title || 'Unknown Book'}
                             </Link>
@@ -268,7 +268,7 @@ export default function IssuedBooks() {
                           <div>
                             <Link
                               to={`/admin/members/${transaction.memberId?._id || '#'}`}
-                              className="text-sm font-medium text-primary-600 hover:text-primary-700"
+                              className="text-sm font-bold text-primary-600 hover:text-primary-700"
                             >
                               {transaction.memberId?.name || 'Unknown Member'}
                             </Link>
@@ -281,7 +281,7 @@ export default function IssuedBooks() {
                         </td>
                         <td className="px-6 py-4">
                           <div className="text-sm">
-                            <p className={isOverdue ? 'text-danger-600 font-medium' : 'text-gray-900'}>
+                            <p className={isOverdue ? 'text-danger-600 font-bold' : 'text-gray-900'}>
                               {format(new Date(transaction.dueDate), 'PP')}
                             </p>
                             {!isOverdue && daysRemaining <= 3 && (
@@ -371,11 +371,11 @@ export default function IssuedBooks() {
             <div className="bg-gray-50 p-3 rounded-lg space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-600">Current Due Date:</span>
-                <span className="font-medium">{format(new Date(renewModal.transaction.dueDate), 'PP')}</span>
+                <span className="font-bold">{format(new Date(renewModal.transaction.dueDate), 'PP')}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Renewals Used:</span>
-                <span className="font-medium">{renewModal.transaction.renewCount}/{renewModal.transaction.maxRenewals}</span>
+                <span className="font-bold">{renewModal.transaction.renewCount}/{renewModal.transaction.maxRenewals}</span>
               </div>
             </div>
             <div className="flex justify-end gap-3">
@@ -412,16 +412,16 @@ export default function IssuedBooks() {
             <div className="bg-gray-50 p-3 rounded-lg space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-600">Issue Date:</span>
-                <span className="font-medium">{format(new Date(returnModal.transaction.issueDate), 'PP')}</span>
+                <span className="font-bold">{format(new Date(returnModal.transaction.issueDate), 'PP')}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Due Date:</span>
-                <span className="font-medium">{format(new Date(returnModal.transaction.dueDate), 'PP')}</span>
+                <span className="font-bold">{format(new Date(returnModal.transaction.dueDate), 'PP')}</span>
               </div>
               {(returnModal.transaction.status === 'Overdue' || getDaysRemaining(returnModal.transaction.dueDate) < 0) && (
                 <div className="flex justify-between">
                   <span className="text-danger-600">Overdue:</span>
-                  <span className="font-medium text-danger-600">
+                  <span className="font-bold text-danger-600">
                     {Math.abs(getDaysRemaining(returnModal.transaction.dueDate))} days
                   </span>
                 </div>
@@ -429,7 +429,7 @@ export default function IssuedBooks() {
             </div>
             {hasUnpaidFines(returnModal.transaction._id) && (
               <div className="bg-orange-50 border border-orange-200 rounded-lg p-3">
-                <p className="text-sm text-orange-700 font-medium">
+                <p className="text-sm text-orange-700 font-bold">
                   <AlertCircle className="h-4 w-4 inline mr-1" />
                   Book has unpaid fines
                 </p>

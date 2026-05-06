@@ -18,7 +18,7 @@ export const CardHeader = ({ children, className, ...props }) => {
 
 export const CardTitle = ({ children, className, ...props }) => {
   return (
-    <h3 className={cn('text-lg font-semibold', className)} style={{color: '#011039'}} {...props}>
+    <h3 className={cn('text-lg font-bold', className)} style={{color: '#011039'}} {...props}>
       {children}
     </h3>
   )

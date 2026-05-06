@@ -214,23 +214,24 @@ export default function Members() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
         <div>
-          <h1 className="text-3xl font-bold" style={{color: '#011039'}}>Members</h1>
-          <p className="mt-1" style={{color: '#011039'}}>Manage library members</p>
+          <h1 className="text-3xl font-black text-secondary">Library Members</h1>
+          <p className="mt-1 text-slate-500 font-bold">Manage and monitor student and staff registrations</p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
           <Button 
-            variant="outline" 
+            variant="secondary" 
             onClick={handleRefresh}
-            disabled={isRefreshing}
+            disabled={isLoading || isRefreshing}
+            className="rounded-xl font-black uppercase tracking-widest text-[11px]"
           >
-            <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
+            <RefreshCw className={`h-4 w-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
             Refresh
           </Button>
           <Link to="/admin/members/add">
-            <Button variant="primary">
-              <Plus className="h-4 w-4" />
+            <Button variant="primary" className="rounded-xl font-black uppercase tracking-widest text-[11px] shadow-lg shadow-orange-500/20">
+              <Plus className="h-4 w-4 mr-2" />
               Add Member
             </Button>
           </Link>
@@ -238,134 +239,150 @@ export default function Members() {
       </div>
 
       {/* Search and Filters */}
-      <Card>
-        <div className="p-4 space-y-4">
+      <Card className="rounded-2xl border-slate-100 shadow-sm">
+        <div className="p-6 space-y-6">
           <SearchBar
             value={search}
             onChange={setSearch}
             placeholder="Search members by name, ID, email, phone..."
+            className="rounded-xl border-2 border-slate-100 focus:border-primary transition-all"
           />
           <div className="flex flex-wrap gap-4">
-            <select
-              className="input w-full sm:w-48"
-              value={filters.memberType}
-              onChange={(e) => setFilters({ ...filters, memberType: e.target.value })}
-            >
-              <option value="">All Member Types</option>
-              <option value="Student">Student</option>
-              <option value="Faculty">Faculty</option>
-              <option value="Staff">Staff</option>
-            </select>
-            <select
-              className="input w-full sm:w-48"
-              value={filters.status}
-              onChange={(e) => setFilters({ ...filters, status: e.target.value })}
-            >
-              <option value="">All Status</option>
-              <option value="active">Active</option>
-              <option value="available">Available</option>
-              <option value="blocked">Blocked</option>
-            </select>
-            <input
-              type="text"
-              className="input w-full sm:w-48"
-              placeholder="Department"
-              value={filters.department}
-              onChange={(e) => setFilters({ ...filters, department: e.target.value })}
-            />
+            <div className="w-full sm:w-48">
+              <p className="text-[10px] font-black uppercase text-slate-400 mb-2 ml-1 tracking-widest">Member Type</p>
+              <select
+                className="input rounded-xl border-2 border-slate-100 focus:border-primary font-bold"
+                value={filters.memberType}
+                onChange={(e) => setFilters({ ...filters, memberType: e.target.value })}
+              >
+                <option value="">All Member Types</option>
+                <option value="Student">Student</option>
+                <option value="Faculty">Faculty</option>
+                <option value="Staff">Staff</option>
+              </select>
+            </div>
+            
+            <div className="w-full sm:w-48">
+              <p className="text-[10px] font-black uppercase text-slate-400 mb-2 ml-1 tracking-widest">Status</p>
+              <select
+                className="input rounded-xl border-2 border-slate-100 focus:border-primary font-bold"
+                value={filters.status}
+                onChange={(e) => setFilters({ ...filters, status: e.target.value })}
+              >
+                <option value="">All Status</option>
+                <option value="active">Active</option>
+                <option value="available">Available</option>
+                <option value="blocked">Blocked</option>
+              </select>
+            </div>
+
+            <div className="w-full sm:w-48">
+              <p className="text-[10px] font-black uppercase text-slate-400 mb-2 ml-1 tracking-widest">Department</p>
+              <input
+                type="text"
+                className="input rounded-xl border-2 border-slate-100 focus:border-primary font-bold"
+                placeholder="Search Department"
+                value={filters.department}
+                onChange={(e) => setFilters({ ...filters, department: e.target.value })}
+              />
+            </div>
           </div>
         </div>
       </Card>
 
       {/* Members Table */}
-      <Card>
+      <Card className="rounded-2xl border-slate-100 shadow-sm overflow-hidden p-0">
         {isLoading ? (
-          <div className="p-8">
-            <LoadingSpinner />
+          <div className="p-20 flex justify-center">
+            <LoadingSpinner size="lg" />
           </div>
         ) : data?.data?.length > 0 ? (
           <>
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead style={{backgroundColor: '#011039'}}>
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase">Photo</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase">Member ID</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase">Name</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase">Type</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase">Department</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase">Contact</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase">Books</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase">Status</th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-white uppercase">Actions</th>
+                <thead>
+                  <tr className="bg-secondary">
+                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Photo</th>
+                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Member ID</th>
+                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Name</th>
+                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Type</th>
+                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Department</th>
+                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Contact</th>
+                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Books</th>
+                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Status</th>
+                    <th className="px-6 py-4 text-right text-[10px] font-black text-white uppercase tracking-widest">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y">
+                <tbody className="divide-y divide-slate-100">
                   {data.data.map((member) => (
-                    <tr key={member._id} className="hover:bg-gray-50">
+                    <tr key={member._id} className="hover:bg-slate-50 transition-colors">
                       <td className="px-6 py-4">
-                        <MemberPhoto
-                          src={member.photo}
-                          alt={member.name}
-                          size="md"
-                        />
+                        <div className="shadow-sm rounded-lg overflow-hidden w-fit ring-2 ring-slate-50">
+                          <MemberPhoto
+                            src={member.photo}
+                            alt={member.name}
+                            size="md"
+                          />
+                        </div>
                       </td>
-                      <td className="px-6 py-4 text-sm font-medium" style={{color: '#011039'}}>{member.memberId}</td>
+                      <td className="px-6 py-4 text-sm font-black text-secondary">{member.memberId}</td>
                       <td className="px-6 py-4">
                         <Link
                           to={`/admin/members/${member._id}`}
-                          className="text-sm font-medium hover:underline"
-                          style={{color: '#E76800'}}
+                          className="text-sm font-black text-primary hover:underline underline-offset-4 decoration-2 block"
                         >
                           {member.name}
                         </Link>
                         {member.isBlocked && (
                           <div className="flex items-center gap-1 mt-1">
-                            <AlertCircle className="h-3 w-3 text-danger-500" />
-                            <span className="text-xs text-danger-600">Blocked</span>
+                            <AlertCircle className="h-3 w-3 text-red-500" />
+                            <span className="text-[10px] font-black text-red-600 uppercase">Blocked</span>
                           </div>
                         )}
                       </td>
                       <td className="px-6 py-4">
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium text-white" style={{backgroundColor: '#E76800'}}>
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-black text-white uppercase tracking-widest bg-primary">
                           {member.memberType}
                         </span>
                       </td>
-                      <td className="px-6 py-4 text-sm" style={{color: '#011039'}}>{member.department}</td>
+                      <td className="px-6 py-4 text-sm font-bold text-slate-500">{member.department}</td>
                       <td className="px-6 py-4">
-                        <div className="flex flex-col gap-1">
-                          <div className="flex items-center gap-1 text-xs" style={{color: '#011039'}}>
-                            <Mail className="h-3 w-3" style={{color: '#E76800'}} />
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2 text-xs font-bold text-slate-600">
+                            <Mail className="h-3 w-3 text-primary" />
                             {member.email}
                           </div>
-                          <div className="flex items-center gap-1 text-xs" style={{color: '#011039'}}>
-                            <Phone className="h-3 w-3" style={{color: '#E76800'}} />
+                          <div className="flex items-center gap-2 text-xs font-bold text-slate-500">
+                            <Phone className="h-3 w-3 text-secondary" />
                             {member.phone}
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 text-sm" style={{color: '#011039'}}>
-                        {member.currentBorrowedBooks}/{member.borrowingLimit}
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-2">
+                           <span className="text-sm font-black text-secondary">{member.currentBorrowedBooks}</span>
+                           <span className="text-xs font-bold text-slate-400">/ {member.borrowingLimit}</span>
+                        </div>
                       </td>
                       <td className="px-6 py-4">
                         {member.isBlocked ? (
                           <Badge variant="danger">
-                            <Ban className="h-3 w-3" />
+                            <Ban className="h-3 w-3 mr-1" />
                             Blocked
                           </Badge>
                         ) : new Date(member.validUntil) < new Date() ? (
                           <Badge variant="warning">
-                            <AlertCircle className="h-3 w-3" />
+                            <AlertCircle className="h-3 w-3 mr-1" />
                             Expired
                           </Badge>
                         ) : member.currentBorrowedBooks > 0 ? (
                           <Badge variant="success">
-                            <CheckCircle className="h-3 w-3" />
+                            <CheckCircle className="h-3 w-3 mr-1" />
                             Active
                           </Badge>
                         ) : (
                           <Badge variant="default">
-                            <CheckCircle className="h-3 w-3" />
+                            <CheckCircle className="h-3 w-3 mr-1" />
                             Available
                           </Badge>
                         )}
@@ -373,16 +390,17 @@ export default function Members() {
                       <td className="px-6 py-4 text-right">
                         <div className="flex justify-end gap-2">
                           <Link to={`/admin/members/${member._id}`}>
-                            <Button variant="ghost" size="sm">View</Button>
+                            <Button variant="ghost" size="sm" className="rounded-xl font-black uppercase text-[10px] tracking-widest">View</Button>
                           </Link>
                           <Link to={`/admin/members/${member._id}/edit`}>
-                            <Button variant="ghost" size="sm">Edit</Button>
+                            <Button variant="ghost" size="sm" className="rounded-xl font-black uppercase text-[10px] tracking-widest">Edit</Button>
                           </Link>
                           {member.isBlocked ? (
                             <Button
                               variant="ghost"
                               size="sm"
                               onClick={() => handleUnblock(member._id)}
+                              className="text-success-600 hover:text-success-700 rounded-xl font-black uppercase text-[10px] tracking-widest"
                             >
                               Unblock
                             </Button>
@@ -391,6 +409,7 @@ export default function Members() {
                               variant="ghost"
                               size="sm"
                               onClick={() => handleBlock(member)}
+                              className="text-red-500 hover:text-red-600 rounded-xl font-black uppercase text-[10px] tracking-widest"
                             >
                               Block
                             </Button>
@@ -498,7 +517,7 @@ export default function Members() {
           <div className="flex items-start gap-3 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
             <AlertCircle className="h-6 w-6 text-yellow-600 flex-shrink-0 mt-0.5" />
             <div className="flex-1">
-              <h4 className="font-semibold text-yellow-900 mb-2">
+              <h4 className="font-bold text-yellow-900 mb-2">
                 {activeBooksWarning.type === 'delete' ? 'Cannot Delete Member' : 'Member Has Borrowed Books'}
               </h4>
               <p className="text-sm text-yellow-800">
@@ -515,13 +534,13 @@ export default function Members() {
           {/* List of borrowed books */}
           {activeBooksWarning.bookDetails && activeBooksWarning.bookDetails.length > 0 && (
             <div className="space-y-2">
-              <h5 className="font-medium text-sm" style={{color: '#011039'}}>Active Borrowed Books:</h5>
+              <h5 className="font-bold text-sm" style={{color: '#011039'}}>Active Borrowed Books:</h5>
               <div className="max-h-48 overflow-y-auto space-y-2">
                 {activeBooksWarning.bookDetails.map((book, index) => (
                   <div key={index} className="p-3 bg-gray-50 border rounded-lg text-sm">
-                    <div className="font-medium" style={{color: '#011039'}}>{book.title}</div>
+                    <div className="font-bold" style={{color: '#011039'}}>{book.title}</div>
                     <div className="text-xs text-gray-600 mt-1">
-                      ISBN: {book.isbn} | Status: <span className={book.status === 'Overdue' ? 'text-red-600 font-semibold' : 'text-gray-700'}>{book.status}</span>
+                      ISBN: {book.isbn} | Status: <span className={book.status === 'Overdue' ? 'text-red-600 font-bold' : 'text-gray-700'}>{book.status}</span>
                     </div>
                     <div className="text-xs text-gray-500 mt-1">
                       Due: {new Date(book.dueDate).toLocaleDateString()}
@@ -560,7 +579,7 @@ export default function Members() {
               </p>
               {!blockModal.open && (
                 <div className="mt-4">
-                  <label className="block text-sm font-medium mb-2" style={{color: '#011039'}}>
+                  <label className="block text-sm font-bold mb-2" style={{color: '#011039'}}>
                     Reason for blocking:
                   </label>
                   <textarea

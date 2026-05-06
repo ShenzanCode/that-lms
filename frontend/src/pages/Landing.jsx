@@ -252,13 +252,13 @@ export default function Landing() {
 
               <div className="absolute inset-0 z-20 h-full max-w-7xl mx-auto px-4 sm:px-8 flex items-center">
                 <div className="max-w-3xl">
-                  <p className="text-[#E76800] font-bold tracking-widest uppercase text-sm mb-4 animate-slide-up">
+                  <p className="text-primary font-black tracking-widest uppercase text-sm mb-4 animate-slide-up">
                     Experience the Future of Learning
                   </p>
                   <h1 className="text-5xl sm:text-7xl font-extrabold text-white leading-tight mb-6 animate-slide-up" style={{ animationDelay: '100ms' }}>
                     {libraryName}
                   </h1>
-                  <p className="text-lg sm:text-xl text-slate-200 mb-10 leading-relaxed max-w-2xl animate-slide-up" style={{ animationDelay: '200ms' }}>
+                  <p className="text-lg sm:text-xl text-slate-200 mb-10 leading-relaxed max-w-2xl animate-slide-up font-bold" style={{ animationDelay: '200ms' }}>
                     Access a world-class collection of books, research papers, and digital resources. Join our community of scholars and explorers today.
                   </p>
 
@@ -266,7 +266,7 @@ export default function Landing() {
                     <Button 
                       variant="primary" 
                       size="lg" 
-                      className="rounded-lg shadow-xl shadow-orange-500/20"
+                      className="rounded-xl shadow-xl shadow-orange-500/20 px-10 h-16 text-lg"
                       onClick={handleExploreCatalog}
                     >
                       Explore Catalog
@@ -276,7 +276,7 @@ export default function Landing() {
                         variant="outline" 
                         size="lg" 
                         onClick={() => openAuth('signup')}
-                        className="rounded-lg bg-white/5 text-white border-white/30 backdrop-blur-md hover:bg-white hover:text-[#011039] transition-all border-2"
+                        className="rounded-xl bg-white/5 text-white border-white/30 backdrop-blur-md hover:bg-white hover:text-secondary transition-all border-2 px-10 h-16 text-lg"
                       >
                         Join Now
                       </Button>
@@ -284,22 +284,22 @@ export default function Landing() {
                   </div>
 
                   <div className="mt-16 flex flex-wrap items-center gap-10 text-white/80 animate-slide-up" style={{ animationDelay: '400ms' }}>
-                    <div className="flex items-center gap-3">
-                      <div className="h-12 w-12 rounded-lg bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/10">
-                        <ShieldCheck className="h-6 w-6 text-[#E76800]" />
+                    <div className="flex items-center gap-4">
+                      <div className="h-14 w-14 rounded-xl bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/10 shadow-inner">
+                        <ShieldCheck className="h-7 w-7 text-primary" />
                       </div>
                       <div>
-                        <p className="text-white font-bold text-lg leading-none">Secure</p>
-                        <p className="text-sm text-white/60 mt-1">Authorized Access</p>
+                        <p className="text-white font-black text-xl leading-none">Secure</p>
+                        <p className="text-xs text-white/60 mt-1 font-bold uppercase tracking-wider">Authorized Access</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <div className="h-12 w-12 rounded-lg bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/10">
-                        <BookOpen className="h-6 w-6 text-[#E76800]" />
+                    <div className="flex items-center gap-4">
+                      <div className="h-14 w-14 rounded-xl bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/10 shadow-inner">
+                        <BookOpen className="h-7 w-7 text-primary" />
                       </div>
                       <div>
-                        <p className="text-white font-bold text-lg leading-none">10,000+</p>
-                        <p className="text-sm text-white/60 mt-1">Resource Library</p>
+                        <p className="text-white font-black text-xl leading-none">10,000+</p>
+                        <p className="text-xs text-white/60 mt-1 font-bold uppercase tracking-wider">Resource Library</p>
                       </div>
                     </div>
                   </div>
@@ -314,8 +314,8 @@ export default function Landing() {
                       <button
                         key={`dot-${idx}`}
                         onClick={() => goToSlide(idx)}
-                        className={`h-2 transition-all duration-300 rounded-full ${
-                          idx === activeSlide ? 'w-12 bg-[#E76800]' : 'w-2 bg-white/30 hover:bg-white/50'
+                        className={`h-2.5 transition-all duration-500 rounded-full ${
+                          idx === activeSlide ? 'w-14 bg-primary shadow-[0_0_15px_rgba(231,104,0,0.5)]' : 'w-2.5 bg-white/30 hover:bg-white/50'
                         }`}
                       />
                     ))}
@@ -324,15 +324,15 @@ export default function Landing() {
                   <div className="flex items-center gap-3">
                     <button
                       onClick={handlePrevSlide}
-                      className="h-12 w-12 rounded-lg border border-white/20 text-white flex items-center justify-center hover:bg-[#E76800] hover:border-[#E76800] transition-all backdrop-blur-sm active:scale-90 group"
+                      className="h-14 w-14 rounded-xl border border-white/20 text-white flex items-center justify-center hover:bg-primary hover:border-primary transition-all backdrop-blur-sm active:scale-90 group shadow-lg"
                     >
-                      <ChevronRight className="h-6 w-6 rotate-180 group-hover:-translate-x-0.5 transition-transform" />
+                      <ChevronRight className="h-7 w-7 rotate-180 group-hover:-translate-x-1 transition-transform" />
                     </button>
                     <button
                       onClick={handleNextSlide}
-                      className="h-12 w-12 rounded-lg border border-white/20 text-white flex items-center justify-center hover:bg-[#E76800] hover:border-[#E76800] transition-all backdrop-blur-sm active:scale-90 group"
+                      className="h-14 w-14 rounded-xl border border-white/20 text-white flex items-center justify-center hover:bg-primary hover:border-primary transition-all backdrop-blur-sm active:scale-90 group shadow-lg"
                     >
-                      <ChevronRight className="h-6 w-6 group-hover:translate-x-0.5 transition-transform" />
+                      <ChevronRight className="h-7 w-7 group-hover:translate-x-1 transition-transform" />
                     </button>
                   </div>
                 </div>
@@ -340,24 +340,24 @@ export default function Landing() {
             </section>
 
             {/* Books */}
-            <section id="books" className="px-4 sm:px-8 py-20 bg-white shadow-[0_-1px_3px_rgba(0,0,0,0.05)]">
+            <section id="books" className="px-4 sm:px-8 py-24 bg-white">
               <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
                   <div className="max-w-2xl">
-                    <p className="text-[#E76800] font-bold tracking-widest uppercase text-xs mb-3">Our Collection</p>
-                    <h2 className="text-3xl sm:text-4xl font-bold text-[#011039]">Discover Your Next Favorite Book</h2>
-                    <div className="h-1.5 w-20 bg-[#E76800] mt-4 rounded-full"></div>
-                    <p className="text-slate-500 mt-6 text-lg">Browse through our extensive library of physical and digital assets.</p>
+                    <p className="text-primary font-black tracking-widest uppercase text-xs mb-3">Our Collection</p>
+                    <h2 className="text-3xl sm:text-5xl font-black text-secondary leading-tight">Discover Your Next Favorite Book</h2>
+                    <div className="h-2 w-24 bg-primary mt-6 rounded-full shadow-sm shadow-orange-500/50"></div>
+                    <p className="text-slate-500 mt-8 text-lg font-bold">Browse through our extensive library of physical and digital assets.</p>
                   </div>
 
                   <div className="w-full md:w-96">
                     <div className="relative group">
-                      <Search className="h-5 w-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#E76800] transition-colors" />
+                      <Search className="h-6 w-6 absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" />
                       <input
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         placeholder="Search titles, authors..."
-                        className="w-full pl-12 pr-4 py-3.5 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-[#E76800] transition-all bg-slate-50 focus:bg-white placeholder:text-slate-400"
+                        className="w-full pl-14 pr-6 py-4.5 border-2 border-slate-100 rounded-2xl focus:outline-none focus:border-primary transition-all bg-slate-50 focus:bg-white placeholder:text-slate-400 font-bold shadow-sm"
                       />
                     </div>
                   </div>
@@ -365,63 +365,63 @@ export default function Landing() {
 
                 <div className="mt-10">
                   {booksError ? (
-                    <div className="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
-                      <p className="text-red-700 font-medium">Unable to load books right now.</p>
+                    <div className="bg-red-50 border-l-4 border-red-500 p-8 rounded-2xl shadow-sm">
+                      <p className="text-red-700 font-black">Unable to load books right now.</p>
                     </div>
                   ) : booksLoading ? (
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
                       {Array.from({ length: 12 }).map((_, idx) => (
-                        <div key={idx} className="bg-white rounded-lg border border-slate-100 p-3 animate-pulse">
-                          <div className="aspect-[3/4] bg-slate-100 rounded-lg mb-4" />
-                          <div className="h-4 bg-slate-100 rounded w-3/4 mb-2" />
+                        <div key={idx} className="bg-white rounded-2xl border border-slate-100 p-4 animate-pulse shadow-sm">
+                          <div className="aspect-[3/4] bg-slate-100 rounded-xl mb-4" />
+                          <div className="h-4 bg-slate-100 rounded w-3/4 mb-3" />
                           <div className="h-3 bg-slate-100 rounded w-1/2" />
                         </div>
                       ))}
                     </div>
                   ) : (
                     <>
-                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8">
                         {bookItems.map((book) => {
                           const coverUrl = getCoverUrl(book.coverImage)
                           return (
                             <Card 
                               key={book._id} 
-                              className="group p-3 border-slate-100 hover:shadow-md transition-all duration-300 rounded-lg flex flex-col h-full bg-white cursor-pointer relative"
+                              className="group p-4 border-slate-100 hover:shadow-2xl transition-all duration-500 rounded-2xl flex flex-col h-full bg-white cursor-pointer relative hover:-translate-y-2 border-2 border-transparent hover:border-primary/10"
                               onClick={() => handleBookClick(book)}
                             >
                               {hasBook(book._id) && (
-                                <div className="absolute top-2 left-2 z-10 bg-blue-500 text-white p-1.5 rounded-full shadow-lg border-2 border-white" title="You currently have this book">
+                                <div className="absolute top-2 left-2 z-10 bg-blue-600 text-white p-2 rounded-full shadow-xl border-2 border-white scale-110" title="You currently have this book">
                                   <CheckCircle className="h-3 w-3" />
                                 </div>
                               )}
-                              <div className="aspect-[3/4] bg-slate-50 rounded-lg overflow-hidden mb-4 relative shadow-sm">
+                              <div className="aspect-[3/4] bg-slate-50 rounded-xl overflow-hidden mb-5 relative shadow-md group-hover:shadow-xl transition-all">
                                 {coverUrl ? (
-                                  <img src={coverUrl} alt={book.title} className="w-full h-full object-cover transition-transform duration-500" />
+                                  <img src={coverUrl} alt={book.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                                 ) : (
                                   <div className="w-full h-full flex items-center justify-center">
-                                    <BookOpen className="h-12 w-12 text-slate-200" />
+                                    <BookOpen className="h-16 w-16 text-slate-200" />
                                   </div>
                                 )}
                                 
                                 {/* Category Overlay */}
-                                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#011039]/90 via-[#011039]/50 to-transparent pt-8 pb-2 px-2 flex items-center justify-center">
-                                  <span className="text-white text-[9px] font-extrabold uppercase tracking-[0.1em] drop-shadow-sm truncate">
+                                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-secondary/95 via-secondary/60 to-transparent pt-10 pb-3 px-3 flex items-center justify-center translate-y-2 group-hover:translate-y-0 transition-transform">
+                                  <span className="text-white text-[10px] font-black uppercase tracking-[0.15em] drop-shadow-md truncate">
                                     {book.category || 'General'}
                                   </span>
                                 </div>
                               </div>
                               <div className="flex flex-col flex-1 px-1 text-center">
-                                <h3 className="text-xs font-bold text-[#011039] line-clamp-2 leading-snug transition-colors">{book.title}</h3>
-                                <p className="text-[10px] text-slate-500 mt-2 truncate italic">{book.author}</p>
+                                <h3 className="text-sm font-black text-secondary line-clamp-2 leading-tight transition-colors group-hover:text-primary">{book.title}</h3>
+                                <p className="text-[11px] text-slate-500 mt-2.5 truncate font-bold uppercase tracking-wider">{book.author}</p>
                               </div>
                             </Card>
                           )
                         })}
                       </div>
-                      <div className="mt-16 flex justify-center">
+                      <div className="mt-20 flex justify-center">
                         <Button 
                           variant="primary" 
-                          className="px-12 h-14 rounded-lg shadow-xl shadow-orange-600/20 text-lg font-bold"
+                          className="px-16 h-16 rounded-xl shadow-2xl shadow-orange-600/30 text-xl font-black transition-all hover:scale-105 active:scale-95"
                           onClick={handleExploreCatalog}
                         >
                           Explore Full Catalog
@@ -434,15 +434,15 @@ export default function Landing() {
             </section>
 
             {/* Services */}
-            <section id="actions" className="px-4 sm:px-8 py-24 bg-[#F8F9FA]">
+            <section id="actions" className="px-4 sm:px-8 py-28 bg-[#F8F9FA]">
               <div className="max-w-7xl mx-auto">
-                <div className="text-center max-w-3xl mx-auto mb-16">
-                  <p className="text-[#E76800] font-bold tracking-widest uppercase text-xs mb-3">Premium Services</p>
-                  <h2 className="text-3xl sm:text-4xl font-bold text-[#011039]">Unlock Full Potential with Membership</h2>
-                  <p className="text-slate-500 mt-6 text-lg">Gain access to our complete suite of library management tools.</p>
+                <div className="text-center max-w-3xl mx-auto mb-20">
+                  <p className="text-primary font-black tracking-widest uppercase text-xs mb-3">Premium Services</p>
+                  <h2 className="text-3xl sm:text-5xl font-black text-secondary leading-tight">Unlock Full Potential with Membership</h2>
+                  <p className="text-slate-500 mt-8 text-lg font-bold">Gain access to our complete suite of library management tools.</p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                   {[
                     { title: 'Academic Catalog', icon: BookOpen, desc: 'Access full digital inventory and real-time availability.' },
                     { title: 'Priority Reservations', icon: Clock, desc: 'Reserve popular titles in advance and get instant notifications.' },
@@ -696,7 +696,7 @@ export default function Landing() {
                           </p>
                         </div>
                         <div className="bg-slate-50 border border-slate-100 rounded-lg p-4">
-                          <p className="text-slate-600 text-sm font-medium">To reserve this book, please log in to your student portal.</p>
+                          <p className="text-slate-600 text-sm font-bold">To reserve this book, please log in to your student portal.</p>
                         </div>
                       </div>
                     )}

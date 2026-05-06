@@ -55,32 +55,32 @@ export default function Books() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
         <div>
-          <h1 className="text-3xl font-bold" style={{color: '#011039'}}>Books</h1>
-          <p className="mt-1" style={{color: '#011039'}}>Manage your library collection</p>
+          <h1 className="text-3xl font-black text-secondary">Books Inventory</h1>
+          <p className="mt-1 text-slate-500 font-bold">Manage and monitor your library collection</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-3">
           <Button 
             variant="secondary" 
             onClick={handleRefresh}
             disabled={isFetching}
+            className="rounded-xl font-black uppercase tracking-widest text-[11px]"
           >
-            <RefreshCw className={`h-4 w-4 ${isFetching ? 'animate-spin' : ''}`} />
+            <RefreshCw className={`h-4 w-4 mr-2 ${isFetching ? 'animate-spin' : ''}`} />
             Refresh
           </Button>
           <Button 
             variant="secondary" 
             onClick={() => setIsBulkManagerOpen(true)}
-            style={{backgroundColor: '#E76800', borderColor: '#E76800', color: 'white'}}
-            className="hover:bg-[#E76800]/90"
+            className="rounded-xl bg-primary hover:bg-primary/90 border-none text-white font-black uppercase tracking-widest text-[11px] shadow-lg shadow-orange-500/20"
           >
-            <Database className="h-4 w-4" />
+            <Database className="h-4 w-4 mr-2" />
             Bulk Management
           </Button>
           <Link to="/admin/books/add">
-            <Button variant="primary">
-              <Plus className="h-4 w-4" />
+            <Button variant="primary" className="rounded-xl font-black uppercase tracking-widest text-[11px] shadow-lg shadow-orange-500/20">
+              <Plus className="h-4 w-4 mr-2" />
               Add Book
             </Button>
           </Link>
@@ -88,117 +88,126 @@ export default function Books() {
       </div>
 
       {/* Search and Filters */}
-      <Card>
-        <div className="p-4 space-y-4">
+      <Card className="rounded-2xl border-slate-100 shadow-sm">
+        <div className="p-6 space-y-6">
           <SearchBar
             value={search}
             onChange={handleSearchChange}
             placeholder="Search books by title, author, ISBN..."
+            className="rounded-xl border-2 border-slate-100 focus:border-primary transition-all"
           />
           <div className="flex flex-wrap gap-4">
-            <select
-              className="input w-full sm:w-48"
-              value={filters.category}
-              onChange={(e) => handleFilterChange('category', e.target.value)}
-            >
-              <option value="">All Categories</option>
-              <option value="Biology">Biology</option>
-              <option value="Business">Business</option>
-              <option value="Chemistry">Chemistry</option>
-              <option value="Communication and Media">Communication and Media</option>
-              <option value="CS & IT">CS & IT</option>
-              <option value="Education">Education</option>
-              <option value="English">English</option>
-              <option value="History">History</option>
-              <option value="International Relations">International Relations</option>
-              <option value="Islamic Studies">Islamic Studies</option>
-              <option value="Mathematics">Mathematics</option>
-              <option value="Miscellaneous">Miscellaneous</option>
-              <option value="Physics">Physics</option>
-              <option value="Psychology">Psychology</option>
-              <option value="Social Work">Social Work</option>
-              <option value="Sociology">Sociology</option>
-              <option value="Sports Sciences">Sports Sciences</option>
-              <option value="Urdu">Urdu</option>
-              <option value="Zoology">Zoology</option>
-            </select>
-            <select
-              className="input w-full sm:w-48"
-              value={filters.status}
-              onChange={(e) => handleFilterChange('status', e.target.value)}
-            >
-              <option value="">All Status</option>
-              <option value="Available">Available</option>
-              <option value="Issued">Issued</option>
-              <option value="Damaged">Damaged</option>
-              <option value="Lost">Lost</option>
-            </select>
+            <div className="w-full sm:w-64">
+              <p className="text-[10px] font-black uppercase text-slate-400 mb-2 ml-1 tracking-widest">Category Filter</p>
+              <select
+                className="input w-full rounded-xl border-2 border-slate-100 focus:border-primary font-bold"
+                value={filters.category}
+                onChange={(e) => handleFilterChange('category', e.target.value)}
+              >
+                <option value="">All Categories</option>
+                <option value="Biology">Biology</option>
+                <option value="Business">Business</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Communication and Media">Communication and Media</option>
+                <option value="CS & IT">CS & IT</option>
+                <option value="Education">Education</option>
+                <option value="English">English</option>
+                <option value="History">History</option>
+                <option value="International Relations">International Relations</option>
+                <option value="Islamic Studies">Islamic Studies</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Miscellaneous">Miscellaneous</option>
+                <option value="Physics">Physics</option>
+                <option value="Psychology">Psychology</option>
+                <option value="Social Work">Social Work</option>
+                <option value="Sociology">Sociology</option>
+                <option value="Sports Sciences">Sports Sciences</option>
+                <option value="Urdu">Urdu</option>
+                <option value="Zoology">Zoology</option>
+              </select>
+            </div>
+            <div className="w-full sm:w-64">
+              <p className="text-[10px] font-black uppercase text-slate-400 mb-2 ml-1 tracking-widest">Status Filter</p>
+              <select
+                className="input w-full rounded-xl border-2 border-slate-100 focus:border-primary font-bold"
+                value={filters.status}
+                onChange={(e) => handleFilterChange('status', e.target.value)}
+              >
+                <option value="">All Status</option>
+                <option value="Available">Available</option>
+                <option value="Issued">Issued</option>
+                <option value="Damaged">Damaged</option>
+                <option value="Lost">Lost</option>
+              </select>
+            </div>
           </div>
         </div>
       </Card>
 
       {/* Books Table */}
-      <Card>
+      <Card className="rounded-2xl border-slate-100 shadow-sm overflow-hidden">
         {isLoading ? (
-          <div className="p-8">
-            <LoadingSpinner />
+          <div className="p-20 flex justify-center">
+            <LoadingSpinner size="lg" />
           </div>
         ) : data?.data?.length > 0 ? (
           <>
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead style={{backgroundColor: '#011039'}}>
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase">Cover</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase">Sr.No</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase">Title</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase">Author</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase">Edition</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase">Price</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase">Category</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase">Available</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase">Status</th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-white uppercase">Actions</th>
+                <thead>
+                  <tr className="bg-secondary">
+                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Cover</th>
+                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Sr.No</th>
+                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Title</th>
+                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Author</th>
+                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Edition</th>
+                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Price</th>
+                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Category</th>
+                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Available</th>
+                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Status</th>
+                    <th className="px-6 py-4 text-right text-[10px] font-black text-white uppercase tracking-widest">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y">
+                <tbody className="divide-y divide-slate-100">
                   {sortedBooks.map((book) => (
-                    <tr key={book._id} className="hover:bg-gray-50">
+                    <tr key={book._id} className="hover:bg-slate-50 transition-colors">
                       <td className="px-6 py-4">
-                        <BookCover 
-                          src={book.coverImage} 
-                          alt={`Cover of ${book.title}`}
-                          size="sm"
-                        />
+                        <div className="shadow-sm rounded-lg overflow-hidden w-fit">
+                          <BookCover 
+                            src={book.coverImage} 
+                            alt={`Cover of ${book.title}`}
+                            size="sm"
+                          />
+                        </div>
                       </td>
-                      <td className="px-6 py-4 text-sm font-medium" style={{color: '#011039'}}>{book.accessionNumber}</td>
+                      <td className="px-6 py-4 text-sm font-black text-secondary">{book.accessionNumber}</td>
                       <td className="px-6 py-4">
-                        <Link to={`/admin/books/${book._id}`} className="text-sm font-medium hover:underline" style={{color: '#E76800'}}>
+                        <Link to={`/admin/books/${book._id}`} className="text-sm font-black text-primary hover:underline underline-offset-4 decoration-2">
                           {book.title}
                         </Link>
                       </td>
-                      <td className="px-6 py-4 text-sm" style={{color: '#011039'}}>{book.author}</td>
-                      <td className="px-6 py-4 text-sm" style={{color: '#011039'}}>
+                      <td className="px-6 py-4 text-sm font-bold text-slate-600">{book.author}</td>
+                      <td className="px-6 py-4 text-sm font-bold text-slate-500">
                         {book.edition && book.edition !== '-' ? book.edition : '-'}
                       </td>
-                      <td className="px-6 py-4 text-sm" style={{color: '#011039'}}>
+                      <td className="px-6 py-4 text-sm font-black text-secondary">
                         {(() => {
                           // Check if there's an acquisition note in description
                           const acquisitionMatch = book.description?.match(/\[Acquisition: ([^\]]+)\]/)
                           if (acquisitionMatch) {
-                            return <span className="text-green-600 font-medium capitalize">{acquisitionMatch[1]}</span>
+                            return <span className="text-success-600 font-black uppercase text-[10px] tracking-wider bg-success/10 px-2 py-1 rounded-lg">{acquisitionMatch[1]}</span>
                           }
-                          return book.price && book.price > 0 ? `Rs. ${book.price.toFixed(2)}` : '-'
+                          return book.price && book.price > 0 ? `Rs. ${book.price.toFixed(0)}` : '-'
                         })()}
                       </td>
-                      <td className="px-6 py-4 text-sm" style={{color: '#011039'}}>{book.category}</td>
-                      <td className="px-6 py-4 text-sm" style={{color: '#011039'}}>{book.availableCopies}/{book.totalCopies}</td>
+                      <td className="px-6 py-4 text-sm font-bold text-slate-500">{book.category}</td>
+                      <td className="px-6 py-4 text-sm font-black text-secondary">{book.availableCopies}/{book.totalCopies}</td>
                       <td className="px-6 py-4">
                         <StatusBadge status={book.status} />
                       </td>
                       <td className="px-6 py-4 text-right">
                         <Link to={`/admin/books/${book._id}/edit`}>
-                          <Button variant="ghost" size="sm">Edit</Button>
+                          <Button variant="ghost" size="sm" className="rounded-xl font-black uppercase text-[10px] tracking-widest">Edit</Button>
                         </Link>
                       </td>
                     </tr>
@@ -207,7 +216,7 @@ export default function Books() {
               </table>
             </div>
             {data.pagination && (
-              <div className="p-4 border-t">
+              <div className="p-6 border-t border-slate-100 bg-slate-50/50">
                 <Pagination
                   currentPage={data.pagination.page}
                   totalPages={data.pagination.pages}
@@ -223,17 +232,16 @@ export default function Books() {
             description="Try adjusting your search or filters"
             action={
               <Link to="/admin/books/add">
-                <Button variant="primary">
-                  <Plus className="h-4 w-4" />
+                <Button variant="primary" className="rounded-xl px-8 h-12 font-black uppercase tracking-widest text-xs">
+                  <Plus className="h-4 w-4 mr-2" />
                   Add Your First Book
                 </Button>
               </Link>
             }
           />
-        )}
-      </Card>
-
-      {/* Bulk Book Manager Modal */}
+          )}
+          </Card>
+          {/* Bulk Book Manager Modal */}
       <BulkBookManager 
         isOpen={isBulkManagerOpen}
         onClose={() => setIsBulkManagerOpen(false)}
