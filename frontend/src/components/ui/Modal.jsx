@@ -44,7 +44,7 @@ export const Modal = ({
         
         {/* Modal */}
         <div className={cn(
-          'relative bg-white rounded-lg shadow-2xl w-full animate-in fade-in zoom-in duration-300',
+          'relative bg-white rounded-lg shadow-lg w-full animate-in fade-in zoom-in duration-300',
           sizes[size],
           className
         )}>

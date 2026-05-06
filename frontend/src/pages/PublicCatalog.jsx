@@ -159,7 +159,7 @@ export default function PublicCatalog() {
           </div>
 
           {/* Search and Filters */}
-          <Card className="mb-10 bg-white shadow-sm border-slate-100 rounded-xl overflow-hidden">
+          <Card className="mb-10 bg-white shadow-sm border-slate-100 rounded-md overflow-hidden">
             <div className="p-6 flex flex-col md:flex-row gap-6">
               <div className="flex-1 relative group">
                 <Search className="h-5 w-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#E76800] transition-colors" />
@@ -210,7 +210,7 @@ export default function PublicCatalog() {
           {booksLoading ? (
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
               {Array.from({ length: 12 }).map((_, idx) => (
-                <div key={idx} className="bg-white rounded-xl border border-slate-100 p-3 animate-pulse">
+                <div key={idx} className="bg-white rounded-md border border-slate-100 p-3 animate-pulse">
                   <div className="aspect-[3/4] bg-slate-100 rounded-lg mb-4" />
                   <div className="space-y-3 px-1">
                     <div className="h-4 bg-slate-100 rounded w-3/4" />
@@ -222,7 +222,7 @@ export default function PublicCatalog() {
           ) : (
             <>
               {books.length === 0 ? (
-                <div className="text-center py-24 bg-white rounded-xl border-2 border-dashed border-slate-200">
+                <div className="text-center py-24 bg-white rounded-md border-2 border-dashed border-slate-200">
                   <BookOpen className="h-20 w-20 text-slate-200 mx-auto mb-4" />
                   <h3 className="text-xl font-bold text-[#011039]">No books found</h3>
                   <p className="text-slate-500 mt-2">Try adjusting your search or category filters.</p>
@@ -297,7 +297,7 @@ export default function PublicCatalog() {
           <div className="grid grid-cols-1 md:grid-cols-5">
             {/* Left Side: Cover Image */}
             <div className="md:col-span-2 bg-slate-50 flex items-center justify-center p-8">
-              <div className="w-full aspect-[3/4] rounded-lg shadow-2xl overflow-hidden border-4 border-white">
+              <div className="w-full aspect-[3/4] rounded-lg shadow-lg overflow-hidden border-4 border-white">
                 {selectedBook.coverImage ? (
                   <img
                     src={getCoverUrl(selectedBook.coverImage)}
@@ -388,7 +388,7 @@ export default function PublicCatalog() {
                         
                         <Button 
                           variant="primary" 
-                          className="w-full h-14 rounded-lg shadow-xl shadow-orange-600/20 text-lg font-bold"
+                          className="w-full h-14 rounded-lg shadow-md shadow-orange-600/20 text-lg font-bold"
                           onClick={(e) => handleReserve(e, selectedBook._id)}
                           loading={reserveMutation.isPending}
                         >

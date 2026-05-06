@@ -9,7 +9,7 @@ export const Button = ({
   loading,
   ...props 
 }) => {
-  const baseStyles = 'btn inline-flex items-center justify-center gap-2 font-bold transition-all rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95'
+  const baseStyles = 'btn inline-flex items-center justify-center gap-2 font-bold transition-all rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]'
   
   const variants = {
     primary: 'bg-primary text-white hover:bg-primary/90 shadow-sm focus:ring-primary',

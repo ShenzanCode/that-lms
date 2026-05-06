@@ -55,7 +55,7 @@ export default function Books() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 bg-white p-6 rounded-lg shadow-sm border border-slate-100">
         <div>
           <h1 className="text-3xl font-black text-secondary">Books Inventory</h1>
           <p className="mt-1 text-slate-500 font-bold">Manage and monitor your library collection</p>
@@ -65,7 +65,7 @@ export default function Books() {
             variant="secondary" 
             onClick={handleRefresh}
             disabled={isFetching}
-            className="rounded-xl font-black uppercase tracking-widest text-[11px]"
+            className="rounded-md font-black uppercase tracking-widest text-[11px]"
           >
             <RefreshCw className={`h-4 w-4 mr-2 ${isFetching ? 'animate-spin' : ''}`} />
             Refresh
@@ -73,13 +73,13 @@ export default function Books() {
           <Button 
             variant="secondary" 
             onClick={() => setIsBulkManagerOpen(true)}
-            className="rounded-xl bg-primary hover:bg-primary/90 border-none text-white font-black uppercase tracking-widest text-[11px] shadow-lg shadow-orange-500/20"
+            className="rounded-md bg-primary hover:bg-primary/90 border-none text-white font-black uppercase tracking-widest text-[11px] shadow-md shadow-orange-500/20"
           >
             <Database className="h-4 w-4 mr-2" />
             Bulk Management
           </Button>
           <Link to="/admin/books/add">
-            <Button variant="primary" className="rounded-xl font-black uppercase tracking-widest text-[11px] shadow-lg shadow-orange-500/20">
+            <Button variant="primary" className="rounded-md font-black uppercase tracking-widest text-[11px] shadow-md shadow-orange-500/20">
               <Plus className="h-4 w-4 mr-2" />
               Add Book
             </Button>
@@ -88,19 +88,19 @@ export default function Books() {
       </div>
 
       {/* Search and Filters */}
-      <Card className="rounded-2xl border-slate-100 shadow-sm">
+      <Card className="rounded-lg border-slate-100 shadow-sm">
         <div className="p-6 space-y-6">
           <SearchBar
             value={search}
             onChange={handleSearchChange}
             placeholder="Search books by title, author, ISBN..."
-            className="rounded-xl border-2 border-slate-100 focus:border-primary transition-all"
+            className="rounded-md border-2 border-slate-100 focus:border-primary transition-all"
           />
           <div className="flex flex-wrap gap-4">
             <div className="w-full sm:w-64">
               <p className="text-[10px] font-black uppercase text-slate-400 mb-2 ml-1 tracking-widest">Category Filter</p>
               <select
-                className="input w-full rounded-xl border-2 border-slate-100 focus:border-primary font-bold"
+                className="input w-full rounded-md border-2 border-slate-100 focus:border-primary font-bold"
                 value={filters.category}
                 onChange={(e) => handleFilterChange('category', e.target.value)}
               >
@@ -129,7 +129,7 @@ export default function Books() {
             <div className="w-full sm:w-64">
               <p className="text-[10px] font-black uppercase text-slate-400 mb-2 ml-1 tracking-widest">Status Filter</p>
               <select
-                className="input w-full rounded-xl border-2 border-slate-100 focus:border-primary font-bold"
+                className="input w-full rounded-md border-2 border-slate-100 focus:border-primary font-bold"
                 value={filters.status}
                 onChange={(e) => handleFilterChange('status', e.target.value)}
               >
@@ -145,7 +145,7 @@ export default function Books() {
       </Card>
 
       {/* Books Table */}
-      <Card className="rounded-2xl border-slate-100 shadow-sm overflow-hidden">
+      <Card className="rounded-lg border-slate-100 shadow-sm overflow-hidden">
         {isLoading ? (
           <div className="p-20 flex justify-center">
             <LoadingSpinner size="lg" />
@@ -172,7 +172,7 @@ export default function Books() {
                   {sortedBooks.map((book) => (
                     <tr key={book._id} className="hover:bg-slate-50 transition-colors">
                       <td className="px-6 py-4">
-                        <div className="shadow-sm rounded-lg overflow-hidden w-fit">
+                        <div className="shadow-sm rounded-md overflow-hidden w-fit">
                           <BookCover 
                             src={book.coverImage} 
                             alt={`Cover of ${book.title}`}
@@ -195,7 +195,7 @@ export default function Books() {
                           // Check if there's an acquisition note in description
                           const acquisitionMatch = book.description?.match(/\[Acquisition: ([^\]]+)\]/)
                           if (acquisitionMatch) {
-                            return <span className="text-success-600 font-black uppercase text-[10px] tracking-wider bg-success/10 px-2 py-1 rounded-lg">{acquisitionMatch[1]}</span>
+                            return <span className="text-success-600 font-black uppercase text-[10px] tracking-wider bg-success/10 px-2 py-1 rounded-md">{acquisitionMatch[1]}</span>
                           }
                           return book.price && book.price > 0 ? `Rs. ${book.price.toFixed(0)}` : '-'
                         })()}
@@ -207,7 +207,7 @@ export default function Books() {
                       </td>
                       <td className="px-6 py-4 text-right">
                         <Link to={`/admin/books/${book._id}/edit`}>
-                          <Button variant="ghost" size="sm" className="rounded-xl font-black uppercase text-[10px] tracking-widest">Edit</Button>
+                          <Button variant="ghost" size="sm" className="rounded-md font-black uppercase text-[10px] tracking-widest">Edit</Button>
                         </Link>
                       </td>
                     </tr>
@@ -232,7 +232,7 @@ export default function Books() {
             description="Try adjusting your search or filters"
             action={
               <Link to="/admin/books/add">
-                <Button variant="primary" className="rounded-xl px-8 h-12 font-black uppercase tracking-widest text-xs">
+                <Button variant="primary" className="rounded-md px-8 h-12 font-black uppercase tracking-widest text-xs">
                   <Plus className="h-4 w-4 mr-2" />
                   Add Your First Book
                 </Button>

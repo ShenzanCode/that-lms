@@ -103,7 +103,7 @@ function DashboardContent() {
   return (
     <div className="space-y-10">
       {/* Page Header */}
-      <div className="relative overflow-hidden bg-secondary rounded-2xl p-8 sm:p-12 text-white shadow-2xl">
+      <div className="relative overflow-hidden bg-secondary rounded-lg p-8 sm:p-12 text-white shadow-lg">
         <div className="relative z-10">
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
             Admin Dashboard
@@ -112,11 +112,11 @@ function DashboardContent() {
             Welcome back to the Library Management System. Monitor your library's performance and manage your resources efficiently.
           </p>
           <div className="flex flex-wrap gap-4 mt-8">
-            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10">
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-md border border-white/10">
               <Calendar className="h-4 w-4 text-primary" />
               <span className="text-sm font-bold">{formatDate(new Date())}</span>
             </div>
-            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10">
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-md border border-white/10">
               <TrendingUp className="h-4 w-4 text-primary" />
               <span className="text-sm font-bold">System Status: Healthy</span>
             </div>
@@ -124,8 +124,8 @@ function DashboardContent() {
         </div>
         
         {/* Abstract Background Shapes */}
-        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-64 h-64 bg-blue-500/10 rounded-full blur-2xl"></div>
+        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-primary/10 rounded-full blur-lg"></div>
+        <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-64 h-64 bg-blue-500/10 rounded-full blur-lg"></div>
       </div>
 
       {/* Stats Cards */}
@@ -147,12 +147,12 @@ function DashboardContent() {
           
           return (
             <Link key={stat.title} to={stat.link}>
-              <Card className="border-none shadow-sm hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden group cursor-pointer h-full">
+              <Card className="border-none shadow-sm hover:shadow-md transition-all duration-300 rounded-lg overflow-hidden group cursor-pointer h-full">
                 <CardContent className="p-8">
                   <div className="flex justify-between items-start">
                     <div>
                       <p className="text-xs font-black text-slate-400 uppercase tracking-widest">{stat.title}</p>
-                      <p className="text-3xl font-black mt-2 transition-transform origin-left duration-500 group-hover:scale-110" style={{ color: iconColors[stat.color] }}>
+                      <p className="text-3xl font-black mt-2 transition-transform origin-left duration-500" style={{ color: iconColors[stat.color] }}>
                         {stat.value}
                       </p>
                       <p className="text-xs font-bold text-slate-500 mt-2 flex items-center gap-1">
@@ -160,7 +160,7 @@ function DashboardContent() {
                         {stat.subtitle}
                       </p>
                     </div>
-                    <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${bgColors[stat.color]} transition-all duration-500 group-hover:rotate-6 shadow-inner`}>
+                    <div className={`w-14 h-14 rounded-md flex items-center justify-center ${bgColors[stat.color]} transition-all duration-500 shadow-inner`}>
                       <Icon className="h-7 w-7" style={{ color: iconColors[stat.color] }} />
                     </div>
                   </div>
@@ -174,7 +174,7 @@ function DashboardContent() {
       {/* Quick Actions & Today's Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Quick Actions */}
-        <Card className="border-none shadow-sm rounded-xl overflow-hidden bg-white">
+        <Card className="border-none shadow-sm rounded-md overflow-hidden bg-white">
           <CardHeader className="border-b border-slate-50 pb-4">
             <CardTitle className="text-xl font-extrabold text-[#011039]">Quick Actions</CardTitle>
           </CardHeader>
@@ -189,9 +189,9 @@ function DashboardContent() {
                 <Link
                   key={i}
                   to={action.to}
-                  className="p-4 rounded-xl border-2 border-transparent bg-slate-50 hover:bg-white hover:border-slate-100 hover:shadow-lg transition-all group text-center flex flex-col items-center justify-center"
+                  className="p-4 rounded-md border-2 border-transparent bg-slate-50 hover:bg-white hover:border-slate-100 hover:shadow-md transition-all group text-center flex flex-col items-center justify-center"
                 >
-                  <div className="w-12 h-12 rounded-lg bg-white shadow-sm flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 rounded-lg bg-white shadow-sm flex items-center justify-center mb-3 transition-transform">
                     <action.icon className="h-6 w-6" style={{ color: action.color }} />
                   </div>
                   <p className="font-bold text-[#011039]">{action.label}</p>
@@ -203,7 +203,7 @@ function DashboardContent() {
         </Card>
 
         {/* Today's Activity */}
-        <Card className="border-none shadow-sm rounded-xl overflow-hidden bg-white">
+        <Card className="border-none shadow-sm rounded-md overflow-hidden bg-white">
           <CardHeader className="border-b border-slate-50 pb-4">
             <CardTitle className="flex items-center gap-2 text-xl font-extrabold text-[#011039]">
               <Calendar className="h-5 w-5 text-[#E76800]" />
@@ -212,7 +212,7 @@ function DashboardContent() {
           </CardHeader>
           <CardContent className="p-6">
             <div className="space-y-4">
-              <div className="flex items-center justify-between p-4 rounded-xl bg-orange-50/50 border border-orange-100/50">
+              <div className="flex items-center justify-between p-4 rounded-md bg-orange-50/50 border border-orange-100/50">
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-lg bg-white shadow-sm flex items-center justify-center">
                     <TrendingUp className="h-5 w-5 text-[#E76800]" />
@@ -227,7 +227,7 @@ function DashboardContent() {
                 </div>
               </div>
               
-              <div className="flex items-center justify-between p-4 rounded-xl bg-blue-50/50 border border-blue-100/50">
+              <div className="flex items-center justify-between p-4 rounded-md bg-blue-50/50 border border-blue-100/50">
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-lg bg-white shadow-sm flex items-center justify-center">
                     <BookOpen className="h-5 w-5 text-[#011039]" />
@@ -242,7 +242,7 @@ function DashboardContent() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between p-4 rounded-xl bg-red-50/50 border border-red-100/50">
+              <div className="flex items-center justify-between p-4 rounded-md bg-red-50/50 border border-red-100/50">
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-lg bg-white shadow-sm flex items-center justify-center">
                     <AlertCircle className="h-5 w-5 text-red-500" />
@@ -264,11 +264,11 @@ function DashboardContent() {
       {/* Recent Transactions & Borrowing Trend */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Recent Transactions */}
-        <Card className="border-none shadow-sm rounded-xl overflow-hidden bg-white">
+        <Card className="border-none shadow-sm rounded-md overflow-hidden bg-white">
           <CardHeader className="border-b border-slate-50 pb-4">
             <div className="flex items-center justify-between">
               <CardTitle className="text-xl font-extrabold text-[#011039]">Recent Transactions</CardTitle>
-              <Link to="/admin/transactions/issued" className="text-xs font-black uppercase tracking-widest text-[#E76800] hover:translate-x-1 transition-transform flex items-center gap-1">
+              <Link to="/admin/transactions/issued" className="text-xs font-black uppercase tracking-widest text-[#E76800] transition-transform flex items-center gap-1">
                 View All
                 <ArrowRight className="h-4 w-4" />
               </Link>
@@ -306,7 +306,7 @@ function DashboardContent() {
         </Card>
 
         {/* Borrowing Trend */}
-        <Card className="border-none shadow-sm rounded-xl overflow-hidden bg-white">
+        <Card className="border-none shadow-sm rounded-md overflow-hidden bg-white">
           <CardHeader className="border-b border-slate-50 pb-4">
             <CardTitle className="text-xl font-extrabold text-[#011039]">Borrowing Trend</CardTitle>
           </CardHeader>
@@ -351,7 +351,7 @@ function DashboardContent() {
       </div>
 
       {/* Popular Categories */}
-      <Card className="border-none shadow-sm rounded-xl overflow-hidden bg-white">
+      <Card className="border-none shadow-sm rounded-md overflow-hidden bg-white">
         <CardHeader className="border-b border-slate-50 pb-4">
           <CardTitle className="text-xl font-extrabold text-[#011039]">Popular Categories</CardTitle>
         </CardHeader>
@@ -393,7 +393,7 @@ function DashboardContent() {
       </Card>
 
       {/* Reset Data Section */}
-      <Card className="border-2 border-dashed border-red-100 bg-red-50/30 rounded-xl overflow-hidden">
+      <Card className="border-2 border-dashed border-red-100 bg-red-50/30 rounded-md overflow-hidden">
         <CardContent className="p-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-6 text-center md:text-left">
@@ -410,7 +410,7 @@ function DashboardContent() {
             <Button
               onClick={() => setShowResetModal(true)}
               variant="danger"
-              className="h-14 px-8 rounded-xl shadow-lg shadow-red-500/20 font-extrabold whitespace-nowrap"
+              className="h-14 px-8 rounded-md shadow-md shadow-red-500/20 font-extrabold whitespace-nowrap"
             >
               <Trash2 className="h-5 w-5 mr-2" />
               Reset All Data

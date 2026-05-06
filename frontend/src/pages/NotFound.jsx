@@ -22,7 +22,7 @@ export default function NotFound() {
         <div className="flex flex-col gap-3">
           {isStudentAuth && (
             <Link to="/student/dashboard" className="w-full">
-              <Button variant="primary" className="w-full h-12 rounded-xl shadow-lg shadow-orange-500/20">
+              <Button variant="primary" className="w-full h-12 rounded-md shadow-lg shadow-orange-500/20">
                 <LayoutDashboard className="h-5 w-5" />
                 Go to Student Dashboard
               </Button>
@@ -31,7 +31,7 @@ export default function NotFound() {
 
           {isLibAuth && (
             <Link to="/admin" className="w-full">
-              <Button variant="primary" className="w-full h-12 rounded-xl shadow-lg shadow-blue-500/20" style={{ backgroundColor: '#011039' }}>
+              <Button variant="primary" className="w-full h-12 rounded-md shadow-lg shadow-blue-500/20" style={{ backgroundColor: '#011039' }}>
                 <ShieldCheck className="h-5 w-5" />
                 Go to Admin Panel
               </Button>
@@ -39,7 +39,7 @@ export default function NotFound() {
           )}
 
           <Link to="/landing" className="w-full">
-            <Button variant="outline" className="w-full h-12 rounded-xl hover:bg-slate-50 transition-all font-bold">
+            <Button variant="outline" className="w-full h-12 rounded-md hover:bg-slate-50 transition-all font-bold">
               <Home className="h-5 w-5" />
               Return to Website
             </Button>

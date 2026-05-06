@@ -150,7 +150,7 @@ export default function MainLayout() {
       </header>
 
       {/* Sidebar */}
-      <div className={`fixed left-0 z-40 w-64 shadow-xl transform transition-transform duration-300 ease-in-out lg:translate-x-0 bg-secondary ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`} style={{ top: '64px', bottom: 0 }}>
+      <div className={`fixed left-0 z-40 w-64 shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 bg-secondary ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`} style={{ top: '64px', bottom: 0 }}>
         <div className="flex flex-col h-full">
           {/* Navigation */}
           <nav className="flex-1 overflow-y-auto py-6 px-3">
@@ -162,7 +162,7 @@ export default function MainLayout() {
                   key={item.path}
                   to={item.path}
                   onClick={() => setSidebarOpen(false)}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-xl mb-2 transition-all group ${active ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-md mb-2 transition-all group ${active ? 'bg-primary text-white shadow-md shadow-primary/20' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}
                 >
                   <Icon className={`h-5 w-5 ${active ? 'text-white' : 'text-slate-400 group-hover:text-primary transition-colors'}`} />
                   <span className="font-bold">{item.name}</span>
@@ -173,7 +173,7 @@ export default function MainLayout() {
 
           {/* Admin Profile Header */}
           <div className="p-4 relative" ref={adminMenuRef} style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-            <div className="flex items-center gap-3 p-2 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 transition-colors">
+            <div className="flex items-center gap-3 p-2 rounded-md bg-white/5 border border-white/5 hover:border-white/10 transition-colors">
               <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden bg-primary shadow-inner">
                 {user?.photo ? (
                   <img src={`http://localhost:5000${user.photo}`} alt={user.name} className="w-full h-full object-cover" />

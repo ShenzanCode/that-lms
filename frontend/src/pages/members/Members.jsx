@@ -214,7 +214,7 @@ export default function Members() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 bg-white p-6 rounded-lg shadow-sm border border-slate-100">
         <div>
           <h1 className="text-3xl font-black text-secondary">Library Members</h1>
           <p className="mt-1 text-slate-500 font-bold">Manage and monitor student and staff registrations</p>
@@ -224,13 +224,13 @@ export default function Members() {
             variant="secondary" 
             onClick={handleRefresh}
             disabled={isLoading || isRefreshing}
-            className="rounded-xl font-black uppercase tracking-widest text-[11px]"
+            className="rounded-md font-black uppercase tracking-widest text-[11px]"
           >
             <RefreshCw className={`h-4 w-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
             Refresh
           </Button>
           <Link to="/admin/members/add">
-            <Button variant="primary" className="rounded-xl font-black uppercase tracking-widest text-[11px] shadow-lg shadow-orange-500/20">
+            <Button variant="primary" className="rounded-md font-black uppercase tracking-widest text-[11px] shadow-md shadow-orange-500/20">
               <Plus className="h-4 w-4 mr-2" />
               Add Member
             </Button>
@@ -239,19 +239,19 @@ export default function Members() {
       </div>
 
       {/* Search and Filters */}
-      <Card className="rounded-2xl border-slate-100 shadow-sm">
+      <Card className="rounded-lg border-slate-100 shadow-sm">
         <div className="p-6 space-y-6">
           <SearchBar
             value={search}
             onChange={setSearch}
             placeholder="Search members by name, ID, email, phone..."
-            className="rounded-xl border-2 border-slate-100 focus:border-primary transition-all"
+            className="rounded-md border-2 border-slate-100 focus:border-primary transition-all"
           />
           <div className="flex flex-wrap gap-4">
             <div className="w-full sm:w-48">
               <p className="text-[10px] font-black uppercase text-slate-400 mb-2 ml-1 tracking-widest">Member Type</p>
               <select
-                className="input rounded-xl border-2 border-slate-100 focus:border-primary font-bold"
+                className="input rounded-md border-2 border-slate-100 focus:border-primary font-bold"
                 value={filters.memberType}
                 onChange={(e) => setFilters({ ...filters, memberType: e.target.value })}
               >
@@ -265,7 +265,7 @@ export default function Members() {
             <div className="w-full sm:w-48">
               <p className="text-[10px] font-black uppercase text-slate-400 mb-2 ml-1 tracking-widest">Status</p>
               <select
-                className="input rounded-xl border-2 border-slate-100 focus:border-primary font-bold"
+                className="input rounded-md border-2 border-slate-100 focus:border-primary font-bold"
                 value={filters.status}
                 onChange={(e) => setFilters({ ...filters, status: e.target.value })}
               >
@@ -280,7 +280,7 @@ export default function Members() {
               <p className="text-[10px] font-black uppercase text-slate-400 mb-2 ml-1 tracking-widest">Department</p>
               <input
                 type="text"
-                className="input rounded-xl border-2 border-slate-100 focus:border-primary font-bold"
+                className="input rounded-md border-2 border-slate-100 focus:border-primary font-bold"
                 placeholder="Search Department"
                 value={filters.department}
                 onChange={(e) => setFilters({ ...filters, department: e.target.value })}
@@ -291,7 +291,7 @@ export default function Members() {
       </Card>
 
       {/* Members Table */}
-      <Card className="rounded-2xl border-slate-100 shadow-sm overflow-hidden p-0">
+      <Card className="rounded-lg border-slate-100 shadow-sm overflow-hidden p-0">
         {isLoading ? (
           <div className="p-20 flex justify-center">
             <LoadingSpinner size="lg" />
@@ -317,7 +317,7 @@ export default function Members() {
                   {data.data.map((member) => (
                     <tr key={member._id} className="hover:bg-slate-50 transition-colors">
                       <td className="px-6 py-4">
-                        <div className="shadow-sm rounded-lg overflow-hidden w-fit ring-2 ring-slate-50">
+                        <div className="shadow-sm rounded-md overflow-hidden w-fit ring-2 ring-slate-50">
                           <MemberPhoto
                             src={member.photo}
                             alt={member.name}
@@ -390,17 +390,17 @@ export default function Members() {
                       <td className="px-6 py-4 text-right">
                         <div className="flex justify-end gap-2">
                           <Link to={`/admin/members/${member._id}`}>
-                            <Button variant="ghost" size="sm" className="rounded-xl font-black uppercase text-[10px] tracking-widest">View</Button>
+                            <Button variant="ghost" size="sm" className="rounded-md font-black uppercase text-[10px] tracking-widest">View</Button>
                           </Link>
                           <Link to={`/admin/members/${member._id}/edit`}>
-                            <Button variant="ghost" size="sm" className="rounded-xl font-black uppercase text-[10px] tracking-widest">Edit</Button>
+                            <Button variant="ghost" size="sm" className="rounded-md font-black uppercase text-[10px] tracking-widest">Edit</Button>
                           </Link>
                           {member.isBlocked ? (
                             <Button
                               variant="ghost"
                               size="sm"
                               onClick={() => handleUnblock(member._id)}
-                              className="text-success-600 hover:text-success-700 rounded-xl font-black uppercase text-[10px] tracking-widest"
+                              className="text-success-600 hover:text-success-700 rounded-md font-black uppercase text-[10px] tracking-widest"
                             >
                               Unblock
                             </Button>
@@ -409,7 +409,7 @@ export default function Members() {
                               variant="ghost"
                               size="sm"
                               onClick={() => handleBlock(member)}
-                              className="text-red-500 hover:text-red-600 rounded-xl font-black uppercase text-[10px] tracking-widest"
+                              className="text-red-500 hover:text-red-600 rounded-md font-black uppercase text-[10px] tracking-widest"
                             >
                               Block
                             </Button>
@@ -514,7 +514,7 @@ export default function Members() {
         title={`Warning: Member Has Active Books`}
       >
         <div className="space-y-4">
-          <div className="flex items-start gap-3 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+          <div className="flex items-start gap-3 p-4 bg-yellow-50 border border-yellow-200 rounded-md">
             <AlertCircle className="h-6 w-6 text-yellow-600 flex-shrink-0 mt-0.5" />
             <div className="flex-1">
               <h4 className="font-bold text-yellow-900 mb-2">
@@ -537,7 +537,7 @@ export default function Members() {
               <h5 className="font-bold text-sm" style={{color: '#011039'}}>Active Borrowed Books:</h5>
               <div className="max-h-48 overflow-y-auto space-y-2">
                 {activeBooksWarning.bookDetails.map((book, index) => (
-                  <div key={index} className="p-3 bg-gray-50 border rounded-lg text-sm">
+                  <div key={index} className="p-3 bg-gray-50 border rounded-md text-sm">
                     <div className="font-bold" style={{color: '#011039'}}>{book.title}</div>
                     <div className="text-xs text-gray-600 mt-1">
                       ISBN: {book.isbn} | Status: <span className={book.status === 'Overdue' ? 'text-red-600 font-bold' : 'text-gray-700'}>{book.status}</span>

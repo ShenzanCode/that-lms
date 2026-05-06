@@ -92,22 +92,22 @@ export default function StudentReservations() {
   return (
     <div className="space-y-8">
       {/* Page Header */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-[#011039] to-[#011039]/90 rounded-lg p-8 sm:p-10 text-white shadow-xl">
+      <div className="relative overflow-hidden bg-gradient-to-r from-[#011039] to-[#011039]/90 rounded-md p-8 sm:p-10 text-white shadow-md">
         <div className="relative z-10">
           <h1 className="text-3xl font-extrabold tracking-tight">My Reservations</h1>
-          <p className="text-slate-300 mt-2 text-lg">Track your book requests and queue status</p>
+          <p className="text-slate-300 mt-2 text-lg font-bold">Track your book requests and queue status</p>
         </div>
-        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-[#E76800]/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-[#E76800]/10 rounded-full blur-xl"></div>
       </div>
 
       {reservations.length === 0 ? (
-        <div className="bg-white rounded-lg p-16 text-center border-2 border-dashed border-slate-200">
+        <div className="bg-white rounded-md p-16 text-center border-2 border-dashed border-slate-200">
            <Clock className="h-16 w-16 mx-auto text-slate-200 mb-6" />
            <h3 className="text-2xl font-bold text-[#011039]">No reservations found</h3>
-           <p className="text-slate-500 mt-2 max-w-sm mx-auto">Reserve books from the Library Catalog when they are currently issued to other members.</p>
+           <p className="text-slate-500 mt-2 max-w-sm mx-auto font-bold">Reserve books from the Library Catalog when they are currently issued to other members.</p>
            <button 
              onClick={() => window.location.href = '/catalog'}
-             className="mt-8 px-10 py-3.5 bg-[#011039] text-white rounded-lg font-bold hover:bg-[#E76800] hover:shadow-lg transition-all"
+             className="mt-8 px-10 py-3.5 bg-[#011039] text-white rounded-md font-bold hover:bg-[#E76800] transition-all"
            >
              Explore Catalog
            </button>
@@ -115,10 +115,10 @@ export default function StudentReservations() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
           {reservations.map((reservation) => (
-            <Card key={reservation._id} className="border-none shadow-sm hover:shadow-md transition-all duration-300 rounded-lg overflow-hidden bg-white p-5 group">
+            <Card key={reservation._id} className="border-none shadow-sm rounded-md overflow-hidden bg-white p-5 group">
               <div className="flex gap-6">
                 <div className="w-32 flex-shrink-0">
-                  <div className="aspect-[3/4] rounded-lg overflow-hidden shadow-lg">
+                  <div className="aspect-[3/4] rounded-md overflow-hidden shadow-md">
                     <BookCover 
                       src={reservation.bookId?.coverImage} 
                       alt={reservation.bookId?.title}
@@ -129,7 +129,7 @@ export default function StudentReservations() {
                 <div className="flex-1 flex flex-col justify-between py-2">
                   <div>
                     <div className="flex justify-between items-start">
-                      <Badge variant={getStatusBadgeVariant(reservation.status)} className="px-3 py-1 rounded-lg text-[10px] uppercase font-bold tracking-wider">
+                      <Badge variant={getStatusBadgeVariant(reservation.status)} className="px-3 py-1 rounded-md text-[10px] uppercase font-bold tracking-wider">
                         {reservation.status}
                       </Badge>
                     </div>
@@ -166,7 +166,7 @@ export default function StudentReservations() {
                         onClick={() => handleCancelReservation(reservation._id)}
                         variant="outline"
                         size="sm"
-                        className="w-full mt-4 rounded-lg border-slate-200 text-slate-400 hover:text-red-500 hover:border-red-100 hover:bg-red-50 font-bold py-2"
+                        className="w-full mt-4 rounded-md border-slate-200 text-slate-400 hover:text-red-500 hover:border-red-100 hover:bg-red-50 font-bold py-2"
                       >
                         <Trash2 className="h-3.5 w-3.5 mr-2" />
                         Cancel Request

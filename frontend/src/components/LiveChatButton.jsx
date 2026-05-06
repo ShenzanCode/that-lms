@@ -44,7 +44,7 @@ export default function LiveChatButton({ enabled = true }) {
         {!isOpen && (
           <button
             onClick={() => setIsOpen(true)}
-            className="group relative flex items-center justify-center w-14 h-14 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+            className="group relative flex items-center justify-center w-14 h-14 rounded-full shadow-md hover:shadow-lg transition-all duration-300"
             style={{
               background: hasActiveSession 
                 ? 'linear-gradient(135deg, #011039 0%, #E76800 100%)' 
@@ -65,18 +65,10 @@ export default function LiveChatButton({ enabled = true }) {
             )}
             
             {/* Tooltip */}
-            <div className="absolute bottom-full right-0 mb-2 px-3 py-1 bg-gray-900 text-white text-sm rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            <div className="absolute bottom-full right-0 mb-2 px-3 py-1 bg-gray-900 text-white text-sm rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
               {hasActiveSession ? 'Resume Chat' : 'Get Help'}
               <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
             </div>
-            
-            {/* Pulse Animation */}
-            <span 
-              className="absolute inset-0 rounded-full animate-ping opacity-25" 
-              style={{
-                background: '#011039'
-              }}
-            ></span>
           </button>
         )}
       </div>

@@ -212,7 +212,7 @@ export default function Landing() {
 
       <main className="pt-16 min-h-screen">
         {view === 'dashboard' ? (
-          <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12">
             <div className="mb-10 flex items-center justify-between">
               <div>
                 <h1 className="text-4xl font-extrabold text-[#011039]">User Dashboard</h1>
@@ -222,7 +222,7 @@ export default function Landing() {
               <Button 
                 variant="outline" 
                 onClick={() => setView('landing')}
-                className="rounded-lg font-bold flex items-center gap-2 border-slate-200 text-slate-600"
+                className="rounded-md font-bold flex items-center gap-2 border-slate-200 text-slate-600"
               >
                 <ChevronRight className="h-4 w-4 rotate-180" />
                 Back to Website
@@ -252,21 +252,21 @@ export default function Landing() {
 
               <div className="absolute inset-0 z-20 h-full max-w-7xl mx-auto px-4 sm:px-8 flex items-center">
                 <div className="max-w-3xl">
-                  <p className="text-primary font-black tracking-widest uppercase text-sm mb-4 animate-slide-up">
+                  <p className="text-primary font-black tracking-widest uppercase text-sm mb-4">
                     Experience the Future of Learning
                   </p>
-                  <h1 className="text-5xl sm:text-7xl font-extrabold text-white leading-tight mb-6 animate-slide-up" style={{ animationDelay: '100ms' }}>
+                  <h1 className="text-5xl sm:text-7xl font-extrabold text-white leading-tight mb-6">
                     {libraryName}
                   </h1>
-                  <p className="text-lg sm:text-xl text-slate-200 mb-10 leading-relaxed max-w-2xl animate-slide-up font-bold" style={{ animationDelay: '200ms' }}>
+                  <p className="text-lg sm:text-xl text-slate-200 mb-10 leading-relaxed max-w-2xl font-bold">
                     Access a world-class collection of books, research papers, and digital resources. Join our community of scholars and explorers today.
                   </p>
 
-                  <div className="flex flex-wrap items-center gap-4 animate-slide-up" style={{ animationDelay: '300ms' }}>
+                  <div className="flex flex-wrap items-center gap-4">
                     <Button 
                       variant="primary" 
                       size="lg" 
-                      className="rounded-xl shadow-xl shadow-orange-500/20 px-10 h-16 text-lg"
+                      className="rounded-md shadow-md shadow-orange-500/20 px-10 h-16 text-lg"
                       onClick={handleExploreCatalog}
                     >
                       Explore Catalog
@@ -276,16 +276,16 @@ export default function Landing() {
                         variant="outline" 
                         size="lg" 
                         onClick={() => openAuth('signup')}
-                        className="rounded-xl bg-white/5 text-white border-white/30 backdrop-blur-md hover:bg-white hover:text-secondary transition-all border-2 px-10 h-16 text-lg"
+                        className="rounded-md bg-white/5 text-white border-white/30 backdrop-blur-md hover:bg-white hover:text-secondary transition-all border-2 px-10 h-16 text-lg"
                       >
                         Join Now
                       </Button>
                     )}
                   </div>
 
-                  <div className="mt-16 flex flex-wrap items-center gap-10 text-white/80 animate-slide-up" style={{ animationDelay: '400ms' }}>
+                  <div className="mt-16 flex flex-wrap items-center gap-10 text-white/80">
                     <div className="flex items-center gap-4">
-                      <div className="h-14 w-14 rounded-xl bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/10 shadow-inner">
+                      <div className="h-14 w-14 rounded-md bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/10 shadow-inner">
                         <ShieldCheck className="h-7 w-7 text-primary" />
                       </div>
                       <div>
@@ -294,7 +294,7 @@ export default function Landing() {
                       </div>
                     </div>
                     <div className="flex items-center gap-4">
-                      <div className="h-14 w-14 rounded-xl bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/10 shadow-inner">
+                      <div className="h-14 w-14 rounded-md bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/10 shadow-inner">
                         <BookOpen className="h-7 w-7 text-primary" />
                       </div>
                       <div>
@@ -324,15 +324,15 @@ export default function Landing() {
                   <div className="flex items-center gap-3">
                     <button
                       onClick={handlePrevSlide}
-                      className="h-14 w-14 rounded-xl border border-white/20 text-white flex items-center justify-center hover:bg-primary hover:border-primary transition-all backdrop-blur-sm active:scale-90 group shadow-lg"
+                      className="h-14 w-14 rounded-md border border-white/20 text-white flex items-center justify-center hover:bg-primary hover:border-primary transition-all backdrop-blur-sm active:scale-[0.98] group shadow-lg"
                     >
-                      <ChevronRight className="h-7 w-7 rotate-180 group-hover:-translate-x-1 transition-transform" />
+                      <ChevronRight className="h-7 w-7 rotate-180 transition-transform" />
                     </button>
                     <button
                       onClick={handleNextSlide}
-                      className="h-14 w-14 rounded-xl border border-white/20 text-white flex items-center justify-center hover:bg-primary hover:border-primary transition-all backdrop-blur-sm active:scale-90 group shadow-lg"
+                      className="h-14 w-14 rounded-md border border-white/20 text-white flex items-center justify-center hover:bg-primary hover:border-primary transition-all backdrop-blur-sm active:scale-[0.98] group shadow-lg"
                     >
-                      <ChevronRight className="h-7 w-7 group-hover:translate-x-1 transition-transform" />
+                      <ChevronRight className="h-7 w-7 transition-transform" />
                     </button>
                   </div>
                 </div>
@@ -357,7 +357,7 @@ export default function Landing() {
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         placeholder="Search titles, authors..."
-                        className="w-full pl-14 pr-6 py-4.5 border-2 border-slate-100 rounded-2xl focus:outline-none focus:border-primary transition-all bg-slate-50 focus:bg-white placeholder:text-slate-400 font-bold shadow-sm"
+                        className="w-full pl-14 pr-6 py-4.5 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-primary transition-all bg-slate-50 focus:bg-white placeholder:text-slate-400 font-bold shadow-sm"
                       />
                     </div>
                   </div>
@@ -365,14 +365,14 @@ export default function Landing() {
 
                 <div className="mt-10">
                   {booksError ? (
-                    <div className="bg-red-50 border-l-4 border-red-500 p-8 rounded-2xl shadow-sm">
+                    <div className="bg-red-50 border-l-4 border-red-500 p-8 rounded-lg shadow-sm">
                       <p className="text-red-700 font-black">Unable to load books right now.</p>
                     </div>
                   ) : booksLoading ? (
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
                       {Array.from({ length: 12 }).map((_, idx) => (
-                        <div key={idx} className="bg-white rounded-2xl border border-slate-100 p-4 animate-pulse shadow-sm">
-                          <div className="aspect-[3/4] bg-slate-100 rounded-xl mb-4" />
+                        <div key={idx} className="bg-white rounded-lg border border-slate-100 p-4 animate-pulse shadow-sm">
+                          <div className="aspect-[3/4] bg-slate-100 rounded-md mb-4" />
                           <div className="h-4 bg-slate-100 rounded w-3/4 mb-3" />
                           <div className="h-3 bg-slate-100 rounded w-1/2" />
                         </div>
@@ -386,17 +386,17 @@ export default function Landing() {
                           return (
                             <Card 
                               key={book._id} 
-                              className="group p-4 border-slate-100 hover:shadow-2xl transition-all duration-500 rounded-2xl flex flex-col h-full bg-white cursor-pointer relative hover:-translate-y-2 border-2 border-transparent hover:border-primary/10"
+                              className="group p-4 border-slate-100 hover:shadow-md transition-all duration-500 rounded-lg flex flex-col h-full bg-white cursor-pointer relative border-2 border-transparent hover:border-primary/10"
                               onClick={() => handleBookClick(book)}
                             >
                               {hasBook(book._id) && (
-                                <div className="absolute top-2 left-2 z-10 bg-blue-600 text-white p-2 rounded-full shadow-xl border-2 border-white scale-110" title="You currently have this book">
+                                <div className="absolute top-2 left-2 z-10 bg-blue-600 text-white p-2 rounded-full shadow-md border-2 border-white" title="You currently have this book">
                                   <CheckCircle className="h-3 w-3" />
                                 </div>
                               )}
-                              <div className="aspect-[3/4] bg-slate-50 rounded-xl overflow-hidden mb-5 relative shadow-md group-hover:shadow-xl transition-all">
+                              <div className="aspect-[3/4] bg-slate-50 rounded-md overflow-hidden mb-5 relative shadow-md hover:shadow-md transition-all">
                                 {coverUrl ? (
-                                  <img src={coverUrl} alt={book.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                                  <img src={coverUrl} alt={book.title} className="w-full h-full object-cover transition-transform duration-700" />
                                 ) : (
                                   <div className="w-full h-full flex items-center justify-center">
                                     <BookOpen className="h-16 w-16 text-slate-200" />
@@ -421,7 +421,7 @@ export default function Landing() {
                       <div className="mt-20 flex justify-center">
                         <Button 
                           variant="primary" 
-                          className="px-16 h-16 rounded-xl shadow-2xl shadow-orange-600/30 text-xl font-black transition-all hover:scale-105 active:scale-95"
+                          className="px-16 h-16 rounded-md shadow-lg shadow-orange-600/30 text-xl font-black transition-all active:scale-[0.98]"
                           onClick={handleExploreCatalog}
                         >
                           Explore Full Catalog
@@ -448,9 +448,9 @@ export default function Landing() {
                     { title: 'Priority Reservations', icon: Clock, desc: 'Reserve popular titles in advance and get instant notifications.' },
                     { title: 'Account Dashboard', icon: User, desc: 'Track borrowing history, fines, and personalized recommendations.' }
                   ].map((service, i) => (
-                    <Card key={i} className="group relative bg-white p-8 rounded-xl border-slate-100 hover:shadow-md transition-all duration-300 overflow-hidden">
+                    <Card key={i} className="group relative bg-white p-8 rounded-md border-slate-100 hover:shadow-md transition-all duration-300 overflow-hidden">
                       <div className="relative z-10">
-                        <div className="h-16 w-16 rounded-lg bg-[#011039]/5 flex items-center justify-center mb-8 shadow-inner">
+                        <div className="h-16 w-16 rounded-md bg-[#011039]/5 flex items-center justify-center mb-8 shadow-inner">
                           <service.icon className="h-8 w-8 text-[#011039]" />
                         </div>
                         <h3 className="text-xl font-bold text-[#011039] mb-4">{service.title}</h3>
@@ -497,25 +497,25 @@ export default function Landing() {
               <ul className="space-y-4 text-sm text-slate-400">
                 <li>
                   <Link to="/landing" className="hover:text-[#E76800] transition-colors flex items-center gap-2 group">
-                    <ChevronRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
+                    <ChevronRight className="h-3 w-3 transition-transform" />
                     Home Page
                   </Link>
                 </li>
                 <li>
                   <a href="#books" className="hover:text-[#E76800] transition-colors flex items-center gap-2 group">
-                    <ChevronRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
+                    <ChevronRight className="h-3 w-3 transition-transform" />
                     Books Collection
                   </a>
                 </li>
                 <li>
                   <Link to="/catalog" className="hover:text-[#E76800] transition-colors flex items-center gap-2 group">
-                    <ChevronRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
+                    <ChevronRight className="h-3 w-3 transition-transform" />
                     Complete Catalog
                   </Link>
                 </li>
                 <li>
                   <a href="#actions" className="hover:text-[#E76800] transition-colors flex items-center gap-2 group">
-                    <ChevronRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
+                    <ChevronRight className="h-3 w-3 transition-transform" />
                     Our Services
                   </a>
                 </li>
@@ -575,10 +575,10 @@ export default function Landing() {
           noPadding={true}
           size="lg"
         >
-          <div className="grid grid-cols-1 md:grid-cols-5">
+          <div className="grid grid-cols-1 md:col-span-5">
             {/* Left Side: Cover Image */}
             <div className="md:col-span-2 bg-slate-50 flex items-center justify-center p-8">
-              <div className="w-full aspect-[3/4] rounded-lg shadow-2xl overflow-hidden border-4 border-white">
+              <div className="w-full aspect-[3/4] rounded-md shadow-lg overflow-hidden border-4 border-white">
                 {selectedBook.coverImage ? (
                   <img
                     src={getCoverUrl(selectedBook.coverImage)}
@@ -597,7 +597,7 @@ export default function Landing() {
             <div className="md:col-span-3 p-8 text-left">
               <div className="flex justify-between items-start mb-6">
                 <div>
-                  <Badge variant={selectedBook.status === 'Available' ? 'success' : 'warning'} className="mb-3 px-3 py-1 rounded-lg">
+                  <Badge variant={selectedBook.status === 'Available' ? 'success' : 'warning'} className="mb-3 px-3 py-1 rounded-md">
                     {selectedBook.status}
                   </Badge>
                   <h2 className="text-2xl font-extrabold text-[#011039] leading-tight">
@@ -613,7 +613,7 @@ export default function Landing() {
                 </button>
               </div>
 
-              <div className="grid grid-cols-2 gap-y-4 gap-x-6 mb-8 bg-slate-50 p-6 rounded-lg border border-slate-100">
+              <div className="grid grid-cols-2 gap-y-4 gap-x-6 mb-8 bg-slate-50 p-6 rounded-md border border-slate-100">
                 <div>
                   <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Sr.No</p>
                   <p className="text-sm font-bold text-[#011039]">{selectedBook.accessionNumber || '-'}</p>
@@ -647,12 +647,12 @@ export default function Landing() {
                 {isStudentAuth ? (
                   <div className="space-y-4">
                     {hasBook(selectedBook._id) ? (
-                      <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 flex items-center gap-3">
+                      <div className="bg-blue-50 border border-blue-100 rounded-md p-4 flex items-center gap-3">
                         <CheckCircle className="h-5 w-5 text-blue-600 shrink-0" />
                         <p className="text-sm font-bold text-blue-800">You currently have this book issued.</p>
                       </div>
                     ) : selectedBook.status === 'Available' ? (
-                      <div className="bg-green-50 border border-green-100 rounded-lg p-4 flex items-center gap-3">
+                      <div className="bg-green-50 border border-green-100 rounded-md p-4 flex items-center gap-3">
                         <CheckCircle className="h-5 w-5 text-green-600 shrink-0" />
                         <p className="text-sm font-bold text-green-800">
                           This book is currently available! Please visit the library to issue it.
@@ -660,7 +660,7 @@ export default function Landing() {
                       </div>
                     ) : (
                       <div className="space-y-4">
-                        <div className="bg-orange-50 border border-orange-100 rounded-lg p-4 flex items-center gap-3">
+                        <div className="bg-orange-50 border border-orange-100 rounded-md p-4 flex items-center gap-3">
                           <AlertTriangle className="h-5 w-5 text-orange-600 shrink-0" />
                           <p className="text-sm font-bold text-orange-800">
                             This book is currently unavailable please send the reservation
@@ -669,7 +669,7 @@ export default function Landing() {
                         
                         <Button 
                           variant="primary" 
-                          className="w-full h-14 rounded-lg shadow-xl shadow-orange-600/20 text-lg font-bold"
+                          className="w-full h-14 rounded-md shadow-lg shadow-orange-600/20 text-lg font-bold"
                           onClick={(e) => handleReserve(e, selectedBook._id)}
                           loading={reserveMutation.isPending}
                         >
@@ -681,7 +681,7 @@ export default function Landing() {
                 ) : (
                   <div className="space-y-6 text-center">
                     {selectedBook.status === 'Available' ? (
-                      <div className="bg-green-50 border border-green-100 rounded-lg p-4 flex items-center gap-3 text-left">
+                      <div className="bg-green-50 border border-green-100 rounded-md p-4 flex items-center gap-3 text-left">
                         <CheckCircle className="h-5 w-5 text-green-600 shrink-0" />
                         <p className="text-sm font-bold text-green-800">
                           This book is currently available! Please visit the library to issue it.
@@ -689,13 +689,13 @@ export default function Landing() {
                       </div>
                     ) : (
                       <div className="space-y-4">
-                        <div className="bg-orange-50 border border-orange-100 rounded-lg p-4 flex items-center gap-3 text-left">
+                        <div className="bg-orange-50 border border-orange-100 rounded-md p-4 flex items-center gap-3 text-left">
                           <AlertTriangle className="h-5 w-5 text-orange-600 shrink-0" />
                           <p className="text-sm font-bold text-orange-800">
                             This book is currently unavailable please send the reservation
                           </p>
                         </div>
-                        <div className="bg-slate-50 border border-slate-100 rounded-lg p-4">
+                        <div className="bg-slate-50 border border-slate-100 rounded-md p-4">
                           <p className="text-slate-600 text-sm font-bold">To reserve this book, please log in to your student portal.</p>
                         </div>
                       </div>
@@ -703,14 +703,14 @@ export default function Landing() {
                     <div className="flex gap-4">
                       <Button 
                         variant="outline" 
-                        className="flex-1 h-12 rounded-lg"
+                        className="flex-1 h-12 rounded-md"
                         onClick={() => setShowBookModal(false)}
                       >
                         Close
                       </Button>
                       <Button 
                         variant="primary" 
-                        className="flex-1 h-12 rounded-lg shadow-lg shadow-orange-500/20 flex items-center justify-center gap-2"
+                        className="flex-1 h-12 rounded-md shadow-md shadow-orange-500/20 flex items-center justify-center gap-2"
                         onClick={() => openAuth('login')}
                       >
                         <LogIn className="h-4 w-4" />

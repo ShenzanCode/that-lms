@@ -123,7 +123,7 @@ export default function StudentDashboard() {
   return (
     <div className="space-y-10">
       {/* Page Header */}
-      <div className="relative overflow-hidden bg-secondary rounded-2xl p-8 sm:p-12 text-white shadow-2xl">
+      <div className="relative overflow-hidden bg-secondary rounded-lg p-8 sm:p-12 text-white shadow-lg">
         <div className="relative z-10">
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
             Welcome, {student?.name}!
@@ -132,12 +132,12 @@ export default function StudentDashboard() {
             Your personal library gateway. Keep track of your borrowed materials, manage reservations, and explore new academic horizons.
           </p>
           <div className="flex gap-4 mt-8">
-            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10">
+            <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-md border border-white/10">
               <BookCheck className="h-4 w-4 text-primary" />
               <span className="text-sm font-bold">{stats.borrowed} Books Issued</span>
             </div>
             {stats.totalFines > 0 && (
-              <div className="flex items-center gap-2 bg-red-500/20 backdrop-blur-md px-4 py-2 rounded-xl border border-red-500/20">
+              <div className="flex items-center gap-2 bg-red-500/20 backdrop-blur-md px-4 py-2 rounded-md border border-red-500/20">
                 <AlertCircle className="h-4 w-4 text-red-400" />
                 <span className="text-sm font-bold text-red-200">Action Required: Fines</span>
               </div>
@@ -146,8 +146,8 @@ export default function StudentDashboard() {
         </div>
         
         {/* Abstract Background Shapes */}
-        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-primary/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-64 h-64 bg-blue-500/10 rounded-full blur-2xl"></div>
+        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-primary/10 rounded-full blur-lg"></div>
+        <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-64 h-64 bg-blue-500/10 rounded-full blur-lg"></div>
       </div>
 
       {/* Stats Grid */}
@@ -158,12 +158,12 @@ export default function StudentDashboard() {
           { label: 'Reservations', value: stats.reservations, sub: 'Active requests', icon: Clock, color: '#011039', bg: 'bg-slate-50' },
           { label: 'Total Fines', value: `Rs. ${stats.totalFines.toFixed(0)}`, sub: stats.totalFines > 0 ? 'Pending payment' : 'No dues', icon: DollarSign, color: stats.totalFines > 0 ? '#EF4444' : '#10B981', bg: stats.totalFines > 0 ? 'bg-red-50' : 'bg-green-50' }
         ].map((stat, idx) => (
-          <Card key={idx} className="border-none shadow-sm hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden group">
+          <Card key={idx} className="border-none shadow-sm hover:shadow-md transition-all duration-300 rounded-lg overflow-hidden group">
             <CardContent className="p-8">
               <div className="flex justify-between items-start">
                 <div>
                   <p className="text-xs font-black text-slate-400 uppercase tracking-widest">{stat.label}</p>
-                  <p className="text-3xl font-black mt-2 transition-transform origin-left duration-500 group-hover:scale-110" style={{ color: stat.color }}>
+                  <p className="text-3xl font-black mt-2 transition-transform origin-left duration-500" style={{ color: stat.color }}>
                     {stat.value}
                   </p>
                   <p className="text-xs font-bold text-slate-500 mt-2 flex items-center gap-1">
@@ -171,7 +171,7 @@ export default function StudentDashboard() {
                     {stat.sub}
                   </p>
                 </div>
-                <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${stat.bg} transition-all duration-500 group-hover:rotate-6 shadow-inner`}>
+                <div className={`w-14 h-14 rounded-md flex items-center justify-center ${stat.bg} transition-all duration-500 shadow-inner`}>
                   <stat.icon className="h-7 w-7" style={{ color: stat.color }} />
                 </div>
               </div>
@@ -191,7 +191,7 @@ export default function StudentDashboard() {
           </div>
 
           {issuedBooks.length === 0 ? (
-            <div className="bg-white rounded-2xl p-12 text-center border-2 border-dashed border-slate-200">
+            <div className="bg-white rounded-lg p-12 text-center border-2 border-dashed border-slate-200">
               <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
                 <BookCheck className="h-10 w-10 text-slate-200" />
               </div>
@@ -199,7 +199,7 @@ export default function StudentDashboard() {
               <p className="text-slate-500 mt-2 max-w-sm mx-auto font-bold">Browse our library catalog to discover and borrow your next read.</p>
               <button 
                 onClick={() => window.location.href = '/catalog'}
-                className="mt-8 px-8 py-3 bg-primary text-white rounded-xl font-bold hover:shadow-lg hover:shadow-orange-600/20 transition-all active:scale-95"
+                className="mt-8 px-8 py-3 bg-primary text-white rounded-md font-bold hover:shadow-md hover:shadow-orange-600/20 transition-all"
               >
                 Discover Books
               </button>
@@ -211,10 +211,10 @@ export default function StudentDashboard() {
                 const isOverdue = daysRemaining < 0
 
                 return (
-                  <Card key={transaction._id} className="border-none shadow-sm hover:shadow-xl transition-all duration-300 rounded-2xl overflow-hidden bg-white p-4">
+                  <Card key={transaction._id} className="border-none shadow-sm hover:shadow-md transition-all duration-300 rounded-lg overflow-hidden bg-white p-4">
                     <div className="flex gap-5 h-full">
                       <div className="w-28 flex-shrink-0">
-                        <div className="aspect-[3/4] rounded-xl overflow-hidden shadow-md group-hover:shadow-xl transition-shadow">
+                        <div className="aspect-[3/4] rounded-md overflow-hidden shadow-md transition-shadow">
                           <BookCover 
                             src={transaction.bookId?.coverImage} 
                             alt={transaction.bookId?.title}
@@ -242,7 +242,7 @@ export default function StudentDashboard() {
                             <Calendar className="h-3.5 w-3.5 text-slate-400" />
                             <span className="text-[10px] font-black uppercase tracking-widest">Due: {formatDate(transaction.dueDate)}</span>
                           </div>
-                          <div className={`mt-2 px-3 py-2 rounded-xl text-center shadow-sm ${isOverdue ? 'bg-red-50 text-red-600' : 'bg-slate-50 text-slate-600'}`}>
+                          <div className={`mt-2 px-3 py-2 rounded-md text-center shadow-sm ${isOverdue ? 'bg-red-50 text-red-600' : 'bg-slate-50 text-slate-600'}`}>
                             <p className="text-[10px] font-black uppercase tracking-widest">
                               {isOverdue ? `Overdue by ${Math.abs(daysRemaining)} days` : `${daysRemaining} days left`}
                             </p>
@@ -264,10 +264,10 @@ export default function StudentDashboard() {
              <h2 className="text-2xl font-extrabold text-secondary">Account Status</h2>
           </div>
           
-          <Card className={`border-none rounded-2xl shadow-xl overflow-hidden ${stats.totalFines > 0 ? 'bg-red-600' : 'bg-secondary'}`}>
+          <Card className={`border-none rounded-lg shadow-lg overflow-hidden ${stats.totalFines > 0 ? 'bg-red-600' : 'bg-secondary'}`}>
             <CardContent className="p-8 text-white">
               <div className="flex items-center justify-between mb-8">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-md">
+                <div className="w-12 h-12 bg-white/20 rounded-md flex items-center justify-center backdrop-blur-md">
                   <DollarSign className="h-6 w-6" />
                 </div>
                 <span className="text-[10px] font-black uppercase tracking-[0.2em] opacity-60">Dues Overview</span>
@@ -282,14 +282,14 @@ export default function StudentDashboard() {
               </div>
 
               {stats.totalFines > 0 ? (
-                <div className="mt-8 p-5 bg-white/10 rounded-xl backdrop-blur-md border border-white/10 shadow-inner">
+                <div className="mt-8 p-5 bg-white/10 rounded-md backdrop-blur-md border border-white/10 shadow-inner">
                   <p className="text-sm font-bold leading-relaxed">
                     Please visit the library to clear your dues and restore full borrowing privileges.
                   </p>
                 </div>
               ) : (
-                <div className="mt-8 p-5 bg-green-500/20 rounded-xl backdrop-blur-md border border-green-500/20 flex items-center gap-3">
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse shadow-[0_0_10px_rgba(74,222,128,0.5)]"></div>
+                <div className="mt-8 p-5 bg-green-500/20 rounded-md backdrop-blur-md border border-green-500/20 flex items-center gap-3">
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-400 shadow-[0_0_10px_rgba(74,222,128,0.5)]"></div>
                   <p className="text-sm font-bold">Your account is in good standing.</p>
                 </div>
               )}
@@ -297,13 +297,13 @@ export default function StudentDashboard() {
           </Card>
 
           {/* Quick Help */}
-          <Card className="border-none rounded-2xl shadow-sm bg-white p-8">
+          <Card className="border-none rounded-lg shadow-sm bg-white p-8">
             <h3 className="text-lg font-extrabold text-secondary mb-4">Need Assistance?</h3>
             <p className="text-slate-500 text-sm font-bold leading-relaxed mb-6">
               Our library staff is here to help you. Reach out via live chat for instant support regarding your account or book issues.
             </p>
             <div className="space-y-3">
-              <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl border border-slate-100">
+              <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-md border border-slate-100">
                 <Clock className="h-5 w-5 text-primary" />
                 <div>
                   <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest">Library Hours</p>

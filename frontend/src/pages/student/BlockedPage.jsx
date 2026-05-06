@@ -102,7 +102,7 @@ export default function BlockedPage() {
           onClick={() => setShowContactModal(false)}
         >
           <Card 
-            className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl max-h-[95vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl"
+            className="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl max-h-[95vh] sm:max-h-[90vh] overflow-y-auto shadow-lg"
             onClick={(e) => e.stopPropagation()}
           >
             <CardContent className="p-0">

@@ -77,7 +77,7 @@ export default function StudentLayout() {
       <PublicNavbar onOpenAuth={() => {}} />
 
       <main className="pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-[calc(100vh-400px)]">
-        <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <div>
           <Outlet />
         </div>
       </main>

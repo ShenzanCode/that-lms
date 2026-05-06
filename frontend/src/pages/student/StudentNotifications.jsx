@@ -182,7 +182,7 @@ export default function StudentNotifications() {
   return (
     <div className="space-y-8">
       {/* Page Header */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-[#011039] to-[#011039]/90 rounded-xl p-8 sm:p-10 text-white shadow-xl">
+      <div className="relative overflow-hidden bg-gradient-to-r from-[#011039] to-[#011039]/90 rounded-md p-8 sm:p-10 text-white shadow-md">
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <h1 className="text-3xl font-extrabold tracking-tight">Notification Center</h1>
@@ -193,18 +193,18 @@ export default function StudentNotifications() {
           {unreadCount > 0 && (
             <Button
               onClick={handleMarkAllAsRead}
-              className="bg-[#E76800] hover:bg-[#E76800]/90 text-white font-bold px-6 py-3 rounded-xl shadow-lg shadow-orange-600/20 flex items-center gap-2 border-none"
+              className="bg-[#E76800] hover:bg-[#E76800]/90 text-white font-bold px-6 py-3 rounded-md shadow-lg shadow-orange-600/20 flex items-center gap-2 border-none"
             >
               <CheckCheck className="h-5 w-5" />
               Mark All as Read
             </Button>
           )}
         </div>
-        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-[#E76800]/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-[#E76800]/10 rounded-full blur-xl"></div>
       </div>
 
       {/* Main Content */}
-      <Card className="border-none shadow-sm rounded-xl overflow-hidden bg-white">
+      <Card className="border-none shadow-sm rounded-md overflow-hidden bg-white">
         <div className="p-6 sm:p-10">
           <div className="flex flex-col xl:flex-row gap-6 items-start xl:items-center justify-between mb-10 pb-8 border-b border-slate-50">
             <div className="flex flex-wrap gap-2">
@@ -216,7 +216,7 @@ export default function StudentNotifications() {
                 <button
                   key={tab.id}
                   onClick={() => setFilter(tab.id)}
-                  className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${
+                  className={`px-6 py-2.5 rounded-md text-sm font-bold transition-all ${
                     filter === tab.id
                       ? 'bg-[#011039] text-white shadow-md'
                       : 'bg-slate-50 text-slate-400 hover:bg-slate-100 hover:text-slate-600'
@@ -234,7 +234,7 @@ export default function StudentNotifications() {
                 placeholder="Search messages..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 bg-slate-50 border-2 border-slate-50 rounded-xl focus:outline-none focus:border-[#E76800] focus:bg-white transition-all text-slate-600 font-bold placeholder:text-slate-300"
+                className="w-full pl-12 pr-4 py-3 bg-slate-50 border-2 border-slate-50 rounded-md focus:outline-none focus:border-[#E76800] focus:bg-white transition-all text-slate-600 font-bold placeholder:text-slate-300"
               />
             </div>
           </div>
@@ -255,7 +255,7 @@ export default function StudentNotifications() {
                 <div
                   key={notification._id}
                   id={`notification-${notification._id}`}
-                  className={`group p-6 rounded-xl border-2 transition-all duration-300 relative ${
+                  className={`group p-6 rounded-md border-2 transition-all duration-300 relative ${
                     highlightedId === notification._id
                       ? 'border-[#E76800] bg-orange-50/30 shadow-md'
                       : !notification.isRead
@@ -264,7 +264,7 @@ export default function StudentNotifications() {
                   }`}
                 >
                   <div className="flex gap-6">
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${!notification.isRead ? 'bg-blue-500/10' : 'bg-slate-50'}`}>
+                    <div className={`w-12 h-12 rounded-md flex items-center justify-center flex-shrink-0 ${!notification.isRead ? 'bg-blue-500/10' : 'bg-slate-50'}`}>
                       {getNotificationIcon(notification.type)}
                     </div>
                     

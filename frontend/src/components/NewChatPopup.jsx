@@ -77,7 +77,7 @@ export default function NewChatPopup() {
 
   return (
     <div className="fixed bottom-6 right-6 z-[60] animate-slide-up">
-      <div className="bg-white rounded-lg shadow-2xl border border-gray-200 max-w-sm overflow-hidden backdrop-blur-sm">
+      <div className="bg-white rounded-lg shadow-lg border border-gray-200 max-w-sm overflow-hidden">
         {/* Header with gradient */}
         <div 
           className="px-5 py-3.5 text-white flex items-center justify-between relative overflow-hidden"

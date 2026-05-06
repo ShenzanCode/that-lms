@@ -306,37 +306,37 @@ export default function ChatHistory() {
   return (
     <div className="space-y-8">
       {/* Page Header */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-[#011039] to-[#011039]/90 rounded-xl p-8 sm:p-10 text-white shadow-xl">
+      <div className="relative overflow-hidden bg-gradient-to-r from-[#011039] to-[#011039]/90 rounded-md p-8 sm:p-10 text-white shadow-md">
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <h1 className="text-3xl font-extrabold tracking-tight">Support History</h1>
             <p className="text-slate-300 mt-2 text-lg">
               View and manage your conversations with library support
               {totalUnread > 0 && (
-                <span className="ml-3 px-3 py-1 bg-[#E76800] text-white text-xs font-black uppercase rounded-full shadow-lg shadow-orange-600/30 inline-block">
+                <span className="ml-3 px-3 py-1 bg-[#E76800] text-white text-xs font-black uppercase rounded-full shadow-md shadow-orange-600/30 inline-block">
                   {totalUnread} new message{totalUnread > 1 ? 's' : ''}
                 </span>
               )}
             </p>
           </div>
         </div>
-        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-[#E76800]/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-[#E76800]/10 rounded-full blur-xl"></div>
       </div>
 
       <div className="grid grid-cols-12 gap-8">
         {/* Sessions List */}
         <div className="col-span-12 lg:col-span-4">
-          <Card className="border-none shadow-sm rounded-xl overflow-hidden bg-white h-[750px] flex flex-col">
+          <Card className="border-none shadow-sm rounded-md overflow-hidden bg-white h-[750px] flex flex-col">
             <div className="p-8 border-b border-slate-50">
                 <div className="flex items-center gap-3 mb-8">
-                  <div className="w-10 h-10 rounded-lg bg-orange-50 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-md bg-orange-50 flex items-center justify-center">
                     <MessageCircle className="h-5 w-5 text-[#E76800]" />
                   </div>
                   <h2 className="text-xl font-extrabold text-[#011039]">Conversations</h2>
                 </div>
 
                 {/* Tabs */}
-                <div className="flex p-1.5 bg-slate-50 rounded-xl mb-6">
+                <div className="flex p-1.5 bg-slate-50 rounded-md mb-6">
                   {[
                     { id: 'active', label: 'Active', count: activeChatCount },
                     { id: 'closed', label: 'History', count: closedChatCount }
@@ -344,7 +344,7 @@ export default function ChatHistory() {
                     <button
                       key={tab.id}
                       onClick={() => setActiveTab(tab.id)}
-                      className={`flex-1 py-2.5 rounded-lg text-xs font-black uppercase tracking-widest transition-all ${
+                      className={`flex-1 py-2.5 rounded-md text-xs font-black uppercase tracking-widest transition-all ${
                         activeTab === tab.id
                           ? 'bg-white text-[#011039] shadow-sm'
                           : 'text-slate-400 hover:text-slate-600'
@@ -368,7 +368,7 @@ export default function ChatHistory() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search messages..."
-                    className="w-full pl-11 pr-4 py-3 bg-slate-50 border-2 border-transparent rounded-lg focus:outline-none focus:border-orange-100 focus:bg-white transition-all text-sm font-bold text-slate-600 placeholder:text-slate-300"
+                    className="w-full pl-11 pr-4 py-3 bg-slate-50 border-2 border-transparent rounded-md focus:outline-none focus:border-orange-100 focus:bg-white transition-all text-sm font-bold text-slate-600 placeholder:text-slate-300"
                   />
                 </div>
             </div>
@@ -431,7 +431,7 @@ export default function ChatHistory() {
                                e.stopPropagation();
                                handleDeleteSession(session._id);
                              }}
-                             className="p-2 hover:bg-red-50 rounded-lg transition-all text-slate-300 hover:text-red-500 opacity-0 group-hover:opacity-100"
+                             className="p-2 hover:bg-red-50 rounded-md transition-all text-slate-300 hover:text-red-500 opacity-0 group-hover:opacity-100"
                            >
                              <Trash2 className="h-3.5 w-3.5" />
                            </button>
@@ -448,11 +448,11 @@ export default function ChatHistory() {
         {/* Chat Window */}
         <div className="col-span-12 lg:col-span-8">
           {selectedSession ? (
-            <Card className="border-none shadow-sm rounded-xl overflow-hidden bg-white h-[750px] flex flex-col">
+            <Card className="border-none shadow-sm rounded-md overflow-hidden bg-white h-[750px] flex flex-col">
               <div className="p-6 sm:px-10 sm:py-8 border-b border-slate-50 bg-slate-50/30 backdrop-blur-sm">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-[#011039] flex items-center justify-center text-white font-black shadow-lg shadow-blue-900/20">
+                    <div className="w-12 h-12 rounded-md bg-[#011039] flex items-center justify-center text-white font-black shadow-md shadow-blue-900/20">
                       SR
                     </div>
                     <div>
@@ -468,7 +468,7 @@ export default function ChatHistory() {
                   {!adminLeft && !memberLeft && (
                     <Button
                       onClick={() => handleCloseSession(selectedSession._id)}
-                      className="bg-red-50 hover:bg-red-100 text-red-500 border-none px-6 py-2.5 rounded-lg text-xs font-black uppercase tracking-widest transition-all"
+                      className="bg-red-50 hover:bg-red-100 text-red-500 border-none px-6 py-2.5 rounded-md text-xs font-black uppercase tracking-widest transition-all"
                     >
                       <XCircle className="h-4 w-4 mr-2" />
                       Leave chat
@@ -492,7 +492,7 @@ export default function ChatHistory() {
                       if (msg.isSystemMessage || msg.senderType === 'system') {
                         return (
                           <div key={msg._id} className="flex justify-center my-8">
-                            <div className="px-5 py-2 bg-slate-100/50 backdrop-blur-sm border border-slate-100 text-slate-400 font-bold rounded-xl text-[10px] uppercase tracking-widest shadow-sm">
+                            <div className="px-5 py-2 bg-slate-100/50 backdrop-blur-sm border border-slate-100 text-slate-400 font-bold rounded-md text-[10px] uppercase tracking-widest shadow-sm">
                               {msg.message}
                             </div>
                           </div>
@@ -505,8 +505,8 @@ export default function ChatHistory() {
                           <div
                             className={`max-w-[80%] sm:max-w-[70%] group relative ${
                               isOwn
-                                ? 'bg-white text-slate-600 rounded-xl rounded-tr-none border-2 border-slate-50'
-                                : 'bg-[#011039] text-white rounded-xl rounded-tl-none shadow-xl shadow-blue-900/10'
+                                ? 'bg-white text-slate-600 rounded-md rounded-tr-none border-2 border-slate-50'
+                                : 'bg-[#011039] text-white rounded-md rounded-tl-none shadow-md shadow-blue-900/10'
                             } p-4 sm:p-5 transition-transform`}
                           >
                             {!isOwn && (
@@ -535,7 +535,7 @@ export default function ChatHistory() {
                     })}
                     {isTyping && (
                       <div className="flex justify-start animate-in fade-in slide-in-from-left-2">
-                        <div className="bg-[#011039] rounded-xl rounded-tl-none px-5 py-4 shadow-lg shadow-blue-900/10">
+                        <div className="bg-[#011039] rounded-md rounded-tl-none px-5 py-4 shadow-md shadow-blue-900/10">
                           <div className="flex gap-1.5">
                             <span className="w-2 h-2 bg-orange-400 rounded-full animate-bounce"></span>
                             <span className="w-2 h-2 bg-orange-400 rounded-full animate-bounce [animation-delay:0.2s]"></span>
@@ -551,7 +551,7 @@ export default function ChatHistory() {
 
               {/* Input Message Overlay */}
               <div className="p-8 sm:px-10 border-t border-slate-50 bg-white">
-                <div className="bg-slate-50 rounded-xl p-6 text-center border-2 border-dashed border-slate-100">
+                <div className="bg-slate-50 rounded-md p-6 text-center border-2 border-dashed border-slate-100">
                   <div className="flex items-center justify-center gap-4 mb-2">
                     <div className="w-2 h-2 rounded-full bg-slate-300"></div>
                     <p className="text-xs font-black uppercase tracking-[0.2em] text-[#011039]">Historical Record</p>
@@ -564,10 +564,10 @@ export default function ChatHistory() {
               </div>
             </Card>
           ) : (
-            <Card className="border-none shadow-sm rounded-xl overflow-hidden bg-white h-[750px] flex items-center justify-center p-12 text-center group">
+            <Card className="border-none shadow-sm rounded-md overflow-hidden bg-white h-[750px] flex items-center justify-center p-12 text-center group">
               <div className="max-w-xs">
                 <div className="relative mb-8 inline-block">
-                    <div className="absolute inset-0 bg-orange-50 rounded-full blur-2xl transition-transform duration-700"></div>
+                    <div className="absolute inset-0 bg-orange-50 rounded-full blur-lg transition-transform duration-700"></div>
                     <div className="relative w-24 h-24 bg-white rounded-full shadow-sm flex items-center justify-center border border-slate-50">
                         <MessageCircle className="h-10 w-10 text-slate-100 transition-colors duration-500" />
                     </div>

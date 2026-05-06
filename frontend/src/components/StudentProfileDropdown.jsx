@@ -68,7 +68,7 @@ export default function StudentProfileDropdown() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-2xl border border-slate-100 py-2 z-[100] animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg border border-slate-100 py-2 z-[100] animate-in fade-in slide-in-from-top-2 duration-200">
           <div className="px-4 py-3 border-b border-slate-50 mb-1">
             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Signed in as</p>
             <p className="text-sm font-extrabold text-[#011039] truncate">{displayName}</p>

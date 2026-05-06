@@ -57,7 +57,7 @@ const AlertDialog = ({
       onClick={onClose}
     >
       <Card 
-        className="w-full max-w-sm sm:max-w-md shadow-2xl"
+        className="w-full max-w-sm sm:max-w-md shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
         <CardContent className="p-0">

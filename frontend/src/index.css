@@ -27,7 +27,7 @@ html {
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 23 100% 45%;
-    --radius: 0.75rem;
+    --radius: 0.5rem;
   }
 }
 
@@ -48,19 +48,19 @@ html {
   }
 
   .card {
-    @apply rounded-xl border bg-card text-card-foreground shadow-sm;
+    @apply rounded-lg border bg-card text-card-foreground shadow-sm;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center rounded-lg text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50;
+    @apply inline-flex items-center justify-center rounded-md text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98];
   }
 
   .btn-primary {
-    @apply bg-primary text-white px-4 py-2 hover:opacity-90;
+    @apply bg-primary text-white px-4 py-2 hover:bg-primary/90 shadow-sm;
   }
   
   .btn-secondary {
-    @apply bg-secondary text-white px-4 py-2 hover:opacity-90;
+    @apply bg-secondary text-white px-4 py-2 hover:bg-secondary/90 shadow-sm;
   }
 
   .btn-outline {
@@ -68,7 +68,7 @@ html {
   }
   
   .btn-ghost {
-    @apply bg-transparent text-secondary px-4 py-2 hover:bg-secondary/10;
+    @apply bg-transparent text-secondary px-4 py-2 hover:bg-secondary/5;
   }
 
   .btn-danger {
@@ -76,7 +76,7 @@ html {
   }
 
   .input {
-    @apply flex h-10 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm transition-all focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/10;
+    @apply flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm transition-all focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/5;
   }
 
   .label {

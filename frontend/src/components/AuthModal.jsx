@@ -98,11 +98,11 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login', init
       onClose={onClose} 
       title={mode === 'login' ? 'Welcome Back' : 'Join Our Library'}
       size="sm"
-      className="rounded-xl overflow-hidden"
+      className="rounded-md overflow-hidden"
     >
       <div className="flex flex-col">
         {/* Toggle Mode */}
-        <div className="flex bg-slate-100 p-1.5 rounded-lg mb-8">
+        <div className="flex bg-slate-100 p-1.5 rounded-md mb-8">
           <button
             onClick={() => setMode('login')}
             className={`flex-1 py-2.5 text-sm font-bold rounded-md transition-all ${
@@ -237,7 +237,7 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login', init
           <Button 
             type="submit" 
             variant="primary" 
-            className="w-full h-14 rounded-lg shadow-xl shadow-orange-600/20 text-lg font-bold mt-4"
+            className="w-full h-14 rounded-md shadow-lg shadow-orange-600/10 text-lg font-bold mt-4"
             loading={loading}
           >
             {mode === 'login' ? 'Sign In' : 'Create Account'}

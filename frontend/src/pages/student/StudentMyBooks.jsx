@@ -76,12 +76,12 @@ export default function StudentMyBooks() {
   return (
     <div className="space-y-8">
       {/* Page Header */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-[#011039] to-[#011039]/90 rounded-lg p-8 sm:p-10 text-white shadow-xl">
+      <div className="relative overflow-hidden bg-gradient-to-r from-[#011039] to-[#011039]/90 rounded-lg p-8 sm:p-10 text-white shadow-md">
         <div className="relative z-10">
           <h1 className="text-3xl font-extrabold tracking-tight">My Issued Books</h1>
           <p className="text-slate-300 mt-2 text-lg">Manage and track your current borrowings</p>
         </div>
-        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-[#E76800]/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-[#E76800]/10 rounded-full blur-xl"></div>
       </div>
 
       {transactions.length === 0 ? (

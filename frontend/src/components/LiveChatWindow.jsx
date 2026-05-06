@@ -334,7 +334,7 @@ export default function LiveChatWindow({ onClose, onUnreadCountChange }) {
       <div className="fixed bottom-6 right-24 z-50">
         <button
           onClick={() => setIsMinimized(false)}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg shadow-lg text-white font-bold"
+          className="flex items-center gap-2 px-4 py-2 rounded-md shadow-lg text-white font-bold"
           style={{ background: 'linear-gradient(135deg, #011039 0%, #E76800 100%)' }}
         >
           <MessageCircle className="h-4 w-4" />
@@ -350,7 +350,7 @@ export default function LiveChatWindow({ onClose, onUnreadCountChange }) {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 w-96 h-[32rem] bg-white rounded-lg shadow-2xl flex flex-col overflow-hidden">
+    <div className="fixed bottom-6 right-6 z-50 w-96 h-[32rem] bg-white rounded-md shadow-lg flex flex-col overflow-hidden">
       {/* Header */}
       <div
         className="flex items-center justify-between px-4 py-3 text-white"
@@ -409,7 +409,7 @@ export default function LiveChatWindow({ onClose, onUnreadCountChange }) {
             <button
               onClick={handleStartChat}
               disabled={loading}
-              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-orange-500 text-white rounded-lg font-bold hover:from-blue-700 hover:to-orange-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-orange-500 text-white rounded-md font-bold hover:from-blue-700 hover:to-orange-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 'Loading...'
@@ -459,7 +459,7 @@ export default function LiveChatWindow({ onClose, onUnreadCountChange }) {
                   className={`flex ${isOwn ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-[75%] rounded-lg px-4 py-2 ${
+                    className={`max-w-[75%] rounded-md px-4 py-2 ${
                       isOwn
                         ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white'
                         : 'bg-white text-gray-800 border border-gray-200'
@@ -483,7 +483,7 @@ export default function LiveChatWindow({ onClose, onUnreadCountChange }) {
             })}
             {isTyping && (
               <div className="flex justify-start">
-                <div className="bg-white border border-gray-200 rounded-lg px-4 py-2">
+                <div className="bg-white border border-gray-200 rounded-md px-4 py-2">
                   <div className="flex gap-1">
                     <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></span>
                     <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100"></span>
@@ -501,7 +501,7 @@ export default function LiveChatWindow({ onClose, onUnreadCountChange }) {
       {chatStarted && (
         <div className="border-t border-gray-200 p-3 bg-white">
           {otherPartyLeft || memberLeft ? (
-            <div className="text-center py-3 text-sm text-gray-500 bg-gray-50 rounded-lg">
+            <div className="text-center py-3 text-sm text-gray-500 bg-gray-50 rounded-md">
               <p className="font-bold">This conversation has ended</p>
               <p className="text-xs mt-1">No new messages can be sent</p>
             </div>
@@ -513,13 +513,13 @@ export default function LiveChatWindow({ onClose, onUnreadCountChange }) {
                 onChange={handleTyping}
                 onKeyPress={handleKeyPress}
                 placeholder="Type your message..."
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                 disabled={sending || !session}
               />
               <button
                 onClick={handleSendMessage}
                 disabled={!newMessage.trim() || sending || !session}
-                className="px-4 py-2 rounded-lg text-white font-bold transition disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 rounded-md text-white font-bold transition disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{ background: newMessage.trim() ? '#E76800' : '#9CA3AF' }}
               >
                 <Send className="h-5 w-5" />

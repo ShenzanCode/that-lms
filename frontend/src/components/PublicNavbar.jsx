@@ -45,7 +45,7 @@ export default function PublicNavbar({ onOpenAuth, view, setView }) {
           <Link 
             to="/landing" 
             onClick={(e) => handleNavClick(e, null, 'landing')} 
-            className={`transition-all duration-300 hover:scale-105 ${view === 'landing' ? 'text-primary' : 'text-slate-600 hover:text-primary'}`}
+            className={`transition-all duration-300 ${view === 'landing' ? 'text-primary' : 'text-slate-600 hover:text-primary'}`}
           >
             Home
           </Link>
@@ -53,7 +53,7 @@ export default function PublicNavbar({ onOpenAuth, view, setView }) {
           <a 
             href="/landing#books" 
             onClick={(e) => handleNavClick(e, 'books')}
-            className="text-slate-600 hover:text-primary transition-all duration-300 hover:scale-105"
+            className="text-slate-600 hover:text-primary transition-all duration-300"
           >
             Books Collection
           </a>
@@ -61,7 +61,7 @@ export default function PublicNavbar({ onOpenAuth, view, setView }) {
           {isAuthenticated && (
             <Link 
               to={isLibAuth ? "/admin" : "/student/dashboard"}
-              className={`transition-all duration-300 hover:scale-105 ${view === 'dashboard' ? 'text-primary' : 'text-slate-600 hover:text-primary'}`}
+              className={`transition-all duration-300 ${view === 'dashboard' ? 'text-primary' : 'text-slate-600 hover:text-primary'}`}
             >
               Dashboard
             </Link>
@@ -70,7 +70,7 @@ export default function PublicNavbar({ onOpenAuth, view, setView }) {
           <a 
             href="/landing#actions" 
             onClick={(e) => handleNavClick(e, 'actions')}
-            className="text-slate-600 hover:text-primary transition-all duration-300 hover:scale-105"
+            className="text-slate-600 hover:text-primary transition-all duration-300"
           >
             Our Services
           </a>
@@ -78,7 +78,7 @@ export default function PublicNavbar({ onOpenAuth, view, setView }) {
           <a 
             href="/landing#contact" 
             onClick={(e) => handleNavClick(e, 'contact')}
-            className="text-slate-600 hover:text-primary transition-all duration-300 hover:scale-105"
+            className="text-slate-600 hover:text-primary transition-all duration-300"
           >
             Contact Us
           </a>
@@ -97,8 +97,8 @@ export default function PublicNavbar({ onOpenAuth, view, setView }) {
             </div>
           ) : (
             <>
-              <Button variant="ghost" onClick={() => onOpenAuth('login')} className="px-6 h-10 text-secondary hover:bg-secondary/5 font-black uppercase tracking-widest text-[11px] rounded-xl transition-all active:scale-95">Login</Button>
-              <Button variant="primary" onClick={() => onOpenAuth('signup')} className="px-7 h-10 rounded-xl shadow-lg shadow-orange-500/20 font-black uppercase tracking-widest text-[11px] transition-all hover:scale-105 active:scale-95">Signup</Button>
+              <Button variant="ghost" onClick={() => onOpenAuth('login')} className="px-6 h-10 text-secondary hover:bg-secondary/5 font-black uppercase tracking-widest text-[11px] rounded-md transition-all active:scale-[0.98]">Login</Button>
+              <Button variant="primary" onClick={() => onOpenAuth('signup')} className="px-7 h-10 rounded-md shadow-lg shadow-orange-500/20 font-black uppercase tracking-widest text-[11px] transition-all active:scale-[0.98]">Signup</Button>
             </>
           )}
         </div>

@@ -70,12 +70,12 @@ export default function StudentFines() {
   return (
     <div className="space-y-8">
       {/* Page Header */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-[#011039] to-[#011039]/90 rounded-xl p-8 sm:p-10 text-white shadow-xl">
+      <div className="relative overflow-hidden bg-gradient-to-r from-[#011039] to-[#011039]/90 rounded-md p-8 sm:p-10 text-white shadow-md">
         <div className="relative z-10">
           <h1 className="text-3xl font-extrabold tracking-tight">Financial Records</h1>
           <p className="text-slate-300 mt-2 text-lg">View your library fine history and payment status</p>
         </div>
-        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-[#E76800]/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-[#E76800]/10 rounded-full blur-xl"></div>
       </div>
 
       {/* Stats Cards */}
@@ -85,10 +85,10 @@ export default function StudentFines() {
           { label: 'Settled Fines', value: stats.paid, icon: BookCheck, color: '#28A745', bg: 'bg-green-50' },
           { label: 'Outstanding Balance', value: stats.unpaid, icon: AlertCircle, color: stats.unpaid > 0 ? '#DC3545' : '#28A745', bg: stats.unpaid > 0 ? 'bg-red-50' : 'bg-green-50' }
         ].map((stat, idx) => (
-          <Card key={idx} className="border-none shadow-sm rounded-xl overflow-hidden bg-white">
+          <Card key={idx} className="border-none shadow-sm rounded-md overflow-hidden bg-white">
             <CardContent className="p-8">
               <div className="flex items-center gap-5">
-                <div className={`w-14 h-14 rounded-xl flex items-center justify-center ${stat.bg}`}>
+                <div className={`w-14 h-14 rounded-md flex items-center justify-center ${stat.bg}`}>
                   <stat.icon className="h-7 w-7" style={{color: stat.color}} />
                 </div>
                 <div>
@@ -110,7 +110,7 @@ export default function StudentFines() {
         </div>
 
         {fines.length === 0 ? (
-          <div className="bg-white rounded-xl p-16 text-center border-2 border-dashed border-slate-200">
+          <div className="bg-white rounded-md p-16 text-center border-2 border-dashed border-slate-200">
              <DollarSign className="h-16 w-16 mx-auto text-slate-200 mb-6" />
              <h3 className="text-2xl font-bold text-[#011039]">Perfect Record!</h3>
              <p className="text-slate-500 mt-2 max-w-sm mx-auto">You don't have any recorded fines. Thank you for being a responsible library member!</p>
@@ -118,11 +118,11 @@ export default function StudentFines() {
         ) : (
           <div className="space-y-4">
             {fines.map((fine) => (
-              <Card key={fine._id} className="border-none shadow-sm hover:shadow-md transition-all duration-300 rounded-xl overflow-hidden bg-white group">
+              <Card key={fine._id} className="border-none shadow-sm hover:shadow-md transition-all duration-300 rounded-md overflow-hidden bg-white group">
                 <CardContent className="p-6 sm:p-8">
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div className="flex-1 flex gap-5">
-                      <div className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center flex-shrink-0">
+                      <div className="w-12 h-12 rounded-md bg-slate-50 flex items-center justify-center flex-shrink-0">
                         <BookOpen className="h-6 w-6 text-[#E76800]" />
                       </div>
                       <div className="flex-1 min-w-0">
@@ -154,7 +154,7 @@ export default function StudentFines() {
                       <div className="text-3xl font-black" style={{color: fine.isPaid ? '#28A745' : '#DC3545'}}>
                         {formatCurrency(fine.amount)}
                       </div>
-                      <Badge variant={fine.isPaid ? 'success' : 'danger'} className="mt-1 px-3 py-1 rounded-xl text-[10px] uppercase font-bold tracking-widest">
+                      <Badge variant={fine.isPaid ? 'success' : 'danger'} className="mt-1 px-3 py-1 rounded-md text-[10px] uppercase font-bold tracking-widest">
                         {fine.isPaid ? 'Paid' : 'Unpaid'}
                       </Badge>
                     </div>
