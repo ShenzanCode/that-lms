@@ -218,7 +218,8 @@ export default function StudentDashboard() {
                           <BookCover 
                             src={transaction.bookId?.coverImage} 
                             alt={transaction.bookId?.title}
-                            className="w-full h-full object-cover"
+                            size="full"
+                            className="object-cover"
                           />
                         </div>
                       </div>

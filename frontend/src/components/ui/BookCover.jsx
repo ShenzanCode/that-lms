@@ -9,14 +9,16 @@ export function BookCover({ src, alt, className = '', size = 'md' }) {
     sm: 'w-12 h-16',
     md: 'w-16 h-20',
     lg: 'w-20 h-28',
-    xl: 'w-24 h-32'
+    xl: 'w-24 h-32',
+    full: 'w-full h-full'
   }
 
   const iconSizes = {
     sm: 'w-6 h-6',
     md: 'w-8 h-8',
     lg: 'w-10 h-10',
-    xl: 'w-12 h-12'
+    xl: 'w-12 h-12',
+    full: 'w-12 h-12'
   }
 
   const handleImageError = () => {
@@ -28,13 +30,9 @@ export function BookCover({ src, alt, className = '', size = 'md' }) {
     setImageLoading(false)
   }
 
-  // Get base URL for images - images are served from the root server, not the API path
-  const baseUrl = import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.startsWith('http') 
-    ? import.meta.env.VITE_API_URL 
-    : window.location.origin
-  
-  // Remove /api from baseUrl for image serving since images are served from root
-  const imageBaseUrl = baseUrl.replace('/api', '')
+  // Get base URL for images
+  // Prioritize hardcoded backend URL for development consistency
+  const imageBaseUrl = 'http://localhost:5000'
 
   // Show default icon if no src or if image failed to load
   if (!src || imageError) {

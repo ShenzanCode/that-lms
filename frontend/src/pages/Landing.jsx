@@ -344,20 +344,20 @@ export default function Landing() {
               <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
                   <div className="max-w-2xl">
-                    <p className="text-primary font-black tracking-widest uppercase text-xs mb-3">Our Collection</p>
-                    <h2 className="text-3xl sm:text-5xl font-black text-secondary leading-tight">Discover Your Next Favorite Book</h2>
-                    <div className="h-2 w-24 bg-primary mt-6 rounded-full shadow-sm shadow-orange-500/50"></div>
-                    <p className="text-slate-500 mt-8 text-lg font-bold">Browse through our extensive library of physical and digital assets.</p>
+                    <p className="text-primary font-black tracking-widest uppercase text-[10px] mb-2">Our Collection</p>
+                    <h2 className="text-3xl sm:text-4xl font-extrabold text-secondary">Discover Your Next Favorite Book</h2>
+                    <p className="text-slate-500 mt-2 text-lg">Browse through our extensive library of physical and digital assets.</p>
+                    <div className="h-1.5 w-20 bg-primary mt-4 rounded-full shadow-sm shadow-orange-500/50"></div>
                   </div>
 
                   <div className="w-full md:w-96">
                     <div className="relative group">
-                      <Search className="h-6 w-6 absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" />
+                      <Search className="h-5 w-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" />
                       <input
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         placeholder="Search titles, authors..."
-                        className="w-full pl-14 pr-6 py-4.5 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-primary transition-all bg-slate-50 focus:bg-white placeholder:text-slate-400 font-bold shadow-sm"
+                        className="w-full pl-12 pr-4 py-3.5 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-primary transition-all bg-slate-50 focus:bg-white placeholder:text-slate-400"
                       />
                     </div>
                   </div>
@@ -369,9 +369,9 @@ export default function Landing() {
                       <p className="text-red-700 font-black">Unable to load books right now.</p>
                     </div>
                   ) : booksLoading ? (
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
                       {Array.from({ length: 12 }).map((_, idx) => (
-                        <div key={idx} className="bg-white rounded-lg border border-slate-100 p-4 animate-pulse shadow-sm">
+                        <div key={idx} className="bg-white rounded-lg border border-slate-100 p-3 animate-pulse shadow-sm">
                           <div className="aspect-[3/4] bg-slate-100 rounded-md mb-4" />
                           <div className="h-4 bg-slate-100 rounded w-3/4 mb-3" />
                           <div className="h-3 bg-slate-100 rounded w-1/2" />
@@ -380,39 +380,39 @@ export default function Landing() {
                     </div>
                   ) : (
                     <>
-                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8">
+                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3">
                         {bookItems.map((book) => {
                           const coverUrl = getCoverUrl(book.coverImage)
                           return (
                             <Card 
                               key={book._id} 
-                              className="group p-4 border-slate-100 hover:shadow-md transition-all duration-500 rounded-lg flex flex-col h-full bg-white cursor-pointer relative border-2 border-transparent hover:border-primary/10"
+                              className="group p-3 border-slate-100 hover:shadow-md transition-all duration-300 rounded-lg flex flex-col h-full bg-white cursor-pointer relative"
                               onClick={() => handleBookClick(book)}
                             >
                               {hasBook(book._id) && (
-                                <div className="absolute top-2 left-2 z-10 bg-blue-600 text-white p-2 rounded-full shadow-md border-2 border-white" title="You currently have this book">
+                                <div className="absolute top-2 left-2 z-10 bg-blue-600 text-white p-1.5 rounded-full shadow-md border-2 border-white" title="You currently have this book">
                                   <CheckCircle className="h-3 w-3" />
                                 </div>
                               )}
-                              <div className="aspect-[3/4] bg-slate-50 rounded-md overflow-hidden mb-5 relative shadow-md hover:shadow-md transition-all">
+                              <div className="aspect-[3/4] bg-slate-50 rounded-lg overflow-hidden mb-4 relative shadow-sm hover:shadow-md transition-all">
                                 {coverUrl ? (
-                                  <img src={coverUrl} alt={book.title} className="w-full h-full object-cover transition-transform duration-700" />
+                                  <img src={coverUrl} alt={book.title} className="w-full h-full object-cover transition-transform duration-500" />
                                 ) : (
                                   <div className="w-full h-full flex items-center justify-center">
-                                    <BookOpen className="h-16 w-16 text-slate-200" />
+                                    <BookOpen className="h-12 w-12 text-slate-200" />
                                   </div>
                                 )}
                                 
                                 {/* Category Overlay */}
-                                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-secondary/95 via-secondary/60 to-transparent pt-10 pb-3 px-3 flex items-center justify-center translate-y-2 group-hover:translate-y-0 transition-transform">
-                                  <span className="text-white text-[10px] font-black uppercase tracking-[0.15em] drop-shadow-md truncate">
+                                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#011039]/90 via-[#011039]/50 to-transparent pt-8 pb-2 px-2 flex items-center justify-center">
+                                  <span className="text-white text-[9px] font-extrabold uppercase tracking-[0.1em] drop-shadow-sm truncate">
                                     {book.category || 'General'}
                                   </span>
                                 </div>
                               </div>
                               <div className="flex flex-col flex-1 px-1 text-center">
-                                <h3 className="text-sm font-black text-secondary line-clamp-2 leading-tight transition-colors group-hover:text-primary">{book.title}</h3>
-                                <p className="text-[11px] text-slate-500 mt-2.5 truncate font-bold uppercase tracking-wider">{book.author}</p>
+                                <h3 className="text-xs font-bold text-[#011039] line-clamp-2 leading-snug transition-colors group-hover:text-primary">{book.title}</h3>
+                                <p className="text-[10px] text-slate-500 mt-2 truncate italic">{book.author}</p>
                               </div>
                             </Card>
                           )
@@ -575,10 +575,10 @@ export default function Landing() {
           noPadding={true}
           size="lg"
         >
-          <div className="grid grid-cols-1 md:col-span-5">
+          <div className="grid grid-cols-1 md:grid-cols-5">
             {/* Left Side: Cover Image */}
             <div className="md:col-span-2 bg-slate-50 flex items-center justify-center p-8">
-              <div className="w-full aspect-[3/4] rounded-md shadow-lg overflow-hidden border-4 border-white">
+              <div className="w-full aspect-[3/4] rounded-lg shadow-lg overflow-hidden border-4 border-white">
                 {selectedBook.coverImage ? (
                   <img
                     src={getCoverUrl(selectedBook.coverImage)}
@@ -597,7 +597,7 @@ export default function Landing() {
             <div className="md:col-span-3 p-8 text-left">
               <div className="flex justify-between items-start mb-6">
                 <div>
-                  <Badge variant={selectedBook.status === 'Available' ? 'success' : 'warning'} className="mb-3 px-3 py-1 rounded-md">
+                  <Badge variant={selectedBook.status === 'Available' ? 'success' : 'warning'} className="mb-3 px-3 py-1 rounded-lg">
                     {selectedBook.status}
                   </Badge>
                   <h2 className="text-2xl font-extrabold text-[#011039] leading-tight">
@@ -613,7 +613,7 @@ export default function Landing() {
                 </button>
               </div>
 
-              <div className="grid grid-cols-2 gap-y-4 gap-x-6 mb-8 bg-slate-50 p-6 rounded-md border border-slate-100">
+              <div className="grid grid-cols-2 gap-y-4 gap-x-6 mb-8 bg-slate-50 p-6 rounded-lg border border-slate-100">
                 <div>
                   <p className="text-[10px] uppercase font-bold text-slate-400 mb-1">Sr.No</p>
                   <p className="text-sm font-bold text-[#011039]">{selectedBook.accessionNumber || '-'}</p>
@@ -647,12 +647,12 @@ export default function Landing() {
                 {isStudentAuth ? (
                   <div className="space-y-4">
                     {hasBook(selectedBook._id) ? (
-                      <div className="bg-blue-50 border border-blue-100 rounded-md p-4 flex items-center gap-3">
+                      <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 flex items-center gap-3">
                         <CheckCircle className="h-5 w-5 text-blue-600 shrink-0" />
                         <p className="text-sm font-bold text-blue-800">You currently have this book issued.</p>
                       </div>
                     ) : selectedBook.status === 'Available' ? (
-                      <div className="bg-green-50 border border-green-100 rounded-md p-4 flex items-center gap-3">
+                      <div className="bg-green-50 border border-green-100 rounded-lg p-4 flex items-center gap-3">
                         <CheckCircle className="h-5 w-5 text-green-600 shrink-0" />
                         <p className="text-sm font-bold text-green-800">
                           This book is currently available! Please visit the library to issue it.
@@ -660,7 +660,7 @@ export default function Landing() {
                       </div>
                     ) : (
                       <div className="space-y-4">
-                        <div className="bg-orange-50 border border-orange-100 rounded-md p-4 flex items-center gap-3">
+                        <div className="bg-orange-50 border border-orange-100 rounded-lg p-4 flex items-center gap-3">
                           <AlertTriangle className="h-5 w-5 text-orange-600 shrink-0" />
                           <p className="text-sm font-bold text-orange-800">
                             This book is currently unavailable please send the reservation
@@ -669,7 +669,7 @@ export default function Landing() {
                         
                         <Button 
                           variant="primary" 
-                          className="w-full h-14 rounded-md shadow-lg shadow-orange-600/20 text-lg font-bold"
+                          className="w-full h-14 rounded-lg shadow-md shadow-orange-600/20 text-lg font-bold"
                           onClick={(e) => handleReserve(e, selectedBook._id)}
                           loading={reserveMutation.isPending}
                         >
@@ -681,7 +681,7 @@ export default function Landing() {
                 ) : (
                   <div className="space-y-6 text-center">
                     {selectedBook.status === 'Available' ? (
-                      <div className="bg-green-50 border border-green-100 rounded-md p-4 flex items-center gap-3 text-left">
+                      <div className="bg-green-50 border border-green-100 rounded-lg p-4 flex items-center gap-3 text-left">
                         <CheckCircle className="h-5 w-5 text-green-600 shrink-0" />
                         <p className="text-sm font-bold text-green-800">
                           This book is currently available! Please visit the library to issue it.
@@ -689,13 +689,13 @@ export default function Landing() {
                       </div>
                     ) : (
                       <div className="space-y-4">
-                        <div className="bg-orange-50 border border-orange-100 rounded-md p-4 flex items-center gap-3 text-left">
+                        <div className="bg-orange-50 border border-orange-100 rounded-lg p-4 flex items-center gap-3 text-left">
                           <AlertTriangle className="h-5 w-5 text-orange-600 shrink-0" />
                           <p className="text-sm font-bold text-orange-800">
                             This book is currently unavailable please send the reservation
                           </p>
                         </div>
-                        <div className="bg-slate-50 border border-slate-100 rounded-md p-4">
+                        <div className="bg-slate-50 border border-slate-100 rounded-lg p-4">
                           <p className="text-slate-600 text-sm font-bold">To reserve this book, please log in to your student portal.</p>
                         </div>
                       </div>
@@ -703,14 +703,14 @@ export default function Landing() {
                     <div className="flex gap-4">
                       <Button 
                         variant="outline" 
-                        className="flex-1 h-12 rounded-md"
+                        className="flex-1 h-12 rounded-lg"
                         onClick={() => setShowBookModal(false)}
                       >
                         Close
                       </Button>
                       <Button 
                         variant="primary" 
-                        className="flex-1 h-12 rounded-md shadow-md shadow-orange-500/20 flex items-center justify-center gap-2"
+                        className="flex-1 h-12 rounded-lg shadow-lg shadow-orange-500/20 flex items-center justify-center gap-2"
                         onClick={() => openAuth('login')}
                       >
                         <LogIn className="h-4 w-4" />

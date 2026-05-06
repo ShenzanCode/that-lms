@@ -410,7 +410,7 @@ const getTransactions = async (req, res, next) => {
     const skip = (page - 1) * limit;
 
     const transactions = await Transaction.find(query)
-      .populate('bookId', 'title author accessionNumber')
+      .populate('bookId', 'title author accessionNumber coverImage category')
       .populate('memberId', 'name memberId memberType')
       .populate('issuedBy', 'name')
       .populate('returnedBy', 'name')
@@ -455,7 +455,7 @@ const getIssuedBooks = async (req, res, next) => {
 
     // First, get all transactions to filter by search
     let transactions = await Transaction.find(query)
-      .populate('bookId', 'title author accessionNumber category')
+      .populate('bookId', 'title author accessionNumber category coverImage')
       .populate('memberId', 'name memberId memberType phone')
       .populate('issuedBy', 'name')
       .sort('dueDate');

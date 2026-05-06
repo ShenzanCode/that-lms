@@ -162,19 +162,19 @@ export default function PublicCatalog() {
           <Card className="mb-10 bg-white shadow-sm border-slate-100 rounded-md overflow-hidden">
             <div className="p-6 flex flex-col md:flex-row gap-6">
               <div className="flex-1 relative group">
-                <Search className="h-5 w-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#E76800] transition-colors" />
+                <Search className="h-5 w-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" />
                 <input
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search by title, author, or ISBN..."
-                  className="w-full pl-12 pr-4 py-3.5 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-[#E76800] transition-all bg-slate-50 focus:bg-white placeholder:text-slate-400"
+                  className="w-full pl-12 pr-4 py-3.5 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-primary transition-all bg-slate-50 focus:bg-white placeholder:text-slate-400"
                 />
               </div>
               
               <div className="flex flex-wrap gap-4">
                 <div className="w-full md:w-64">
                   <select
-                    className="w-full px-4 py-3.5 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-[#E76800] transition-all bg-slate-50 focus:bg-white text-slate-600 font-bold"
+                    className="w-full px-4 py-3.5 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-primary transition-all bg-slate-50 focus:bg-white text-slate-600 font-bold"
                     value={filters.category}
                     onChange={(e) => handleFilterChange('category', e.target.value)}
                   >
@@ -193,7 +193,7 @@ export default function PublicCatalog() {
 
                 <div className="w-full md:w-48">
                   <select
-                    className="w-full px-4 py-3.5 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-[#E76800] transition-all bg-slate-50 focus:bg-white text-slate-600 font-bold"
+                    className="w-full px-4 py-3.5 border-2 border-slate-100 rounded-lg focus:outline-none focus:border-primary transition-all bg-slate-50 focus:bg-white text-slate-600 font-bold"
                     value={filters.status}
                     onChange={(e) => handleFilterChange('status', e.target.value)}
                   >
