@@ -53,35 +53,35 @@ export default function Books() {
   }) : []
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 bg-white p-6 rounded-lg shadow-sm border border-slate-100">
-        <div>
-          <h1 className="text-3xl font-black text-secondary">Books Inventory</h1>
-          <p className="mt-1 text-slate-500 font-bold">Manage and monitor your library collection</p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-6 bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-slate-100">
+        <div className="min-w-0">
+          <h1 className="text-2xl sm:text-3xl font-black text-secondary">Books Inventory</h1>
+          <p className="mt-1 text-xs sm:text-sm text-slate-500 font-bold">Manage and monitor your library collection</p>
         </div>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-2 sm:gap-3 flex-shrink-0">
           <Button 
             variant="secondary" 
             onClick={handleRefresh}
             disabled={isFetching}
-            className="rounded-md font-black uppercase tracking-widest text-[11px]"
+            className="rounded-md font-black uppercase tracking-widest text-[10px] sm:text-[11px] h-9 sm:h-10 px-2 sm:px-3"
           >
-            <RefreshCw className={`h-4 w-4 mr-2 ${isFetching ? 'animate-spin' : ''}`} />
-            Refresh
+            <RefreshCw className={`h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 flex-shrink-0 ${isFetching ? 'animate-spin' : ''}`} />
+            <span className="hidden sm:inline">Refresh</span>
           </Button>
           <Button 
             variant="secondary" 
             onClick={() => setIsBulkManagerOpen(true)}
-            className="rounded-md bg-primary hover:bg-primary/90 border-none text-white font-black uppercase tracking-widest text-[11px] shadow-md shadow-orange-500/20"
+            className="rounded-md bg-primary hover:bg-primary/90 border-none text-white font-black uppercase tracking-widest text-[10px] sm:text-[11px] shadow-md shadow-orange-500/20 h-9 sm:h-10 px-2 sm:px-3"
           >
-            <Database className="h-4 w-4 mr-2" />
-            Bulk Management
+            <Database className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 flex-shrink-0" />
+            <span className="hidden sm:inline">Bulk</span>
           </Button>
           <Link to="/admin/books/add">
-            <Button variant="primary" className="rounded-md font-black uppercase tracking-widest text-[11px] shadow-md shadow-orange-500/20">
-              <Plus className="h-4 w-4 mr-2" />
-              Add Book
+            <Button variant="primary" className="rounded-md font-black uppercase tracking-widest text-[10px] sm:text-[11px] shadow-md shadow-orange-500/20 h-9 sm:h-10 px-2 sm:px-3">
+              <Plus className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 flex-shrink-0" />
+              <span className="hidden sm:inline">Add</span>
             </Button>
           </Link>
         </div>
@@ -89,18 +89,18 @@ export default function Books() {
 
       {/* Search and Filters */}
       <Card className="rounded-lg border-slate-100 shadow-sm">
-        <div className="p-6 space-y-6">
+        <div className="p-3 sm:p-4 md:p-6 space-y-4 sm:space-y-6">
           <SearchBar
             value={search}
             onChange={handleSearchChange}
             placeholder="Search books by title, author, ISBN..."
-            className="rounded-md border-2 border-slate-100 focus:border-primary transition-all"
+            className="rounded-md border-2 border-slate-100 focus:border-primary transition-all text-sm"
           />
-          <div className="flex flex-wrap gap-4">
-            <div className="w-full sm:w-64">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <div className="w-full sm:w-auto sm:flex-1">
               <p className="text-[10px] font-black uppercase text-slate-400 mb-2 ml-1 tracking-widest">Category Filter</p>
               <select
-                className="input w-full rounded-md border-2 border-slate-100 focus:border-primary font-bold"
+                className="input w-full rounded-md border-2 border-slate-100 focus:border-primary font-bold text-sm"
                 value={filters.category}
                 onChange={(e) => handleFilterChange('category', e.target.value)}
               >
@@ -126,10 +126,10 @@ export default function Books() {
                 <option value="Zoology">Zoology</option>
               </select>
             </div>
-            <div className="w-full sm:w-64">
+            <div className="w-full sm:w-auto sm:flex-1">
               <p className="text-[10px] font-black uppercase text-slate-400 mb-2 ml-1 tracking-widest">Status Filter</p>
               <select
-                className="input w-full rounded-md border-2 border-slate-100 focus:border-primary font-bold"
+                className="input w-full rounded-md border-2 border-slate-100 focus:border-primary font-bold text-sm"
                 value={filters.status}
                 onChange={(e) => handleFilterChange('status', e.target.value)}
               >
@@ -147,31 +147,31 @@ export default function Books() {
       {/* Books Table */}
       <Card className="rounded-lg border-slate-100 shadow-sm overflow-hidden">
         {isLoading ? (
-          <div className="p-20 flex justify-center">
+          <div className="p-12 sm:p-20 flex justify-center">
             <LoadingSpinner size="lg" />
           </div>
         ) : data?.data?.length > 0 ? (
           <>
             <div className="overflow-x-auto">
-              <table className="w-full">
+              <table className="w-full min-w-max">
                 <thead>
                   <tr className="bg-secondary">
-                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Cover</th>
-                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Sr.No</th>
-                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Title</th>
-                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Author</th>
-                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Edition</th>
-                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Price</th>
-                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Category</th>
-                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Available</th>
-                    <th className="px-6 py-4 text-left text-[10px] font-black text-white uppercase tracking-widest">Status</th>
-                    <th className="px-6 py-4 text-right text-[10px] font-black text-white uppercase tracking-widest">Actions</th>
+                    <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-[9px] sm:text-[10px] font-black text-white uppercase tracking-widest whitespace-nowrap">Cover</th>
+                    <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-[9px] sm:text-[10px] font-black text-white uppercase tracking-widest whitespace-nowrap">Sr.No</th>
+                    <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-[9px] sm:text-[10px] font-black text-white uppercase tracking-widest whitespace-nowrap">Title</th>
+                    <th className="hidden sm:table-cell px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-[9px] sm:text-[10px] font-black text-white uppercase tracking-widest whitespace-nowrap">Author</th>
+                    <th className="hidden md:table-cell px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-[9px] sm:text-[10px] font-black text-white uppercase tracking-widest whitespace-nowrap">Edition</th>
+                    <th className="hidden lg:table-cell px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-[9px] sm:text-[10px] font-black text-white uppercase tracking-widest whitespace-nowrap">Price</th>
+                    <th className="hidden md:table-cell px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-[9px] sm:text-[10px] font-black text-white uppercase tracking-widest whitespace-nowrap">Category</th>
+                    <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-[9px] sm:text-[10px] font-black text-white uppercase tracking-widest whitespace-nowrap">Available</th>
+                    <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-[9px] sm:text-[10px] font-black text-white uppercase tracking-widest whitespace-nowrap">Status</th>
+                    <th className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-right text-[9px] sm:text-[10px] font-black text-white uppercase tracking-widest whitespace-nowrap">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {sortedBooks.map((book) => (
-                    <tr key={book._id} className="hover:bg-slate-50 transition-colors">
-                      <td className="px-6 py-4">
+                    <tr key={book._id} className="hover:bg-slate-50 transition-colors text-xs sm:text-sm">
+                      <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4">
                         <div className="shadow-sm rounded-md overflow-hidden w-fit">
                           <BookCover 
                             src={book.coverImage} 
@@ -180,34 +180,34 @@ export default function Books() {
                           />
                         </div>
                       </td>
-                      <td className="px-6 py-4 text-sm font-black text-secondary">{book.accessionNumber}</td>
-                      <td className="px-6 py-4">
-                        <Link to={`/admin/books/${book._id}`} className="text-sm font-black text-primary hover:underline underline-offset-4 decoration-2">
+                      <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 font-black text-secondary whitespace-nowrap">{book.accessionNumber}</td>
+                      <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4">
+                        <Link to={`/admin/books/${book._id}`} className="font-black text-primary hover:underline underline-offset-4 decoration-2">
                           {book.title}
                         </Link>
                       </td>
-                      <td className="px-6 py-4 text-sm font-bold text-slate-600">{book.author}</td>
-                      <td className="px-6 py-4 text-sm font-bold text-slate-500">
+                      <td className="hidden sm:table-cell px-3 sm:px-4 md:px-6 py-3 sm:py-4 font-bold text-slate-600">{book.author}</td>
+                      <td className="hidden md:table-cell px-3 sm:px-4 md:px-6 py-3 sm:py-4 font-bold text-slate-500">
                         {book.edition && book.edition !== '-' ? book.edition : '-'}
                       </td>
-                      <td className="px-6 py-4 text-sm font-black text-secondary">
+                      <td className="hidden lg:table-cell px-3 sm:px-4 md:px-6 py-3 sm:py-4 font-black text-secondary">
                         {(() => {
                           // Check if there's an acquisition note in description
                           const acquisitionMatch = book.description?.match(/\[Acquisition: ([^\]]+)\]/)
                           if (acquisitionMatch) {
-                            return <span className="text-success-600 font-black uppercase text-[10px] tracking-wider bg-success/10 px-2 py-1 rounded-md">{acquisitionMatch[1]}</span>
+                            return <span className="text-success-600 font-black uppercase text-[9px] tracking-wider bg-success/10 px-2 py-1 rounded-md">{acquisitionMatch[1]}</span>
                           }
                           return book.price && book.price > 0 ? `Rs. ${book.price.toFixed(0)}` : '-'
                         })()}
                       </td>
-                      <td className="px-6 py-4 text-sm font-bold text-slate-500">{book.category}</td>
-                      <td className="px-6 py-4 text-sm font-black text-secondary">{book.availableCopies}/{book.totalCopies}</td>
-                      <td className="px-6 py-4">
+                      <td className="hidden md:table-cell px-3 sm:px-4 md:px-6 py-3 sm:py-4 font-bold text-slate-500">{book.category}</td>
+                      <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 font-black text-secondary whitespace-nowrap">{book.availableCopies}/{book.totalCopies}</td>
+                      <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4">
                         <StatusBadge status={book.status} />
                       </td>
-                      <td className="px-6 py-4 text-right">
+                      <td className="px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-right">
                         <Link to={`/admin/books/${book._id}/edit`}>
-                          <Button variant="ghost" size="sm" className="rounded-md font-black uppercase text-[10px] tracking-widest">Edit</Button>
+                          <Button variant="ghost" size="sm" className="rounded-md font-black uppercase text-[9px] sm:text-[10px] tracking-widest px-2 h-8">Edit</Button>
                         </Link>
                       </td>
                     </tr>
@@ -216,7 +216,7 @@ export default function Books() {
               </table>
             </div>
             {data.pagination && (
-              <div className="p-6 border-t border-slate-100 bg-slate-50/50">
+              <div className="p-3 sm:p-4 md:p-6 border-t border-slate-100 bg-slate-50/50">
                 <Pagination
                   currentPage={data.pagination.page}
                   totalPages={data.pagination.pages}
@@ -232,7 +232,7 @@ export default function Books() {
             description="Try adjusting your search or filters"
             action={
               <Link to="/admin/books/add">
-                <Button variant="primary" className="rounded-md px-8 h-12 font-black uppercase tracking-widest text-xs">
+                <Button variant="primary" className="rounded-md px-6 sm:px-8 h-10 sm:h-12 font-black uppercase tracking-widest text-xs">
                   <Plus className="h-4 w-4 mr-2" />
                   Add Your First Book
                 </Button>
