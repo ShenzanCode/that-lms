@@ -38,9 +38,30 @@ html {
   }
   body {
     @apply bg-background text-foreground;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-feature-settings: 'rlig' 1, 'calt' 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
+}
+
+/* Typographic refinements for a premium look */
+@layer base {
+  h1, h2, h3, h4 {
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    letter-spacing: -0.01em;
+    color: #011039;
+    font-weight: 700;
+  }
+
+  h1 { font-size: clamp(1.375rem, 2.4vw, 2.25rem); }
+  h2 { font-size: clamp(1.25rem, 2.0vw, 1.75rem); }
+  h3 { font-size: clamp(1.125rem, 1.6vw, 1.25rem); }
+
+  p, label, input, button { font-weight: 400; }
+  .btn, .btn-primary, .btn-secondary { border-radius: 10px; }
+  .card { border-radius: 12px; box-shadow: 0 6px 18px rgba(1,16,57,0.06); }
 }
 
 @layer components {

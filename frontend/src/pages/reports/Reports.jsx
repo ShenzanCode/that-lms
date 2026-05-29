@@ -418,15 +418,15 @@ export default function Reports() {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold" style={{color: '#011039'}}>Reports</h1>
-          <p className="mt-1" style={{color: '#011039'}}>Analytics and insights for your library</p>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+        <div className="min-w-0">
+          <h1 className="text-2xl sm:text-3xl font-bold" style={{color: '#011039'}}>Reports</h1>
+          <p className="mt-1 text-sm sm:text-base" style={{color: '#011039'}}>Analytics and insights for your library</p>
         </div>
         {activeTab !== 'dashboard' && (
-          <Button onClick={exportReport} variant="outline">
+          <Button onClick={exportReport} variant="outline" className="w-full sm:w-auto justify-center">
             <Download className="h-4 w-4" />
             Export CSV
           </Button>
@@ -435,15 +435,15 @@ export default function Reports() {
 
       {/* Tab Navigation */}
       <Card>
-        <div className="px-4 pt-4">
-          <nav className="flex space-x-1">
+        <div className="px-3 pt-3 sm:px-4 sm:pt-4">
+          <nav className="flex gap-2 overflow-x-auto pb-1 -mx-3 px-3 sm:mx-0 sm:px-0 sm:flex-wrap sm:overflow-visible">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               return (
                 <button
                   key={tab.id}
                   onClick={() => handleTabChange(tab.id)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold text-sm transition-colors ${
+                  className={`flex shrink-0 items-center gap-2 whitespace-nowrap px-3 sm:px-4 py-2 rounded-lg font-bold text-sm transition-colors ${
                     activeTab === tab.id
                       ? 'text-white'
                       : 'hover:text-white'
@@ -482,7 +482,7 @@ export default function Reports() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
               <div>
                 <label className="label mb-2 block">
                   <Calendar className="h-4 w-4 inline mr-1" />
@@ -572,12 +572,12 @@ export default function Reports() {
                 </>
               )}
 
-              <div className="flex items-end gap-2">
-                <Button onClick={clearFilters} variant="outline" className="w-full">
+              <div className="flex flex-col sm:flex-row sm:items-end gap-2 sm:col-span-2 xl:col-span-1">
+                <Button onClick={clearFilters} variant="outline" className="w-full justify-center">
                   <RotateCcw className="h-4 w-4" />
                   Clear Filters
                 </Button>
-                <Button onClick={applyFilters} variant="primary" className="w-full">
+                <Button onClick={applyFilters} variant="primary" className="w-full justify-center">
                   <Filter className="h-4 w-4" />
                   Apply Filters
                 </Button>
@@ -597,7 +597,7 @@ export default function Reports() {
       {activeTab === 'dashboard' && dashboardStats && (
         <div className="space-y-6">
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6">
             <Card className="hover:shadow-lg transition-shadow">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
@@ -742,7 +742,7 @@ export default function Reports() {
             </CardHeader>
             <CardContent>
               <div className="overflow-x-auto">
-                <table className="w-full">
+                <table className="w-full min-w-[720px]">
                   <thead>
                     <tr style={{borderBottom: '1px solid #E76800', backgroundColor: '#F8F9FA'}}>
                       <th className="text-left py-3 px-4 font-bold" style={{color: '#011039'}}>Member</th>
@@ -795,7 +795,7 @@ export default function Reports() {
               </div>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full">
+                <table className="w-full min-w-[840px]">
                   <thead>
                     <tr style={{borderBottom: '1px solid #E76800', backgroundColor: '#F8F9FA'}}>
                       <th className="text-left py-3 px-4 font-bold" style={{color: '#011039'}}>Member ID</th>
@@ -852,7 +852,7 @@ export default function Reports() {
               </div>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full">
+                <table className="w-full min-w-[700px]">
                   <thead>
                     <tr style={{borderBottom: '1px solid #E76800', backgroundColor: '#F8F9FA'}}>
                       <th className="text-left py-3 px-4 font-bold" style={{color: '#011039'}}>Rank</th>
@@ -898,7 +898,7 @@ export default function Reports() {
       {activeTab === 'transactions' && !loading && (
         <div className="space-y-6">
           {/* Summary Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4">
             <Card className="hover:shadow-lg transition-shadow">
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
@@ -1050,7 +1050,7 @@ export default function Reports() {
               </div>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full">
+                <table className="w-full min-w-[900px]">
                   <thead>
                     <tr style={{borderBottom: '1px solid #E76800', backgroundColor: '#F8F9FA'}}>
                       <th className="text-left py-3 px-4 font-bold" style={{color: '#011039'}}>Member ID</th>
@@ -1100,7 +1100,7 @@ export default function Reports() {
       {activeTab === 'fine-collection' && !loading && (
         <div className="space-y-6">
           {/* Summary Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
             <Card className="hover:shadow-lg transition-shadow">
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
@@ -1162,7 +1162,7 @@ export default function Reports() {
                 <CardTitle>Collection by Payment Method</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {Object.entries(fineCollection.byPaymentMethod).map(([method, amount]) => (
                     <div key={method} className="text-center p-4 border rounded-lg">
                       <div className="text-xl font-bold text-primary-600">Rs {amount}</div>
@@ -1181,7 +1181,7 @@ export default function Reports() {
             </CardHeader>
             <CardContent>
               <div className="overflow-x-auto">
-                <table className="w-full text-sm">
+                <table className="w-full min-w-[900px] text-sm">
                   <thead>
                     <tr style={{borderBottom: '1px solid #E76800'}}>
                       <th className="text-left py-2" style={{color: '#011039'}}>Member</th>
