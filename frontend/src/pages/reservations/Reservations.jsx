@@ -70,8 +70,8 @@ export default function Reservations() {
     enabled: bookSearch.length > 0 && createModal,
   })
 
-  // Filter to show only unavailable books
-  const unavailableBooks = booksData?.data?.filter(book => book.availableCopies === 0) || []
+  // Show all matching books (tag availability in the list)
+  const allBooks = booksData?.data || []
 
   // Search members
   const { data: membersData } = useQuery({
@@ -534,9 +534,9 @@ export default function Reservations() {
                   value={bookSearch}
                   onChange={(e) => setBookSearch(e.target.value)}
                 />
-                {bookSearch && unavailableBooks.length > 0 && (
+                {bookSearch && allBooks.length > 0 && (
                   <div className="border border-gray-200 rounded-lg divide-y max-h-60 overflow-y-auto">
-                    {unavailableBooks.map((book) => (
+                    {allBooks.map((book) => (
                       <button
                         key={book._id}
                         onClick={() => {
@@ -548,25 +548,15 @@ export default function Reservations() {
                         <p className="font-bold text-gray-900">{book.title}</p>
                         <p className="text-sm text-gray-600">{book.author}</p>
                         <div className="flex items-center gap-2 mt-1">
-                          <span className="text-xs text-gray-500">
-                            {book.accessionNumber}
-                          </span>
-                          <Badge variant="danger">
-                            Not available
-                          </Badge>
+                          <span className="text-xs text-gray-500">{book.accessionNumber}</span>
+                          {book.availableCopies > 0 ? (
+                            <Badge variant="success">Available</Badge>
+                          ) : (
+                            <Badge variant="danger">Not available</Badge>
+                          )}
                         </div>
                       </button>
                     ))}
-                  </div>
-                )}
-                {bookSearch && booksData?.data?.length > 0 && unavailableBooks.length === 0 && (
-                  <div className="border border-gray-200 rounded-lg p-4 text-center">
-                    <p className="text-sm text-gray-600">
-                      No unavailable books found. All matching books are currently available for direct issue.
-                    </p>
-                    <p className="text-xs text-gray-500 mt-2">
-                      Reservations are only for books that are currently issued.
-                    </p>
                   </div>
                 )}
                 {bookSearch && !booksData?.data?.length && (

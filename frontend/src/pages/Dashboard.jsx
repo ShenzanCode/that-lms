@@ -184,7 +184,6 @@ function DashboardContent() {
                 { to: "/admin/transactions/issue", icon: BookCheck, label: "Issue Book", sub: "Lend a book", color: "#E76800" },
                 { to: "/admin/transactions/return", icon: BookOpen, label: "Return Book", sub: "Process return", color: "#011039" },
                 { to: "/admin/books/add", icon: BookOpen, label: "Add Book", sub: "New book entry", color: "#E76800" },
-                { to: "/admin/members/add", icon: Users, label: "Add Member", sub: "Register member", color: "#011039" }
               ].map((action, i) => (
                 <Link
                   key={i}

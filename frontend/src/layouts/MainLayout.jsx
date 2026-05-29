@@ -94,6 +94,7 @@ export default function MainLayout() {
     { name: 'Fines', path: '/admin/fines', icon: DollarSign },
     { name: 'Live Chat Support', path: '/admin/live-chat', icon: MessageCircle },
     { name: 'Reports', path: '/admin/reports', icon: BarChart3 },
+    { name: 'Staff', path: '/admin/staff', icon: UserCog },
   ]
 
   const handleLogout = () => {

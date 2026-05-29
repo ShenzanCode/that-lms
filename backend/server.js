@@ -9,6 +9,7 @@ const dotenv = require('dotenv');
 const path = require('path');
 const http = require('http');
 const { Server } = require('socket.io');
+const { WebSocketServer } = require('ws');
 
 // Load environment variables
 dotenv.config();
@@ -42,6 +43,19 @@ const ChatMessage = require('./models/ChatMessage');
 
 const app = express();
 const server = http.createServer(app);
+const wsClients = new Set();
+
+const broadcastRealtimeEvent = (event, payload) => {
+  const message = JSON.stringify({ event, payload, timestamp: new Date().toISOString() });
+
+  for (const client of wsClients) {
+    if (client.readyState === 1) {
+      client.send(message);
+    } else {
+      wsClients.delete(client);
+    }
+  }
+};
 
 // Security middleware with CSP configuration to allow images
 app.use(helmet({
@@ -87,6 +101,18 @@ const io = new Server(server, {
     methods: ["GET", "POST"],
     credentials: true
   }
+});
+
+// Native WebSocket setup for lightweight realtime clients
+const wss = new WebSocketServer({ server, path: '/ws' });
+
+wss.on('connection', (socket) => {
+  wsClients.add(socket);
+  socket.send(JSON.stringify({ event: 'connected', payload: { message: 'WebSocket connected' }, timestamp: new Date().toISOString() }));
+
+  socket.on('close', () => {
+    wsClients.delete(socket);
+  });
 });
 // Rate limiting
 const limiter = rateLimit({
@@ -259,32 +285,41 @@ function setupSocketIO(io) {
         
         // If this is a NEW session from student, send popup notification to admin
         if (senderType === 'student' && isNewSession) {
-          io.to('admins').emit('new_session_popup', {
+          const newSessionPayload = {
             sessionId: session._id,
             memberName: senderName,
             memberId: senderId,
             message: message.trim(),
             timestamp: new Date()
-          });
+          };
+
+          io.to('admins').emit('new_session_popup', newSessionPayload);
+          broadcastRealtimeEvent('new_session_popup', newSessionPayload);
           console.log(`🔔 New session popup sent to admins for ${senderName}`);
         }
         
         // Emit message to session room
-        io.to(`session_${sessionId}`).emit('new_message', {
+        const messagePayload = {
           ...newMessage.toObject(),
           createdAt: newMessage.createdAt
-        });
+        };
+
+        io.to(`session_${sessionId}`).emit('new_message', messagePayload);
+        broadcastRealtimeEvent('new_message', messagePayload);
         
         console.log(`✅ Message sent in session ${sessionId} by ${senderName}`);
         
         // Notify admins if message is from student (for existing sessions)
         if (senderType === 'student' && !isNewSession) {
-          io.to('admins').emit('new_chat_notification', {
+          const chatNotificationPayload = {
             sessionId,
             memberName: senderName,
             message: message.trim().substring(0, 50),
             unreadCount: session?.unreadCountAdmin || 0
-          });
+          };
+
+          io.to('admins').emit('new_chat_notification', chatNotificationPayload);
+          broadcastRealtimeEvent('new_chat_notification', chatNotificationPayload);
         }
       } catch (error) {
         console.error('Error sending message:', error);
@@ -319,7 +354,9 @@ function setupSocketIO(io) {
         
         await session.save();
         
-        io.to(`session_${sessionId}`).emit('messages_read', { userType });
+        const readPayload = { userType, sessionId };
+        io.to(`session_${sessionId}`).emit('messages_read', readPayload);
+        broadcastRealtimeEvent('messages_read', readPayload);
       } catch (error) {
         console.error('Error marking messages as read:', error);
       }

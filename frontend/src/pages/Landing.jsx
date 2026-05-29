@@ -154,6 +154,12 @@ export default function Landing() {
     setIsAuthModalOpen(true)
   }
 
+  const closeAuthModal = () => {
+    setIsAuthModalOpen(false)
+    // remove auth query params from URL so modal doesn't reopen on refresh
+    if (location.search) navigate(location.pathname, { replace: true })
+  }
+
   const heroSlides = useMemo(
     () => [
       'https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&q=80&w=2000',
@@ -559,9 +565,9 @@ export default function Landing() {
         </div>
       </footer>
 
-      <AuthModal 
-        isOpen={isAuthModalOpen} 
-        onClose={() => setIsAuthModalOpen(false)} 
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={closeAuthModal}
         initialMode={authMode}
         initialType={authType}
       />

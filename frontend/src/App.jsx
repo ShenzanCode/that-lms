@@ -31,6 +31,8 @@ import LiveChatSupport from './pages/admin/LiveChatSupport'
 import NotFound from './pages/NotFound'
 import Landing from './pages/Landing'
 import PublicCatalog from './pages/PublicCatalog'
+import StaffLogin from './pages/StaffLogin'
+import StaffManagement from './pages/admin/StaffManagement'
 
 // Student Pages
 import ProfileSetup from './pages/student/ProfileSetup'
@@ -231,6 +233,10 @@ function App() {
         <Route path="/landing" element={<Landing />} />
         <Route path="/catalog" element={<PublicCatalog />} />
         
+        {/* Staff login routes (separate pages) */}
+        <Route path="/admin/login" element={<StaffLogin role="admin" />} />
+        <Route path="/librarian/login" element={<StaffLogin role="librarian" />} />
+
         {/* Protected Routes */}
         <Route
           path="/admin"
@@ -269,6 +275,7 @@ function App() {
           
           {/* Reports */}
           <Route path="reports" element={<Reports />} />
+          <Route path="staff" element={<StaffManagement />} />
           
           {/* Live Chat Support */}
           <Route path="live-chat" element={<LiveChatSupport />} />
