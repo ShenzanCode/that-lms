@@ -6,7 +6,9 @@ import { EmptyState } from '@/components/ui/EmptyState'
 import { Badge } from '@/components/ui/Badge'
 import { Modal } from '@/components/ui/Modal'
 import ConfirmDialog from '@/components/ui/ConfirmDialog'
+import { MemberPhoto } from '@/components/ui/MemberPhoto'
 import { memberService } from '@/services/memberService'
+import { getImageUrl } from '@/lib/utils'
 import { UserCheck, UserX, Clock, Mail, Phone, Building2, Eye, FileText } from 'lucide-react'
 import toast from 'react-hot-toast'
 
@@ -132,10 +134,10 @@ export default function PendingApprovals() {
                   <div className="flex-shrink-0">
                     <div className="w-24 h-24 rounded-full overflow-hidden border-4" style={{borderColor: '#E76800'}}>
                       {member.photo ? (
-                        <img
-                          src={`http://localhost:5000${member.photo}`}
+                        <MemberPhoto
+                          src={member.photo}
                           alt={member.name}
-                          className="w-full h-full object-cover"
+                          size="xl"
                         />
                       ) : (
                         <div className="w-full h-full bg-gray-200 flex items-center justify-center">
@@ -331,7 +333,7 @@ export default function PendingApprovals() {
             {selectedMember?.document ? (
               <div className="border rounded-lg overflow-hidden">
                 <img
-                  src={`http://localhost:5000${selectedMember.document}`}
+                  src={getImageUrl(selectedMember.document)}
                   alt="Student Document"
                   className="w-full h-auto"
                   style={{maxHeight: '500px', objectFit: 'contain'}}

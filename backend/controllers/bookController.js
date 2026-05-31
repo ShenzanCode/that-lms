@@ -1,6 +1,7 @@
 const Book = require('../models/Book');
 const Transaction = require('../models/Transaction');
 const { generateAccessionNumber } = require('../utils/helpers');
+const { uploadImageBuffer } = require('../utils/cloudinary');
 
 // @desc    Get all books with filtering, sorting, pagination
 // @route   GET /api/books
@@ -182,7 +183,8 @@ const createBook = async (req, res, next) => {
 
     // Add cover image if uploaded
     if (req.file) {
-      bookData.coverImage = `/uploads/book-covers/${req.file.filename}`;
+      const uploadedCover = await uploadImageBuffer(req.file, 'library-management/book-covers');
+      bookData.coverImage = uploadedCover.secure_url;
     }
 
     // Generate accession number if not provided
@@ -233,7 +235,8 @@ const updateBook = async (req, res, next) => {
     }
     // Add new cover image if uploaded
     else if (req.file) {
-      updateData.coverImage = `/uploads/book-covers/${req.file.filename}`;
+      const uploadedCover = await uploadImageBuffer(req.file, 'library-management/book-covers');
+      updateData.coverImage = uploadedCover.secure_url;
     }
 
     // Remove the removeImage flag from updateData

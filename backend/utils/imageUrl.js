@@ -16,6 +16,8 @@ const getBaseUrl = (req) => {
   return `${protocol}://${host}`;
 };
 
+const isAbsoluteUrl = (value) => /^https?:\/\//i.test(value);
+
 /**
  * Generate full URL for member photo
  * @param {string} filename - Photo filename from database
@@ -24,6 +26,10 @@ const getBaseUrl = (req) => {
  */
 const getMemberPhotoUrl = (filename, req) => {
   if (!filename) return null;
+
+  if (isAbsoluteUrl(filename)) {
+    return filename;
+  }
   
   const baseUrl = getBaseUrl(req);
   
@@ -45,6 +51,10 @@ const getMemberPhotoUrl = (filename, req) => {
  */
 const getBookCoverUrl = (filename, req) => {
   if (!filename) return null;
+
+  if (isAbsoluteUrl(filename)) {
+    return filename;
+  }
   
   const baseUrl = getBaseUrl(req);
   
@@ -76,6 +86,7 @@ const formatMemberWithImageUrls = (member, req) => {
 
 module.exports = {
   getBaseUrl,
+  isAbsoluteUrl,
   getMemberPhotoUrl,
   getBookCoverUrl,
   formatMemberWithImageUrls

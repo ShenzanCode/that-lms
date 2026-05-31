@@ -7,6 +7,7 @@ import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { LoadingSpinner } from '@/components/ui/Loading'
+import { getBookImageUrl } from '@/lib/utils'
 import toast from 'react-hot-toast'
 
 export default function EditBook() {
@@ -76,7 +77,7 @@ export default function EditBook() {
         coverImage: null,
       })
       if (book.coverImage) {
-        const imageUrl = `http://localhost:5000${book.coverImage}`
+        const imageUrl = getBookImageUrl(book.coverImage)
         console.log('Loading book cover image:', imageUrl)
         setOriginalImage(imageUrl)
         setCoverPreview(imageUrl)

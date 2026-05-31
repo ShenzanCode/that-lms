@@ -3,6 +3,7 @@ const Settings = require('../models/Settings');
 const AdminNotification = require('../models/AdminNotification');
 const generateToken = require('../utils/generateToken');
 const { getMemberPhotoUrl } = require('../utils/imageUrl');
+const { uploadImageBuffer } = require('../utils/cloudinary');
 
 // @desc    Register new student
 // @route   POST /api/student-auth/register
@@ -235,12 +236,14 @@ const submitProfile = async (req, res, next) => {
 
     // Handle photo if provided
     if (req.files && req.files.photo && req.files.photo[0]) {
-      req.student.photo = `/uploads/member-photos/${req.files.photo[0].filename}`;
+      const uploadedPhoto = await uploadImageBuffer(req.files.photo[0], 'library-management/member-photos');
+      req.student.photo = uploadedPhoto.secure_url;
     }
 
     // Handle document (fee challan or university card) if provided
     if (req.files && req.files.document && req.files.document[0]) {
-      req.student.document = `/uploads/student-documents/${req.files.document[0].filename}`;
+      const uploadedDocument = await uploadImageBuffer(req.files.document[0], 'library-management/student-documents');
+      req.student.document = uploadedDocument.secure_url;
     }
 
     await req.student.save();
@@ -354,7 +357,8 @@ const updateProfile = async (req, res, next) => {
 
     // Handle photo if provided
     if (req.files && req.files.photo && req.files.photo[0]) {
-      req.student.photo = `/uploads/member-photos/${req.files.photo[0].filename}`;
+      const uploadedPhoto = await uploadImageBuffer(req.files.photo[0], 'library-management/member-photos');
+      req.student.photo = uploadedPhoto.secure_url;
     }
 
     await req.student.save();

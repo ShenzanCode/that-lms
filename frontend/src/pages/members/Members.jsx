@@ -229,12 +229,6 @@ export default function Members() {
             <RefreshCw className={`h-4 w-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
             Refresh
           </Button>
-          <Link to="/admin/members/add">
-            <Button variant="primary" className="rounded-md font-black uppercase tracking-widest text-[11px] shadow-md shadow-orange-500/20">
-              <Plus className="h-4 w-4 mr-2" />
-              Add Member
-            </Button>
-          </Link>
         </div>
       </div>
 

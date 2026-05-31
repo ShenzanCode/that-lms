@@ -21,6 +21,7 @@ import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { LoadingSpinner } from '@/components/ui/Loading'
 import { Modal } from '@/components/ui/Modal'
+import { getBookImageUrl } from '@/lib/utils'
 import toast from 'react-hot-toast'
 import { format } from 'date-fns'
 
@@ -111,7 +112,7 @@ export default function BookDetails() {
             <div className="p-6">
               {book.coverImage ? (
                 <img
-                  src={`http://localhost:5000${book.coverImage}`}
+                  src={getBookImageUrl(book.coverImage)}
                   alt={book.title}
                   className="w-full h-96 object-cover rounded-lg"
                   onError={(e) => {

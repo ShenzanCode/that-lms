@@ -1,40 +1,5 @@
 const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
-
-// Create uploads directory if it doesn't exist
-const uploadDir = './uploads';
-const bookCoversDir = './uploads/book-covers';
-const memberPhotosDir = './uploads/member-photos';
-const adminPhotosDir = './uploads/admin-photos';
-const studentDocumentsDir = './uploads/student-documents';
-
-[uploadDir, bookCoversDir, memberPhotosDir, adminPhotosDir, studentDocumentsDir].forEach(dir => {
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-  }
-});
-
-// Storage configuration
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    if (file.fieldname === 'photo') {
-      cb(null, memberPhotosDir);
-    } else if (file.fieldname === 'adminPhoto') {
-      cb(null, adminPhotosDir);
-    } else if (file.fieldname === 'coverImage') {
-      cb(null, bookCoversDir);
-    } else if (file.fieldname === 'document') {
-      cb(null, studentDocumentsDir);
-    } else {
-      cb(null, uploadDir);
-    }
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-  }
-});
+const storage = multer.memoryStorage();
 
 // File filter
 const fileFilter = (req, file, cb) => {

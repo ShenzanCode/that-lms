@@ -4,6 +4,7 @@ const Fine = require('../models/Fine');
 const Settings = require('../models/Settings');
 const AdminNotification = require('../models/AdminNotification');
 const { generateMemberId } = require('../utils/helpers');
+const { uploadImageBuffer } = require('../utils/cloudinary');
 
 // @desc    Get all members with filtering, sorting, pagination
 // @route   GET /api/members
@@ -148,7 +149,8 @@ const createMember = async (req, res, next) => {
 
     // Add photo if uploaded
     if (req.file) {
-      memberData.photo = `/uploads/member-photos/${req.file.filename}`;
+      const uploadedPhoto = await uploadImageBuffer(req.file, 'library-management/member-photos');
+      memberData.photo = uploadedPhoto.secure_url;
     }
 
     // Generate member ID if not provided
@@ -231,7 +233,8 @@ const updateMember = async (req, res, next) => {
     }
     // Add new photo if uploaded
     else if (req.file) {
-      updateData.photo = `/uploads/member-photos/${req.file.filename}`;
+      const uploadedPhoto = await uploadImageBuffer(req.file, 'library-management/member-photos');
+      updateData.photo = uploadedPhoto.secure_url;
     }
 
     // Remove the removePhoto flag from updateData
@@ -604,7 +607,8 @@ const updateMemberPhoto = async (req, res, next) => {
     }
 
     // Update member photo
-    member.photo = `/uploads/member-photos/${req.file.filename}`;
+    const uploadedPhoto = await uploadImageBuffer(req.file, 'library-management/member-photos');
+    member.photo = uploadedPhoto.secure_url;
     await member.save();
 
     res.json({

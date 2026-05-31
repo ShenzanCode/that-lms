@@ -1,6 +1,7 @@
 const Librarian = require('../models/Librarian');
 const generateToken = require('../utils/generateToken');
 const { body, validationResult } = require('express-validator');
+const { uploadImageBuffer } = require('../utils/cloudinary');
 
 // @desc    Login librarian
 // @route   POST /api/auth/login
@@ -197,7 +198,8 @@ const updateProfile = async (req, res, next) => {
     }
     // Handle photo upload (only if not removing)
     else if (req.file) {
-      librarian.photo = `/uploads/admin-photos/${req.file.filename}`;
+      const uploadedPhoto = await uploadImageBuffer(req.file, 'library-management/admin-photos');
+      librarian.photo = uploadedPhoto.secure_url;
     }
 
     // Update password if provided

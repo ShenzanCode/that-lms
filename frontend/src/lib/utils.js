@@ -83,3 +83,42 @@ export const downloadFile = (data, filename, type = 'text/csv') => {
   document.body.removeChild(link)
   window.URL.revokeObjectURL(url)
 }
+export const getBookImageUrl = (coverImage) => {
+  if (!coverImage) return null
+
+  if (
+    coverImage.startsWith('http://') ||
+    coverImage.startsWith('https://') ||
+    coverImage.startsWith('blob:') ||
+    coverImage.startsWith('data:')
+  ) {
+    return coverImage
+  }
+
+  const apiUrl = import.meta.env.VITE_API_URL || '/api'
+  const backendBaseUrl = apiUrl === '/api'
+    ? `${window.location.protocol}//${window.location.hostname}:5000`
+    : apiUrl.replace(/\/api\/?$/, '')
+
+  return `${backendBaseUrl}${coverImage.startsWith('/') ? coverImage : `/${coverImage}`}`
+}
+
+export const getImageUrl = (imagePath) => {
+  if (!imagePath) return null
+
+  if (
+    imagePath.startsWith('http://') ||
+    imagePath.startsWith('https://') ||
+    imagePath.startsWith('blob:') ||
+    imagePath.startsWith('data:')
+  ) {
+    return imagePath
+  }
+
+  const apiUrl = import.meta.env.VITE_API_URL || '/api'
+  const backendBaseUrl = apiUrl === '/api'
+    ? `${window.location.protocol}//${window.location.hostname}:5000`
+    : apiUrl.replace(/\/api\/?$/, '')
+
+  return `${backendBaseUrl}${imagePath.startsWith('/') ? imagePath : `/${imagePath}`}`
+}
