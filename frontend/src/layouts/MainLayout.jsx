@@ -235,7 +235,7 @@ export default function MainLayout() {
       </div>
 
       {/* Main Content */}
-      <div className="lg:pl-64" style={{paddingTop: '56px'}} className="sm:lg:pl-64 sm:lg:pt-16">
+      <div className="lg:pl-64 pt-14 sm:pt-16">
         {/* Page Content */}
         <main className="p-3 sm:p-4 md:p-6 max-w-full">
           <Outlet />
