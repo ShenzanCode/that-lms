@@ -11,6 +11,7 @@ import {
   BookOpen
 } from 'lucide-react'
 import Avatar from '@/components/ui/Avatar'
+import { getServerRoot } from '@/lib/server'
 import { useAuthStore } from '@/store/authStore'
 
 export default function AdminProfileDropdown() {
@@ -53,19 +54,19 @@ export default function AdminProfileDropdown() {
         className="flex items-center gap-2 p-1 pr-3 rounded-full border-2 border-slate-100 hover:border-[#011039]/30 transition-all bg-white shadow-sm"
       >
         <div className="w-8 h-8 rounded-full overflow-hidden bg-slate-100 flex items-center justify-center">
-            {userPhoto ? (
-                <img 
-                    src={userPhoto.startsWith('http') ? userPhoto : `http://localhost:5000${userPhoto}`} 
-                    alt={displayName} 
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                        e.target.src = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(displayName) + '&background=011039&color=fff'
-                    }}
-                />
-            ) : (
-                <ShieldCheck className="h-4 w-4 text-[#011039]" />
-            )}
-        </div>
+        {userPhoto ? (
+          <img 
+            src={userPhoto.startsWith('http') ? userPhoto : `${getServerRoot()}${userPhoto.startsWith('/') ? userPhoto : `/${userPhoto}`}`} 
+            alt={displayName} 
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              e.target.src = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(displayName) + '&background=011039&color=fff'
+            }}
+          />
+        ) : (
+          <ShieldCheck className="h-4 w-4 text-[#011039]" />
+        )}
+      </div>
         <span className="text-sm font-bold text-slate-700 hidden sm:block truncate max-w-[120px]">{displayName}</span>
         <ChevronDown className={`h-4 w-4 text-slate-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
       </button>

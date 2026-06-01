@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { BookOpen } from 'lucide-react'
+import { getServerRoot } from '@/lib/server'
 
 export function BookCover({ src, alt, className = '', size = 'md' }) {
   const [imageError, setImageError] = useState(false)
@@ -30,9 +31,8 @@ export function BookCover({ src, alt, className = '', size = 'md' }) {
     setImageLoading(false)
   }
 
-  // Get base URL for images
-  // Prioritize hardcoded backend URL for development consistency
-  const imageBaseUrl = 'http://localhost:5000'
+  // Base URL for images
+  const imageBaseUrl = getServerRoot()
 
   // Show default icon if no src or if image failed to load
   if (!src || imageError) {

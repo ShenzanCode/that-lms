@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { getServerRoot } from '@/lib/server'
 import { useNavigate } from 'react-router-dom'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
@@ -36,10 +37,10 @@ export default function StudentProfile() {
         address: student.address || ''
       })
       if (student.photo) {
-        // Handle photo URL - if it's already a full URL, use it; otherwise prepend server URL
+        const root = getServerRoot()
         const photoUrl = student.photo.startsWith('http') 
           ? student.photo 
-          : `http://localhost:5000${student.photo}`
+          : `${root}${student.photo.startsWith('/') ? student.photo : '/' + student.photo}`
         setPhotoPreview(photoUrl)
       }
     }

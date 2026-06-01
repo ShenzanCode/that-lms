@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { getServerRoot } from '@/lib/server'
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ArrowLeft, Upload, X, Calendar, User } from 'lucide-react'
@@ -64,7 +65,8 @@ export default function EditMember() {
         photo: null,
       })
       if (member.photo) {
-        const photoUrl = `http://localhost:5000${member.photo}`
+          const root = getServerRoot()
+        const photoUrl = `${root}${member.photo.startsWith('/') ? member.photo : '/' + member.photo}`
         setOriginalPhoto(photoUrl)
         setPhotoPreview(photoUrl)
       }

@@ -1,7 +1,8 @@
 import { io } from 'socket.io-client';
 
 // Socket.io connects to the base URL, not the API path
-const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000';
+import { getSocketUrl } from '@/lib/server'
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || getSocketUrl();
 
 console.log('🌐 Socket.io connecting to:', SOCKET_URL);
 

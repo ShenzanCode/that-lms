@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { getServerRoot } from '@/lib/server'
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
 import { useAuthStore } from '@/store/authStore'
@@ -20,7 +21,7 @@ export default function AdminProfile() {
     confirmPassword: '',
   })
   const [photoFile, setPhotoFile] = useState(null)
-  const [photoPreview, setPhotoPreview] = useState(user?.photo ? `http://localhost:5000${user.photo}` : null)
+  const [photoPreview, setPhotoPreview] = useState(null)
   const [removePhoto, setRemovePhoto] = useState(false)
   const [showPasswordFields, setShowPasswordFields] = useState(false)
   const [message, setMessage] = useState({ type: '', text: '' })
@@ -78,6 +79,13 @@ export default function AdminProfile() {
       reader.readAsDataURL(file)
     }
   }
+
+  useEffect(() => {
+    if (user?.photo) {
+      const root = getServerRoot()
+      setPhotoPreview(`${root}${user.photo.startsWith('/') ? user.photo : '/' + user.photo}`)
+    }
+  }, [user?.photo])
 
   const handleRemovePhoto = () => {
     setPhotoFile(null)

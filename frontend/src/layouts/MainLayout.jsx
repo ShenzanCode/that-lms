@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { getServerRoot } from '@/lib/server'
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '@/store/authStore'
 import { settingsService } from '@/services/settingsService'
@@ -177,7 +178,7 @@ export default function MainLayout() {
             <div className="flex items-center gap-2 sm:gap-3 p-2 rounded-md bg-white/5 border border-white/5 hover:border-white/10 transition-colors">
               <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex-shrink-0 flex items-center justify-center overflow-hidden bg-primary shadow-inner">
                 {user?.photo ? (
-                  <img src={`http://localhost:5000${user.photo}`} alt={user.name} className="w-full h-full object-cover" />
+                  <img src={`${getServerRoot()}${user.photo.startsWith('/') ? user.photo : `/${user.photo}`}`} alt={user.name} className="w-full h-full object-cover" />
                 ) : (
                   <User className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
                 )}

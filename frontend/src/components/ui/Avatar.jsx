@@ -10,6 +10,8 @@ import { User } from 'lucide-react'
  * @param {string} size - Size variant: 'sm', 'md', 'lg', 'xl'
  * @param {string} className - Additional CSS classes
  */
+import { getServerRoot } from '@/lib/server'
+
 export default function Avatar({ 
   src, 
   alt = 'User', 
@@ -36,12 +38,9 @@ export default function Avatar({
   // Build proper image URL
   const getImageUrl = (url) => {
     if (!url) return null
-    // If already a full URL, use as is
-    if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('blob:')) {
-      return url
-    }
-    // If relative path, prepend server URL
-    return `http://localhost:5000${url}`
+    if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('blob:')) return url
+    const root = getServerRoot()
+    return `${root}${url.startsWith('/') ? url : '/' + url}`
   }
 
   const imageUrl = getImageUrl(src)

@@ -27,12 +27,22 @@ import PublicNavbar from '@/components/PublicNavbar'
 
 const PAGE_SIZE = 12
 
+const API_URL = import.meta.env.VITE_API_URL || ''
+
 const getCoverUrl = (coverImage) => {
   if (!coverImage) return null
-  if (coverImage.startsWith('http://') || coverImage.startsWith('https://') || coverImage.startsWith('blob:')) {
-    return coverImage
+  if (/^(https?:\/\/|blob:)/.test(coverImage)) return coverImage
+
+  // If VITE_API_URL includes a trailing /api, strip it to get the server root
+  let serverRoot = API_URL
+  if (serverRoot.endsWith('/api')) serverRoot = serverRoot.slice(0, -4)
+
+  if (serverRoot) {
+    return `${serverRoot}${coverImage.startsWith('/') ? coverImage : '/' + coverImage}`
   }
-  return `http://localhost:5000${coverImage}`
+
+  // Fallback to relative path (works with dev proxy)
+  return `${coverImage.startsWith('/') ? coverImage : '/' + coverImage}`
 }
 
 export default function Landing() {

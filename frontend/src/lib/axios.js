@@ -1,6 +1,11 @@
 import axios from 'axios'
 
-const API_URL = import.meta.env.VITE_API_URL || '/api'
+// Default API URL resolution:
+// - Prefer `VITE_API_URL` (set in deployments like Vercel)
+// - If building for production and not provided, fall back to the provided Render URL
+// - Otherwise use the dev proxy `/api`
+const DEFAULT_RENDER_API = 'https://that-lms-1.onrender.com/api'
+const API_URL = import.meta.env.VITE_API_URL || (import.meta.env.MODE === 'production' ? DEFAULT_RENDER_API : '/api')
 
 const api = axios.create({
   baseURL: API_URL,

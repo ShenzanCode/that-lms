@@ -20,15 +20,15 @@ import toast from 'react-hot-toast'
 
 import PublicNavbar from '@/components/PublicNavbar'
 import AuthModal from '@/components/AuthModal'
+import { getServerRoot } from '@/lib/server'
 
 const PAGE_SIZE = 18
 
 const getCoverUrl = (coverImage) => {
   if (!coverImage) return null
-  if (coverImage.startsWith('http://') || coverImage.startsWith('https://') || coverImage.startsWith('blob:')) {
-    return coverImage
-  }
-  return `http://localhost:5000${coverImage}`
+  if (/^(https?:\/\/|blob:)/.test(coverImage)) return coverImage
+  const root = getServerRoot()
+  return `${root}${coverImage.startsWith('/') ? coverImage : '/' + coverImage}`
 }
 
 export default function PublicCatalog() {
